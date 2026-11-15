@@ -1,14 +1,23 @@
+import AppKit
 import SwiftUI
+import UniformTypeIdentifiers
 
 /// The "Hồ sơ" page, shown inside the panel (sheets, popovers and alerts are separate windows that
 /// would appear in screen sharing): profiles on the left, the active profile's fields on the right.
+/// The only separate window is the file picker of "Nhập từ Word", opened on demand.
 struct ProfilePage: View {
     @EnvironmentObject private var state: AppState
     let onBack: () -> Void
+    // Kept here, not in the editor, so switching profiles mid-import keeps the spinner and result.
+    @State private var importing = false
+    @State private var importResult: ImportResult?
 
     var body: some View {
         VStack(spacing: 0) {
             header
+            if let importResult {
+                ImportResultBar(result: importResult) { self.importResult = nil }
+            }
             HStack(spacing: 0) {
                 ProfileList()
                     .frame(width: 156)
@@ -43,12 +52,61 @@ struct ProfilePage: View {
                 }
                 .buttonStyle(.plain)
                 Spacer()
+                importControl
             }
             .padding(.horizontal, Theme.pad)
         }
         .frame(height: 36)
         .background(WindowDragArea())
         .overlay(alignment: .bottom) { Hairline() }
+    }
+
+    @ViewBuilder private var importControl: some View {
+        if importing {
+            HStack(spacing: 6) {
+                ProgressView().controlSize(.small)
+                Text("Đang nhập…")
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundStyle(Theme.textSecondary)
+            }
+        } else {
+            Button(action: chooseFile) {
+                HStack(spacing: 4) {
+                    Image(systemName: "doc.text").font(.system(size: 10.5, weight: .semibold))
+                    Text("Nhập từ Word").font(.system(size: 12, weight: .medium))
+                }
+                .foregroundStyle(Theme.accent)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .help("Điền hồ sơ từ CV: .docx, .doc, .rtf hoặc .txt")
+        }
+    }
+
+    /// Picks a CV and lets Claude fill the active profile (a new one when there is none).
+    private func chooseFile() {
+        let picker = NSOpenPanel()
+        picker.allowedContentTypes = ["docx", "doc", "rtf", "txt"].compactMap { UTType(filenameExtension: $0) }
+        picker.allowsMultipleSelection = false
+        picker.canChooseDirectories = false
+        picker.message = "Chọn CV hoặc hồ sơ: Word (.docx, .doc), .rtf hoặc .txt"
+        picker.prompt = "Nhập"
+        picker.level = .modalPanel // above the floating overlay
+        picker.sharingType = .none // like the overlay, kept out of screen sharing where macOS allows it
+        NSApp.activate() // the overlay never activates the app, so the picker would open behind other apps
+        guard picker.runModal() == .OK, let url = picker.url else { return }
+
+        importResult = nil
+        importing = true
+        Task {
+            do {
+                let count = try await state.importProfile(from: url)
+                importResult = count > 0 ? .filled(count) : .failed("Không tìm thấy thông tin hồ sơ nào trong file này.")
+            } catch {
+                importResult = .failed(error.localizedDescription)
+            }
+            importing = false
+        }
     }
 }
 
@@ -117,17 +175,13 @@ private struct ProfileEditor: View {
                     .font(.system(size: 10.5))
                     .foregroundStyle(Theme.textTertiary)
                     .fixedSize(horizontal: false, vertical: true)
-                HStack(alignment: .top, spacing: 10) {
-                    LineField(label: "Tên", text: field(\.name))
-                    LineField(label: "Tuổi", text: field(\.age))
-                        .frame(width: 64)
+                ForEach(UserProfile.fields) { profileField in
+                    if profileField.multiline {
+                        BoxField(label: profileField.label, text: field(profileField.keyPath))
+                    } else {
+                        LineField(label: profileField.label, text: field(profileField.keyPath))
+                    }
                 }
-                LineField(label: "Địa chỉ", text: field(\.address))
-                LineField(label: "Nơi làm việc / vị trí", text: field(\.work))
-                BoxField(label: "Món sở trường", text: field(\.specialties), height: 44)
-                BoxField(label: "Menu", text: field(\.menu), height: 60)
-                BoxField(label: "Công thức", text: field(\.recipes), height: 84)
-                BoxField(label: "Ghi chú cho AI", text: field(\.notes), height: 52)
                 Hairline().padding(.top, 2)
                 deleteRow
             }
@@ -234,7 +288,6 @@ private struct LineField: View {
 private struct BoxField: View {
     let label: String
     @Binding var text: String
-    let height: CGFloat
 
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
@@ -242,8 +295,55 @@ private struct BoxField: View {
             TextEditor(text: $text)
                 .font(.system(size: 12.5))
                 .scrollContentBackground(.hidden)
-                .frame(height: height)
+                .frame(height: 60)
                 .fieldChrome(horizontal: 4)
+        }
+    }
+}
+
+private enum ImportResult {
+    case filled(Int)
+    case failed(String)
+}
+
+/// Outcome of the last Word import, under the header until dismissed or the next import.
+private struct ImportResultBar: View {
+    let result: ImportResult
+    let dismiss: () -> Void
+
+    var body: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            Image(systemName: isError ? "exclamationmark.triangle.fill" : "checkmark.circle.fill")
+                .font(.system(size: 11))
+                .foregroundStyle(isError ? Theme.warning : Theme.accent)
+            Text(message)
+                .font(.system(size: 11.5))
+                .foregroundStyle(Theme.textPrimary)
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 8)
+            Button(action: dismiss) {
+                Image(systemName: "xmark")
+                    .font(.system(size: 9.5, weight: .bold))
+                    .foregroundStyle(Theme.textTertiary)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(.horizontal, Theme.pad)
+        .padding(.vertical, 7)
+        .background(Color.black.opacity(0.14))
+        .overlay(alignment: .bottom) { Hairline() }
+    }
+
+    private var isError: Bool {
+        if case .failed = result { return true }
+        return false
+    }
+
+    private var message: String {
+        switch result {
+        case .filled(let count): "Đã điền \(count) trường"
+        case .failed(let message): message
         }
     }
 }

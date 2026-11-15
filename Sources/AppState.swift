@@ -22,9 +22,6 @@ final class AppState: ObservableObject {
         var isProcessing = false
     }
 
-    /// `open --env UNDERTONE_DEBUG=1 Undertone.app` logs utterances and errors to stdout.
-    private static let debug = ProcessInfo.processInfo.environment["UNDERTONE_DEBUG"] == "1"
-
     @Published var listenState: ListenState = .idle {
         didSet { log("state: \(listenState)") }
     }
@@ -69,12 +66,15 @@ final class AppState: ObservableObject {
     let meter = AudioMeter()
     private let defaults: UserDefaults
     private let profilesURL: URL
-    private let capture = SystemAudioCapture()
-    private let transcriber = SonioxTranscriber()
+    // Internal (not private) so the latency harness can stop the tap and feed recorded speech instead.
+    let capture = SystemAudioCapture()
+    let transcriber = SonioxTranscriber()
     private var tasks: [UUID: Task<Void, Never>] = [:]
     /// Keeps the knowledge base and the active profile in Claude's prompt cache while listening.
     private var cacheWarmer: Task<Void, Never>?
     private var rewarmTask: Task<Void, Never>?
+    /// Debug only: reports when the main thread falls behind (it also runs the transcriber).
+    private var stallProbe: Task<Void, Never>?
 
     init(defaults: UserDefaults = .standard, profilesURL: URL = ProfileStore.defaultURL) {
         self.defaults = defaults
@@ -122,6 +122,37 @@ final class AppState: ObservableObject {
     func deleteProfile(_ id: UUID) {
         profiles.removeAll { $0.id == id }
         if activeProfile == nil { activeProfileID = profiles.first?.id }
+    }
+
+    /// Reads a Word/RTF/text file (usually a CV), has Claude match its text to the profile fields and
+    /// overwrites those fields of the active profile (a new profile when there is none); fields the
+    /// document does not cover keep their values. Returns how many fields were filled.
+    /// Throws errors with Vietnamese messages.
+    func importProfile(from url: URL) async throws -> Int {
+        guard hasAPIKey else { throw ProfileImportError.noAPIKey }
+        // Reading a large Word file can take a while; keep it off the main thread.
+        let text = try await Task.detached { try ProfileImport.text(of: url) }.value
+        let targetID = activeProfileID
+        let reply = try await ClaudeClient(apiKey: trimmedKey).json(
+            system: ProfileImport.system,
+            user: ProfileImport.userMessage(documentText: text),
+            schema: ProfileImport.schema)
+        let values = try ProfileImport.values(fromReply: reply)
+        guard !values.isEmpty else { return 0 }
+
+        // A new profile only now that the import worked (none was active, or it was deleted meanwhile).
+        let index = profiles.firstIndex { $0.id == targetID } ?? {
+            let profile = UserProfile()
+            profiles.append(profile)
+            activeProfileID = profile.id
+            return profiles.count - 1
+        }()
+        var profile = profiles[index]
+        for field in UserProfile.fields {
+            if let value = values[field.key] { profile[keyPath: field.keyPath] = value }
+        }
+        profiles[index] = profile
+        return values.count
     }
 
     /// The active profile's notes, kept for the older single "Bối cảnh cho AI" field.
@@ -183,6 +214,7 @@ final class AppState: ObservableObject {
             }
             listenState = .listening
             if hasAPIKey { startCacheWarmer() }
+            if DebugLog.enabled { stallProbe = Self.probeMainThread() }
         } catch {
             transcriber.stop()
             capture.stop()
@@ -198,6 +230,8 @@ final class AppState: ObservableObject {
         cacheWarmer = nil
         rewarmTask?.cancel()
         rewarmTask = nil
+        stallProbe?.cancel()
+        stallProbe = nil
         listenState = .idle
         meter.level = 0
     }
@@ -240,37 +274,64 @@ final class AppState: ObservableObject {
             rows[index].isFinal = isFinal
         } else {
             rows.append(Row(id: id, english: text, isFinal: isFinal))
+            log("partial #\(DebugLog.tag(id))")
         }
         if isFinal {
-            log("heard: \(text)")
+            log("heard #\(DebugLog.tag(id)): \(text)")
             process(id)
         }
     }
 
-    private func log(_ message: String) {
-        guard Self.debug else { return }
-        print("[Undertone] \(message)")
-        fflush(stdout)
+    private func log(_ message: @autoclosure () -> String) {
+        DebugLog.log(message())
+    }
+
+    private static func probeMainThread() -> Task<Void, Never> {
+        Task { @MainActor in
+            while !Task.isCancelled {
+                let due = Date().addingTimeInterval(0.25)
+                try? await Task.sleep(for: .milliseconds(250), tolerance: .milliseconds(10))
+                let late = Date().timeIntervalSince(due)
+                if late > 0.15 { DebugLog.log(String(format: "main thread late %.0f ms", late * 1000)) }
+            }
+        }
     }
 
     private func process(_ id: UUID) {
         guard hasAPIKey, let index = rows.firstIndex(where: { $0.id == id }) else { return }
+        if Prompt.isFiller(rows[index].english) {
+            log("filler #\(DebugLog.tag(id)), no Claude call")
+            return
+        }
         let history = rows[..<index].filter(\.isFinal).suffix(10).map(\.english).joined(separator: "\n")
         let message = Prompt.user(history: history, utterance: rows[index].english)
         let profile = activeProfile?.promptBlock
         let client = ClaudeClient(apiKey: trimmedKey)
         rows[index].isProcessing = true
+        let tag = DebugLog.tag(id)
+        log("claude #\(tag) start, \(tasks.count + 1) in flight")
 
         tasks[id] = Task { [weak self] in
+            let started = Date()
             var output = ""
+            var viLogged = false
             do {
                 for try await chunk in client.stream(system: Self.systemPrompt, profile: profile, user: message) {
+                    if output.isEmpty {
+                        DebugLog.log(String(format: "claude #%@ first token %.2f s", tag, Date().timeIntervalSince(started)))
+                    }
                     output += chunk
+                    if !viLogged, output.contains("</vi>") {
+                        viLogged = true
+                        DebugLog.log(String(format: "claude #%@ vi done %.2f s", tag, Date().timeIntervalSince(started)))
+                    }
                     self?.apply(output, to: id)
                 }
             } catch {
+                DebugLog.log("claude #\(tag) error: \(error.localizedDescription)")
                 if !Task.isCancelled { self?.errorMessage = error.localizedDescription }
             }
+            DebugLog.log(String(format: "claude #%@ done %.2f s", tag, Date().timeIntervalSince(started)))
             self?.finish(id)
         }
     }
@@ -286,7 +347,7 @@ final class AppState: ObservableObject {
         tasks[id] = nil
         if let index = rows.firstIndex(where: { $0.id == id }) {
             rows[index].isProcessing = false
-            log("vi: \(rows[index].vietnamese) | answer: \(rows[index].answerEnglish.isEmpty ? "-" : rows[index].answerEnglish)")
+            log("vi #\(DebugLog.tag(id)): \(rows[index].vietnamese) | answer: \(rows[index].answerEnglish.isEmpty ? "-" : rows[index].answerEnglish)")
         }
     }
 
