@@ -7,10 +7,12 @@ enum ClaudeError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
+        case let .http(status, message) where status == 402 || message.lowercased().contains("credit balance"):
+            "Hết credit Claude API — nạp thêm trong Console (console.anthropic.com)."
         case let .http(status, message):
             switch status {
             case 401: "API key không hợp lệ. Kiểm tra lại trong Cài đặt."
-            case 403: "API key này không được phép dùng model \(ClaudeClient.model)."
+            case 403: "API key này không được phép dùng model Claude này."
             case 429: "Đang vượt giới hạn tần suất của API. Thử lại sau vài giây."
             case 500...599: "Máy chủ AI đang bận (\(status)). Thử lại sau giây lát."
             default: "Lỗi API (\(status)): \(message)"
@@ -23,6 +25,10 @@ enum ClaudeError: LocalizedError {
 
 /// Streaming client for the Claude Messages API over raw HTTP (there is no official Swift SDK).
 struct ClaudeClient {
+    /// The per-utterance translation and answer, and its cache warmer (caches are per model, so both
+    /// must match): many calls, so the fast low-cost Haiku. Haiku 5.5 has no server-side fallback.
+    static let liveModel = "claude-haiku-5-5"
+    /// Rare one-off jobs such as the Word profile import.
     static let model = "claude-opus-5-5"
     let apiKey: String
 
@@ -93,20 +99,60 @@ struct ClaudeClient {
         }
     }
 
+    /// One non-streaming request whose reply is JSON matching `schema` (structured outputs).
+    /// Returns the reply text, a JSON document. Used for one-off jobs such as the Word profile import,
+    /// so it carries no knowledge base or profile.
+    func json(system: String, user: String, schema: [String: Any]) async throws -> String {
+        var request = try makeRequest(body: Self.jsonRequestBody(system: system, user: user, schema: schema))
+        request.timeoutInterval = 180
+        let (data, response) = try await URLSession.shared.data(for: request)
+        let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+        let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+        guard status == 200, let json else {
+            throw ClaudeError.http(status: status, message: Self.errorMessage(in: json))
+        }
+        switch json["stop_reason"] as? String {
+        case "refusal": throw ClaudeError.refusal
+        case "max_tokens": throw ClaudeError.stream("câu trả lời bị cắt vì quá dài")
+        default: break
+        }
+        let blocks = json["content"] as? [[String: Any]] ?? []
+        return blocks.filter { $0["type"] as? String == "text" }.compactMap { $0["text"] as? String }.joined()
+    }
+
     private func makeRequest(
         system: String, profile: String?, user: String, maxTokens: Int, stream: Bool
     ) throws -> URLRequest {
+        try makeRequest(
+            body: Self.requestBody(system: system, profile: profile, user: user, maxTokens: maxTokens, stream: stream))
+    }
+
+    /// Internal so an offline check can inspect the headers.
+    func makeRequest(body: [String: Any]) throws -> URLRequest {
         var request = URLRequest(url: URL(string: "https://api.anthropic.com/v1/messages")!)
         request.httpMethod = "POST"
         request.timeoutInterval = 60
         request.setValue("application/json", forHTTPHeaderField: "content-type")
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
         request.setValue("2026-10-21", forHTTPHeaderField: "anthropic-version")
-        // If a safety classifier declines, the API retries on a fallback model inside the same stream.
-        request.setValue("server-side-fallback-2026-07-01", forHTTPHeaderField: "anthropic-beta")
-        let body = Self.requestBody(system: system, profile: profile, user: user, maxTokens: maxTokens, stream: stream)
+        // If a safety classifier declines, the API retries on a fallback model (requests with `fallbacks`).
+        if body["fallbacks"] != nil {
+            request.setValue("server-side-fallback-2026-07-01", forHTTPHeaderField: "anthropic-beta")
+        }
         request.httpBody = try JSONSerialization.data(withJSONObject: body)
         return request
+    }
+
+    /// Body for `json`: Opus with server-side fallback (internal so an offline check can inspect it).
+    static func jsonRequestBody(system: String, user: String, schema: [String: Any]) -> [String: Any] {
+        [
+            "model": model,
+            "max_tokens": 16000,
+            "system": system,
+            "messages": [["role": "user", "content": user]],
+            "output_config": ["effort": "medium", "format": ["type": "json_schema", "schema": schema]],
+            "fallbacks": "default",
+        ]
     }
 
     /// The JSON body of a Messages request (internal so a debug harness can inspect it).
@@ -114,14 +160,14 @@ struct ClaudeClient {
         system: String, profile: String?, user: String, maxTokens: Int, stream: Bool
     ) -> [String: Any] {
         [
-            "model": model,
+            "model": liveModel,
             "max_tokens": maxTokens,
             "stream": stream,
             "system": systemBlocks(system, profile: profile),
             "messages": [["role": "user", "content": user]],
-            // The answer is needed within seconds, so keep thinking shallow.
+            // The answer is needed within seconds, so keep thinking shallow (adaptive thinking is
+            // Haiku 5.5's default). No `fallbacks`: Haiku 5.5 has none, refusals surface as `.refusal`.
             "output_config": ["effort": "low"],
-            "fallbacks": "default",
         ]
     }
 
@@ -170,6 +216,21 @@ enum Prompt {
     rules. If there is no profile, or it does not contain what was asked, answer as you otherwise would, and \
     never invent personal facts such as a name, age, address, workplace or dish.
     """
+
+    /// Acknowledgements and fillers ("Okay.", "Yes, chef.", "Uh-huh.", "D'accord.") need neither a
+    /// translation nor an answer, so they are shown without calling Claude.
+    static func isFiller(_ utterance: String) -> Bool {
+        // A question ("You?", "Right?", "Chef?") expects an answer, so it is never a filler.
+        if utterance.trimmingCharacters(in: .whitespacesAndNewlines).hasSuffix("?") { return false }
+        let words = utterance.lowercased().split { !$0.isLetter }
+        return !words.isEmpty && words.count <= 4 && words.allSatisfy { fillerWords.contains(String($0)) }
+    }
+
+    private static let fillerWords: Set<String> = [
+        "yeah", "yes", "yep", "yup", "ok", "okay", "right", "alright", "all", "sure", "chef",
+        "uh", "huh", "um", "mm", "mmm", "mhm", "hmm", "oh", "ah", "thanks", "thank", "you",
+        "oui", "ouais", "d", "accord", "merci", "bon", "voilà", "voila",
+    ]
 
     static func user(history: String, utterance: String) -> String {
         var message = ""

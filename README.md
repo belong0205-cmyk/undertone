@@ -65,9 +65,10 @@ nên hãy luôn thử bước 3 với đúng ứng dụng họp bạn dùng.
 
 ## AI
 
-- Model: `claude-opus-5-5`, effort `low` cho nhanh; mỗi câu nghe được = 1 request (dịch + gợi ý nếu là câu hỏi).
-- Bật sẵn server-side fallback (`fallbacks: "default"`): nếu bộ lọc an toàn từ chối, API tự chạy lại bằng model dự phòng.
-- Đổi model: sửa `ClaudeClient.model` trong `Sources/ClaudeClient.swift`.
+- Model mỗi câu: `claude-haiku-5-5`, effort `low` cho nhanh; mỗi câu nghe được = 1 request (dịch + gợi ý nếu là câu hỏi).
+- Haiku 5.5 không có server-side fallback: nếu bộ lọc an toàn từ chối, câu đó hiện lỗi "AI từ chối trả lời".
+- Nhập hồ sơ từ Word dùng `claude-opus-5-5` (có `fallbacks: "default"`).
+- Đổi model: sửa `ClaudeClient.liveModel` (mỗi câu) hoặc `ClaudeClient.model` (nhập hồ sơ) trong `Sources/ClaudeClient.swift`.
 
 ## Debug
 
