@@ -174,9 +174,9 @@ private struct TimelineRow: View {
                 }
                 if !row.answerEnglish.isEmpty {
                     Columns(leading: Theme.afterGutter) {
-                        AnswerCard(label: "Đáp", text: row.answerVietnamese, highlighted: isNewest)
+                        AnswerCard(text: row.answerVietnamese, highlighted: isNewest)
                     } right: {
-                        AnswerCard(label: "Say", text: row.answerEnglish, highlighted: isNewest)
+                        AnswerCard(text: row.answerEnglish, highlighted: isNewest)
                     }
                 }
             }
@@ -207,21 +207,16 @@ private struct TimelineGutter: View {
     }
 }
 
-/// The suggested answer, short by design: a quiet card with a mono label, like an IN/OUT block.
+/// The suggested answer, short by design: a quiet card; the newest one gets a green border.
 private struct AnswerCard: View {
-    let label: String
     let text: String
     let highlighted: Bool
     @Environment(\.textScale) private var textScale
 
     var body: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 10) {
-            Text(label.uppercased())
-                .font(.system(size: 10.5, weight: .medium, design: .monospaced))
-                .foregroundStyle(highlighted ? Theme.accent : Theme.textTertiary)
-                .frame(width: 26, alignment: .leading)
+        Group {
             if text.isEmpty {
-                // An invisible line of answer text gives the dots the label's baseline.
+                // An invisible line of answer text keeps the card one line tall while it waits.
                 ZStack(alignment: .leading) {
                     Text(" ").font(.system(size: Theme.answerSize * textScale))
                     PendingDots()
@@ -234,7 +229,10 @@ private struct AnswerCard: View {
         .padding(.vertical, 8)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Theme.answerFill))
-        .overlay(RoundedRectangle(cornerRadius: 8, style: .continuous).strokeBorder(Theme.answerStroke))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .strokeBorder(highlighted ? Theme.accent.opacity(0.45) : Theme.answerStroke)
+        )
     }
 }
 
