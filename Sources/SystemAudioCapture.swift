@@ -49,7 +49,7 @@ final class SystemAudioCapture {
             // a 48 kHz tap). A wrong rate speeds the speech up or slows it down for the recognizer.
             var streamDescription = try tapStreamDescription()
             let box = FormatBox()
-            let meter = Self.debug ? RateMeter(tapRate: streamDescription.mSampleRate) : nil
+            let meter = DebugLog.enabled ? RateMeter(tapRate: streamDescription.mSampleRate) : nil
             try check("Đăng ký luồng âm thanh", AudioDeviceCreateIOProcIDWithBlock(&procID, aggregateID, queue) { _, input, _, _, _ in
                 guard let format = box.format,
                       let buffer = AVAudioPCMBuffer(pcmFormat: format, bufferListNoCopy: input, deallocator: nil)
@@ -130,9 +130,6 @@ final class SystemAudioCapture {
     private func check(_ step: String, _ status: OSStatus) throws {
         guard status == noErr else { throw Failure(step: step, status: status) }
     }
-
-    /// `open --env UNDERTONE_DEBUG=1 Undertone.app` also logs the capture rate.
-    private static let debug = ProcessInfo.processInfo.environment["UNDERTONE_DEBUG"] == "1"
 }
 
 /// The buffer format, set once the device runs; read from the audio thread.
@@ -157,9 +154,8 @@ private final class RateMeter: @unchecked Sendable {
         frames += Int(buffer.frameLength)
         let elapsed = Date().timeIntervalSince(since)
         guard elapsed >= 10 else { return }
-        print(String(format: "[Undertone] capture: %.0f frames/s measured, %.0f Hz declared, tap reports %.0f Hz",
-                     Double(frames) / elapsed, buffer.format.sampleRate, tapRate))
-        fflush(stdout)
+        DebugLog.log(String(format: "capture: %.0f frames/s measured, %.0f Hz declared, tap reports %.0f Hz",
+                            Double(frames) / elapsed, buffer.format.sampleRate, tapRate))
         frames = 0
         since = Date()
     }
