@@ -39,8 +39,22 @@ final class AppState: ObservableObject {
 
     @Published var apiKey: String { didSet { defaults.set(apiKey, forKey: "apiKey") } }
     @Published var sonioxKey: String { didSet { defaults.set(sonioxKey, forKey: "sonioxKey") } }
-    @Published var notes: String { didSet { defaults.set(notes, forKey: "notes") } }
     @Published var opacity: Double { didSet { defaults.set(opacity, forKey: "opacity") } }
+
+    /// Saved to profiles.json on every change, so views can edit `$state.profiles[i]` directly.
+    @Published var profiles: [UserProfile] {
+        didSet {
+            saveProfiles()
+            let previous = oldValue.first { $0.id == activeProfileID }?.promptBlock
+            if previous != activeProfile?.promptBlock { scheduleCacheRewarm() }
+        }
+    }
+    @Published var activeProfileID: UUID? {
+        didSet {
+            defaults.set(activeProfileID?.uuidString, forKey: "activeProfileID")
+            if oldValue != activeProfileID { scheduleCacheRewarm() }
+        }
+    }
 
     /// Default Soniox key shipped inside the app (Resources/Secrets.plist, gitignored), used when
     /// the user has not saved one, so a fresh Mac can listen without typing a key.
@@ -54,25 +68,81 @@ final class AppState: ObservableObject {
 
     let meter = AudioMeter()
     private let defaults: UserDefaults
+    private let profilesURL: URL
     private let capture = SystemAudioCapture()
     private let transcriber = SonioxTranscriber()
     private var tasks: [UUID: Task<Void, Never>] = [:]
-    /// Keeps the cookery knowledge base in Claude's prompt cache while listening.
+    /// Keeps the knowledge base and the active profile in Claude's prompt cache while listening.
     private var cacheWarmer: Task<Void, Never>?
+    private var rewarmTask: Task<Void, Never>?
 
-    init(defaults: UserDefaults = .standard) {
+    init(defaults: UserDefaults = .standard, profilesURL: URL = ProfileStore.defaultURL) {
         self.defaults = defaults
+        self.profilesURL = profilesURL
         apiKey = defaults.string(forKey: "apiKey") ?? ""
         let savedSonioxKey = defaults.string(forKey: "sonioxKey") ?? ""
         sonioxKey = savedSonioxKey.isEmpty ? Self.bundledSonioxKey : savedSonioxKey
-        notes = defaults.string(forKey: "notes") ?? ""
         opacity = defaults.object(forKey: "opacity") as? Double ?? 1
+
+        // First run with profiles: carry the old single "notes" setting over into a profile.
+        let saved = ProfileStore.load(from: profilesURL)
+        var profiles = saved ?? []
+        let oldNotes = (defaults.string(forKey: "notes") ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        if saved == nil, !oldNotes.isEmpty {
+            profiles.append(UserProfile(notes: oldNotes))
+        }
+        self.profiles = profiles
+        let savedID = defaults.string(forKey: "activeProfileID").flatMap(UUID.init(uuidString:))
+        activeProfileID = profiles.contains { $0.id == savedID } ? savedID : profiles.first?.id
+        defaults.set(activeProfileID?.uuidString, forKey: "activeProfileID")
+        if saved == nil, !profiles.isEmpty { saveProfiles() }
+
         transcriber.onUtterance = { [weak self] id, text, isFinal in
             self?.receive(id, text: text, isFinal: isFinal)
         }
         transcriber.onFailure = { [weak self] message in
             self?.stopListening()
             self?.errorMessage = message
+        }
+    }
+
+    // MARK: - Profiles
+
+    var activeProfile: UserProfile? { profiles.first { $0.id == activeProfileID } }
+
+    /// Adds an empty profile and makes it active.
+    @discardableResult
+    func addProfile() -> UUID {
+        let profile = UserProfile()
+        profiles.append(profile)
+        activeProfileID = profile.id
+        return profile.id
+    }
+
+    func deleteProfile(_ id: UUID) {
+        profiles.removeAll { $0.id == id }
+        if activeProfile == nil { activeProfileID = profiles.first?.id }
+    }
+
+    /// The active profile's notes, kept for the older single "Bối cảnh cho AI" field.
+    var notes: String {
+        get { activeProfile?.notes ?? "" }
+        set {
+            if let index = profiles.firstIndex(where: { $0.id == activeProfileID }) {
+                profiles[index].notes = newValue
+            } else if !newValue.isEmpty {
+                let profile = UserProfile(notes: newValue)
+                profiles.append(profile)
+                activeProfileID = profile.id
+            }
+        }
+    }
+
+    private func saveProfiles() {
+        do {
+            try ProfileStore.save(profiles, to: profilesURL)
+        } catch {
+            errorMessage = "Không lưu được hồ sơ: \(error.localizedDescription)"
         }
     }
 
@@ -112,9 +182,7 @@ final class AppState: ObservableObject {
                 }
             }
             listenState = .listening
-            if hasAPIKey {
-                cacheWarmer = ClaudeClient(apiKey: trimmedKey).keepCacheWarm(system: Self.systemPrompt)
-            }
+            if hasAPIKey { startCacheWarmer() }
         } catch {
             transcriber.stop()
             capture.stop()
@@ -128,8 +196,27 @@ final class AppState: ObservableObject {
         transcriber.stop()
         cacheWarmer?.cancel()
         cacheWarmer = nil
+        rewarmTask?.cancel()
+        rewarmTask = nil
         listenState = .idle
         meter.level = 0
+    }
+
+    private func startCacheWarmer() {
+        cacheWarmer?.cancel()
+        cacheWarmer = ClaudeClient(apiKey: trimmedKey)
+            .keepCacheWarm(system: Self.systemPrompt, profile: activeProfile?.promptBlock)
+    }
+
+    /// The prompt changed (profile edited or switched): re-warm once typing has paused.
+    private func scheduleCacheRewarm() {
+        guard listenState == .listening, hasAPIKey else { return }
+        rewarmTask?.cancel()
+        rewarmTask = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(3))
+            guard !Task.isCancelled, let self, self.listenState == .listening else { return }
+            self.startCacheWarmer()
+        }
     }
 
     private func showLevel(_ level: Float) {
@@ -169,14 +256,15 @@ final class AppState: ObservableObject {
     private func process(_ id: UUID) {
         guard hasAPIKey, let index = rows.firstIndex(where: { $0.id == id }) else { return }
         let history = rows[..<index].filter(\.isFinal).suffix(10).map(\.english).joined(separator: "\n")
-        let message = Prompt.user(notes: notes, history: history, utterance: rows[index].english)
+        let message = Prompt.user(history: history, utterance: rows[index].english)
+        let profile = activeProfile?.promptBlock
         let client = ClaudeClient(apiKey: trimmedKey)
         rows[index].isProcessing = true
 
         tasks[id] = Task { [weak self] in
             var output = ""
             do {
-                for try await chunk in client.stream(system: Self.systemPrompt, user: message) {
+                for try await chunk in client.stream(system: Self.systemPrompt, profile: profile, user: message) {
                     output += chunk
                     self?.apply(output, to: id)
                 }

@@ -26,12 +26,13 @@ struct ClaudeClient {
     static let model = "claude-opus-5-5"
     let apiKey: String
 
-    /// Yields answer text as it streams in.
-    func stream(system: String, user: String) -> AsyncThrowingStream<String, Error> {
+    /// Yields answer text as it streams in. `profile` is the active user profile block, if any.
+    func stream(system: String, profile: String?, user: String) -> AsyncThrowingStream<String, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
                 do {
-                    let request = try makeRequest(system: system, user: user, maxTokens: 16000, stream: true)
+                    let request = try makeRequest(
+                        system: system, profile: profile, user: user, maxTokens: 16000, stream: true)
                     let (bytes, response) = try await URLSession.shared.bytes(for: request)
                     let status = (response as? HTTPURLResponse)?.statusCode ?? 0
                     guard status == 200 else {
@@ -68,10 +69,10 @@ struct ClaudeClient {
         }
     }
 
-    /// Writes (or refreshes) the cached knowledge-base prefix without generating output, so the
-    /// next real request skips re-processing it. Model and settings must match `stream`.
-    func warmCache(system: String) async throws {
-        let request = try makeRequest(system: system, user: "Warm-up.", maxTokens: 0, stream: false)
+    /// Writes (or refreshes) the cached knowledge-base and profile prefix without generating output,
+    /// so the next real request skips re-processing it. Model and settings must match `stream`.
+    func warmCache(system: String, profile: String?) async throws {
+        let request = try makeRequest(system: system, profile: profile, user: "Warm-up.", maxTokens: 0, stream: false)
         let (data, response) = try await URLSession.shared.data(for: request)
         let status = (response as? HTTPURLResponse)?.statusCode ?? 0
         guard status == 200 else {
@@ -80,19 +81,21 @@ struct ClaudeClient {
         }
     }
 
-    /// Keeps the knowledge base in the prompt cache (entries expire after 5 idle minutes) until
-    /// cancelled. Best effort: if a warm-up fails, the next real request simply writes the cache.
-    func keepCacheWarm(system: String) -> Task<Void, Never> {
+    /// Keeps the knowledge base and profile in the prompt cache (entries expire after 5 idle minutes)
+    /// until cancelled. Best effort: if a warm-up fails, the next real request simply writes the cache.
+    func keepCacheWarm(system: String, profile: String?) -> Task<Void, Never> {
         Task {
-            guard !KnowledgeBase.promptBlock.isEmpty else { return }
+            guard !KnowledgeBase.promptBlock.isEmpty || profile != nil else { return }
             while !Task.isCancelled {
-                try? await warmCache(system: system)
+                try? await warmCache(system: system, profile: profile)
                 try? await Task.sleep(for: .seconds(240))
             }
         }
     }
 
-    private func makeRequest(system: String, user: String, maxTokens: Int, stream: Bool) throws -> URLRequest {
+    private func makeRequest(
+        system: String, profile: String?, user: String, maxTokens: Int, stream: Bool
+    ) throws -> URLRequest {
         var request = URLRequest(url: URL(string: "https://api.anthropic.com/v1/messages")!)
         request.httpMethod = "POST"
         request.timeoutInterval = 60
@@ -101,23 +104,31 @@ struct ClaudeClient {
         request.setValue("2026-10-21", forHTTPHeaderField: "anthropic-version")
         // If a safety classifier declines, the API retries on a fallback model inside the same stream.
         request.setValue("server-side-fallback-2026-07-01", forHTTPHeaderField: "anthropic-beta")
-        let body: [String: Any] = [
-            "model": Self.model,
+        let body = Self.requestBody(system: system, profile: profile, user: user, maxTokens: maxTokens, stream: stream)
+        request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        return request
+    }
+
+    /// The JSON body of a Messages request (internal so a debug harness can inspect it).
+    static func requestBody(
+        system: String, profile: String?, user: String, maxTokens: Int, stream: Bool
+    ) -> [String: Any] {
+        [
+            "model": model,
             "max_tokens": maxTokens,
             "stream": stream,
-            "system": Self.systemBlocks(system),
+            "system": systemBlocks(system, profile: profile),
             "messages": [["role": "user", "content": user]],
             // The answer is needed within seconds, so keep thinking shallow.
             "output_config": ["effort": "low"],
             "fallbacks": "default",
         ]
-        request.httpBody = try JSONSerialization.data(withJSONObject: body)
-        return request
     }
 
-    /// The large, unchanging knowledge base goes first with a cache breakpoint, so every request
-    /// reads it from the cache; the instructions follow it.
-    private static func systemBlocks(_ system: String) -> [[String: Any]] {
+    /// Order: the large knowledge base, then the user's profile (each with its own cache
+    /// breakpoint, so long menus and recipes are read from the cache), then the instructions.
+    /// No profile means no profile block.
+    private static func systemBlocks(_ system: String, profile: String?) -> [[String: Any]] {
         var blocks: [[String: Any]] = []
         if !KnowledgeBase.promptBlock.isEmpty {
             blocks.append([
@@ -125,6 +136,9 @@ struct ClaudeClient {
                 "text": KnowledgeBase.promptBlock,
                 "cache_control": ["type": "ephemeral"],
             ])
+        }
+        if let profile, !profile.isEmpty {
+            blocks.append(["type": "text", "text": profile, "cache_control": ["type": "ephemeral"]])
         }
         blocks.append(["type": "text", "text": system])
         return blocks
@@ -149,14 +163,16 @@ enum Prompt {
     is CEFR B1, so use only common B1-level (or easier) words and simple grammar; no idioms, no rare or formal words. \
     Keep a technical cooking term only when the answer needs it (e.g. "brunoise"). No bullet points, no headings.</answer_en>
     <answer_vi>The same answer in Vietnamese.</answer_vi>
+
+    A <user_profile> block, when present, holds facts the user entered about themselves. When the newest \
+    utterance asks about the user (their name, age, where they live, their work or experience, their dishes, \
+    recipes or menu), write the answer from that profile in the first person, still following the answer_en \
+    rules. If there is no profile, or it does not contain what was asked, answer as you otherwise would, and \
+    never invent personal facts such as a name, age, address, workplace or dish.
     """
 
-    static func user(notes: String, history: String, utterance: String) -> String {
+    static func user(history: String, utterance: String) -> String {
         var message = ""
-        let notes = notes.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !notes.isEmpty {
-            message += "<user_notes>\n\(notes)\n</user_notes>\n\n"
-        }
         if !history.isEmpty {
             message += "<recent_conversation>\n\(history)\n</recent_conversation>\n\n"
         }

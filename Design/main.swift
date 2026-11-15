@@ -22,14 +22,40 @@ func snapshot<V: View>(_ view: V, size: CGSize, name: String) {
     print("wrote \(name).png")
 }
 
+/// Bright, busy content (like a web page) to check text contrast at low background settings.
+struct BusyBackdrop: View {
+    private let colors: [Color] = [.yellow, .orange, .cyan, .pink, .green]
+
+    var body: some View {
+        ZStack(alignment: .topLeading) {
+            Color.white
+            VStack(alignment: .leading, spacing: 8) {
+                ForEach(0..<18, id: \.self) { i in
+                    HStack(spacing: 10) {
+                        Rectangle().fill(colors[i % colors.count]).frame(width: 90, height: 20)
+                        Text("Food safety audit, section \(i + 1): temperatures, labels and storage rules")
+                            .font(.system(size: 15, weight: .bold))
+                            .foregroundStyle(.black)
+                    }
+                }
+            }
+            .padding(18)
+        }
+    }
+}
+
 /// The overlay over a desktop-like backdrop, the way it sits on screen.
 @MainActor
 func renderOverlay(_ name: String, size: CGSize = CGSize(width: 680, height: 440), textScale: Double = 1,
-                   configure: (AppState) -> Void) {
+                   showingProfiles: Bool = false, busyBackdrop: Bool = false, configure: (AppState) -> Void) {
     let suite = "local.undertone.design"
     let defaults = UserDefaults(suiteName: suite)!
     defaults.removePersistentDomain(forName: suite)
-    let state = AppState(defaults: defaults)
+    // A throwaway profiles file, never the user's real one.
+    let profilesURL = FileManager.default.temporaryDirectory.appendingPathComponent("undertone-design-profiles.json")
+    try? FileManager.default.removeItem(at: profilesURL)
+    defer { try? FileManager.default.removeItem(at: profilesURL) }
+    let state = AppState(defaults: defaults, profilesURL: profilesURL)
     configure(state)
     // OverlayView reads the text size with @AppStorage, i.e. from the standard defaults.
     UserDefaults.standard.set(textScale, forKey: Theme.textScaleKey)
@@ -39,8 +65,8 @@ func renderOverlay(_ name: String, size: CGSize = CGSize(width: 680, height: 440
         startPoint: .topLeading, endPoint: .bottomTrailing
     )
     let view = ZStack {
-        backdrop
-        OverlayView().environmentObject(state).frame(width: size.width, height: size.height)
+        if busyBackdrop { BusyBackdrop() } else { backdrop }
+        OverlayView(showingProfiles: showingProfiles).environmentObject(state).frame(width: size.width, height: size.height)
     }
     snapshot(view, size: CGSize(width: size.width + 48, height: size.height + 48), name: name)
     defaults.removePersistentDomain(forName: suite)
@@ -101,10 +127,48 @@ MainActor.assumeIsolated {
             ),
         ]
     }
+    let chef = UserProfile(
+        name: "Trung Huy",
+        age: "29",
+        address: "Footscray, Melbourne",
+        work: "Commis chef, The Grand Hotel",
+        specialties: "Phở bò, bánh xèo, beurre blanc",
+        menu: "Entrée: prawn cocktail\nMain: pan-fried barramundi, beurre blanc\nDessert: crème brûlée",
+        recipes: "Beurre blanc: reduce white wine, vinegar and shallot; whisk in cold butter off the heat.",
+        notes: "Đang học Cert III in Commercial Cookery (SIT30821)."
+    )
+    let second = UserProfile(name: "Lan", work: "Pastry cook")
+
     renderOverlay("4-settings") { state in
         state.listenState = .listening
         state.hasSignal = true
         state.rows = [intro, question]
+        state.profiles = [chef]
+        state.activeProfileID = chef.id
+        state.showSettings = true
+    }
+    // "Độ đậm nền" over bright, busy content: text must stay crisp at every setting.
+    for percent in [40, 70, 100] {
+        renderOverlay("9-background-\(percent)", busyBackdrop: true) { state in
+            state.apiKey = "design-preview"
+            state.sonioxKey = "design-preview"
+            state.listenState = .listening
+            state.hasSignal = true
+            state.opacity = Double(percent) / 100
+            state.rows = [intro, question, crossContamination]
+        }
+    }
+    renderOverlay("7-profiles-empty", showingProfiles: true) { state in
+        state.showSettings = true
+    }
+    renderOverlay("8-profiles-filled", showingProfiles: true) { state in
+        state.profiles = [chef, second]
+        state.activeProfileID = chef.id
+        state.showSettings = true
+    }
+    renderOverlay("8b-profiles-min-size", size: CGSize(width: 520, height: 380), showingProfiles: true) { state in
+        state.profiles = [chef, second]
+        state.activeProfileID = chef.id
         state.showSettings = true
     }
     renderOverlay("4b-settings-min-size", size: CGSize(width: 520, height: 380)) { state in
