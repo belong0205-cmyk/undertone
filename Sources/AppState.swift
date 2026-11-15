@@ -42,6 +42,16 @@ final class AppState: ObservableObject {
     @Published var notes: String { didSet { defaults.set(notes, forKey: "notes") } }
     @Published var opacity: Double { didSet { defaults.set(opacity, forKey: "opacity") } }
 
+    /// Default Soniox key shipped inside the app (Resources/Secrets.plist, gitignored), used when
+    /// the user has not saved one, so a fresh Mac can listen without typing a key.
+    private static let bundledSonioxKey: String = {
+        guard let url = Bundle.main.url(forResource: "Secrets", withExtension: "plist"),
+              let secrets = NSDictionary(contentsOf: url),
+              let key = secrets["SonioxKey"] as? String
+        else { return "" }
+        return key.trimmingCharacters(in: .whitespacesAndNewlines)
+    }()
+
     let meter = AudioMeter()
     private let defaults: UserDefaults
     private let capture = SystemAudioCapture()
@@ -53,7 +63,8 @@ final class AppState: ObservableObject {
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         apiKey = defaults.string(forKey: "apiKey") ?? ""
-        sonioxKey = defaults.string(forKey: "sonioxKey") ?? ""
+        let savedSonioxKey = defaults.string(forKey: "sonioxKey") ?? ""
+        sonioxKey = savedSonioxKey.isEmpty ? Self.bundledSonioxKey : savedSonioxKey
         notes = defaults.string(forKey: "notes") ?? ""
         opacity = defaults.object(forKey: "opacity") as? Double ?? 1
         transcriber.onUtterance = { [weak self] id, text, isFinal in

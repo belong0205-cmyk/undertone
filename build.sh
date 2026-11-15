@@ -22,6 +22,8 @@ rm -f "${SLICES[@]}"
 cp Resources/Info.plist "$APP/Contents/Info.plist"
 [ -f Resources/AppIcon.icns ] && cp Resources/AppIcon.icns "$APP/Contents/Resources/"
 cp -R Knowledge "$APP/Contents/Resources/Knowledge"
+# Optional default API keys (gitignored); the app falls back to them when settings are empty.
+[ -f Resources/Secrets.plist ] && cp Resources/Secrets.plist "$APP/Contents/Resources/"
 codesign --force --sign - "$APP"
 
 echo "Built $APP"

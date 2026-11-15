@@ -1,3 +1,5 @@
 build/
 *.zip
 .DS_Store
+# Local secrets bundled into the app by build.sh; never commit.
+Resources/Secrets.plist
