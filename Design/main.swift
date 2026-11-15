@@ -130,8 +130,13 @@ MainActor.assumeIsolated {
     let chef = UserProfile(
         name: "Trung Huy",
         age: "29",
+        phone: "0412 345 678",
+        email: "chef@example.com",
         address: "Footscray, Melbourne",
         work: "Commis chef, The Grand Hotel",
+        experience: "2023–nay: Commis chef, The Grand Hotel\n2021–2023: Kitchen hand, Saigon Corner",
+        skills: "Knife skills, sauces, HACCP, mise en place",
+        languages: "Tiếng Việt, English (IELTS 6.5)",
         specialties: "Phở bò, bánh xèo, beurre blanc",
         menu: "Entrée: prawn cocktail\nMain: pan-fried barramundi, beurre blanc\nDessert: crème brûlée",
         recipes: "Beurre blanc: reduce white wine, vinegar and shallot; whisk in cold butter off the heat.",
@@ -148,7 +153,7 @@ MainActor.assumeIsolated {
         state.showSettings = true
     }
     // "Độ đậm nền" over bright, busy content: text must stay crisp at every setting.
-    for percent in [40, 70, 100] {
+    for percent in [0, 40, 70, 100] {
         renderOverlay("9-background-\(percent)", busyBackdrop: true) { state in
             state.apiKey = "design-preview"
             state.sonioxKey = "design-preview"
@@ -162,6 +167,12 @@ MainActor.assumeIsolated {
         state.showSettings = true
     }
     renderOverlay("8-profiles-filled", showingProfiles: true) { state in
+        state.profiles = [chef, second]
+        state.activeProfileID = chef.id
+        state.showSettings = true
+    }
+    // Tall enough to show every field of UserProfile.fields without scrolling.
+    renderOverlay("8c-profiles-all-fields", size: CGSize(width: 680, height: 1560), showingProfiles: true) { state in
         state.profiles = [chef, second]
         state.activeProfileID = chef.id
         state.showSettings = true

@@ -34,6 +34,15 @@ enum Theme {
     /// UserDefaults key and range of the "Cỡ chữ" setting (conversation text only).
     static let textScaleKey = "textScale"
     static let textScaleRange: ClosedRange<Double> = 0.8...1.6
+
+    /// "Độ đậm nền": alpha of both the blur and the dark tint over it. 0 = see-through, 1 = solid dark.
+    /// Text and controls are never faded.
+    static let backgroundRange: ClosedRange<Double> = 0...1
+    /// Smallest tint alpha actually drawn: fully clear pixels let clicks fall through the panel,
+    /// so it could no longer be dragged or scrolled at 0%. Invisible at this level.
+    static let minTint = 0.04
+    /// Below this tint, text gets a soft shadow to stay readable over bright content behind the panel.
+    static let shadowBelow = 0.6
 }
 
 private struct TextScaleKey: EnvironmentKey {
@@ -134,9 +143,10 @@ struct IconButton: View {
 }
 
 extension View {
-    /// Dark inset field look for text inputs.
-    func fieldChrome() -> some View {
-        padding(.horizontal, 9)
+    /// Dark inset field look for text inputs. TextEditor already insets its text by ~5pt,
+    /// so pass a smaller `horizontal` there to line its text up with single-line fields.
+    func fieldChrome(horizontal: CGFloat = 9) -> some View {
+        padding(.horizontal, horizontal)
             .padding(.vertical, 7)
             .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Theme.field))
             .overlay(RoundedRectangle(cornerRadius: 8, style: .continuous).strokeBorder(Theme.hairline))
@@ -189,15 +199,21 @@ struct AnswerText: View {
 // MARK: - AppKit bridges
 
 struct VisualEffectBackground: NSViewRepresentable {
+    /// Strength of the blur: 0 shows the backdrop sharp, 1 is the full frosted material.
+    var opacity: Double = 1
+
     func makeNSView(context: Context) -> NSVisualEffectView {
         let view = NSVisualEffectView()
         view.material = .hudWindow
         view.blendingMode = .behindWindow
         view.state = .active
+        view.alphaValue = opacity
         return view
     }
 
-    func updateNSView(_ nsView: NSVisualEffectView, context: Context) {}
+    func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
+        nsView.alphaValue = opacity
+    }
 }
 
 /// Lets the borderless panel be dragged from the top bar.

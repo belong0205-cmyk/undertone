@@ -6,14 +6,22 @@ import SwiftUI
 struct OverlayView: View {
     @EnvironmentObject private var state: AppState
     @AppStorage(Theme.textScaleKey) private var textScale = 1.0
+    /// The profile page is a step inside settings: it covers the panel and goes back to the settings card.
+    @State private var showingProfiles: Bool
+
+    init(showingProfiles: Bool = false) {
+        _showingProfiles = State(initialValue: showingProfiles)
+    }
 
     var body: some View {
+        let tint = min(max(state.opacity, Theme.backgroundRange.lowerBound), Theme.backgroundRange.upperBound)
         VStack(spacing: 0) {
             TopBar()
             Conversation()
                 .frame(maxHeight: .infinity)
                 .environment(\.textScale, textScale)
         }
+        .shadow(color: .black.opacity(tint < Theme.shadowBelow ? 0.7 : 0), radius: 1.5, y: 0.5)
         .overlay(alignment: .bottom) {
             if let message = state.errorMessage {
                 ErrorBar(message: message) { state.errorMessage = nil }
@@ -21,13 +29,18 @@ struct OverlayView: View {
         }
         .overlay {
             if state.showSettings {
-                SettingsOverlay().transition(.opacity)
+                if showingProfiles {
+                    ProfilePage { showingProfiles = false }.transition(.opacity)
+                } else {
+                    SettingsOverlay { showingProfiles = true }.transition(.opacity)
+                }
             }
         }
         .background {
+            // Blur first, then the dark tint; the "Độ đậm nền" slider fades both.
             ZStack {
-                VisualEffectBackground()
-                Theme.tint.opacity(0.85)
+                VisualEffectBackground(opacity: tint)
+                Theme.tint.opacity(max(tint, Theme.minTint))
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: Theme.radius, style: .continuous))
@@ -36,6 +49,10 @@ struct OverlayView: View {
         .environment(\.colorScheme, .dark)
         .tint(Theme.accent)
         .animation(.easeOut(duration: 0.15), value: state.showSettings)
+        .animation(.easeOut(duration: 0.15), value: showingProfiles)
+        .onChange(of: state.showSettings) { _, isOpen in
+            if !isOpen { showingProfiles = false }
+        }
     }
 }
 
@@ -349,13 +366,14 @@ private struct ErrorBar: View {
 
 private struct SettingsOverlay: View {
     @EnvironmentObject private var state: AppState
+    let openProfiles: () -> Void
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
             Color.black.opacity(0.4)
                 .contentShape(Rectangle())
                 .onTapGesture { state.showSettings = false }
-            SettingsCard()
+            SettingsCard(openProfiles: openProfiles)
                 .padding(.top, 40)
                 .padding(.trailing, 8)
                 .padding(.bottom, 8)
@@ -366,6 +384,7 @@ private struct SettingsOverlay: View {
 private struct SettingsCard: View {
     @EnvironmentObject private var state: AppState
     @AppStorage(Theme.textScaleKey) private var textScale = 1.0
+    let openProfiles: () -> Void
 
     var body: some View {
         // Scroll only when the panel is too short to show the whole card.
@@ -388,16 +407,12 @@ private struct SettingsCard: View {
                     KeyField(label: "Soniox", prompt: "Soniox key", text: $state.sonioxKey)
                 }
             }
-            SettingsField("Bối cảnh cho AI", hint: "Vai trò của bạn, chủ đề buổi nói chuyện, muốn trả lời ra sao.") {
-                TextEditor(text: $state.notes)
-                    .font(.system(size: 12.5))
-                    .scrollContentBackground(.hidden)
-                    .frame(height: 52)
-                    .fieldChrome()
+            SettingsField("Hồ sơ", hint: "AI dùng hồ sơ để trả lời các câu hỏi về bạn.") {
+                ProfileRow(profile: state.activeProfile, action: openProfiles)
             }
             SettingsField("Hiển thị", hint: nil) {
                 VStack(spacing: 6) {
-                    PercentSlider(label: "Độ hiện", value: $state.opacity, range: 0.4...1)
+                    PercentSlider(label: "Độ đậm nền", value: $state.opacity, range: Theme.backgroundRange)
                     PercentSlider(label: "Cỡ chữ", value: $textScale, range: Theme.textScaleRange)
                 }
             }
@@ -415,6 +430,36 @@ private struct SettingsCard: View {
     }
 }
 
+/// The active profile's name and a way into the profile page.
+private struct ProfileRow: View {
+    let profile: UserProfile?
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 8) {
+                Circle()
+                    .fill(profile == nil ? Theme.dot : Theme.accent)
+                    .frame(width: 6, height: 6)
+                Text(profile?.displayName ?? "Chưa có hồ sơ")
+                    .font(.system(size: 12.5))
+                    .foregroundStyle(profile == nil ? Theme.textTertiary : Theme.textPrimary)
+                    .lineLimit(1)
+                Spacer(minLength: 8)
+                Text(profile == nil ? "Tạo" : "Mở")
+                    .font(.system(size: 11.5, weight: .medium))
+                    .foregroundStyle(Theme.textSecondary)
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 9.5, weight: .semibold))
+                    .foregroundStyle(Theme.textTertiary)
+            }
+            .fieldChrome()
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+}
+
 /// A labelled slider with its value as a percentage at the right.
 private struct PercentSlider: View {
     let label: String
@@ -426,7 +471,7 @@ private struct PercentSlider: View {
             Text(label)
                 .font(.system(size: 11.5, weight: .medium))
                 .foregroundStyle(Theme.textSecondary)
-                .frame(width: 50, alignment: .leading)
+                .frame(width: 68, alignment: .leading)
             Slider(value: $value, in: range)
             Text("\(Int((value * 100).rounded()))%")
                 .font(.system(size: 11.5, weight: .medium))
@@ -482,7 +527,7 @@ private struct SettingsField<Content: View>: View {
     }
 }
 
-private struct TextAction: View {
+struct TextAction: View {
     let title: String
     let color: Color
     let action: () -> Void

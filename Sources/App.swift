@@ -1,5 +1,4 @@
 import AppKit
-import Combine
 import SwiftUI
 
 @main
@@ -7,7 +6,6 @@ import SwiftUI
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private let state = AppState()
     private var panel: OverlayPanel?
-    private var subscriptions = Set<AnyCancellable>()
 
     static func main() {
         let app = NSApplication.shared
@@ -28,11 +26,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             panel.setFrameOrigin(NSPoint(x: area.maxX - panel.frame.width - 24, y: area.maxY - panel.frame.height - 24))
         }
         panel.setFrameAutosaveName(frameName)
-
-        state.$opacity
-            .sink { [weak panel] in panel?.alphaValue = CGFloat($0) }
-            .store(in: &subscriptions)
-
+        // state.opacity only fades the background blur and tint (see OverlayView); the window's own
+        // alpha stays 1 so text and controls are never faded.
         panel.orderFrontRegardless()
         self.panel = panel
 

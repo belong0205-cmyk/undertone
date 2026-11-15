@@ -5,11 +5,12 @@ final class OverlayPanel: NSPanel {
     static let minimumSize = NSSize(width: 520, height: 380)
 
     init(contentView: NSView) {
-        // Titled (not borderless) so the window server gives it resize edges; the title bar
-        // itself is made invisible and the SwiftUI content runs underneath it.
+        // Not `.resizable`: the system resize edges show resize cursors, which screen sharing captures
+        // over "nothing". Edge drags are handled in `sendEvent` instead. The title bar is invisible and
+        // the SwiftUI content runs underneath it.
         super.init(
             contentRect: NSRect(x: 0, y: 0, width: 680, height: 440),
-            styleMask: [.titled, .fullSizeContentView, .resizable, .nonactivatingPanel],
+            styleMask: [.titled, .fullSizeContentView, .nonactivatingPanel],
             backing: .buffered,
             defer: false
         )
@@ -33,6 +34,71 @@ final class OverlayPanel: NSPanel {
         // The privacy requirement: the window server leaves this window out of screenshots,
         // screen recordings and screen-sharing streams (Zoom, Google Meet, ...).
         sharingType = .none
+        // Screen sharing does capture the cursor, so it must never change shape over the panel.
+        disableCursorRects()
+    }
+
+    // MARK: - Arrow-only cursor and edge resizing
+
+    override func sendEvent(_ event: NSEvent) {
+        switch event.type {
+        case .cursorUpdate:
+            // Text fields (I-beam), selectable text and the like ask for their cursor here; everything
+            // gets the arrow.
+            NSCursor.arrow.set()
+        case .leftMouseDown where !resizeEdges(at: event.locationInWindow).isEmpty:
+            trackResize(resizeEdges(at: event.locationInWindow))
+        default:
+            // Arrow before the views see the event too, so no frame ever shows another cursor.
+            if event.type == .mouseMoved || event.type == .mouseEntered { NSCursor.arrow.set() }
+            super.sendEvent(event)
+            // The field editor of a focused text field sets the I-beam itself on mouse up, bypassing
+            // cursorUpdate; put the arrow straight back.
+            if NSCursor.current !== NSCursor.arrow { NSCursor.arrow.set() }
+        }
+    }
+
+    private struct Edges: OptionSet {
+        let rawValue: Int
+        static let left = Edges(rawValue: 1)
+        static let right = Edges(rawValue: 2)
+        static let bottom = Edges(rawValue: 4)
+        static let top = Edges(rawValue: 8)
+    }
+
+    /// Edges grabbed by a click this close to the border; near a corner the click grabs both edges.
+    private func resizeEdges(at point: NSPoint) -> Edges {
+        // The top bar's buttons sit 5pt below the top edge and 14pt in from the sides, so the top band
+        // and the corner zones stay clear of them.
+        let band: CGFloat = 4
+        let topBand: CGFloat = 3
+        let corner: CGFloat = 12
+        let size = frame.size
+        var edges: Edges = []
+        if point.x < band { edges.insert(.left) } else if point.x > size.width - band { edges.insert(.right) }
+        if point.y < band { edges.insert(.bottom) } else if point.y > size.height - topBand { edges.insert(.top) }
+        guard !edges.isEmpty else { return [] }
+        if point.x < corner { edges.insert(.left) } else if point.x > size.width - corner { edges.insert(.right) }
+        if point.y < corner { edges.insert(.bottom) } else if point.y > size.height - topBand - 5 { edges.insert(.top) }
+        return edges
+    }
+
+    /// Follows the drag until mouse up; the edges that were not grabbed stay where they are.
+    private func trackResize(_ edges: Edges) {
+        let start = frame
+        let grab = NSEvent.mouseLocation
+        while let event = nextEvent(matching: [.leftMouseDragged, .leftMouseUp]), event.type == .leftMouseDragged {
+            let mouse = NSEvent.mouseLocation
+            var size = start.size
+            if edges.contains(.left) { size.width -= mouse.x - grab.x }
+            if edges.contains(.right) { size.width += mouse.x - grab.x }
+            if edges.contains(.bottom) { size.height -= mouse.y - grab.y }
+            if edges.contains(.top) { size.height += mouse.y - grab.y }
+            size = Self.atLeastMinimum(size)
+            let x = edges.contains(.left) ? start.maxX - size.width : start.minX
+            let y = edges.contains(.bottom) ? start.maxY - size.height : start.minY
+            setFrame(NSRect(x: x, y: y, width: size.width, height: size.height), display: true)
+        }
     }
 
     override var canBecomeKey: Bool { true }
