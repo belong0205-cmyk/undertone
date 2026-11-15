@@ -5,12 +5,14 @@ import SwiftUI
 /// (Vietnamese | English); settings hidden behind one icon.
 struct OverlayView: View {
     @EnvironmentObject private var state: AppState
+    @AppStorage(Theme.textScaleKey) private var textScale = 1.0
 
     var body: some View {
         VStack(spacing: 0) {
             TopBar()
             Conversation()
                 .frame(maxHeight: .infinity)
+                .environment(\.textScale, textScale)
         }
         .overlay(alignment: .bottom) {
             if let message = state.errorMessage {
@@ -30,6 +32,7 @@ struct OverlayView: View {
         }
         .clipShape(RoundedRectangle(cornerRadius: Theme.radius, style: .continuous))
         .overlay(RoundedRectangle(cornerRadius: Theme.radius, style: .continuous).strokeBorder(Theme.hairline))
+        .ignoresSafeArea() // run under the invisible title bar instead of below it
         .environment(\.colorScheme, .dark)
         .tint(Theme.accent)
         .animation(.easeOut(duration: 0.15), value: state.showSettings)
@@ -209,6 +212,7 @@ private struct AnswerCard: View {
     let label: String
     let text: String
     let highlighted: Bool
+    @Environment(\.textScale) private var textScale
 
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
@@ -219,7 +223,7 @@ private struct AnswerCard: View {
             if text.isEmpty {
                 // An invisible line of answer text gives the dots the label's baseline.
                 ZStack(alignment: .leading) {
-                    Text(" ").font(Theme.answer)
+                    Text(" ").font(.system(size: Theme.answerSize * textScale))
                     PendingDots()
                 }
             } else {
@@ -236,7 +240,17 @@ private struct AnswerCard: View {
 
 private extension Text {
     func utterance(color: Color) -> some View {
-        font(Theme.body)
+        modifier(UtteranceStyle(color: color))
+    }
+}
+
+private struct UtteranceStyle: ViewModifier {
+    let color: Color
+    @Environment(\.textScale) private var textScale
+
+    func body(content: Content) -> some View {
+        content
+            .font(.system(size: Theme.bodySize * textScale))
             .foregroundStyle(color)
             .lineSpacing(3)
             .textSelection(.enabled)
@@ -353,6 +367,7 @@ private struct SettingsOverlay: View {
 
 private struct SettingsCard: View {
     @EnvironmentObject private var state: AppState
+    @AppStorage(Theme.textScaleKey) private var textScale = 1.0
 
     var body: some View {
         // Scroll only when the panel is too short to show the whole card.
@@ -382,14 +397,10 @@ private struct SettingsCard: View {
                     .frame(height: 52)
                     .fieldChrome()
             }
-            SettingsField("Độ hiện cửa sổ", hint: nil) {
-                HStack(spacing: 10) {
-                    Slider(value: $state.opacity, in: 0.4...1)
-                    Text("\(Int((state.opacity * 100).rounded()))%")
-                        .font(.system(size: 11.5, weight: .medium))
-                        .monospacedDigit()
-                        .foregroundStyle(Theme.textSecondary)
-                        .frame(width: 36, alignment: .trailing)
+            SettingsField("Hiển thị", hint: nil) {
+                VStack(spacing: 6) {
+                    PercentSlider(label: "Độ hiện", value: $state.opacity, range: 0.4...1)
+                    PercentSlider(label: "Cỡ chữ", value: $textScale, range: Theme.textScaleRange)
                 }
             }
             Hairline()
@@ -403,6 +414,28 @@ private struct SettingsCard: View {
             }
         }
         .padding(14)
+    }
+}
+
+/// A labelled slider with its value as a percentage at the right.
+private struct PercentSlider: View {
+    let label: String
+    @Binding var value: Double
+    let range: ClosedRange<Double>
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Text(label)
+                .font(.system(size: 11.5, weight: .medium))
+                .foregroundStyle(Theme.textSecondary)
+                .frame(width: 50, alignment: .leading)
+            Slider(value: $value, in: range)
+            Text("\(Int((value * 100).rounded()))%")
+                .font(.system(size: 11.5, weight: .medium))
+                .monospacedDigit()
+                .foregroundStyle(Theme.textSecondary)
+                .frame(width: 36, alignment: .trailing)
+        }
     }
 }
 

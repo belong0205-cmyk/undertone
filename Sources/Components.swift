@@ -20,14 +20,32 @@ enum Theme {
     static let answerFill = Color.black.opacity(0.22)
     static let answerStroke = Color.white.opacity(0.08)
 
-    static let radius: CGFloat = 14
+    static let radius: CGFloat = 16      // matches the system window corner radius
     static let pad: CGFloat = 14
     static let gutter: CGFloat = 28      // timeline column at the left edge
     static let afterGutter: CGFloat = 6  // gap between the timeline and the Vietnamese column
 
-    static let body = Font.system(size: 13)
-    static let answer = Font.system(size: 13.5)
+    static let bodySize: CGFloat = 13
+    static let answerSize: CGFloat = 13.5
+    static let body = Font.system(size: bodySize)
+    static let answer = Font.system(size: answerSize)
     static let label = Font.system(size: 10, weight: .semibold)
+
+    /// UserDefaults key and range of the "Cỡ chữ" setting (conversation text only).
+    static let textScaleKey = "textScale"
+    static let textScaleRange: ClosedRange<Double> = 0.8...1.6
+}
+
+private struct TextScaleKey: EnvironmentKey {
+    static let defaultValue: Double = 1
+}
+
+extension EnvironmentValues {
+    /// Multiplier for conversation text (utterance, translation, suggested answer); chrome ignores it.
+    var textScale: Double {
+        get { self[TextScaleKey.self] }
+        set { self[TextScaleKey.self] = newValue }
+    }
 }
 
 struct Hairline: View {
@@ -128,6 +146,7 @@ extension View {
 /// Renders an answer: inline markdown (bold, italic, code) and "- " bullets with a hanging indent.
 struct AnswerText: View {
     let text: String
+    @Environment(\.textScale) private var textScale
 
     private struct Line {
         let isBullet: Bool
@@ -159,7 +178,7 @@ struct AnswerText: View {
                 }
             }
         }
-        .font(Theme.answer)
+        .font(.system(size: Theme.answerSize * textScale))
         .foregroundStyle(Theme.textPrimary)
         .lineSpacing(2)
         .fixedSize(horizontal: false, vertical: true)

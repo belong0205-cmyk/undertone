@@ -24,12 +24,16 @@ func snapshot<V: View>(_ view: V, size: CGSize, name: String) {
 
 /// The overlay over a desktop-like backdrop, the way it sits on screen.
 @MainActor
-func renderOverlay(_ name: String, size: CGSize = CGSize(width: 680, height: 440), configure: (AppState) -> Void) {
+func renderOverlay(_ name: String, size: CGSize = CGSize(width: 680, height: 440), textScale: Double = 1,
+                   configure: (AppState) -> Void) {
     let suite = "local.undertone.design"
     let defaults = UserDefaults(suiteName: suite)!
     defaults.removePersistentDomain(forName: suite)
     let state = AppState(defaults: defaults)
     configure(state)
+    // OverlayView reads the text size with @AppStorage, i.e. from the standard defaults.
+    UserDefaults.standard.set(textScale, forKey: Theme.textScaleKey)
+    defer { UserDefaults.standard.removeObject(forKey: Theme.textScaleKey) }
     let backdrop = LinearGradient(
         colors: [Color(red: 0.20, green: 0.24, blue: 0.33), Color(red: 0.36, green: 0.31, blue: 0.40)],
         startPoint: .topLeading, endPoint: .bottomTrailing
@@ -67,18 +71,20 @@ MainActor.assumeIsolated {
     renderOverlay("1-empty-no-key") { state in
         state.listenState = .listening
     }
-    renderOverlay("2-conversation") { state in
-        state.apiKey = "design-preview"
-        state.sonioxKey = "design-preview"
-        state.listenState = .listening
-        state.hasSignal = true
-        state.meter.level = 0.6
-        state.rows = [
-            intro,
-            question,
-            crossContamination,
-            row("And how would you make a beurre blanc for the", final: false),
-        ]
+    for (name, scale) in [("2-conversation", 1.0), ("2b-conversation-text-160", 1.6)] {
+        renderOverlay(name, textScale: scale) { state in
+            state.apiKey = "design-preview"
+            state.sonioxKey = "design-preview"
+            state.listenState = .listening
+            state.hasSignal = true
+            state.meter.level = 0.6
+            state.rows = [
+                intro,
+                question,
+                crossContamination,
+                row("And how would you make a beurre blanc for the", final: false),
+            ]
+        }
     }
     renderOverlay("3-answer-streaming") { state in
         state.apiKey = "design-preview"
