@@ -27,6 +27,8 @@ final class SonioxTranscriber {
     private var currentFinal = "" // finalized tokens of the utterance in progress
     private var currentPending = "" // its non-final tokens; may still change
     private var discarding = false // skip the rest of a discarded utterance until its <end>
+    /// The last final token closed a sentence (or a long clause); the utterance ends at the next word.
+    private var atBoundary = false
     private var connectedAt = Date()
     private var quickFailures = 0
     private var keepAliveTimer: Timer?
@@ -169,8 +171,16 @@ final class SonioxTranscriber {
             } else if token.text == "<fin>" || discarding {
                 continue
             } else if token.isFinal {
+                // Someone talking without pauses never triggers <end>, so close the utterance at a
+                // sentence boundary instead; it can then be translated while they keep talking.
+                // Waiting for the next word (leading space) avoids splitting "3.5" or "e.g".
+                if atBoundary, token.text.first?.isWhitespace == true { finishUtterance() }
                 currentFinal += token.text
+                atBoundary = Self.endsUtterance(currentFinal)
             } else {
+                // The boundary itself is final, so the next word may start the new utterance even
+                // before it is final.
+                if atBoundary, pending.isEmpty, token.text.first?.isWhitespace == true { finishUtterance() }
                 pending += token.text
             }
         }
@@ -185,6 +195,16 @@ final class SonioxTranscriber {
         currentID = UUID()
         currentFinal = ""
         currentPending = ""
+        atBoundary = false
+    }
+
+    /// A finished sentence of at least a few words, or a long run-on clause at a comma.
+    private static func endsUtterance(_ text: String) -> Bool {
+        guard let last = text.last else { return false }
+        let words = text.split(whereSeparator: \.isWhitespace).count
+        if ".?!".contains(last) { return words >= 4 }
+        if ",;".contains(last) { return words >= 15 }
+        return false
     }
 
     // MARK: - Wire format (https://docs.soniox.com/api-reference/stt/websocket-api)

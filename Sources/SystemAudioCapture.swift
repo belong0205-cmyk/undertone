@@ -44,16 +44,25 @@ final class SystemAudioCapture {
             ]
             try check("Tạo thiết bị thu", AudioHardwareCreateAggregateDevice(aggregate as CFDictionary, &aggregateID))
 
+            // Every IO cycle delivers the aggregate device's buffer, so the audio runs at the device's
+            // sample rate, which can differ from the rate the tap reports (e.g. 44.1 kHz speakers with
+            // a 48 kHz tap). A wrong rate speeds the speech up or slows it down for the recognizer.
             var streamDescription = try tapStreamDescription()
-            guard let format = AVAudioFormat(streamDescription: &streamDescription) else {
-                throw Failure(step: "Đọc định dạng âm thanh", status: -1)
-            }
-
+            let box = FormatBox()
+            let meter = Self.debug ? RateMeter(tapRate: streamDescription.mSampleRate) : nil
             try check("Đăng ký luồng âm thanh", AudioDeviceCreateIOProcIDWithBlock(&procID, aggregateID, queue) { _, input, _, _, _ in
-                guard let buffer = AVAudioPCMBuffer(pcmFormat: format, bufferListNoCopy: input, deallocator: nil) else { return }
+                guard let format = box.format,
+                      let buffer = AVAudioPCMBuffer(pcmFormat: format, bufferListNoCopy: input, deallocator: nil)
+                else { return }
+                meter?.count(buffer)
                 onBuffer(buffer)
             })
             try check("Bắt đầu thu âm", AudioDeviceStart(aggregateID, procID))
+            streamDescription.mSampleRate = try deviceSampleRate() // read once running
+            guard let format = AVAudioFormat(streamDescription: &streamDescription) else {
+                throw Failure(step: "Đọc định dạng âm thanh", status: -1)
+            }
+            box.format = format
         } catch {
             stop()
             throw error
@@ -106,8 +115,53 @@ final class SystemAudioCapture {
         return description
     }
 
+    private func deviceSampleRate() throws -> Float64 {
+        var address = AudioObjectPropertyAddress(
+            mSelector: kAudioDevicePropertyNominalSampleRate,
+            mScope: kAudioObjectPropertyScopeGlobal,
+            mElement: kAudioObjectPropertyElementMain
+        )
+        var rate: Float64 = 0
+        var size = UInt32(MemoryLayout<Float64>.size)
+        try check("Đọc tần số lấy mẫu", AudioObjectGetPropertyData(aggregateID, &address, 0, nil, &size, &rate))
+        return rate
+    }
+
     private func check(_ step: String, _ status: OSStatus) throws {
         guard status == noErr else { throw Failure(step: step, status: status) }
+    }
+
+    /// `open --env UNDERTONE_DEBUG=1 Undertone.app` also logs the capture rate.
+    private static let debug = ProcessInfo.processInfo.environment["UNDERTONE_DEBUG"] == "1"
+}
+
+/// The buffer format, set once the device runs; read from the audio thread.
+private final class FormatBox: @unchecked Sendable {
+    private let lock = NSLock()
+    private var value: AVAudioFormat?
+    var format: AVAudioFormat? {
+        get { lock.withLock { value } }
+        set { lock.withLock { value = newValue } }
+    }
+}
+
+/// Debug only: every 10 s, prints how many frames per second actually arrive versus the declared rate.
+private final class RateMeter: @unchecked Sendable {
+    private let tapRate: Double
+    private var frames = 0
+    private var since = Date()
+
+    init(tapRate: Double) { self.tapRate = tapRate }
+
+    func count(_ buffer: AVAudioPCMBuffer) { // audio thread only
+        frames += Int(buffer.frameLength)
+        let elapsed = Date().timeIntervalSince(since)
+        guard elapsed >= 10 else { return }
+        print(String(format: "[Undertone] capture: %.0f frames/s measured, %.0f Hz declared, tap reports %.0f Hz",
+                     Double(frames) / elapsed, buffer.format.sampleRate, tapRate))
+        fflush(stdout)
+        frames = 0
+        since = Date()
     }
 }
 
