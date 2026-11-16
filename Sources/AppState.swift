@@ -33,6 +33,7 @@ final class AppState: ObservableObject {
         didSet { if let errorMessage { log("error: \(errorMessage)") } }
     }
     @Published var showSettings = false
+    @Published var update: UpdateState = .idle
 
     @Published var apiKey: String { didSet { defaults.set(apiKey, forKey: "apiKey") } }
     @Published var sonioxKey: String { didSet { defaults.set(sonioxKey, forKey: "sonioxKey") } }
@@ -70,11 +71,16 @@ final class AppState: ObservableObject {
     let capture = SystemAudioCapture()
     let transcriber = SonioxTranscriber()
     private var tasks: [UUID: Task<Void, Never>] = [:]
+    /// Last request to the Claude API, to know whether its connection may have gone idle.
+    private var lastAPIUse = Date.distantPast
     /// Keeps the knowledge base and the active profile in Claude's prompt cache while listening.
     private var cacheWarmer: Task<Void, Never>?
     private var rewarmTask: Task<Void, Never>?
     /// Debug only: reports when the main thread falls behind (it also runs the transcriber).
     private var stallProbe: Task<Void, Never>?
+    /// The release behind `.available`, kept for installUpdate().
+    private var pendingRelease: Updater.Release?
+    private var updateChecker: Task<Void, Never>?
 
     init(defaults: UserDefaults = .standard, profilesURL: URL = ProfileStore.defaultURL) {
         self.defaults = defaults
@@ -100,10 +106,81 @@ final class AppState: ObservableObject {
         transcriber.onUtterance = { [weak self] id, text, isFinal in
             self?.receive(id, text: text, isFinal: isFinal)
         }
+        transcriber.onTranslation = { [weak self] id, vietnamese in
+            guard let self, let index = rows.firstIndex(where: { $0.id == id }) else { return }
+            rows[index].vietnamese = vietnamese
+        }
         transcriber.onFailure = { [weak self] message in
             self?.stopListening()
             self?.errorMessage = message
         }
+
+        // Only the real app checks; harnesses and design snapshots are not bundles.
+        if Bundle.main.bundleURL.pathExtension == "app" {
+            updateChecker = Task { [weak self] in
+                while !Task.isCancelled {
+                    await self?.checkForUpdates(silent: true)
+                    try? await Task.sleep(for: .seconds(6 * 3600))
+                }
+            }
+        }
+    }
+
+    // MARK: - Updates
+
+    var appVersion: String { Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "0" }
+
+    /// Asks GitHub for the latest release. Silent checks only ever surface `.available` and leave
+    /// any update already in progress alone.
+    func checkForUpdates(silent: Bool) async {
+        switch update {
+        case .checking, .downloading, .installing: return
+        case .available where silent: return
+        default: break
+        }
+        if !silent { update = .checking }
+        do {
+            let release = try await Updater.latest()
+            if Updater.isNewer(release.version, than: appVersion) {
+                pendingRelease = release
+                update = .available(version: release.version, notes: release.notes)
+            } else if !silent {
+                update = .upToDate
+            }
+        } catch {
+            if !silent { update = .failed(Self.updateMessage(error)) }
+        }
+        log("update check: \(update)")
+    }
+
+    /// Downloads and verifies the pending release, then quits; a helper swaps the app and reopens it.
+    func installUpdate() async {
+        guard let release = pendingRelease else { return }
+        switch update {
+        case .downloading, .installing: return
+        default: break
+        }
+        update = .downloading(progress: 0)
+        do {
+            let zip = try await Updater.download(release.zipURL) { [weak self] progress in
+                Task { @MainActor in
+                    if case .downloading = self?.update { self?.update = .downloading(progress: progress) }
+                }
+            }
+            update = .installing
+            let current = Bundle.main.bundleURL
+            let newApp = try await Task.detached { try Updater.unpack(zip, matching: current) }.value
+            try Updater.install(newApp, replacing: current, afterExitOf: ProcessInfo.processInfo.processIdentifier)
+            NSApp.terminate(nil)
+        } catch {
+            update = .failed(Self.updateMessage(error))
+        }
+    }
+
+    private static func updateMessage(_ error: Error) -> String {
+        if let error = error as? UpdateError { return error.errorDescription ?? "Cập nhật thất bại." }
+        if error is URLError { return "Không kết nối được GitHub để cập nhật. Kiểm tra mạng rồi thử lại." }
+        return "Cập nhật thất bại: \(error.localizedDescription)"
     }
 
     // MARK: - Profiles
@@ -275,7 +352,15 @@ final class AppState: ObservableObject {
         } else {
             rows.append(Row(id: id, english: text, isFinal: isFinal))
             log("partial #\(DebugLog.tag(id))")
+            // Someone started talking: have the API connection ready before their sentence ends.
+            if hasAPIKey, Date().timeIntervalSince(lastAPIUse) > 20 {
+                lastAPIUse = Date()
+                ClaudeClient(apiKey: trimmedKey).preconnect()
+            }
         }
+        // No early answer from partials: Soniox updates partials in bursts more than 300 ms apart while
+        // the speaker is still talking, so every early request measured hit half a sentence and had to be
+        // redone, while the final itself arrives 0.2-0.8 s after speech ends.
         if isFinal {
             log("heard #\(DebugLog.tag(id)): \(text)")
             process(id)
@@ -307,6 +392,7 @@ final class AppState: ObservableObject {
         let message = Prompt.user(history: history, utterance: rows[index].english)
         let profile = activeProfile?.promptBlock
         let client = ClaudeClient(apiKey: trimmedKey)
+        lastAPIUse = Date()
         rows[index].isProcessing = true
         let tag = DebugLog.tag(id)
         log("claude #\(tag) start, \(tasks.count + 1) in flight")
@@ -314,16 +400,16 @@ final class AppState: ObservableObject {
         tasks[id] = Task { [weak self] in
             let started = Date()
             var output = ""
-            var viLogged = false
+            var answerLogged = false
             do {
                 for try await chunk in client.stream(system: Self.systemPrompt, profile: profile, user: message) {
                     if output.isEmpty {
                         DebugLog.log(String(format: "claude #%@ first token %.2f s", tag, Date().timeIntervalSince(started)))
                     }
                     output += chunk
-                    if !viLogged, output.contains("</vi>") {
-                        viLogged = true
-                        DebugLog.log(String(format: "claude #%@ vi done %.2f s", tag, Date().timeIntervalSince(started)))
+                    if !answerLogged, !Prompt.section("answer_en", in: output).isEmpty {
+                        answerLogged = true
+                        DebugLog.log(String(format: "claude #%@ answer on screen %.2f s", tag, Date().timeIntervalSince(started)))
                     }
                     self?.apply(output, to: id)
                 }
@@ -338,7 +424,6 @@ final class AppState: ObservableObject {
 
     private func apply(_ output: String, to id: UUID) {
         guard let index = rows.firstIndex(where: { $0.id == id }) else { return }
-        rows[index].vietnamese = Prompt.section("vi", in: output)
         rows[index].answerEnglish = Prompt.section("answer_en", in: output)
         rows[index].answerVietnamese = Prompt.section("answer_vi", in: output)
     }

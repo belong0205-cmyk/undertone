@@ -2,6 +2,7 @@
 # Builds build/Undertone.app (signed with this Mac's Apple Development identity, else ad-hoc).
 # Usage: ./build.sh                          (this Mac's architecture, fast)
 #        ARCHS="arm64 x86_64" ./build.sh     (universal: Apple Silicon + Intel)
+#        VERSION=0.4.0 ./build.sh            (release: version = tag without the "v")
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -20,6 +21,10 @@ done
 lipo -create "${SLICES[@]}" -output "$APP/Contents/MacOS/Undertone"
 rm -f "${SLICES[@]}"
 cp Resources/Info.plist "$APP/Contents/Info.plist"
+# Releases pass the tag's version (VERSION=0.4.0 ./build.sh); the in-app updater compares it with the latest tag.
+if [ -n "${VERSION:-}" ]; then
+  /usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $VERSION" -c "Set :CFBundleVersion $VERSION" "$APP/Contents/Info.plist"
+fi
 [ -f Resources/AppIcon.icns ] && cp Resources/AppIcon.icns "$APP/Contents/Resources/"
 cp -R Knowledge "$APP/Contents/Resources/Knowledge"
 # Optional default API keys (gitignored); the app falls back to them when settings are empty.
