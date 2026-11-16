@@ -25,7 +25,7 @@ enum UpdateError: LocalizedError {
         case .noAsset: "Bản mới chưa có file Undertone.zip."
         case .unpackFailed: "Không giải nén được bản mới."
         case .notTrusted: "Bản mới không cùng chữ ký với app đang chạy nên không cài."
-        case .cannotWrite: "Không ghi được vào thư mục chứa app. Hãy tải bản mới thủ công."
+        case .cannotWrite: "Không ghi được vào app hiện tại. Hãy tải bản mới thủ công."
         }
     }
 }
@@ -110,30 +110,63 @@ enum Updater {
             && Bundle(url: candidate)?.bundleIdentifier == Bundle(url: current)?.bundleIdentifier
     }
 
-    /// Copies the new app beside the current one (so a failure leaves the current app untouched),
-    /// then starts a helper that waits for `pid` to exit, swaps the bundles and opens the new app.
-    /// The caller quits right after.
+    /// The app's real location. A downloaded (quarantined) app that was not moved with Finder runs from
+    /// a read-only App Translocation copy under /private/var/folders/.../AppTranslocation/, so writing
+    /// next to Bundle.main fails ("Không ghi được…", seen on the user's Mac). Security.framework maps
+    /// that copy back to the original path; the function is not in the public headers, so it is
+    /// looked up at run time and the URL is returned unchanged if it is missing.
+    static func originalURL(of url: URL) -> URL {
+        guard url.path.contains("/AppTranslocation/"),
+              let security = dlopen("/System/Library/Frameworks/Security.framework/Security", RTLD_LAZY),
+              let symbol = dlsym(security, "SecTranslocateCreateOriginalPathForURL")
+        else { return url }
+        typealias Original = @convention(c) (CFURL, UnsafeMutablePointer<Unmanaged<CFError>?>?) -> Unmanaged<CFURL>?
+        let original = unsafeBitCast(symbol, to: Original.self)
+        return original(url as CFURL, nil)?.takeRetainedValue() as URL? ?? url
+    }
+
+    /// Where the update helper writes what it did (it runs after the app has quit).
+    static let logURL = FileManager.default.homeDirectoryForCurrentUser
+        .appendingPathComponent("Library/Logs/Undertone-update.log")
+
+    /// Starts a helper that waits for `pid` to exit, then syncs the new bundle's contents over the
+    /// current bundle in place and opens it. The caller quits right after.
+    /// In place, because macOS App Management lets an app update its own bundle but blocks it from
+    /// creating a new .app inside /Applications (the old staging copy there failed for the user).
     static func install(_ newApp: URL, replacing current: URL, afterExitOf pid: Int32) throws {
-        let staged = current.deletingLastPathComponent().appendingPathComponent(".Undertone-update.app")
-        try? FileManager.default.removeItem(at: staged)
-        guard run("/usr/bin/ditto", [newApp.path, staged.path]) else { throw UpdateError.cannotWrite }
+        guard FileManager.default.isWritableFile(atPath: current.path) else { throw UpdateError.cannotWrite }
         let script = """
+        exec >>"$4" 2>&1
+        echo "$(date) update $2 from $3"
         while kill -0 "$1" 2>/dev/null; do sleep 0.2; done
-        rm -rf "$2" && mv "$3" "$2" && open "$2"
+        if /usr/bin/rsync -a --delete "$3/" "$2/"; then echo "replaced"; else echo "rsync failed with status $?"; fi
+        # The new bundle matched our signature; without quarantine, macOS runs it in place next time.
+        /usr/bin/xattr -dr com.apple.quarantine "$2"
+        open "$2"
         """
         let helper = Process()
         helper.executableURL = URL(fileURLWithPath: "/bin/sh")
-        helper.arguments = ["-c", script, "undertone-update", String(pid), current.path, staged.path]
+        helper.arguments = ["-c", script, "undertone-update", String(pid), current.path, newApp.path, logURL.path]
         try helper.run()
     }
 
+    /// Runs a tool and waits; on failure its status and stderr go to the debug log.
     @discardableResult
     private static func run(_ tool: String, _ arguments: [String]) -> Bool {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: tool)
         process.arguments = arguments
-        guard (try? process.run()) != nil else { return false }
+        let errors = Pipe()
+        process.standardError = errors
+        do { try process.run() } catch {
+            DebugLog.log("updater: \(tool) did not start: \(error.localizedDescription)")
+            return false
+        }
+        let output = errors.fileHandleForReading.readDataToEndOfFile()
         process.waitUntilExit()
+        if process.terminationStatus != 0 {
+            DebugLog.log("updater: \(tool) exited \(process.terminationStatus): \(String(decoding: output, as: UTF8.self))")
+        }
         return process.terminationStatus == 0
     }
 }

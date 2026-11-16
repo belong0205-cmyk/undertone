@@ -120,6 +120,12 @@ final class AppState: ObservableObject {
             updateChecker = Task { [weak self] in
                 while !Task.isCancelled {
                     await self?.checkForUpdates(silent: true)
+                    // Test hook: `open --env UNDERTONE_INSTALL_UPDATE=1 Undertone.app` installs an
+                    // available update without the settings UI (the panel is hidden from screenshots).
+                    if ProcessInfo.processInfo.environment["UNDERTONE_INSTALL_UPDATE"] == "1",
+                       case .available = self?.update {
+                        await self?.installUpdate()
+                    }
                     try? await Task.sleep(for: .seconds(6 * 3600))
                 }
             }
@@ -168,7 +174,8 @@ final class AppState: ObservableObject {
                 }
             }
             update = .installing
-            let current = Bundle.main.bundleURL
+            let current = Updater.originalURL(of: Bundle.main.bundleURL)
+            log("update: installing over \(current.path)")
             let newApp = try await Task.detached { try Updater.unpack(zip, matching: current) }.value
             try Updater.install(newApp, replacing: current, afterExitOf: ProcessInfo.processInfo.processIdentifier)
             NSApp.terminate(nil)
