@@ -43,9 +43,16 @@ final class SonioxTranscriber {
     private var discarding = false // skip the rest of a discarded utterance until its <end>
     /// The last final token closed a sentence (or a long clause); the utterance ends at the next word.
     private var atBoundary = false
-    /// Translation tokens belong to the utterance that received the last final spoken token.
-    private var translationID: UUID?
-    private var translationFinal = ""
+    /// Soniox translates finalized speech stretch by stretch: the final words of a stretch arrive, then
+    /// its translation, which can cover several of our utterances (we split at sentence ends; Soniox may
+    /// translate two sentences as one). `untranslated` collects final words per utterance since the last
+    /// translation token; the next translation fills that stretch in order, one translated sentence per
+    /// spoken sentence, and its last utterance takes the rest, so a mismatch never spills further.
+    private var untranslated: [(id: UUID, text: String)] = []
+    private var translating: [(id: UUID, text: String)] = []
+    private var translatingIndex = 0
+    private var translatedInStretch = "" // translation given to translating[translatingIndex] so far
+    private var translations: [UUID: String] = [:] // final translation per utterance
     private var connectedAt = Date()
     private var quickFailures = 0
     private var keepAliveTimer: Timer?
@@ -109,7 +116,15 @@ final class SonioxTranscriber {
         currentID = UUID()
         currentFinal = ""
         currentPending = ""
-        translationID = nil
+        resetTranslation() // the cleared rows are gone; later translations of them are dropped
+    }
+
+    private func resetTranslation() {
+        untranslated = []
+        translating = []
+        translatingIndex = 0
+        translatedInStretch = ""
+        translations = [:]
     }
 
     /// Called from the audio thread for every captured buffer.
@@ -302,6 +317,7 @@ final class SonioxTranscriber {
         }
         discarding = false
         finishUtterance()
+        resetTranslation() // a closed stream sends no more translations
         guard running else { return } // stopped on purpose
         if let failure {
             quickFailures = Date().timeIntervalSince(connectedAt) < 5 ? quickFailures + 1 : 0
@@ -346,8 +362,8 @@ final class SonioxTranscriber {
     private func apply(_ tokens: [Response.Token]) {
         guard !tokens.isEmpty else { return }
         var pending = ""
-        var pendingTranslation = ""
-        var translatedID: UUID?
+        var pendingTranslation: [UUID: String] = [:]
+        var translated: [UUID] = [] // in order, to report
         for token in tokens {
             if token.text == "<end>" || token.text == "<fin>" { // endpoint, or our finalize at a pause
                 DebugLog.log("soniox \(token.text)")
@@ -356,9 +372,22 @@ final class SonioxTranscriber {
             } else if discarding {
                 continue
             } else if token.translationStatus == "translation" {
-                guard let id = translationID else { continue }
-                if token.isFinal { translationFinal += token.text } else { pendingTranslation += token.text }
-                translatedID = id
+                guard token.isFinal else { // a provisional translation of the words still being spoken
+                    pendingTranslation[currentID, default: ""] += token.text
+                    if !translated.contains(currentID) { translated.append(currentID) }
+                    continue
+                }
+                if !untranslated.isEmpty { startTranslatingStretch() }
+                guard translatingIndex < translating.count else { continue }
+                let id = translating[translatingIndex].id
+                if !translated.contains(id) { translated.append(id) }
+                translations[id, default: ""] += token.text
+                translatedInStretch += token.text
+                if translatingIndex < translating.count - 1,
+                   Self.sentenceCount(translatedInStretch) >= max(1, Self.sentenceCount(translating[translatingIndex].text)) {
+                    translatingIndex += 1
+                    translatedInStretch = ""
+                }
             } else if token.isFinal {
                 // Someone talking without pauses never triggers <end>, so close the utterance at a
                 // sentence boundary instead; it can then be translated while they keep talking.
@@ -366,9 +395,10 @@ final class SonioxTranscriber {
                 if atBoundary, token.text.first?.isWhitespace == true { finishUtterance() }
                 currentFinal += token.text
                 atBoundary = Self.endsUtterance(currentFinal)
-                if translationID != currentID {
-                    translationID = currentID
-                    translationFinal = ""
+                if untranslated.last?.id == currentID {
+                    untranslated[untranslated.count - 1].text += token.text
+                } else {
+                    untranslated.append((currentID, token.text))
                 }
             } else {
                 // The boundary itself is final, so the next word may start the new utterance even
@@ -380,10 +410,35 @@ final class SonioxTranscriber {
         currentPending = pending
         let text = (currentFinal + currentPending).trimmingCharacters(in: .whitespacesAndNewlines)
         if !text.isEmpty { onUtterance?(currentID, text, false) }
-        if let id = translatedID {
-            let vietnamese = (translationFinal + pendingTranslation).trimmingCharacters(in: .whitespacesAndNewlines)
+        for id in translated {
+            let vietnamese = ((translations[id] ?? "") + (pendingTranslation[id] ?? ""))
+                .trimmingCharacters(in: .whitespacesAndNewlines)
             if !vietnamese.isEmpty { onTranslation?(id, vietnamese) }
         }
+    }
+
+    /// The final words since the last translation are what Soniox is translating now.
+    private func startTranslatingStretch() {
+        // Utterances of earlier stretches get no more translation (an utterance still being spoken
+        // can continue into the new stretch, so it keeps its text).
+        let keep = Set(untranslated.map(\.id))
+        translations = translations.filter { keep.contains($0.key) }
+        translating = untranslated
+        untranslated = []
+        translatingIndex = 0
+        translatedInStretch = ""
+    }
+
+    /// Sentences in a text: runs of . ? ! … followed by a space or the end ("3.5" inside a sentence
+    /// does not count).
+    private static func sentenceCount(_ text: String) -> Int {
+        var count = 0
+        var previous: Character?
+        for character in text + " " {
+            if let previous, ".?!…".contains(previous), character.isWhitespace || character == "\"" { count += 1 }
+            previous = character
+        }
+        return count
     }
 
     private func finishUtterance() {
