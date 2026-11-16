@@ -3,13 +3,15 @@ import AppKit
 /// Floating, non-activating panel that is excluded from screenshots and screen sharing.
 final class OverlayPanel: NSPanel {
     static let minimumSize = NSSize(width: 520, height: 380)
+    /// First-launch size, used when no saved frame exists.
+    static let defaultSize = NSSize(width: 680, height: 880)
 
     init(contentView: NSView) {
         // Not `.resizable`: the system resize edges show resize cursors, which screen sharing captures
         // over "nothing". Edge drags are handled in `sendEvent` instead. The title bar is invisible and
         // the SwiftUI content runs underneath it.
         super.init(
-            contentRect: NSRect(x: 0, y: 0, width: 680, height: 440),
+            contentRect: NSRect(origin: .zero, size: Self.defaultSize),
             styleMask: [.titled, .fullSizeContentView, .nonactivatingPanel],
             backing: .buffered,
             defer: false
