@@ -84,32 +84,50 @@ private struct TopBar: View {
     }
 }
 
-/// Green and breathing with the audio level while listening; a hollow ring when paused. Click to toggle.
+/// Labelled pause / listen toggle: green live dot and "Tạm dừng" while listening, grey and "Nghe" when paused.
 private struct ListenDot: View {
     @EnvironmentObject private var state: AppState
     @ObservedObject var meter: AudioMeter
 
+    private var paused: Bool { state.listenState == .idle }
+
     var body: some View {
         Button { state.toggleListening() } label: {
-            ZStack {
-                switch state.listenState {
-                case .listening:
-                    Circle()
-                        .fill(Theme.accent.opacity(0.28))
-                        .frame(width: 8 + 12 * CGFloat(meter.level), height: 8 + 12 * CGFloat(meter.level))
-                        .animation(.easeOut(duration: 0.12), value: meter.level)
-                    Circle().fill(Theme.accent).frame(width: 7, height: 7)
-                case .starting:
-                    Circle().fill(Theme.warning).frame(width: 7, height: 7)
-                case .idle:
-                    Circle().strokeBorder(Theme.textSecondary, lineWidth: 1.5).frame(width: 8, height: 8)
-                }
+            HStack(spacing: 6) {
+                indicator
+                Image(systemName: paused ? "play.fill" : "pause.fill")
+                    .font(.system(size: 9.5, weight: .bold))
+                Text(paused ? "Nghe" : "Tạm dừng")
+                    .font(.system(size: 11.5, weight: .semibold))
             }
-            .frame(width: 26, height: 26)
-            .contentShape(Rectangle())
+            .foregroundStyle(paused ? Theme.textSecondary : Theme.textPrimary)
+            .padding(.horizontal, 9)
+            .frame(height: 24)
+            .background(Capsule().fill(paused ? Color.white.opacity(0.08) : Theme.accent.opacity(0.16)))
+            .overlay(Capsule().strokeBorder(paused ? Theme.hairline : Theme.accent.opacity(0.4)))
+            .contentShape(Capsule())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(state.listenState == .idle ? "Bắt đầu nghe" : "Tạm dừng nghe")
+        .accessibilityLabel(paused ? "Bắt đầu nghe" : "Tạm dừng nghe")
+    }
+
+    /// Breathes with the audio level while listening; a hollow grey ring when paused.
+    @ViewBuilder private var indicator: some View {
+        ZStack {
+            switch state.listenState {
+            case .listening:
+                Circle()
+                    .fill(Theme.accent.opacity(0.28))
+                    .frame(width: 7 + 7 * CGFloat(meter.level), height: 7 + 7 * CGFloat(meter.level))
+                    .animation(.easeOut(duration: 0.12), value: meter.level)
+                Circle().fill(Theme.accent).frame(width: 6, height: 6)
+            case .starting:
+                Circle().fill(Theme.warning).frame(width: 6, height: 6)
+            case .idle:
+                Circle().strokeBorder(Theme.textTertiary, lineWidth: 1.3).frame(width: 7, height: 7)
+            }
+        }
+        .frame(width: 14, height: 14)
     }
 }
 

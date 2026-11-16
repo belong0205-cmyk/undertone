@@ -129,7 +129,7 @@ MainActor.assumeIsolated {
     }
     let chef = UserProfile(
         name: "Trung Huy",
-        age: "29",
+        dateOfBirth: "12/03/1996",
         phone: "0412 345 678",
         email: "chef@example.com",
         address: "Footscray, Melbourne",
@@ -205,6 +205,19 @@ MainActor.assumeIsolated {
         state.rows = [intro]
         state.showSettings = true
         state.update = .available(version: "0.4.0", notes: "Nhập hồ sơ từ Word, panel trong suốt theo ý bạn, sửa lỗi con trỏ.")
+    }
+    // Labelled listen toggle in the top bar: both states, plus the minimum size.
+    renderOverlay("11-listen-on") { state in
+        state.apiKey = "design-preview"; state.sonioxKey = "design-preview"
+        state.listenState = .listening; state.hasSignal = true; state.rows = [intro]
+    }
+    renderOverlay("11-listen-paused") { state in
+        state.apiKey = "design-preview"; state.sonioxKey = "design-preview"
+        state.listenState = .idle; state.rows = [intro]
+    }
+    renderOverlay("11b-listen-min-size", size: CGSize(width: 520, height: 380)) { state in
+        state.apiKey = "design-preview"; state.sonioxKey = "design-preview"
+        state.listenState = .listening; state.hasSignal = true; state.rows = [intro]
     }
     renderOverlay("4b-settings-min-size", size: CGSize(width: 520, height: 380)) { state in
         state.listenState = .listening
