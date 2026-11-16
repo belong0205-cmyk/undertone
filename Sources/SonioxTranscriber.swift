@@ -16,6 +16,9 @@ final class SonioxTranscriber {
 
     /// (utterance id, text so far, isFinal)
     var onUtterance: ((UUID, String, Bool) -> Void)?
+    /// (utterance id, Vietnamese translation so far). Soniox translates each finalized stretch of
+    /// speech right after it, so this can arrive after the utterance's final text.
+    var onTranslation: ((UUID, String) -> Void)?
     var onFailure: ((String) -> Void)?
 
     private static let endpoint = URL(string: "wss://stt-rt.soniox.com/transcribe-websocket")!
@@ -40,6 +43,9 @@ final class SonioxTranscriber {
     private var discarding = false // skip the rest of a discarded utterance until its <end>
     /// The last final token closed a sentence (or a long clause); the utterance ends at the next word.
     private var atBoundary = false
+    /// Translation tokens belong to the utterance that received the last final spoken token.
+    private var translationID: UUID?
+    private var translationFinal = ""
     private var connectedAt = Date()
     private var quickFailures = 0
     private var keepAliveTimer: Timer?
@@ -103,6 +109,7 @@ final class SonioxTranscriber {
         currentID = UUID()
         currentFinal = ""
         currentPending = ""
+        translationID = nil
     }
 
     /// Called from the audio thread for every captured buffer.
@@ -156,26 +163,51 @@ final class SonioxTranscriber {
         send(chunk, on: socket)
     }
 
-    /// Caller holds `lock`.
+    /// Caller holds `lock`. Takes PCM16 and sends it as 8-bit mu-law: half the bytes, so the stream
+    /// keeps up on a slow uplink (measured 31 KB/s to Soniox on a lossy network, below PCM16's 32 KB/s,
+    /// and the lag grew without bound). Byte counters stay in PCM16 units.
     nonisolated private func send(_ chunk: Data, on socket: URLSessionWebSocketTask) {
         lastSentAt = Date()
         sentBytes += chunk.count
         let count = chunk.count
-        socket.send(.data(chunk)) { [weak self] _ in // a broken socket surfaces in the receive loop
+        socket.send(.data(Self.muLaw(chunk))) { [weak self] _ in // a broken socket surfaces in the receive loop
             guard let self, DebugLog.enabled else { return }
             self.writtenLock.withLock { self.writtenBytes += count } // not `lock`: send may call back at once
         }
     }
 
-    /// A chunk of the same length holding +-1 LSB noise: never pure digital zeros, which Soniox
-    /// falls behind on.
+    /// A chunk of the same length holding inaudible noise (+-24 LSB, about -63 dBFS): never digital
+    /// zeros, which Soniox falls behind on. Smaller values would round to zero in mu-law.
     nonisolated private static func dithered(_ chunk: Data) -> Data {
         var out = Data(count: chunk.count)
         out.withUnsafeMutableBytes { raw in
             let samples = raw.bindMemory(to: Int16.self)
-            for i in samples.indices { samples[i] = Bool.random() ? 1 : -1 }
+            for i in samples.indices { samples[i] = Bool.random() ? 24 : -24 }
         }
         return out
+    }
+
+    /// G.711 mu-law encoding of little-endian PCM16 (one byte per sample).
+    nonisolated static func muLaw(_ pcm: Data) -> Data {
+        var out = Data(count: pcm.count / 2)
+        pcm.withUnsafeBytes { source in
+            out.withUnsafeMutableBytes { target in
+                let samples = source.bindMemory(to: Int16.self)
+                let bytes = target.bindMemory(to: UInt8.self)
+                for i in bytes.indices { bytes[i] = muLaw(samples[i]) }
+            }
+        }
+        return out
+    }
+
+    nonisolated private static func muLaw(_ sample: Int16) -> UInt8 {
+        var magnitude = Int(sample)
+        let sign = magnitude < 0 ? 0x80 : 0
+        magnitude = min(abs(magnitude), 32_635) + 0x84
+        var exponent = 7
+        while exponent > 0, magnitude & (0x80 << exponent) == 0 { exponent -= 1 }
+        let mantissa = (magnitude >> (exponent + 3)) & 0x0F
+        return UInt8(~(sign | exponent << 4 | mantissa) & 0xFF)
     }
 
     /// Digital silence (what the tap delivers while nothing plays), allowing for rounding noise.
@@ -314,6 +346,8 @@ final class SonioxTranscriber {
     private func apply(_ tokens: [Response.Token]) {
         guard !tokens.isEmpty else { return }
         var pending = ""
+        var pendingTranslation = ""
+        var translatedID: UUID?
         for token in tokens {
             if token.text == "<end>" || token.text == "<fin>" { // endpoint, or our finalize at a pause
                 DebugLog.log("soniox \(token.text)")
@@ -321,6 +355,10 @@ final class SonioxTranscriber {
                 pending = ""
             } else if discarding {
                 continue
+            } else if token.translationStatus == "translation" {
+                guard let id = translationID else { continue }
+                if token.isFinal { translationFinal += token.text } else { pendingTranslation += token.text }
+                translatedID = id
             } else if token.isFinal {
                 // Someone talking without pauses never triggers <end>, so close the utterance at a
                 // sentence boundary instead; it can then be translated while they keep talking.
@@ -328,6 +366,10 @@ final class SonioxTranscriber {
                 if atBoundary, token.text.first?.isWhitespace == true { finishUtterance() }
                 currentFinal += token.text
                 atBoundary = Self.endsUtterance(currentFinal)
+                if translationID != currentID {
+                    translationID = currentID
+                    translationFinal = ""
+                }
             } else {
                 // The boundary itself is final, so the next word may start the new utterance even
                 // before it is final.
@@ -338,6 +380,10 @@ final class SonioxTranscriber {
         currentPending = pending
         let text = (currentFinal + currentPending).trimmingCharacters(in: .whitespacesAndNewlines)
         if !text.isEmpty { onUtterance?(currentID, text, false) }
+        if let id = translatedID {
+            let vietnamese = (translationFinal + pendingTranslation).trimmingCharacters(in: .whitespacesAndNewlines)
+            if !vietnamese.isEmpty { onTranslation?(id, vietnamese) }
+        }
     }
 
     private func finishUtterance() {
@@ -361,6 +407,7 @@ final class SonioxTranscriber {
     // MARK: - Wire format (https://docs.soniox.com/api-reference/stt/websocket-api)
 
     private struct Config: Encodable {
+        struct Translation: Encodable { let type, targetLanguage: String }
         struct Context: Encodable {
             struct Item: Encodable { let key, value: String }
             let general: [Item]
@@ -368,13 +415,21 @@ final class SonioxTranscriber {
             let terms: [String]
         }
         let model = "stt-rt-v6"
-        let audioFormat = "pcm_s16le"
+        let audioFormat = "mulaw" // see send(_:on:)
         let sampleRate = 16_000
         let numChannels = 1
         let languageHints = ["en", "fr"]
         // Off: tokens' language is never used, and identifying it costs Soniox processing time.
         let enableLanguageIdentification = false
         let enableEndpointDetection = true
+        // The most eager endpointing Soniox allows: an utterance ends at most 500 ms after speech
+        // stops (default 2000 ms), so its answer can start sooner. Sensitivity stays at Soniox's
+        // low-latency suggestion; higher splits sentences at short pauses.
+        let endpointLatencyAdjustmentLevel = 3
+        let endpointSensitivity = 0.3
+        let maxEndpointDelayMs = 500
+        /// Live Vietnamese for whatever is spoken (English or French), on the same stream.
+        let translation = Translation(type: "one_way", targetLanguage: "vi")
         let context = Context(
             general: CulinaryTerms.general.map { Context.Item(key: $0.key, value: $0.value) },
             text: CulinaryTerms.background,
@@ -385,6 +440,8 @@ final class SonioxTranscriber {
         struct Token: Decodable {
             let text: String
             let isFinal: Bool
+            /// "translation" for Vietnamese tokens; "original" or "none" for spoken ones.
+            let translationStatus: String?
         }
         let tokens: [Token]?
         let finalAudioProcMs: Int?

@@ -25,8 +25,8 @@ enum ClaudeError: LocalizedError {
 
 /// Streaming client for the Claude Messages API over raw HTTP (there is no official Swift SDK).
 struct ClaudeClient {
-    /// The per-utterance translation and answer, and its cache warmer (caches are per model, so both
-    /// must match): many calls, so the fast low-cost Haiku. Haiku 5.5 has no server-side fallback.
+    /// The per-utterance answer, and its cache warmer (caches are per model, so both must match):
+    /// many calls, so the fast low-cost Haiku. Haiku 5.5 has no server-side fallback.
     static let liveModel = "claude-haiku-5-5"
     /// Rare one-off jobs such as the Word profile import.
     static let model = "claude-opus-5-5"
@@ -38,7 +38,7 @@ struct ClaudeClient {
             let task = Task {
                 do {
                     let request = try makeRequest(
-                        system: system, profile: profile, user: user, maxTokens: 16000, stream: true)
+                        system: system, profile: profile, user: user, maxTokens: 1024, stream: true)
                     let (bytes, response) = try await URLSession.shared.bytes(for: request)
                     let status = (response as? HTTPURLResponse)?.statusCode ?? 0
                     guard status == 200 else {
@@ -85,6 +85,15 @@ struct ClaudeClient {
             let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
             throw ClaudeError.http(status: status, message: Self.errorMessage(in: json))
         }
+    }
+
+    /// Opens (or keeps open) the HTTPS connection to the API with a free request, so the answer
+    /// request that follows skips the TCP and TLS handshakes. URLSession.shared reuses the connection.
+    func preconnect() {
+        var request = URLRequest(url: URL(string: "https://api.anthropic.com/v1/models?limit=1")!)
+        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        request.setValue("2026-10-21", forHTTPHeaderField: "anthropic-version")
+        URLSession.shared.dataTask(with: request).resume()
     }
 
     /// Keeps the knowledge base and profile in the prompt cache (entries expire after 5 idle minutes)
@@ -165,8 +174,9 @@ struct ClaudeClient {
             "stream": stream,
             "system": systemBlocks(system, profile: profile),
             "messages": [["role": "user", "content": user]],
-            // The answer is needed within seconds, so keep thinking shallow (adaptive thinking is
-            // Haiku 5.5's default). No `fallbacks`: Haiku 5.5 has none, refusals surface as `.refusal`.
+            // The answer must start within a second, so no thinking (Haiku 5.5 accepts `disabled`
+            // at effort high or below). No `fallbacks`: Haiku 5.5 has none, refusals surface as `.refusal`.
+            "thinking": ["type": "disabled"],
             "output_config": ["effort": "low"],
         ]
     }
@@ -197,28 +207,31 @@ struct ClaudeClient {
 
 enum Prompt {
     static let system = """
-    You help a Vietnamese speaker follow and take part in a live English conversation (an interview, meeting or call). \
-    You get the recent conversation and the newest utterance, transcribed from the audio playing on their computer \
-    (mostly the other participants). Transcripts can contain recognition errors; infer the intended words.
+    You help a Vietnamese speaker take part in a live English conversation (an interview, meeting or call, \
+    often in a professional kitchen). You get the recent conversation and the newest utterance, transcribed from \
+    the audio playing on their computer (mostly the other participants). Transcripts can contain recognition \
+    errors; infer the intended words. The user already sees a Vietnamese translation, so never translate.
 
-    Reply in exactly this format and nothing else:
-    <vi>A natural Vietnamese translation of the newest utterance only.</vi>
-
-    Only when the newest utterance asks the user something or expects them to respond, continue with:
+    When the newest utterance asks the user something or expects them to respond, reply in exactly this format \
+    and nothing else:
     <answer_en>What the user can say aloud: 1 or 2 short sentences, at most 25 words in total. The user's English \
     is CEFR B1, so use only common B1-level (or easier) words and simple grammar; no idioms, no rare or formal words. \
     Keep a technical cooking term only when the answer needs it (e.g. "brunoise"). No bullet points, no headings.</answer_en>
     <answer_vi>The same answer in Vietnamese.</answer_vi>
 
+    Otherwise reply with exactly: -
+
     A <user_profile> block, when present, holds facts the user entered about themselves. When the newest \
     utterance asks about the user (their name, age, where they live, their work or experience, their dishes, \
     recipes or menu), write the answer from that profile in the first person, still following the answer_en \
-    rules. If there is no profile, or it does not contain what was asked, answer as you otherwise would, and \
-    never invent personal facts such as a name, age, address, workplace or dish.
+    rules. If there is no profile, or it does not contain what was asked, still give the answer the user can say, \
+    with a placeholder in square brackets for each missing personal fact (e.g. "My name is [your name]. I work at \
+    [your workplace]."), and the same placeholders in answer_vi. Never invent personal facts such as a name, age, \
+    address, workplace or dish, and never ask the user for them.
     """
 
-    /// Acknowledgements and fillers ("Okay.", "Yes, chef.", "Uh-huh.", "D'accord.") need neither a
-    /// translation nor an answer, so they are shown without calling Claude.
+    /// Acknowledgements and fillers ("Okay.", "Yes, chef.", "Uh-huh.", "D'accord.") need no answer,
+    /// so they are shown without calling Claude.
     static func isFiller(_ utterance: String) -> Bool {
         // A question ("You?", "Right?", "Chef?") expects an answer, so it is never a filler.
         if utterance.trimmingCharacters(in: .whitespacesAndNewlines).hasSuffix("?") { return false }
