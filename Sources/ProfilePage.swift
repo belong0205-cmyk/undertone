@@ -11,10 +11,12 @@ struct ProfilePage: View {
     // Kept here, not in the editor, so switching profiles mid-import keeps the spinner and result.
     @State private var importing = false
     @State private var importResult: ImportResult?
+    @ObservedObject private var inbox = ProfileInbox.shared
 
     var body: some View {
         VStack(spacing: 0) {
             header
+            toolbar
             if let importResult {
                 ImportResultBar(result: importResult) { self.importResult = nil }
             }
@@ -34,6 +36,16 @@ struct ProfilePage: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Theme.tint)
         .onExitCommand(perform: onBack)
+        .onAppear(perform: takeNotice)
+        .onChange(of: inbox.postCount) { _, _ in takeNotice() }
+    }
+
+    /// Shows the result of a profile file opened from Finder.
+    private func takeNotice() {
+        if let notice = inbox.notice {
+            importResult = notice
+            inbox.notice = nil
+        }
     }
 
     private var header: some View {
@@ -52,7 +64,6 @@ struct ProfilePage: View {
                 }
                 .buttonStyle(.plain)
                 Spacer()
-                importControl
             }
             .padding(.horizontal, Theme.pad)
         }
@@ -60,6 +71,65 @@ struct ProfilePage: View {
         .background(WindowDragArea())
         .overlay(alignment: .bottom) { Hairline() }
     }
+
+    /// Word import, and export / import of a whole profile as a file. Under the header so three
+    /// buttons still fit beside each other at the minimum panel width.
+    private var toolbar: some View {
+        HStack(spacing: 14) {
+            Spacer()
+            importControl
+            ToolbarButton(title: "Xuất hồ sơ", icon: "square.and.arrow.up", enabled: state.activeProfile != nil && !importing,
+                          help: "Lưu hồ sơ đang chọn thành file .undertone-profile", action: exportFile)
+            ToolbarButton(title: "Nhập hồ sơ", icon: "square.and.arrow.down", enabled: !importing,
+                          help: "Mở file .undertone-profile hoặc .json", action: importFile)
+        }
+        .padding(.horizontal, Theme.pad)
+        .frame(height: 30)
+        .overlay(alignment: .bottom) { Hairline() }
+    }
+
+    /// Saves the active profile where the user chooses.
+    private func exportFile() {
+        guard let profile = state.activeProfile else { return }
+        let picker = NSSavePanel()
+        if let type = UTType(filenameExtension: Self.fileExtension) { picker.allowedContentTypes = [type] }
+        picker.nameFieldStringValue = "\(profile.displayName).\(Self.fileExtension)"
+        picker.prompt = "Lưu"
+        picker.level = .modalPanel
+        picker.sharingType = .none
+        NSApp.activate()
+        guard picker.runModal() == .OK, let url = picker.url else { return }
+        do {
+            try state.exportProfile(profile.id, to: url)
+            importResult = .info("Đã lưu: \(url.lastPathComponent)")
+        } catch {
+            importResult = .failed(error.localizedDescription)
+        }
+    }
+
+    /// Reads a profile file and switches to the new profile.
+    private func importFile() {
+        let picker = NSOpenPanel()
+        picker.allowedContentTypes = [Self.fileExtension, "json"].compactMap { UTType(filenameExtension: $0) }
+        picker.allowsMultipleSelection = false
+        picker.canChooseDirectories = false
+        picker.message = "Chọn file hồ sơ: .undertone-profile hoặc .json"
+        picker.prompt = "Nhập"
+        picker.level = .modalPanel
+        picker.sharingType = .none
+        NSApp.activate()
+        guard picker.runModal() == .OK, let url = picker.url else { return }
+        do {
+            let id = try state.importProfile(fromFile: url)
+            state.activeProfileID = id
+            let name = state.profiles.first { $0.id == id }?.displayName ?? ""
+            importResult = .info("Đã nhập hồ sơ \(name)")
+        } catch {
+            importResult = .failed(error.localizedDescription)
+        }
+    }
+
+    private static let fileExtension = "undertone-profile"
 
     @ViewBuilder private var importControl: some View {
         if importing {
@@ -70,16 +140,8 @@ struct ProfilePage: View {
                     .foregroundStyle(Theme.textSecondary)
             }
         } else {
-            Button(action: chooseFile) {
-                HStack(spacing: 4) {
-                    Image(systemName: "doc.text").font(.system(size: 10.5, weight: .semibold))
-                    Text("Nhập từ Word").font(.system(size: 12, weight: .medium))
-                }
-                .foregroundStyle(Theme.accent)
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .help("Điền hồ sơ từ CV: .docx, .doc, .rtf hoặc .txt")
+            ToolbarButton(title: "Nhập từ Word", icon: "doc.text", enabled: true,
+                          help: "Điền hồ sơ từ CV: .docx, .doc, .rtf hoặc .txt", action: chooseFile)
         }
     }
 
@@ -303,7 +365,31 @@ private struct BoxField: View {
     }
 }
 
-private enum ImportResult {
+/// Small accent text button with an icon, for the page's toolbar row.
+private struct ToolbarButton: View {
+    let title: String
+    let icon: String
+    let enabled: Bool
+    let help: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 4) {
+                Image(systemName: icon).font(.system(size: 10.5, weight: .semibold))
+                Text(title).font(.system(size: 12, weight: .medium))
+            }
+            .foregroundStyle(enabled ? Theme.accent : Theme.textTertiary)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .disabled(!enabled)
+        .help(help)
+    }
+}
+
+enum ImportResult {
+    case info(String)
     case filled(Int)
     case failed(String)
 }
@@ -344,6 +430,7 @@ private struct ImportResultBar: View {
 
     private var message: String {
         switch result {
+        case .info(let text): text
         case .filled(let count): "Đã điền \(count) trường"
         case .failed(let message): message
         }

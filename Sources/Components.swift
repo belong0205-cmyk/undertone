@@ -227,3 +227,18 @@ struct WindowDragArea: NSViewRepresentable {
     func makeNSView(context: Context) -> NSView { DragView() }
     func updateNSView(_ nsView: NSView, context: Context) {}
 }
+
+/// Hand-off from the app delegate (a double-clicked profile file) to the SwiftUI pages: the delegate
+/// posts a notice, the panel opens the Hồ sơ page and shows it.
+@MainActor
+final class ProfileInbox: ObservableObject {
+    static let shared = ProfileInbox()
+    /// Bumped on every post, so the same text twice still triggers `onChange`.
+    @Published private(set) var postCount = 0
+    var notice: ImportResult?
+
+    func post(_ notice: ImportResult) {
+        self.notice = notice
+        postCount += 1
+    }
+}

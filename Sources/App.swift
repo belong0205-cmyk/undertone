@@ -8,6 +8,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let state = AppState()
     private var panel: OverlayPanel?
     private var hotKey: HotKey?
+    /// Files opened before the panel exists (a cold launch by double-click).
+    private var pendingFiles: [URL] = []
 
     static func main() {
         let app = NSApplication.shared
@@ -41,7 +43,29 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             if panel.isVisible { panel.orderOut(nil) } else { panel.orderFrontRegardless() }
         }
 
+        openProfileFiles(pendingFiles)
+        pendingFiles = []
         Task { await state.startListening() }
+    }
+
+    /// Double-clicking a .undertone-profile (or .json) file imports it and shows it on the Hồ sơ page.
+    func application(_ application: NSApplication, open urls: [URL]) {
+        if panel == nil { pendingFiles += urls } else { openProfileFiles(urls) }
+    }
+
+    private func openProfileFiles(_ urls: [URL]) {
+        guard !urls.isEmpty else { return }
+        for url in urls {
+            do {
+                let id = try state.importProfile(fromFile: url)
+                state.activeProfileID = id
+                let name = state.profiles.first { $0.id == id }?.displayName ?? ""
+                ProfileInbox.shared.post(.info("Đã nhập hồ sơ \(name)"))
+            } catch {
+                ProfileInbox.shared.post(.failed(error.localizedDescription))
+            }
+        }
+        panel?.orderFrontRegardless()
     }
 
     func applicationWillTerminate(_ notification: Notification) {

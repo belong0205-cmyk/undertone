@@ -8,6 +8,7 @@ struct OverlayView: View {
     @AppStorage(Theme.textScaleKey) private var textScale = 1.0
     /// The profile page is a step inside settings: it covers the panel and goes back to the settings card.
     @State private var showingProfiles: Bool
+    @ObservedObject private var inbox = ProfileInbox.shared
 
     init(showingProfiles: Bool = false) {
         _showingProfiles = State(initialValue: showingProfiles)
@@ -50,6 +51,10 @@ struct OverlayView: View {
         .tint(Theme.accent)
         .animation(.easeOut(duration: 0.15), value: state.showSettings)
         .animation(.easeOut(duration: 0.15), value: showingProfiles)
+        .onChange(of: inbox.postCount) { _, _ in // a profile file was opened from Finder
+            showingProfiles = true
+            state.showSettings = true
+        }
         .onChange(of: state.showSettings) { _, isOpen in
             if !isOpen { showingProfiles = false }
         }
