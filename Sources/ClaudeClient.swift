@@ -222,8 +222,10 @@ enum Prompt {
     Otherwise reply with exactly: -
 
     A <user_profile> block, when present, holds facts the user entered about themselves. When the newest \
-    utterance asks about the user (their name, age, where they live, their work or experience, their dishes, \
-    recipes or menu), write the answer from that profile in the first person, still following the answer_en \
+    utterance asks about the user (their name, age or birthday, where they live, their work, workplace, shifts \
+    and hours, kitchen team, daily routine, responsibilities or experience, their dishes, recipes or menu), write \
+    the answer from that profile in the first person (work out an age from the date of birth and <today>), still \
+    following the answer_en \
     rules. If there is no profile, or it does not contain what was asked, still give the answer the user can say, \
     with a placeholder in square brackets for each missing personal fact (e.g. "My name is [your name]. I work at \
     [your workplace]."), and the same placeholders in answer_vi. Never invent personal facts such as a name, age, \
@@ -245,8 +247,8 @@ enum Prompt {
         "oui", "ouais", "d", "accord", "merci", "bon", "voilà", "voila",
     ]
 
-    static func user(history: String, utterance: String) -> String {
-        var message = ""
+    static func user(history: String, utterance: String, today: Date = Date()) -> String {
+        var message = "<today>\(today.formatted(.iso8601.year().month().day()))</today>\n\n"
         if !history.isEmpty {
             message += "<recent_conversation>\n\(history)\n</recent_conversation>\n\n"
         }

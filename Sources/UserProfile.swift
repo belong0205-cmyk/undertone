@@ -5,12 +5,25 @@ import Foundation
 struct UserProfile: Codable, Identifiable, Equatable {
     var id = UUID()
     var name = ""
-    var age = ""
+    var dateOfBirth = ""
     var phone = ""
     var email = ""
+    /// Home address.
     var address = ""
     /// Workplace and role.
     var work = ""
+    var workplaceAddress = ""
+    var yearsOfExperience = ""
+    var shifts = ""
+    var workStart = ""
+    var workEnd = ""
+    var openingHours = ""
+    var closingHours = ""
+    var kitchenStaff = ""
+    /// How many head chefs, sous chefs, chefs de partie, commis…
+    var kitchenTeam = ""
+    var responsibilities = ""
+    var dailyRoutine = ""
     /// Career objective.
     var objective = ""
     var experience = ""
@@ -31,12 +44,34 @@ struct UserProfile: Codable, Identifiable, Equatable {
     /// Word import all loop over this list.
     static let fields: [ProfileField] = [
         ProfileField(key: "name", keyPath: \.name, label: "Tên", promptLabel: "Name"),
-        ProfileField(key: "age", keyPath: \.age, label: "Tuổi", promptLabel: "Age"),
+        ProfileField(key: "dateOfBirth", keyPath: \.dateOfBirth, label: "Ngày tháng năm sinh",
+                     promptLabel: "Date of birth"),
         ProfileField(key: "phone", keyPath: \.phone, label: "Số điện thoại", promptLabel: "Phone"),
         ProfileField(key: "email", keyPath: \.email, label: "Email", promptLabel: "Email"),
-        ProfileField(key: "address", keyPath: \.address, label: "Địa chỉ", promptLabel: "Address"),
+        ProfileField(key: "address", keyPath: \.address, label: "Địa chỉ nhà", promptLabel: "Home address"),
         ProfileField(key: "work", keyPath: \.work, label: "Nơi làm việc / vị trí",
                      promptLabel: "Work (workplace and role)"),
+        ProfileField(key: "workplaceAddress", keyPath: \.workplaceAddress, label: "Địa chỉ nơi làm việc",
+                     promptLabel: "Workplace address"),
+        ProfileField(key: "yearsOfExperience", keyPath: \.yearsOfExperience, label: "Số năm kinh nghiệm",
+                     promptLabel: "Years of experience"),
+        ProfileField(key: "shifts", keyPath: \.shifts, label: "Ca làm việc", promptLabel: "Shifts"),
+        ProfileField(key: "workStart", keyPath: \.workStart, label: "Giờ bắt đầu làm",
+                     promptLabel: "Work start time"),
+        ProfileField(key: "workEnd", keyPath: \.workEnd, label: "Giờ kết thúc", promptLabel: "Work finish time"),
+        ProfileField(key: "openingHours", keyPath: \.openingHours, label: "Giờ nhà hàng mở cửa",
+                     promptLabel: "Restaurant opening time"),
+        ProfileField(key: "closingHours", keyPath: \.closingHours, label: "Giờ nhà hàng đóng cửa",
+                     promptLabel: "Restaurant closing time"),
+        ProfileField(key: "kitchenStaff", keyPath: \.kitchenStaff, label: "Số nhân viên trong bếp",
+                     promptLabel: "Number of kitchen staff"),
+        ProfileField(key: "kitchenTeam", keyPath: \.kitchenTeam,
+                     label: "Đội bếp (bao nhiêu head chef, sous chef, chef de partie, commis…)",
+                     promptLabel: "Kitchen team (head chefs, sous chefs, chefs de partie, commis…)", multiline: true),
+        ProfileField(key: "responsibilities", keyPath: \.responsibilities, label: "Trách nhiệm chính",
+                     promptLabel: "Main responsibilities", multiline: true),
+        ProfileField(key: "dailyRoutine", keyPath: \.dailyRoutine, label: "Quy trình làm việc thực tế mỗi ngày",
+                     promptLabel: "Actual daily work routine", multiline: true),
         ProfileField(key: "objective", keyPath: \.objective, label: "Mục tiêu nghề nghiệp",
                      promptLabel: "Career objective", multiline: true),
         ProfileField(key: "experience", keyPath: \.experience, label: "Kinh nghiệm làm việc",
@@ -111,6 +146,19 @@ extension UserProfile {
             guard let key = CodingKeys(stringValue: field.key) else { continue }
             self[keyPath: field.keyPath] = try container.decodeIfPresent(String.self, forKey: key) ?? ""
         }
+        // Older versions had "age" instead of a date of birth: keep the value so the user can correct it.
+        if dateOfBirth.isEmpty,
+           let age = try decoder.container(keyedBy: LegacyKey.self).decodeIfPresent(String.self, forKey: LegacyKey("age")) {
+            dateOfBirth = age
+        }
+    }
+
+    private struct LegacyKey: CodingKey {
+        let stringValue: String
+        init(_ string: String) { stringValue = string }
+        init?(stringValue: String) { self.stringValue = stringValue }
+        var intValue: Int? { nil }
+        init?(intValue: Int) { nil }
     }
 }
 
