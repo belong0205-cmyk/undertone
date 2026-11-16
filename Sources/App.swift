@@ -1,4 +1,5 @@
 import AppKit
+import Carbon.HIToolbox
 import SwiftUI
 
 @main
@@ -6,6 +7,7 @@ import SwiftUI
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private let state = AppState()
     private var panel: OverlayPanel?
+    private var hotKey: HotKey?
 
     static func main() {
         let app = NSApplication.shared
@@ -23,6 +25,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let frameName = "UndertoneOverlay"
         if !panel.setFrameUsingName(frameName), let screen = NSScreen.main {
             let area = screen.visibleFrame
+            // Keep the whole default panel on screen: clamp the height, then anchor top-right.
+            let height = min(panel.frame.height, area.height - 48)
+            panel.setContentSize(NSSize(width: panel.frame.width, height: max(height, OverlayPanel.minimumSize.height)))
             panel.setFrameOrigin(NSPoint(x: area.maxX - panel.frame.width - 24, y: area.maxY - panel.frame.height - 24))
         }
         panel.setFrameAutosaveName(frameName)
@@ -30,6 +35,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // alpha stays 1 so text and controls are never faded.
         panel.orderFrontRegardless()
         self.panel = panel
+        // Cmd+Shift+Z shows or hides the panel from any app. Hiding only removes the window: listening continues.
+        hotKey = HotKey(keyCode: kVK_ANSI_Z, modifiers: cmdKey | shiftKey) { [weak panel] in
+            guard let panel else { return }
+            if panel.isVisible { panel.orderOut(nil) } else { panel.orderFrontRegardless() }
+        }
 
         Task { await state.startListening() }
     }
