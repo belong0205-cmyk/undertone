@@ -69,23 +69,61 @@ enum Updater {
         return false
     }
 
-    /// Downloads the zip to a new temporary folder, reporting progress from 0 to 1.
+    /// Download, unpack and rollback area: emptied before each download, removed by the helper after
+    /// installing. Outside the app's folder, so nothing is created next to the app.
+    static let stagingURL = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        .appendingPathComponent("local.undertone/Update")
+
+    /// Streams the zip to `stagingURL` with a download task, reporting progress from 0 to 1.
     static func download(_ url: URL, progress: @escaping @Sendable (Double) -> Void) async throws -> URL {
-        let (bytes, response) = try await URLSession.shared.bytes(from: url)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw UpdateError.badResponse }
-        let total = max(response.expectedContentLength, 1)
-        var data = Data()
-        data.reserveCapacity(Int(total))
-        for try await byte in bytes {
-            data.append(byte)
-            if data.count % 65_536 == 0 { progress(min(Double(data.count) / Double(total), 1)) }
+        try? FileManager.default.removeItem(at: stagingURL)
+        try FileManager.default.createDirectory(at: stagingURL, withIntermediateDirectories: true)
+        let zip = stagingURL.appendingPathComponent("Undertone.zip")
+        let delegate = DownloadDelegate(destination: zip, progress: progress)
+        let session = URLSession(configuration: .ephemeral, delegate: delegate, delegateQueue: nil) // no copy in the HTTP cache
+        defer { session.finishTasksAndInvalidate() }
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+            delegate.continuation = continuation
+            session.downloadTask(with: url).resume()
         }
-        progress(1)
-        let folder = FileManager.default.temporaryDirectory.appendingPathComponent("UndertoneUpdate-\(UUID().uuidString)")
-        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
-        let zip = folder.appendingPathComponent("Undertone.zip")
-        try data.write(to: zip)
         return zip
+    }
+
+    /// Callbacks arrive one at a time on the session's serial delegate queue.
+    private final class DownloadDelegate: NSObject, URLSessionDownloadDelegate, @unchecked Sendable {
+        let destination: URL
+        let progress: @Sendable (Double) -> Void
+        var continuation: CheckedContinuation<Void, Error>?
+        private var failure: Error?
+
+        init(destination: URL, progress: @escaping @Sendable (Double) -> Void) {
+            self.destination = destination
+            self.progress = progress
+        }
+
+        func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64,
+                        totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+            guard totalBytesExpectedToWrite > 0 else { return }
+            progress(min(Double(totalBytesWritten) / Double(totalBytesExpectedToWrite), 1))
+        }
+
+        func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+            guard (downloadTask.response as? HTTPURLResponse)?.statusCode == 200 else {
+                failure = UpdateError.badResponse
+                return
+            }
+            do { try FileManager.default.moveItem(at: location, to: destination) } catch { failure = error }
+        }
+
+        func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+            if let error = error ?? failure {
+                continuation?.resume(throwing: error)
+            } else {
+                progress(1)
+                continuation?.resume()
+            }
+            continuation = nil
+        }
     }
 
     /// Unzips next to the zip and returns the new app once its signature matches `current`'s
@@ -129,24 +167,32 @@ enum Updater {
     static let logURL = FileManager.default.homeDirectoryForCurrentUser
         .appendingPathComponent("Library/Logs/Undertone-update.log")
 
-    /// Starts a helper that waits for `pid` to exit, then syncs the new bundle's contents over the
-    /// current bundle in place and opens it. The caller quits right after.
-    /// In place, because macOS App Management lets an app update its own bundle but blocks it from
-    /// creating a new .app inside /Applications (the old staging copy there failed for the user).
+    /// Starts a helper that waits for `pid` to exit, copies the current bundle to a rollback copy in
+    /// the staging folder, syncs the new bundle over the current one in place (restoring the copy if
+    /// that fails), reopens the app and removes the staging folder. The caller quits right after.
+    /// The bundle is only ever updated in place: nothing new is created or renamed next to the app.
     static func install(_ newApp: URL, replacing current: URL, afterExitOf pid: Int32) throws {
         guard FileManager.default.isWritableFile(atPath: current.path) else { throw UpdateError.cannotWrite }
+        let staging = newApp.deletingLastPathComponent()
+        let rollback = staging.appendingPathComponent("Rollback.app")
         let script = """
-        exec >>"$4" 2>&1
+        exec >>"$5" 2>&1
         echo "$(date) update $2 from $3"
         while kill -0 "$1" 2>/dev/null; do sleep 0.2; done
-        if /usr/bin/rsync -a --delete "$3/" "$2/"; then echo "replaced"; else echo "rsync failed with status $?"; fi
+        rm -rf "$4"
+        if /usr/bin/ditto "$2" "$4"; then
+          if /usr/bin/rsync -a --delete "$3/" "$2/"; then echo "replaced"
+          else echo "rsync failed with status $?, restoring"; /usr/bin/rsync -a --delete "$4/" "$2/" && echo "restored"; fi
+        else echo "could not make a rollback copy, update skipped"; fi
         # The new bundle matched our signature; without quarantine, macOS runs it in place next time.
         /usr/bin/xattr -dr com.apple.quarantine "$2"
         open "$2"
+        rm -rf "$6"
         """
         let helper = Process()
         helper.executableURL = URL(fileURLWithPath: "/bin/sh")
-        helper.arguments = ["-c", script, "undertone-update", String(pid), current.path, newApp.path, logURL.path]
+        helper.arguments = ["-c", script, "undertone-update", String(pid), current.path, newApp.path,
+                            rollback.path, logURL.path, staging.path]
         try helper.run()
     }
 
