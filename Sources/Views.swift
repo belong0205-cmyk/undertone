@@ -119,7 +119,7 @@ private struct SettingsButton: View {
     var body: some View {
         IconButton(systemName: "gearshape", label: "Cài đặt") { state.showSettings.toggle() }
             .overlay(alignment: .topTrailing) {
-                if !state.hasAPIKey || !state.hasSonioxKey { // nudge: a required key is missing
+                if !state.hasAPIKey || !state.hasSonioxKey || state.update.isAvailable { // nudge: a key is missing or an update is ready
                     Circle().fill(Theme.accent).frame(width: 6, height: 6).offset(x: -4, y: 4)
                 }
             }
@@ -416,6 +416,7 @@ private struct SettingsCard: View {
                     PercentSlider(label: "Cỡ chữ", value: $textScale, range: Theme.textScaleRange)
                 }
             }
+            SettingsField("Cập nhật", hint: nil) { UpdateRow() }
             Hairline()
             HStack {
                 TextAction(title: "Xoá hội thoại", color: Theme.textSecondary) {
@@ -427,6 +428,87 @@ private struct SettingsCard: View {
             }
         }
         .padding(14)
+    }
+}
+
+private extension UpdateState {
+    var isAvailable: Bool {
+        if case .available = self { return true }
+        return false
+    }
+}
+
+/// App version, and the in-app update flow: check, then download and install.
+private struct UpdateRow: View {
+    @EnvironmentObject private var state: AppState
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 8) {
+                Text("Phiên bản \(state.appVersion)")
+                    .font(.system(size: 12.5))
+                    .foregroundStyle(Theme.textPrimary)
+                Spacer(minLength: 8)
+                action
+            }
+            detail
+        }
+    }
+
+    @ViewBuilder private var action: some View {
+        switch state.update {
+        case .idle, .upToDate, .failed:
+            TextAction(title: "Kiểm tra cập nhật", color: Theme.accent) { Task { await state.checkForUpdates(silent: false) } }
+        case .checking:
+            HStack(spacing: 6) {
+                ProgressView().controlSize(.small)
+                Text("Đang kiểm tra…").font(.system(size: 11.5)).foregroundStyle(Theme.textSecondary)
+            }
+        case .available:
+            TextAction(title: "Cập nhật", color: Theme.accent) { Task { await state.installUpdate() } }
+        case .downloading, .installing:
+            EmptyView()
+        }
+    }
+
+    @ViewBuilder private var detail: some View {
+        switch state.update {
+        case .available(let version, let notes):
+            VStack(alignment: .leading, spacing: 3) {
+                Text("Có bản \(version)")
+                    .font(.system(size: 11.5, weight: .medium))
+                    .foregroundStyle(Theme.accent)
+                if !notes.isEmpty {
+                    Text(notes)
+                        .font(.system(size: 10.5))
+                        .foregroundStyle(Theme.textTertiary)
+                        .lineLimit(3)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+        case .downloading(let progress):
+            VStack(alignment: .leading, spacing: 4) {
+                ProgressView(value: min(max(progress, 0), 1))
+                Text("Đang tải \(Int((progress * 100).rounded()))%")
+                    .font(.system(size: 10.5))
+                    .foregroundStyle(Theme.textTertiary)
+            }
+        case .installing:
+            Text("Đang cài, app sẽ tự mở lại…")
+                .font(.system(size: 11.5))
+                .foregroundStyle(Theme.textSecondary)
+        case .upToDate:
+            Text("Đã là bản mới nhất")
+                .font(.system(size: 11.5))
+                .foregroundStyle(Theme.textSecondary)
+        case .failed(let message):
+            Text(message)
+                .font(.system(size: 11.5))
+                .foregroundStyle(Theme.warning)
+                .fixedSize(horizontal: false, vertical: true)
+        case .idle, .checking:
+            EmptyView()
+        }
     }
 }
 

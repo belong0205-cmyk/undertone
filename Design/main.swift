@@ -182,6 +182,30 @@ MainActor.assumeIsolated {
         state.activeProfileID = chef.id
         state.showSettings = true
     }
+    // In-app updates: one snapshot per state of the "Phiên bản" row.
+    let updateStates: [(String, UpdateState)] = [
+        ("idle", .idle), ("checking", .checking), ("uptodate", .upToDate),
+        ("available", .available(version: "0.4.0", notes: "Nhập hồ sơ từ Word, panel trong suốt theo ý bạn, sửa lỗi con trỏ.")),
+        ("downloading", .downloading(progress: 0.42)), ("installing", .installing),
+        ("failed", .failed("Không kết nối được máy chủ cập nhật.")),
+    ]
+    for (name, update) in updateStates {
+        renderOverlay("10-update-\(name)") { state in
+            state.apiKey = "design-preview"
+            state.sonioxKey = "design-preview"
+            state.listenState = .listening
+            state.rows = [intro]
+            state.showSettings = true
+            state.update = update
+        }
+    }
+    renderOverlay("10b-update-min-size", size: CGSize(width: 520, height: 380)) { state in
+        state.apiKey = "design-preview"
+        state.sonioxKey = "design-preview"
+        state.rows = [intro]
+        state.showSettings = true
+        state.update = .available(version: "0.4.0", notes: "Nhập hồ sơ từ Word, panel trong suốt theo ý bạn, sửa lỗi con trỏ.")
+    }
     renderOverlay("4b-settings-min-size", size: CGSize(width: 520, height: 380)) { state in
         state.listenState = .listening
         state.rows = [intro]
