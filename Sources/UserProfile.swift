@@ -241,7 +241,14 @@ enum ProfileFile {
               document["format"] as? String == format,
               let profileJSON = document["profile"] as? [String: Any]
         else { throw ProfileFileError.wrongFormat }
-        let fileVersion = document["version"] as? Int ?? 1
+        // A missing version is 1 (the first files); anything but a whole number from 1 up is not ours.
+        var fileVersion = 1
+        if let value = document["version"] {
+            guard let number = value as? NSNumber, CFGetTypeID(number) != CFBooleanGetTypeID(),
+                  let whole = Int(exactly: number.doubleValue), whole >= 1
+            else { throw ProfileFileError.wrongFormat }
+            fileVersion = whole
+        }
         guard fileVersion <= version else { throw ProfileFileError.newerVersion(fileVersion) }
         do {
             return try JSONDecoder().decode(UserProfile.self, from: JSONSerialization.data(withJSONObject: profileJSON))

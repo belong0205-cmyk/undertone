@@ -222,7 +222,7 @@ final class AppState: ObservableObject {
     }
 
     /// Adds the profile in an exported file (.undertone-profile or .json) as a new profile, never
-    /// overwriting one: it gets a new id, and " (nhập)" when its name is already taken. It becomes
+    /// overwriting one: it gets a new id, and " (nhập)" (" (nhập 2)"…) when its name is taken. It becomes
     /// the active profile; returns its id.
     @discardableResult
     func importProfile(fromFile url: URL) throws -> UUID {
@@ -237,10 +237,20 @@ final class AppState: ObservableObject {
         var profile = try ProfileFile.profile(from: data)
         profile.id = UUID()
         let name = profile.name.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !name.isEmpty, profiles.contains(where: {
-            $0.name.trimmingCharacters(in: .whitespacesAndNewlines).caseInsensitiveCompare(name) == .orderedSame
-        }) {
-            profile.name = name + " (nhập)"
+        func taken(_ candidate: String) -> Bool {
+            profiles.contains {
+                $0.name.trimmingCharacters(in: .whitespacesAndNewlines).caseInsensitiveCompare(candidate) == .orderedSame
+            }
+        }
+        if !name.isEmpty, taken(name) {
+            // "X (nhập)", then "X (nhập 2)", "X (nhập 3)"… when the same file is imported again.
+            var candidate = name + " (nhập)"
+            var number = 2
+            while taken(candidate) {
+                candidate = "\(name) (nhập \(number))"
+                number += 1
+            }
+            profile.name = candidate
         }
         profiles.append(profile) // saved to profiles.json by didSet
         activeProfileID = profile.id
