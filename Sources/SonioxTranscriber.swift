@@ -52,6 +52,8 @@ final class SonioxTranscriber {
     private var translating: [(id: UUID, text: String)] = []
     private var translatingIndex = 0
     private var translatedInStretch = "" // translation given to translating[translatingIndex] so far
+    /// An endpoint came after the stretch: everything before it has been translated.
+    private var stretchEnded = false
     private var translations: [UUID: String] = [:] // final translation per utterance
     private var connectedAt = Date()
     private var quickFailures = 0
@@ -125,6 +127,7 @@ final class SonioxTranscriber {
         translatingIndex = 0
         translatedInStretch = ""
         translations = [:]
+        stretchEnded = false
     }
 
     /// Called from the audio thread for every captured buffer.
@@ -369,6 +372,7 @@ final class SonioxTranscriber {
                 DebugLog.log("soniox \(token.text)")
                 if discarding { discarding = false } else { finishUtterance() }
                 pending = ""
+                stretchEnded = true
             } else if discarding {
                 continue
             } else if token.translationStatus == "translation" {
@@ -377,7 +381,18 @@ final class SonioxTranscriber {
                     if !translated.contains(currentID) { translated.append(currentID) }
                     continue
                 }
-                if !untranslated.isEmpty { startTranslatingStretch() }
+                // Words of the next stretch can be final before this stretch's translation is complete;
+                // its tail still belongs here.
+                if !untranslated.isEmpty {
+                    if stretchEnded || stretchTranslated {
+                        startTranslatingStretch()
+                    } else if let next = untranslated.first, next.id == translating.last?.id {
+                        // More words of the same utterance (Soniox translates parts of a sentence):
+                        // this translation continues it, so they join the current stretch.
+                        translating[translating.count - 1].text += next.text
+                        untranslated.removeFirst()
+                    }
+                }
                 guard translatingIndex < translating.count else { continue }
                 let id = translating[translatingIndex].id
                 if !translated.contains(id) { translated.append(id) }
@@ -417,8 +432,19 @@ final class SonioxTranscriber {
         }
     }
 
+    /// The current stretch's last utterance has all its sentences translated (or, for one closed at a
+    /// comma, a translated clause).
+    private var stretchTranslated: Bool {
+        guard let last = translating.last, translatingIndex == translating.count - 1 else { return translating.isEmpty }
+        if Self.sentenceCount(translatedInStretch) >= max(1, Self.sentenceCount(last.text)) { return true }
+        let spoken = last.text.trimmingCharacters(in: .whitespacesAndNewlines).last
+        let translated = translatedInStretch.trimmingCharacters(in: .whitespacesAndNewlines).last
+        return spoken.map { ",;:".contains($0) } == true && translated.map { ",;:".contains($0) } == true
+    }
+
     /// The final words since the last translation are what Soniox is translating now.
     private func startTranslatingStretch() {
+        stretchEnded = false
         // Utterances of earlier stretches get no more translation (an utterance still being spoken
         // can continue into the new stretch, so it keeps its text).
         let keep = Set(untranslated.map(\.id))
