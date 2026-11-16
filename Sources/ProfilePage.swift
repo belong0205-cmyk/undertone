@@ -179,7 +179,8 @@ private struct ProfileEditor: View {
                     if profileField.multiline {
                         BoxField(label: profileField.label, text: field(profileField.keyPath))
                     } else {
-                        LineField(label: profileField.label, text: field(profileField.keyPath))
+                        LineField(label: profileField.label, placeholder: profileField.placeholder,
+                                  text: field(profileField.keyPath))
                     }
                 }
                 Hairline().padding(.top, 2)
@@ -271,12 +272,13 @@ private struct FieldLabel: View {
 /// Single-line field with its label above.
 private struct LineField: View {
     let label: String
+    var placeholder: String?
     @Binding var text: String
 
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             FieldLabel(text: label)
-            TextField("", text: $text)
+            TextField("", text: $text, prompt: placeholder.map { Text($0).foregroundStyle(Theme.textTertiary) })
                 .textFieldStyle(.plain)
                 .font(.system(size: 12.5))
                 .fieldChrome()

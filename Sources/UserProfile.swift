@@ -15,10 +15,10 @@ struct UserProfile: Codable, Identifiable, Equatable {
     var workplaceAddress = ""
     var yearsOfExperience = ""
     var shifts = ""
-    var workStart = ""
-    var workEnd = ""
+    /// Start to finish, e.g. "14:00–23:00".
+    var workHours = ""
+    /// Opening to closing, e.g. "11:00–22:00".
     var openingHours = ""
-    var closingHours = ""
     var kitchenStaff = ""
     /// How many head chefs, sous chefs, chefs de partie, commis…
     var kitchenTeam = ""
@@ -56,13 +56,10 @@ struct UserProfile: Codable, Identifiable, Equatable {
         ProfileField(key: "yearsOfExperience", keyPath: \.yearsOfExperience, label: "Số năm kinh nghiệm",
                      promptLabel: "Years of experience"),
         ProfileField(key: "shifts", keyPath: \.shifts, label: "Ca làm việc", promptLabel: "Shifts"),
-        ProfileField(key: "workStart", keyPath: \.workStart, label: "Giờ bắt đầu làm",
-                     promptLabel: "Work start time"),
-        ProfileField(key: "workEnd", keyPath: \.workEnd, label: "Giờ kết thúc", promptLabel: "Work finish time"),
+        ProfileField(key: "workHours", keyPath: \.workHours, label: "Giờ làm việc",
+                     promptLabel: "Working hours (start-finish)", placeholder: "Ví dụ: 14:00–23:00"),
         ProfileField(key: "openingHours", keyPath: \.openingHours, label: "Giờ nhà hàng mở cửa",
-                     promptLabel: "Restaurant opening time"),
-        ProfileField(key: "closingHours", keyPath: \.closingHours, label: "Giờ nhà hàng đóng cửa",
-                     promptLabel: "Restaurant closing time"),
+                     promptLabel: "Restaurant opening hours (open-close)", placeholder: "Ví dụ: 11:00–22:00"),
         ProfileField(key: "kitchenStaff", keyPath: \.kitchenStaff, label: "Số nhân viên trong bếp",
                      promptLabel: "Number of kitchen staff"),
         ProfileField(key: "kitchenTeam", keyPath: \.kitchenTeam,
@@ -133,6 +130,8 @@ struct ProfileField: Identifiable, @unchecked Sendable {
     let promptLabel: String
     /// Long text (a text box) rather than one line.
     var multiline = false
+    /// Grey example shown in an empty one-line field.
+    var placeholder: String?
 
     var id: String { key }
 }
@@ -146,11 +145,21 @@ extension UserProfile {
             guard let key = CodingKeys(stringValue: field.key) else { continue }
             self[keyPath: field.keyPath] = try container.decodeIfPresent(String.self, forKey: key) ?? ""
         }
-        // Older versions had "age" instead of a date of birth: keep the value so the user can correct it.
-        if dateOfBirth.isEmpty,
-           let age = try decoder.container(keyedBy: LegacyKey.self).decodeIfPresent(String.self, forKey: LegacyKey("age")) {
-            dateOfBirth = age
+        // Fields of older versions: keep their values in the fields that replaced them.
+        let legacy = try decoder.container(keyedBy: LegacyKey.self)
+        func old(_ key: String) throws -> String {
+            (try legacy.decodeIfPresent(String.self, forKey: LegacyKey(key)) ?? "")
+                .trimmingCharacters(in: .whitespacesAndNewlines)
         }
+        if dateOfBirth.isEmpty { dateOfBirth = try old("age") } // the user can correct it to a date
+        if workHours.isEmpty { workHours = Self.range(try old("workStart"), try old("workEnd")) }
+        let closing = try old("closingHours")
+        if !closing.isEmpty, !openingHours.contains("–") { openingHours = Self.range(openingHours, closing) }
+    }
+
+    /// "start–end", or whichever side is filled in.
+    private static func range(_ start: String, _ end: String) -> String {
+        start.isEmpty || end.isEmpty ? start + end : "\(start)–\(end)"
     }
 
     private struct LegacyKey: CodingKey {
