@@ -208,6 +208,45 @@ final class AppState: ObservableObject {
         if activeProfile == nil { activeProfileID = profiles.first?.id }
     }
 
+    /// Writes one profile to a ".undertone-profile" file (ProfileFile format) to move it to another Mac.
+    func exportProfile(_ id: UUID, to url: URL) throws {
+        guard let profile = profiles.first(where: { $0.id == id }) else { throw ProfileFileError.notFound }
+        let data = try ProfileFile.data(for: profile)
+        let scoped = url.startAccessingSecurityScopedResource()
+        defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+        do {
+            try data.write(to: url, options: .atomic)
+        } catch {
+            throw ProfileFileError.unwritable(error.localizedDescription)
+        }
+    }
+
+    /// Adds the profile in an exported file (.undertone-profile or .json) as a new profile, never
+    /// overwriting one: it gets a new id, and " (nhập)" when its name is already taken. It becomes
+    /// the active profile; returns its id.
+    @discardableResult
+    func importProfile(fromFile url: URL) throws -> UUID {
+        let scoped = url.startAccessingSecurityScopedResource()
+        defer { if scoped { url.stopAccessingSecurityScopedResource() } }
+        let data: Data
+        do {
+            data = try Data(contentsOf: url)
+        } catch {
+            throw ProfileFileError.unreadable(error.localizedDescription)
+        }
+        var profile = try ProfileFile.profile(from: data)
+        profile.id = UUID()
+        let name = profile.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        if !name.isEmpty, profiles.contains(where: {
+            $0.name.trimmingCharacters(in: .whitespacesAndNewlines).caseInsensitiveCompare(name) == .orderedSame
+        }) {
+            profile.name = name + " (nhập)"
+        }
+        profiles.append(profile) // saved to profiles.json by didSet
+        activeProfileID = profile.id
+        return profile.id
+    }
+
     /// Reads a Word/RTF/text file (usually a CV), has Claude match its text to the profile fields and
     /// overwrites those fields of the active profile (a new profile when there is none); fields the
     /// document does not cover keep their values. Returns how many fields were filled.

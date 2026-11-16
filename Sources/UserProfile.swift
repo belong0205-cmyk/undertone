@@ -1,4 +1,5 @@
 import Foundation
+import UniformTypeIdentifiers
 
 /// What one person using the app has told it about themselves. When a question in the conversation
 /// is about "me", Claude answers from the active profile.
@@ -196,5 +197,56 @@ enum ProfileStore {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         try encoder.encode(profiles).write(to: url, options: .atomic)
+    }
+}
+
+extension UTType {
+    /// A profile exported to move it to another Mac (".undertone-profile", JSON). Declared in Info.plist.
+    static let undertoneProfile = UTType(exportedAs: "local.undertone.profile", conformingTo: .json)
+}
+
+enum ProfileFileError: LocalizedError {
+    case notFound
+    case wrongFormat
+    case newerVersion(Int)
+    case unreadable(String)
+    case unwritable(String)
+
+    var errorDescription: String? {
+        switch self {
+        case .notFound: "Không tìm thấy hồ sơ này."
+        case .wrongFormat: "File không đúng định dạng hồ sơ Undertone."
+        case .newerVersion: "File hồ sơ được tạo bởi phiên bản Undertone mới hơn. Hãy cập nhật app rồi nhập lại."
+        case let .unreadable(reason): "Không đọc được file: \(reason)"
+        case let .unwritable(reason): "Không ghi được file: \(reason)"
+        }
+    }
+}
+
+/// One profile in a file, to move it between Macs:
+/// {"format":"undertone-profile","version":1,"profile":{...UserProfile fields...}}, pretty-printed UTF-8.
+enum ProfileFile {
+    static let format = "undertone-profile"
+    static let version = 1
+
+    static func data(for profile: UserProfile) throws -> Data {
+        let profileJSON = try JSONSerialization.jsonObject(with: JSONEncoder().encode(profile))
+        let document: [String: Any] = ["format": format, "version": version, "profile": profileJSON]
+        return try JSONSerialization.data(withJSONObject: document, options: [.prettyPrinted, .sortedKeys])
+    }
+
+    /// Missing fields decode as empty (older or partial files); the id is whatever the file had.
+    static func profile(from data: Data) throws -> UserProfile {
+        guard let document = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              document["format"] as? String == format,
+              let profileJSON = document["profile"] as? [String: Any]
+        else { throw ProfileFileError.wrongFormat }
+        let fileVersion = document["version"] as? Int ?? 1
+        guard fileVersion <= version else { throw ProfileFileError.newerVersion(fileVersion) }
+        do {
+            return try JSONDecoder().decode(UserProfile.self, from: JSONSerialization.data(withJSONObject: profileJSON))
+        } catch {
+            throw ProfileFileError.wrongFormat
+        }
     }
 }
