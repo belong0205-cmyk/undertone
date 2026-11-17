@@ -27,9 +27,12 @@ final class SonioxTranscriber {
     nonisolated private static let pauseAfterSilentChunks = 20
     /// Audio sent ahead of the first sound when resuming after a pause (400 ms).
     nonisolated private static let preRollBytes = 4 * chunkBytes
-    /// When Soniox falls this far behind the audio sent, start a fresh stream: a line that arrives
-    /// later than this is useless in a live conversation, so the stale audio is dropped.
-    private static let maxLagMs = 10_000
+    /// When Soniox falls this far behind the audio sent, start a fresh stream and replay to it the
+    /// audio after the last final word (see `history`), so nothing said is lost.
+    private static let maxLagMs = 6_000
+    /// Audio kept for a replay: the last 30 s sent on the stream, and at most 30 s captured while
+    /// reconnecting.
+    nonisolated private static let replayCapBytes = 30 * 32_000
     /// While audio is being sent, no reply for this long means the stream stalled (measured: Soniox
     /// went silent for 18-20 s with our audio stuck unsent, then closed with 408); start a fresh one.
     private static let stallSeconds = 6.0
@@ -59,6 +62,14 @@ final class SonioxTranscriber {
     private var quickFailures = 0
     private var keepAliveTimer: Timer?
     private var lastMessageAt = Date()
+    /// End of the last final word on the current stream (stream ms); the replay starts here.
+    /// (final_audio_proc_ms ran seconds behind the words already shown, so replays repeated them.)
+    private var lastFinalEndMs = 0
+    /// Lowest lag seen on this stream. A replay starts a stream already behind by the replayed audio,
+    /// which Soniox works through at about real time; only lag beyond this floor means a new stall.
+    private var lagFloorMs = 0
+    /// The first word of a new stream joins the utterance kept open across the reconnect.
+    private var needsSpace = false
 
     // Shared with the audio thread, guarded by `lock`.
     nonisolated private let lock = NSLock()
@@ -73,6 +84,18 @@ final class SonioxTranscriber {
     nonisolated(unsafe) private var paused = false // not sending audio during a long silence
     nonisolated(unsafe) private var resumedAt = Date.distantPast // last resume after a silence pause
     nonisolated(unsafe) private var leadIn = Data() // last 400 ms of silence, sent first when sound returns
+    /// PCM16 sent on the current stream, its first byte being byte `historyStart` of the stream.
+    nonisolated(unsafe) private var history = Data()
+    nonisolated(unsafe) private var historyStart = 0
+    /// While reconnecting: audio captured meanwhile (`backlog`), sent after `replay` on the new stream.
+    nonisolated(unsafe) private var reconnecting = false
+    nonisolated(unsafe) private var backlog = Data()
+    nonisolated(unsafe) private var replay = Data()
+    #if DEBUG
+    /// Test only: socket writes held back until this time, as in a network stall.
+    nonisolated(unsafe) private var holdUntil: Date?
+    nonisolated(unsafe) private var held: [Data] = []
+    #endif
     nonisolated private let targetFormat = AVAudioFormat(
         commonFormat: .pcmFormatInt16, sampleRate: 16_000, channels: 1, interleaved: true)!
 
@@ -99,7 +122,14 @@ final class SonioxTranscriber {
         keepAliveTimer?.invalidate()
         keepAliveTimer = nil
         let (socket, rest) = lock.withLock { () -> (URLSessionWebSocketTask?, Data) in
-            defer { self.socket = nil; outgoing.removeAll() }
+            defer {
+                self.socket = nil
+                outgoing.removeAll()
+                reconnecting = false
+                backlog = Data()
+                replay = Data()
+                history = Data()
+            }
             return (self.socket, outgoing)
         }
         guard let socket else { return }
@@ -134,7 +164,7 @@ final class SonioxTranscriber {
     nonisolated func append(_ buffer: AVAudioPCMBuffer) {
         lock.lock()
         defer { lock.unlock() }
-        guard let socket else { return }
+        guard socket != nil || reconnecting else { return }
         if converter?.inputFormat != buffer.format {
             converter = AVAudioConverter(from: buffer.format, to: targetFormat)
             converter?.downmix = true
@@ -147,6 +177,11 @@ final class SonioxTranscriber {
         guard outgoing.count >= Self.chunkBytes else { return }
         let chunk = outgoing
         outgoing.removeAll(keepingCapacity: true)
+        guard let socket else { // reconnecting: keep it for the new stream
+            backlog.append(chunk)
+            if backlog.count > Self.replayCapBytes { backlog.removeFirst(backlog.count - Self.replayCapBytes) }
+            return
+        }
 
         // Soniox falls further and further behind real time while it receives digital silence
         // (measured: 13 s behind after 150 s of it), so the next sentence arrived 10+ s late or not
@@ -187,8 +222,23 @@ final class SonioxTranscriber {
     nonisolated private func send(_ chunk: Data, on socket: URLSessionWebSocketTask) {
         lastSentAt = Date()
         sentBytes += chunk.count
+        history.append(chunk)
+        if history.count > Self.replayCapBytes {
+            let excess = history.count - Self.replayCapBytes
+            history.removeFirst(excess)
+            historyStart += excess
+        }
         let count = chunk.count
-        socket.send(.data(Self.muLaw(chunk))) { [weak self] _ in // a broken socket surfaces in the receive loop
+        let frame = Self.muLaw(chunk)
+        #if DEBUG
+        if let until = holdUntil {
+            if Date() < until { held.append(frame); return }
+            holdUntil = nil
+            for data in held { socket.send(.data(data)) { _ in } }
+            held = []
+        }
+        #endif
+        socket.send(.data(frame)) { [weak self] _ in // a broken socket surfaces in the receive loop
             guard let self, DebugLog.enabled else { return }
             self.writtenLock.withLock { self.writtenBytes += count } // not `lock`: send may call back at once
         }
@@ -201,6 +251,22 @@ final class SonioxTranscriber {
         out.withUnsafeMutableBytes { raw in
             let samples = raw.bindMemory(to: Int16.self)
             for i in samples.indices { samples[i] = Bool.random() ? 24 : -24 }
+        }
+        return out
+    }
+
+    /// A replay with every silence cut to at most 300 ms: Soniox works through audio at about real
+    /// time, so the shorter the replay, the sooner the stream is live again.
+    nonisolated private static func shortenedSilences(_ audio: Data) -> Data {
+        var out = Data()
+        var silentRun = 0
+        var offset = 0
+        while offset < audio.count {
+            let end = min(offset + chunkBytes, audio.count)
+            let chunk = audio.subdata(in: offset..<end)
+            silentRun = isSilent(chunk) ? silentRun + 1 : 0
+            if silentRun <= 3 { out.append(chunk) }
+            offset = end
         }
         return out
     }
@@ -237,6 +303,13 @@ final class SonioxTranscriber {
         }
     }
 
+    #if DEBUG
+    /// Test only: hold back every socket write for `seconds`, as in a network stall.
+    nonisolated func simulateStall(seconds: Double) {
+        lock.withLock { holdUntil = Date().addingTimeInterval(seconds) }
+    }
+    #endif
+
     // MARK: - Connection
 
     private func connect() {
@@ -257,13 +330,35 @@ final class SonioxTranscriber {
         do {
             try await socket.send(.string(Self.configJSON))
             if running, generation == self.generation { // audio flows from here on
-                lock.withLock {
+                // After a reconnect: first the audio the old stream never finalized, then what was
+                // captured while connecting, then live audio.
+                let replayed = lock.withLock { () -> Int in
                     self.socket = socket
                     sentBytes = 0
+                    history = Data()
+                    historyStart = 0
                     writtenLock.withLock { writtenBytes = 0 }
                     silentChunks = 0
                     paused = false
+                    #if DEBUG
+                    holdUntil = nil
+                    held = []
+                    #endif
+                    let catchUp = Self.shortenedSilences(replay + backlog)
+                    replay = Data()
+                    backlog = Data()
+                    reconnecting = false
+                    var offset = 0
+                    while offset < catchUp.count {
+                        let end = min(offset + Self.chunkBytes, catchUp.count)
+                        send(catchUp.subdata(in: offset..<end), on: socket)
+                        offset = end
+                    }
+                    return catchUp.count
                 }
+                lastFinalEndMs = 0
+                lagFloorMs = replayed / 32
+                if replayed > 0 { DebugLog.log("soniox replayed \(replayed / 32) ms") }
             }
             DebugLog.log(String(format: "soniox open after %.2f s", Date().timeIntervalSince(connectedAt)))
             var lastMessage = Date()
@@ -289,10 +384,13 @@ final class SonioxTranscriber {
                 }
                 apply(response.tokens ?? [])
                 if response.finished == true { break loop }
-                if let processed = response.totalAudioProcMs,
-                   lock.withLock({ sentBytes }) / 32 - processed > Self.maxLagMs {
-                    fellBehind = true
-                    break loop
+                if let processed = response.totalAudioProcMs {
+                    let lag = lock.withLock { sentBytes } / 32 - processed
+                    lagFloorMs = min(lagFloorMs, max(0, lag))
+                    if lag - lagFloorMs > Self.maxLagMs {
+                        fellBehind = true
+                        break loop
+                    }
                 }
             }
         } catch {
@@ -301,31 +399,40 @@ final class SonioxTranscriber {
         lock.withLock { if self.socket === socket { self.socket = nil } }
         socket.cancel(with: .normalClosure, reason: nil)
         DebugLog.log(String(format: "soniox closed after %.0f s: %@", Date().timeIntervalSince(connectedAt),
-                            failure ?? (fellBehind ? "fell more than 10 s behind" : "finished")))
+                            failure ?? (fellBehind ? "fell more than 6 s behind" : "finished")))
         // A stream of an earlier start must not reconnect (a second stream) or touch the new text.
         guard generation == self.generation else { return }
         disconnected(failure: failure, fatal: fatal, immediately: fellBehind)
     }
 
     private func disconnected(failure: String?, fatal: Bool, immediately: Bool = false) {
-        // Never finalized on this connection: keep it as heard. When the last final word closed a
-        // sentence, the pending words are the next sentence, so they get their own utterance.
-        let pending = currentPending
-        currentPending = ""
-        if atBoundary, !pending.isEmpty {
-            finishUtterance()
-            currentFinal = pending
-        } else {
-            currentFinal += pending
-        }
-        discarding = false
-        finishUtterance()
         resetTranslation() // a closed stream sends no more translations
-        guard running else { return } // stopped on purpose
+        discarding = false
+        guard running else { // stopped on purpose: keep the words not yet final as heard
+            currentFinal += currentPending
+            currentPending = ""
+            finishUtterance()
+            return
+        }
+        // The next stream gets the audio after the last final word again, so words not final yet
+        // come back from it; the utterance stays open and continues with them.
+        currentPending = ""
+        needsSpace = !currentFinal.isEmpty
+        let finalBytes = lastFinalEndMs * 32
+        lock.withLock {
+            let offset = max(0, finalBytes - historyStart)
+            // dropFirst counts from startIndex, which removeFirst (the 30 s cap) moves off zero, so
+            // subdata(in:) with plain offsets would read older audio and repeat words already shown.
+            replay = Data(history.dropFirst(offset))
+            DebugLog.log("soniox replay from \(finalBytes / 32) ms; stream audio \(historyStart / 32)-\((historyStart + history.count) / 32) ms")
+            history = Data()
+            reconnecting = true
+        }
         if let failure {
             quickFailures = Date().timeIntervalSince(connectedAt) < 5 ? quickFailures + 1 : 0
             if fatal || quickFailures >= 3 {
                 stop()
+                finishUtterance()
                 onFailure?(failure)
                 return
             }
@@ -367,7 +474,17 @@ final class SonioxTranscriber {
         var pending = ""
         var pendingTranslation: [UUID: String] = [:]
         var translated: [UUID] = [] // in order, to report
-        for token in tokens {
+        var spaced = false
+        for var token in tokens {
+            if token.isFinal, token.translationStatus != "translation", let end = token.endMs {
+                lastFinalEndMs = max(lastFinalEndMs, end)
+            }
+            // A new stream's first word has no leading space; it continues the utterance kept open.
+            if needsSpace, !spaced, token.translationStatus != "translation", !token.text.hasPrefix("<") {
+                spaced = true
+                if token.text.first?.isWhitespace != true { token = Response.Token(text: " " + token.text, isFinal: token.isFinal, translationStatus: token.translationStatus, endMs: token.endMs) }
+                if token.isFinal { needsSpace = false }
+            }
             if token.text == "<end>" || token.text == "<fin>" { // endpoint, or our finalize at a pause
                 DebugLog.log("soniox \(token.text)")
                 if discarding { discarding = false } else { finishUtterance() }
@@ -523,6 +640,8 @@ final class SonioxTranscriber {
             let isFinal: Bool
             /// "translation" for Vietnamese tokens; "original" or "none" for spoken ones.
             let translationStatus: String?
+            /// Where a spoken token ends in the stream's audio; translations have none.
+            let endMs: Int?
         }
         let tokens: [Token]?
         let finalAudioProcMs: Int?
