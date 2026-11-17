@@ -6,7 +6,7 @@ version; other wording passes if it meets every rule below.
 ## Setup
 1. Build and open the app. On the Hồ sơ page import `Tests/eval-profile.undertone-profile` (double-click it or use
    Import) and make "Minh Le" the active profile. It is an imaginary person; its menu has the same shape as real menus:
-   Vietnamese set meals on a 2-week rotation (Monday–Saturday) plus a Western set menu by weekday, written in Vietnamese.
+   Vietnamese set meals on a 2-week rotation (Monday–Saturday) plus a European set menu by weekday, written in Vietnamese.
 2. Start listening, then speak each question through the speakers from Terminal, for example:
    `say -v Karen "What do you have in your menu?"` (Karen is an Australian voice). For split questions (section E) run
    the two `say` commands with `sleep 2` between them.
@@ -19,24 +19,25 @@ version; other wording passes if it meets every rule below.
    knowledge base. Missing personal facts use a placeholder in square brackets.
 3. At most 25 words in 1–2 sentences; spoken as the user ("I", "my", "we"); never "You could say…".
 4. Simple B1 English; Vietnamese dishes get simple English names.
-5. The Vietnamese answer says the same thing in the first person ("tôi").
-6. Questions that need no reply show no answer ("-" or the filler is skipped).
+5. Menu and dish answers name European dishes first; Vietnamese dishes come after, or only when asked (user preference).
+6. The Vietnamese answer says the same thing in the first person ("tôi").
+7. Questions that need no reply show no answer ("-" or the filler is skipped).
 
 ## A. Menu — general vs specific
 | # | Question | Ideal answer | Must / must not |
 |---|---|---|---|
-| 1 | What do you have in your menu? | We cook Vietnamese set meals, like braised pork with eggs and sour fish soup, and a Western set menu too. It changes every day. | Must NOT name a day (the original bug). Both menus mentioned. |
-| 2 | What kind of food do you cook? | I cook Vietnamese home-style meals, like braised fish and sour soup, and some Western dishes like lasagne. | No day, no prices. |
-| 3 | Tell me about your menu. | We have Vietnamese set meals with rice, a main dish, soup and vegetables, and a Western set menu. Both change every day. | General only. |
-| 4 | What does one meal come with? | Each Vietnamese meal comes with rice, dipping sauce and iced tea, plus a main dish, a stir-fry, soup, vegetables and dessert. | From the menu header, no invented sides. |
-| 5 | What's on the menu today? | (Tuesday) Today the Western menu has beef stew in red wine with mashed potato. The Vietnamese meal changes every week. | Uses today's weekday from the Western menu (Mon lasagne, Tue beef stew, Wed salmon, Thu spaghetti bolognese, Fri fish and chips, Sat roast chicken). Must not pick a Vietnamese week. Sunday → "We are closed on Sunday." |
-| 6 | What are you cooking on Friday? | On Friday we have fish and chips on the Western menu, and a Vietnamese meal like caramelised prawns or braised fish. | Friday only; Western Friday = fish and chips. |
+| 1 | What do you have in your menu? | We cook a European set menu, like lasagne and roast chicken, and Vietnamese set meals too. It changes every day. | Must NOT name a day (the original bug). European dishes first. |
+| 2 | What kind of food do you cook? | I cook European dishes like lasagne and fish and chips, and also Vietnamese home-style meals. | European first; no day, no prices. |
+| 3 | Tell me about your menu. | We have a European set menu with soup, a main, sides, salad and dessert, and Vietnamese set meals too. Both change every day. | General only; European first. |
+| 4 | What does one meal come with? | Our European set menu comes with soup, a main course, a side, a salad and a dessert. | From the European menu header first; no invented sides. Vietnamese details only if asked. |
+| 5 | What's on the menu today? | (Tuesday) Today the European menu has beef stew in red wine with mashed potato. The Vietnamese meal changes every week. | Uses today's weekday from the European menu, named first (Mon lasagne, Tue beef stew, Wed salmon, Thu spaghetti bolognese, Fri fish and chips, Sat roast chicken). Must not pick a Vietnamese week. Sunday → "We are closed on Sunday." |
+| 6 | What are you cooking on Friday? | On Friday we have fish and chips on the European menu, and a Vietnamese meal like caramelised prawns. | Friday only; European Friday = fish and chips, named first. |
 | 7 | Do you have vegetarian options? | Yes, every Vietnamese set meal has a vegetarian dish, like tofu in tomato sauce. | Yes + one real example. |
-| 8 | How often does your menu change? | Both menus change every day. The Vietnamese one repeats every two weeks, and the Western one repeats every week. | From the menu structure. |
-| 9 | What's your signature dish? | My best dishes are braised pork with eggs and sour fish soup. | From "Signature dishes" only. |
+| 8 | How often does your menu change? | Both menus change every day. The European one repeats every week, and the Vietnamese one every two weeks. | From the menu structure; European first. |
+| 9 | What's your signature dish? | My best dishes are braised pork with eggs and sour fish soup. | From "Signature dishes" only — stays Vietnamese because the profile says so. |
 | 10 | What do you serve on Sunday? | We are closed on Sunday. | Must not invent Sunday dishes. |
-| 11 | Do you serve any Western food? | Yes, we have a Western set menu every day, like beef lasagne and fish and chips. | No day needed. |
-| 12 | What soup do you make? | We make a different soup every day, like sour fish soup or pumpkin soup. | General, no day. |
+| 11 | Do you serve any European food? | Yes, we have a European set menu every day, like beef lasagne and fish and chips. | No day needed. |
+| 12 | What soup do you make? | We make a different soup every day, like pumpkin soup or mushroom soup, and Vietnamese sour fish soup. | General, no day; European soups first. |
 
 ## B. Questions about the user — exact scope
 | # | Question | Ideal answer | Must / must not |
@@ -49,7 +50,7 @@ version; other wording passes if it meets every rule below.
 | 18 | When is your kitchen open? | We serve lunch from 10:30 am to 2 pm, Monday to Saturday. | Opening hours, not the user's hours. |
 | 19 | How many people work in your kitchen? | There are eight people in our kitchen. | Number; roles optional only if short. |
 | 20 | Tell me about your day. | I check deliveries and fridge temperatures, prep meat and vegetables, then cook the braised dishes and soups for lunch. | 2–3 steps, no clock times needed. |
-| 21 | What are your main responsibilities? | I cook the braised dishes, stir-fries and soups, and I check fridge temperatures and label food. | From the profile. |
+| 21 | What are your main responsibilities? | I cook the European soups and mains and the Vietnamese braised dishes, and I check fridge temperatures. | From the profile; European first. |
 | 22 | How long have you been working as a cook? | I have about three years of kitchen experience. | 3 years. |
 | 23 | Do you have any certificates? | Yes, I have a Food Safety Supervisor certificate and a First Aid certificate. | Both, no invented ones. |
 | 24 | What languages do you speak? | I speak Vietnamese and some English. | — |
@@ -81,9 +82,9 @@ version; other wording passes if it meets every rule below.
 ## E. Questions in pieces
 | # | Pieces (about 2 s apart) | Ideal answer | Must / must not |
 |---|---|---|---|
-| 41 | "What do you usually…" + "cook on Fridays?" | On Fridays we cook fish and chips on the Western menu, and Vietnamese dishes like caramelised prawns. | Answers the joined question, once. |
+| 41 | "What do you usually…" + "cook on Fridays?" | On Fridays we cook fish and chips on the European menu, and Vietnamese dishes like caramelised prawns. | Answers the joined question, once; European first. |
 | 42 | "How many people…" + "work in your kitchen?" | There are eight people in our kitchen. | Not an answer to the first piece alone. |
-| 43 | "Do you usually cook?" + "At your restaurant?" | Yes, I cook every day at work, mostly Vietnamese braised dishes and soups. | One answer for both pieces. |
+| 43 | "Do you usually cook?" + "At your restaurant?" | Yes, I cook every day at work, European soups and mains, and Vietnamese braised dishes. | One answer for both pieces; European first. |
 
 ## F. No answer expected
 | # | Utterance | Expected |
