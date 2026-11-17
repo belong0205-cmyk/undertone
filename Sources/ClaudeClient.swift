@@ -208,28 +208,35 @@ struct ClaudeClient {
 enum Prompt {
     static let system = """
     You help a Vietnamese speaker take part in a live English conversation (an interview, meeting or call, \
-    often in a professional kitchen). You get the recent conversation and the newest utterance, transcribed from \
-    the audio playing on their computer (mostly the other participants). Transcripts can contain recognition \
-    errors; infer the intended words. The user already sees a Vietnamese translation, so never translate.
+    often in a professional kitchen). You get the recent conversation, each line marked with how many seconds ago \
+    it ended, and the newest utterance, transcribed from the audio playing on their computer (mostly the other \
+    participants). Transcripts can contain recognition errors; infer the intended words. The user already sees a \
+    Vietnamese translation, so never translate.
+
+    Speakers pause and hesitate, so one question can arrive in several pieces. The newest utterance may already \
+    join such pieces; if the last lines of the recent conversation ended only a few seconds before it and are \
+    unfinished parts of the same question, read them together with it and answer the whole question, not only its \
+    last piece.
 
     When the newest utterance asks the user something or expects them to respond, reply in exactly this format \
     and nothing else:
-    <answer_en>What the user can say aloud: 1 or 2 short sentences, at most 25 words in total. The user's English \
+    <answer_en>The exact words the user says aloud, as the user, in the first person ("I", "my", and "we" for their \
+    team or restaurant): 1 or 2 short sentences, at most 25 words in total. Never advice about what to say (no "You \
+    could say…", no "Tell them…"), never about the user in the third person, no quotation marks. The user's English \
     is CEFR B1, so use only common B1-level (or easier) words and simple grammar; no idioms, no rare or formal words. \
     Keep a technical cooking term only when the answer needs it (e.g. "brunoise"). No bullet points, no headings.</answer_en>
-    <answer_vi>The same answer in Vietnamese.</answer_vi>
+    <answer_vi>The same answer in Vietnamese, also in the first person ("tôi").</answer_vi>
 
     Otherwise reply with exactly: -
 
     A <user_profile> block, when present, holds facts the user entered about themselves. When the newest \
     utterance asks about the user (their name, age or birthday, where they live, their work, workplace, shifts \
     and hours, kitchen team, daily routine, responsibilities or experience, their dishes, recipes or menu), write \
-    the answer from that profile in the first person (work out an age from the date of birth and <today>), still \
-    following the answer_en \
-    rules. If there is no profile, or it does not contain what was asked, still give the answer the user can say, \
-    with a placeholder in square brackets for each missing personal fact (e.g. "My name is [your name]. I work at \
-    [your workplace]."), and the same placeholders in answer_vi. Never invent personal facts such as a name, age, \
-    address, workplace or dish, and never ask the user for them.
+    the answer from that profile (work out an age from the date of birth and <today>), still following the \
+    answer_en rules. If there is no profile, or it does not contain what was asked, still give the answer the user \
+    can say, with a placeholder in square brackets for each missing personal fact (e.g. "My name is [your name]. I \
+    work at [your workplace]."), and the same placeholders in answer_vi. Never invent personal facts such as a name, \
+    age, address, workplace or dish, and never ask the user for them.
     """
 
     /// Acknowledgements and fillers ("Okay.", "Yes, chef.", "Uh-huh.", "D'accord.") need no answer,
@@ -247,10 +254,50 @@ enum Prompt {
         "oui", "ouais", "d", "accord", "merci", "bon", "voilà", "voila",
     ]
 
-    static func user(history: String, utterance: String, today: Date = Date()) -> String {
-        var message = "<today>\(today.formatted(.iso8601.year().month().day()))</today>\n\n"
+    /// One utterance as heard: its text, when its first words appeared and when it was final.
+    struct Heard {
+        let text: String
+        let start: Date
+        let end: Date
+    }
+
+    /// Pieces closer than this (final of one to first words of the next) can be one question cut by a
+    /// pause. Measured with real Soniox: a 2.2 s hesitation shows as 3.4 s here (the next words appear
+    /// about 1 s after they are spoken); separate questions 4.5 s apart showed as 5.6 s.
+    static let pieceGap: TimeInterval = 4
+    static let maxPieces = 4
+
+    /// Index of the first piece of the question that ends with the last utterance in `heard`. An earlier
+    /// utterance joins it when it ended less than `pieceGap` before the next one began and either was left
+    /// unfinished (Soniox ends a piece cut by a pause with "—", a comma or no punctuation) or the next one
+    /// starts with a preposition ("Do you usually cook?" + "At your restaurant?"); up to `maxPieces`
+    /// pieces. Fillers ("Okay.", "Um.") are never pieces.
+    static func questionStart(_ heard: [Heard]) -> Int {
+        var first = heard.count - 1
+        while first > 0, heard.count - first < maxPieces {
+            let previous = heard[first - 1].text.trimmingCharacters(in: .whitespacesAndNewlines)
+            let next = heard[first].text.lowercased().split { !$0.isLetter }.first.map(String.init) ?? ""
+            let unfinished = previous.last.map { !".?!".contains($0) } ?? false
+            guard heard[first].start.timeIntervalSince(heard[first - 1].end) < pieceGap,
+                  unfinished || continuationWords.contains(next), !isFiller(previous)
+            else { break }
+            first -= 1
+        }
+        return first
+    }
+
+    /// First words that continue the previous piece rather than start a new question.
+    private static let continuationWords: Set<String> = [
+        "at", "to", "in", "on", "for", "with", "from", "about", "of", "by", "into", "during", "than", "like",
+    ]
+
+    /// `history`: earlier utterances, oldest first; each line says how long ago it ended, so the model
+    /// can tell pieces of one question from separate turns.
+    static func user(history: [Heard], utterance: String, now: Date = Date()) -> String {
+        var message = "<today>\(now.formatted(.iso8601.year().month().day()))</today>\n\n"
         if !history.isEmpty {
-            message += "<recent_conversation>\n\(history)\n</recent_conversation>\n\n"
+            let lines = history.map { "[\(max(0, Int(now.timeIntervalSince($0.end).rounded()))) s ago] \($0.text)" }
+            message += "<recent_conversation>\n\(lines.joined(separator: "\n"))\n</recent_conversation>\n\n"
         }
         message += "<newest_utterance>\n\(utterance)\n</newest_utterance>"
         return message

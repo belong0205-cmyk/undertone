@@ -20,6 +20,8 @@ final class AppState: ObservableObject {
         var answerEnglish = ""
         var answerVietnamese = ""
         var isProcessing = false
+        var startedAt = Date() // first words on screen
+        var finishedAt: Date? // final
     }
 
     @Published var listenState: ListenState = .idle {
@@ -405,8 +407,9 @@ final class AppState: ObservableObject {
         if let index = rows.firstIndex(where: { $0.id == id }) {
             rows[index].english = text
             rows[index].isFinal = isFinal
+            if isFinal { rows[index].finishedAt = Date() }
         } else {
-            rows.append(Row(id: id, english: text, isFinal: isFinal))
+            rows.append(Row(id: id, english: text, isFinal: isFinal, finishedAt: isFinal ? Date() : nil))
             log("partial #\(DebugLog.tag(id))")
             // Someone started talking: have the API connection ready before their sentence ends.
             if hasAPIKey, Date().timeIntervalSince(lastAPIUse) > 20 {
@@ -444,8 +447,22 @@ final class AppState: ObservableObject {
             log("filler #\(DebugLog.tag(id)), no Claude call")
             return
         }
-        let history = rows[..<index].filter(\.isFinal).suffix(10).map(\.english).joined(separator: "\n")
-        let message = Prompt.user(history: history, utterance: rows[index].english)
+        // A question cut by pauses arrives as several rows: answer them together on the newest row, and
+        // drop the answers given to the earlier pieces (a complete question never waits for more).
+        let heard = rows[...index].filter(\.isFinal).suffix(10)
+        let pieces = Array(heard).map { Prompt.Heard(text: $0.english, start: $0.startedAt, end: $0.finishedAt ?? $0.startedAt) }
+        let first = Prompt.questionStart(pieces)
+        for row in heard.dropFirst(first).dropLast() {
+            tasks[row.id]?.cancel()
+            tasks[row.id] = nil
+            guard let i = rows.firstIndex(where: { $0.id == row.id }) else { continue }
+            rows[i].answerEnglish = ""
+            rows[i].answerVietnamese = ""
+            rows[i].isProcessing = false
+            log("claude #\(DebugLog.tag(row.id)) replaced: joins #\(DebugLog.tag(id))")
+        }
+        let question = pieces[first...].map(\.text).joined(separator: " ")
+        let message = Prompt.user(history: Array(pieces[..<first]), utterance: question)
         let profile = activeProfile?.promptBlock
         let client = ClaudeClient(apiKey: trimmedKey)
         lastAPIUse = Date()
@@ -459,6 +476,7 @@ final class AppState: ObservableObject {
             var answerLogged = false
             do {
                 for try await chunk in client.stream(system: Self.systemPrompt, profile: profile, user: message) {
+                    if Task.isCancelled { break } // replaced: a chunk already received must not bring it back
                     if output.isEmpty {
                         DebugLog.log(String(format: "claude #%@ first token %.2f s", tag, Date().timeIntervalSince(started)))
                     }
