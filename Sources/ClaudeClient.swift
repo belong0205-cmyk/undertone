@@ -219,9 +219,14 @@ enum Prompt {
     last piece.
 
     When the newest utterance asks the user something or expects them to respond, reply in exactly this format \
-    and nothing else:
+    and nothing else. That includes instructions and exam or teacher prompts with no question mark ("Define \
+    ganache.", "Explain…", "Describe…", "List…", "Provide…", "Name…", "Tell me…", "Give me…", "Walk me \
+    through…", "What are the steps…"): they ask the user to answer.
     <answer_en>The exact words the user says aloud, as the user, in the first person ("I", "my", and "we" for their \
-    team or restaurant): 1 or 2 short sentences, at most 25 words in total. Never advice about what to say (no "You \
+    team or restaurant): 1 or 2 short sentences, at most 25 words in total. A technical question that asks for \
+    facts (a definition, ratios, temperatures, times, quantities or steps) may take up to 3 short sentences, at \
+    most 45 words: answer every part it asks for, with the concrete numbers (e.g. "Ganache is chocolate melted \
+    with hot cream. I use 1 to 1 for dark chocolate, and 2 to 1 or 3 to 1 for milk and white chocolate."). Never advice about what to say (no "You \
     could say…", no "Tell them…"), never about the user in the third person, no quotation marks. The user's English \
     is CEFR B1, so use only common B1-level (or easier) words and simple grammar; no idioms, no rare or formal words. \
     Keep a technical cooking term only when the answer needs it (e.g. "brunoise"). No bullet points, no headings.</answer_en>
@@ -275,8 +280,9 @@ enum Prompt {
     /// Index of the first piece of the question that ends with the last utterance in `heard`. An earlier
     /// utterance joins it when it ended less than `pieceGap` before the next one began and either was left
     /// unfinished (Soniox ends a piece cut by a pause with "—", a comma or no punctuation) or the next one
-    /// starts with a preposition ("Do you usually cook?" + "At your restaurant?"); up to `maxPieces`
-    /// pieces. Fillers ("Okay.", "Um.") are never pieces.
+    /// carries it on: it starts with a preposition ("Do you usually cook?" + "At your restaurant?") or a
+    /// joining word ("Define ganache." + "And provide common ratios…"). Up to `maxPieces` pieces;
+    /// fillers ("Okay.", "Um.") are never pieces.
     static func questionStart(_ heard: [Heard]) -> Int {
         var first = heard.count - 1
         while first > 0, heard.count - first < maxPieces {
@@ -291,9 +297,10 @@ enum Prompt {
         return first
     }
 
-    /// First words that continue the previous piece rather than start a new question.
+    /// First words that carry on the previous piece rather than start a new question.
     private static let continuationWords: Set<String> = [
         "at", "to", "in", "on", "for", "with", "from", "about", "of", "by", "into", "during", "than", "like",
+        "and", "or", "also", "plus", "then", "including", "especially",
     ]
 
     /// `history`: earlier utterances, oldest first; each line says how long ago it ended, so the model
