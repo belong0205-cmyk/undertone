@@ -38,6 +38,21 @@ Ice cream base: crème anglaise (pasteurised), chilled, churned (incorporates ai
 - Types: dark (bittersweet, cocoa solids ~50–70%+), milk (milk solids added), white (cocoa butter, sugar, milk — no cocoa solids), couverture (high cocoa butter — for tempering), compound (vegetable fat — no tempering needed).
 - Melt gently over a bain-marie or microwave in short bursts; no water or steam (it seizes — becomes thick and grainy); don't overheat (burns, grainy).
 - Tempering (for shine, snap and shrink from moulds): dark — melt 45–50°C, cool to 27–28°C, rewarm to 31–32°C (milk 29–30°C, white 28–29°C). Methods: tabling (on marble), seeding (add chopped tempered chocolate), microwave. Test: a smear sets glossy and snaps at room temperature in a few minutes. Bloom = grey/white streaks (fat bloom from poor tempering/heat; sugar bloom from moisture).
+### Ganache
+- Definition: a smooth emulsion of chocolate and hot cream (cream 35% fat), sometimes with butter, glucose/invert sugar, liqueur or flavourings. Used as a sauce, glaze/drip, cake filling or frosting (whipped ganache), tart filling, macaron filling and truffle centres.
+- Ratio = chocolate : cream by weight. More chocolate → firmer. Milk and white chocolate contain less cocoa solids and more sugar/milk, so they set softer and need more chocolate than dark for the same firmness. Typical starting ratios (adjust to the brand and the standard recipe):
+
+| Use | Dark (55–70%) | Milk | White |
+|---|---|---|---|
+| Sauce (pouring, served warm) | 1 : 2 | 1 : 1 | 1 : 1 to 1.5 : 1 |
+| Glaze, drip, soft filling, whipped ganache | 1 : 1 | 2 : 1 | 3 : 1 |
+| Firm: truffles, piping, set tart filling | 2 : 1 | 2.5 : 1 to 3 : 1 | 3 : 1 to 4 : 1 |
+
+  Example: dark truffles 200 g chocolate + 100 g cream; white chocolate drip 300 g chocolate + 100 g cream.
+- Method: chop chocolate finely; heat cream until just simmering (about 80–85°C, do not boil hard); pour over the chocolate, rest 1–2 minutes, then stir gently from the centre outwards until smooth and glossy (or use a stick blender, blade under the surface, to avoid air bubbles); add soft butter at about 35–40°C for extra shine and smoothness. Use warm (about 32–35°C) for glazing; cool and set for piping/truffles; chill then whip for whipped ganache.
+- Truffles: firm ganache set in the fridge, piped or scooped, rolled, then coated in cocoa powder, chopped nuts or tempered chocolate.
+- Faults: split/oily or grainy (too hot, too much fat, overheated chocolate or stirred too hard) — fix by blending in a little warm cream or milk with a stick blender; too soft (not enough chocolate) — add melted chocolate; too firm — add warm cream; seized (water got in) — chocolate can't be tempered, use it in a baked item.
+- Storage: contains cream, so cover and refrigerate (≤5°C), label and date; use within the recipe's shelf life (usually a few days to 2 weeks); bring to room temperature before use.
 
 ## Dessert sauces
 Crème anglaise, chocolate sauce, caramel/butterscotch, fruit coulis (puréed, sweetened, strained raspberry/mango), sabayon, Melba sauce (raspberry), syrups, honey, crème fraîche, Chantilly cream (whipped cream with sugar and vanilla).

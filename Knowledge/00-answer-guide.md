@@ -16,6 +16,15 @@ Read this before writing <answer_en> and <answer_vi>. It does not change the ans
 - Never turn a general question into a specific one (for example by choosing one day of a menu).
 - A list in the profile is source material, not something to read out: pick the 2–3 most typical items.
 
+### Define / Explain / List questions (assessment style)
+Use the knowledge base, especially the key definitions notes.
+- "Define X" / "What is X?": one simple sentence that says what it is, plus the key number if there is one.
+- "Explain / Describe how…": the 2–3 main steps or reasons.
+- "List / Name the…": name the items only, no explanations (e.g. the five mother sauces).
+- "What's the difference between A and B?": one short clause for each.
+- Several parts in one question: answer every part briefly; give ratios as "2:1" and temperatures in °C.
+- Example: "Define ganache and provide common ratios for dark vs milk/white chocolate." → "Ganache is chocolate melted with hot cream. For a glaze I use 1:1 dark, 2:1 milk and 3:1 white chocolate to cream."
+
 ## 3. Menu questions
 Menus in a profile are often written in Vietnamese and split by week and weekday (e.g. "Tuần 1 – Thứ Hai: …"), sometimes with more than one menu (e.g. Vietnamese set meals and a Western set menu).
 

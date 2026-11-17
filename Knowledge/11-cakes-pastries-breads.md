@@ -24,7 +24,7 @@
 - Baking: preheat oven (cakes usually 160–180°C), prepare tins (grease, line, flour), fill to about two-thirds, centre of the oven, don't open the door early (collapse).
 - Test if cooked: skewer comes out clean, springs back when lightly pressed, shrinks from the sides of the tin, golden colour. Cool in the tin ~5–10 min then on a wire rack.
 - Faults: sunken centre (underbaked, too much raising agent/sugar, door opened early, oven too cool), peaked/cracked top (oven too hot, too much flour), heavy/dense (too little raising agent, mixture curdled, overmixed after flour, under-creamed), tunnels (overmixed), dry (overbaked, too little fat/liquid), fruit sunk (batter too thin, fruit wet — toss in flour), burnt outside raw inside (oven too hot).
-- Finishes: buttercream (butter + icing sugar; Swiss/Italian meringue buttercream), glacé icing (icing sugar + water/juice), royal icing (egg white + icing sugar — hard set for decorations), fondant (rolled sugar paste), ganache (chocolate + cream — 1:1 for glazing/filling, 2:1 for truffles/firm), cream cheese frosting, glazes, piping, crumb coating, mirror glaze.
+- Finishes: buttercream (butter + icing sugar; Swiss/Italian meringue buttercream), glacé icing (icing sugar + water/juice), royal icing (egg white + icing sugar — hard set for decorations), fondant (rolled sugar paste), ganache (chocolate + cream; dark chocolate 1:1 for glazing/filling, 2:1 for truffles — milk and white ratios in the desserts notes, Ganache), cream cheese frosting, glazes, piping, crumb coating, mirror glaze.
 
 ## Pastry
 | Pastry | Ratio / method | Uses |

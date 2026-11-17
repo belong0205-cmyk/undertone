@@ -1,6 +1,6 @@
 # Answer evaluation — manual check for TESTER
 
-46 common kitchen-interview questions with an ideal answer and what must (not) happen. The ideal answer is one good
+56 common kitchen-interview and assessment questions with an ideal answer and what must (not) happen. The ideal answer is one good
 version; other wording passes if it meets every rule below.
 
 ## Setup
@@ -91,6 +91,21 @@ version; other wording passes if it meets every rule below.
 | 44 | Okay. | No answer (filler). |
 | 45 | Yes, chef. | No answer (filler). |
 | 46 | Let's get started with the interview. | "-" (a statement, no question). |
+
+## G. Define / Explain / List (assessor style)
+Answers must stay within 25 words, so they give the definition and the key numbers, not a full lesson.
+| # | Question | Ideal answer | Must / must not |
+|---|---|---|---|
+| 47 | Define ganache and provide common ratios for dark vs milk/white chocolate. | Ganache is chocolate melted with hot cream. For a glaze I use 1:1 dark, 2:1 milk and 3:1 white chocolate to cream. | Definition + ratios for all three; milk and white need more chocolate than dark. Accept truffle ratios (2:1 dark, 2.5–3:1 milk, 3–4:1 white) if the use is named. |
+| 48 | What is an emulsion? Give an example. | An emulsion is oil and water mixed into tiny drops, like mayonnaise or a vinaigrette. | Definition + example. |
+| 49 | Explain the three types of roux. | All are equal flour and butter: white roux has no colour, blond is light golden, and brown is nut brown. | Equal weights; white / blond / brown. |
+| 50 | List the five mother sauces. | Béchamel, velouté, espagnole, tomato sauce and hollandaise. | Names only, all five. |
+| 51 | How do you temper dark chocolate? | I melt it to 45–50 °C, cool it to 27–28 °C, then warm it to 31–32 °C. | Three temperatures. |
+| 52 | What is a liaison? | A liaison is egg yolks and cream added at the end to thicken a sauce or soup. I never boil it after. | No boiling. |
+| 53 | What's the difference between braising and stewing? | Braising cooks large pieces in a little liquid; stewing cooks small pieces fully covered in liquid. Both are slow. | One clause each. |
+| 54 | Name the three types of meringue. | French, Swiss and Italian meringue. | Names only. |
+| 55 | What is the difference between crème anglaise and crème pâtissière? | Crème anglaise is a thin pouring custard I never boil; crème pâtissière is thick, with flour, and must boil. | Anglaise no boil; pâtissière boiled. |
+| 56 | What does HACCP stand for? | Hazard Analysis and Critical Control Points. It's a system to control food safety hazards at key steps. | Full name correct. |
 
 ## Recording results
 For each failed item note: question #, the app's answer, which pass rule failed. Send failures about scope or invented
