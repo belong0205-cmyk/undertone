@@ -303,10 +303,21 @@ enum Prompt {
         "and", "or", "also", "plus", "then", "including", "especially",
     ]
 
+    /// The user's local date with its weekday in English, e.g. "2026-11-17 (Tuesday)": the model often
+    /// gets the weekday of a bare ISO date wrong. (The ISO format style alone would give the UTC date,
+    /// a day off in Vietnam before 7 am.)
+    static func today(_ now: Date, in timeZone: TimeZone) -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = timeZone
+        formatter.dateFormat = "yyyy-MM-dd (EEEE)"
+        return formatter.string(from: now)
+    }
+
     /// `history`: earlier utterances, oldest first; each line says how long ago it ended, so the model
     /// can tell pieces of one question from separate turns.
-    static func user(history: [Heard], utterance: String, now: Date = Date()) -> String {
-        var message = "<today>\(now.formatted(.iso8601.year().month().day()))</today>\n\n"
+    static func user(history: [Heard], utterance: String, now: Date = Date(), timeZone: TimeZone = .current) -> String {
+        var message = "<today>\(today(now, in: timeZone))</today>\n\n"
         if !history.isEmpty {
             let lines = history.map { "[\(max(0, Int(now.timeIntervalSince($0.end).rounded()))) s ago] \($0.text)" }
             message += "<recent_conversation>\n\(lines.joined(separator: "\n"))\n</recent_conversation>\n\n"

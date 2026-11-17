@@ -54,5 +54,12 @@ for verb in ["Define", "Explain", "Describe", "List", "Provide", "Name", "Tell m
 check(Prompt.system.contains("at most 45 words"), "technical answers may be longer")
 check(Prompt.system.contains("concrete numbers"), "technical answers keep the numbers")
 
+// <today> carries the local date and its weekday (the model gets weekdays of bare dates wrong).
+let tuesdayMorningInHanoi = ISO8601DateFormatter().date(from: "2026-11-16T23:30:00Z")! // 06:30 on Tue 17 Nov, UTC+7
+let hanoi = TimeZone(identifier: "Asia/Ho_Chi_Minh")!
+check(Prompt.today(tuesdayMorningInHanoi, in: hanoi) == "2026-11-17 (Tuesday)", "today is the local date with its weekday")
+check(Prompt.user(history: [], utterance: "Hi.", now: tuesdayMorningInHanoi, timeZone: hanoi)
+      .hasPrefix("<today>2026-11-17 (Tuesday)</today>"), "the user message starts with <today>")
+
 print(failures == 0 ? "ALL PASSED" : "\(failures) FAILED")
 exit(failures == 0 ? 0 : 1)
