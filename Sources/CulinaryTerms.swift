@@ -11,7 +11,9 @@ enum CulinaryTerms {
     static let background = """
         Chefs and cookery students talk about classical French techniques, knife cuts, stocks, \
         sauces and soups, meat, poultry and seafood, pastry and desserts, the kitchen brigade, \
-        food safety under the FSANZ Food Standards Code and HACCP, and work health and safety.
+        food safety under the FSANZ Food Standards Code and HACCP, and work health and safety. \
+        Pastry and chocolate work covers ganache (chocolate and cream), couverture, tempering, \
+        pâte à choux, pâte sablée, crème pâtissière.
         """
 
     /// Note for the answering model: what the transcript is and how to read recognition errors.
