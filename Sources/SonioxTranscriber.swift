@@ -20,16 +20,25 @@ final class SonioxTranscriber {
     /// speech right after it, so this can arrive after the utterance's final text.
     var onTranslation: ((UUID, String) -> Void)?
     var onFailure: ((String) -> Void)?
+    #if DEBUG
+    /// Test only: a spoken token became final (latency harness).
+    var onDebugFinalToken: (() -> Void)?
+    #endif
 
     private static let endpoint = URL(string: "wss://stt-rt.soniox.com/transcribe-websocket")!
-    nonisolated private static let chunkBytes = 3_200 // 100 ms of 16 kHz mono PCM16
+    /// Audio is sent every 20 ms. Measured against 100 ms chunks (20 sentences x 3 runs): first word
+    /// on screen p50 1440 -> 1310 ms after speech starts, utterance final p50 445 -> 385 ms after it ends.
+    nonisolated private static let chunkMs = 20
+    nonisolated private static let chunkBytes = chunkMs * 32 // 16 kHz mono PCM16: 32 bytes per ms
     /// Silent chunks sent after speech before audio pauses (2 s; endpoints arrive within that).
-    nonisolated private static let pauseAfterSilentChunks = 20
+    nonisolated private static let pauseAfterSilentChunks = 2_000 / chunkMs
     /// Audio sent ahead of the first sound when resuming after a pause (400 ms).
-    nonisolated private static let preRollBytes = 4 * chunkBytes
+    nonisolated private static let preRollBytes = 400 * 32
     /// When Soniox falls this far behind the audio sent, start a fresh stream and replay to it the
     /// audio after the last final word (see `history`), so nothing said is lost.
-    private static let maxLagMs = 6_000
+    /// (3 s rather than 6 s: on a simulated 8 s network stall, the sentence caught in it was shown
+    /// whole 1.4 s after it ended instead of 3.7 s; no false reconnects in normal runs, lag ~0.4 s.)
+    private static let maxLagMs = 3_000
     /// Audio kept for a replay: the last 30 s sent on the stream, and at most 30 s captured while
     /// reconnecting.
     nonisolated private static let replayCapBytes = 30 * 32_000
@@ -37,10 +46,11 @@ final class SonioxTranscriber {
     /// only shrinks when it gets less audio than is spoken: while this far behind, every live silence
     /// is cut to 600 ms (still long enough for an endpoint) and the lag drops at each pause.
     private static let catchUpLagMs = 1_500
-    nonisolated private static let catchUpSilentChunks = 6
+    nonisolated private static let catchUpSilentChunks = 600 / chunkMs
     /// While audio is being sent, no reply for this long means the stream stalled (measured: Soniox
     /// went silent for 18-20 s with our audio stuck unsent, then closed with 408); start a fresh one.
-    private static let stallSeconds = 6.0
+    /// Soniox replies several times a second while it gets audio, so 3 s of nothing is a stall.
+    private static let stallSeconds = 3.0
 
     private var apiKey = ""
     private var running = false
@@ -66,6 +76,7 @@ final class SonioxTranscriber {
     private var connectedAt = Date()
     private var quickFailures = 0
     private var keepAliveTimer: Timer?
+    private var lastKeepAliveAt = Date.distantPast
     private var lastMessageAt = Date()
     /// End of the last final word on the current stream (stream ms); the replay starts here.
     /// (final_audio_proc_ms ran seconds behind the words already shown, so replays repeated them.)
@@ -116,7 +127,8 @@ final class SonioxTranscriber {
         quickFailures = 0
         connect()
         // Soniox closes a stream that receives neither audio nor keepalive for 20 seconds.
-        keepAliveTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
+        // Checked every second, so a stall is caught within a second of `stallSeconds`.
+        keepAliveTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             MainActor.assumeIsolated {
                 self?.sendKeepAliveIfIdle()
                 self?.reconnectIfStalled()
@@ -207,7 +219,7 @@ final class SonioxTranscriber {
                 }
                 // Once a second, 100 ms of inaudible dither keeps Soniox ready, so speech after a long
                 // silence is transcribed as fast as mid-speech (measured: lag stays ~80 ms over 150 s).
-                if silentChunks % 10 == 0 { send(Self.dithered(chunk), on: socket) }
+                if silentChunks % (1_000 / Self.chunkMs) == 0 { send(Self.dithered(count: 100 * 32), on: socket) }
                 leadIn.append(chunk)
                 if leadIn.count > Self.preRollBytes { leadIn.removeFirst(leadIn.count - Self.preRollBytes) }
                 return
@@ -254,10 +266,10 @@ final class SonioxTranscriber {
         }
     }
 
-    /// A chunk of the same length holding inaudible noise (+-24 LSB, about -63 dBFS): never digital
-    /// zeros, which Soniox falls behind on. Smaller values would round to zero in mu-law.
-    nonisolated private static func dithered(_ chunk: Data) -> Data {
-        var out = Data(count: chunk.count)
+    /// `count` bytes of inaudible noise (+-24 LSB, about -63 dBFS): never digital zeros, which Soniox
+    /// falls behind on. Smaller values would round to zero in mu-law.
+    nonisolated private static func dithered(count: Int) -> Data {
+        var out = Data(count: count)
         out.withUnsafeMutableBytes { raw in
             let samples = raw.bindMemory(to: Int16.self)
             for i in samples.indices { samples[i] = Bool.random() ? 24 : -24 }
@@ -275,7 +287,7 @@ final class SonioxTranscriber {
             let end = min(offset + chunkBytes, audio.count)
             let chunk = audio.subdata(in: offset..<end)
             silentRun = isSilent(chunk) ? silentRun + 1 : 0
-            if silentRun <= 3 { out.append(chunk) }
+            if silentRun * chunkMs <= 300 { out.append(chunk) }
             offset = end
         }
         return out
@@ -477,7 +489,7 @@ final class SonioxTranscriber {
         lock.withLock { if self.socket === socket { self.socket = nil } }
         socket.cancel(with: .normalClosure, reason: nil)
         DebugLog.log(String(format: "soniox closed after %.0f s: %@", Date().timeIntervalSince(connectedAt),
-                            failure ?? (fellBehind ? "fell more than 6 s behind" : "finished")))
+                            failure ?? (fellBehind ? "fell more than \(Self.maxLagMs / 1000) s behind" : "finished")))
         // A stream of an earlier start must not reconnect (a second stream) or touch the new text.
         guard generation == self.generation else { return }
         disconnected(failure: failure, fatal: fatal, immediately: fellBehind, opened: opened)
@@ -550,7 +562,8 @@ final class SonioxTranscriber {
 
     private func sendKeepAliveIfIdle() {
         let socket = lock.withLock { Date().timeIntervalSince(lastSentAt) > 8 ? self.socket : nil }
-        guard let socket else { return }
+        guard let socket, Date().timeIntervalSince(lastKeepAliveAt) > 8 else { return }
+        lastKeepAliveAt = Date()
         DebugLog.log("soniox keepalive")
         socket.send(.string(#"{"type":"keepalive"}"#)) { _ in }
     }
@@ -566,6 +579,9 @@ final class SonioxTranscriber {
         for var token in tokens {
             if token.isFinal, token.translationStatus != "translation", let end = token.endMs {
                 lastFinalEndMs = max(lastFinalEndMs, end)
+                #if DEBUG
+                if !token.text.hasPrefix("<") { onDebugFinalToken?() }
+                #endif
             }
             // A new stream's first word has no leading space; it continues the utterance kept open.
             if needsSpace, !spaced, token.translationStatus != "translation", !token.text.hasPrefix("<") {
