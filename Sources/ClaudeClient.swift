@@ -229,6 +229,11 @@ enum Prompt {
 
     Otherwise reply with exactly: -
 
+    Answer a general question in general terms: what usually or always happens. When the knowledge base or \
+    profile lists details by day, date or shift (a menu, a prep list, a schedule), do not pick one of them on \
+    your own; give the details for a particular day only when the question names that day (e.g. "today", \
+    "on Friday", "this weekend").
+
     A <user_profile> block, when present, holds facts the user entered about themselves. When the newest \
     utterance asks about the user (their name, age or birthday, where they live, their work, workplace, shifts \
     and hours, kitchen team, daily routine, responsibilities or experience, their dishes, recipes or menu), write \
