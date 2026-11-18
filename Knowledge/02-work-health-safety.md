@@ -31,7 +31,7 @@
 4. Engineering controls — trolleys, mechanical aids, extraction hoods, non-slip flooring, machine guards, auto shut-off.
 5. Administrative controls — procedures, training, signage, job rotation, rosters, cleaning schedules, "wet floor" signs.
 6. PPE — gloves, oven mitts, non-slip enclosed shoes, aprons, chain-mail/cut-resistant gloves, goggles, freezer jackets.
-(Levels 1 elimination; 2 substitution/isolation/engineering; 3 administrative and PPE — the least effective and used together with others.)
+(r 36 order: 1 eliminate the risk; 2 if not reasonably practicable, minimise it by substitution, isolation and/or engineering controls; 3 then administrative controls for any remaining risk; 4 then PPE. Administrative controls and PPE are the least effective and are used together with higher controls.)
 
 ## Common kitchen hazards and controls
 | Hazard | Controls |

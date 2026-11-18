@@ -59,7 +59,7 @@ Food (protein-rich, moist), Acidity (pH above ~4.6 favours growth), Temperature 
 
 ## Allergen management
 - Know the ingredients of every dish (standard recipes, ingredient labels, allergen matrix).
-- Mandatory declarable allergens in Australia (PEAL): milk, egg, peanut, tree nuts (almond, Brazil nut, cashew, hazelnut, macadamia, pecan, pine nut, pistachio, walnut), sesame, soy, fish, crustacea, mollusc, wheat, lupin; gluten-containing cereals (wheat, rye, barley, oats — declared with the word "gluten"); added sulphites 10 mg/kg or more (Std 1.2.3, Schedule 9; in force 25 Feb 2024).
+- Mandatory declarable allergens in Australia (PEAL): milk, egg, peanut, tree nuts (almond, Brazil nut, cashew, hazelnut, macadamia, pecan, pine nut, pistachio, walnut), sesame, soy, fish, crustacea, mollusc, wheat, lupin; gluten-containing cereals — the cereal is named in bold in the ingredient list (wheat always; barley, oats or rye when they contain gluten) and the word "gluten" goes in the "Contains" summary statement; added sulphites 10 mg/kg or more (Std 1.2.3, Schedule 9; in force 25 Feb 2024).
 - Anaphylaxis = severe, life-threatening allergic reaction (swelling of throat/tongue, difficulty breathing, wheeze, collapse). Response: call 000, give adrenaline autoinjector (EpiPen) if available, lay person flat (or sit if breathing is difficult), do not let them stand or walk.
 - Preventing cross-contact: clean/sanitise equipment and benches first, use separate (often purple) boards and utensils, fresh oil for allergen-free frying, wash hands and change gloves, label and store allergen-free items separately/above, prepare allergen-free orders first, communicate with front of house; if unsure, tell the customer honestly that you cannot guarantee it.
 
