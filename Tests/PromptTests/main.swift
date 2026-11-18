@@ -8,13 +8,14 @@ func check(_ condition: Bool, _ name: String) {
     if !condition { failures += 1 }
 }
 
-/// Utterances as (text, seconds from the previous one's final to its first words).
-func joined(_ pieces: [(String, Double)]) -> String {
+/// Utterances as (text, seconds from the previous one's final to its first words), each on screen for
+/// `duration` seconds from first words to final.
+func joined(_ pieces: [(String, Double)], duration: Double = 2) -> String {
     var heard: [Prompt.Heard] = []
     var clock = Date(timeIntervalSince1970: 0)
     for (text, gap) in pieces {
         let start = clock.addingTimeInterval(gap)
-        clock = start.addingTimeInterval(2)
+        clock = start.addingTimeInterval(duration)
         heard.append(Prompt.Heard(text: text, start: start, end: clock))
     }
     return heard[Prompt.questionStart(heard)...].map(\.text).joined(separator: " ")
@@ -33,6 +34,32 @@ check(joined([("Define ganache and provide", 0), ("common ratios for dark", 1.0)
 check(joined([("Define ganache.", 0)]) == "Define ganache.", "a whole instruction is answered at once")
 check(!Prompt.isFiller("Define ganache."), "an instruction is not a filler")
 check(!Prompt.isFiller("Name three mother sauces."), "\"Name…\" is not a filler")
+
+// A long exam question that Soniox cut into ten pieces (each about 1 s, short pauses between them).
+let fishQuestion = "List three types of fish that are good for poaching, and for each one describe the texture, "
+    + "the flavor, and the main characteristics."
+let fishPieces: [(String, Double)] = [
+    ("Okay, next question.", 0),
+    ("List three types of", 3.0),
+    ("fish that are good", 0.6),       // after "of": a sentence cannot end there
+    ("for poaching,", 0.4),
+    ("and for each one", 0.8),
+    ("describe the", 0.5),
+    ("texture,", 1.2),
+    ("the flavor,", 0.3),
+    ("and the", 0.4),
+    ("main", 5.0),                     // a long hesitation, but "the" cannot end a sentence
+    ("characteristics.", 0.5),
+]
+check(joined(fishPieces, duration: 1) == fishQuestion, "a question cut into ten pieces is joined whole")
+check(joined(Array(fishPieces.prefix(4)), duration: 1) == "List three types of fish that are good for poaching,",
+      "its first pieces are joined while it is still being spoken")
+check(joined([("Tell me about the", 0), ("sauce?", 6.0)]) == "Tell me about the sauce?",
+      "a piece ending on \"the\" joins the next one even after a long pause")
+check(joined([("What pan do you cook it in?", 0), ("Explain the steps for a beurre blanc.", 6.0)])
+      == "Explain the steps for a beurre blanc.", "a question ending on \"in?\" is finished")
+let slow = (0..<12).map { ("word \($0) and", $0 == 0 ? 0.0 : 1.0) } + [("done.", 1.0)]
+check(joined(slow).hasPrefix("word 6 and"), "pieces beyond the 20 s span are left out")
 
 // Pieces seen with real Soniox (v0.5.0 probe).
 check(joined([("So, tell me, what kind of dishes—", 0), ("Do you usually cook?", 0.9), ("At your restaurant?", 2.3)])

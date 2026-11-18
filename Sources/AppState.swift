@@ -449,7 +449,7 @@ final class AppState: ObservableObject {
         }
         // A question cut by pauses arrives as several rows: answer them together on the newest row, and
         // drop the answers given to the earlier pieces (a complete question never waits for more).
-        let heard = rows[...index].filter(\.isFinal).suffix(10)
+        let heard = rows[...index].filter(\.isFinal).suffix(40) // a long question can come in many pieces
         let pieces = Array(heard).map { Prompt.Heard(text: $0.english, start: $0.startedAt, end: $0.finishedAt ?? $0.startedAt) }
         let first = Prompt.questionStart(pieces)
         for row in heard.dropFirst(first).dropLast() {
@@ -462,7 +462,7 @@ final class AppState: ObservableObject {
             log("claude #\(DebugLog.tag(row.id)) replaced: joins #\(DebugLog.tag(id))")
         }
         let question = pieces[first...].map(\.text).joined(separator: " ")
-        let message = Prompt.user(history: Array(pieces[..<first]), utterance: question)
+        let message = Prompt.user(history: Array(pieces[..<first].suffix(10)), utterance: question)
         let profile = activeProfile?.promptBlock
         let client = ClaudeClient(apiKey: trimmedKey)
         lastAPIUse = Date()

@@ -275,27 +275,41 @@ enum Prompt {
     /// pause. Measured with real Soniox: a 2.2 s hesitation shows as 3.4 s here (the next words appear
     /// about 1 s after they are spoken); separate questions 4.5 s apart showed as 5.6 s.
     static let pieceGap: TimeInterval = 4
-    static let maxPieces = 4
+    /// All pieces of one question lie within this span (first words of the first to final of the last):
+    /// a long question can be cut into ten or more pieces, so the limit is time, not a piece count.
+    static let questionSpan: TimeInterval = 20
 
     /// Index of the first piece of the question that ends with the last utterance in `heard`. An earlier
-    /// utterance joins it when it ended less than `pieceGap` before the next one began and either was left
-    /// unfinished (Soniox ends a piece cut by a pause with "—", a comma or no punctuation) or the next one
-    /// carries it on: it starts with a preposition ("Do you usually cook?" + "At your restaurant?") or a
-    /// joining word ("Define ganache." + "And provide common ratios…"). Up to `maxPieces` pieces;
-    /// fillers ("Okay.", "Um.") are never pieces.
+    /// utterance joins it, while the whole question stays within `questionSpan`, when
+    /// - it ends on a word that cannot end a sentence ("…types of", "…and the"), at any gap, or
+    /// - it ended less than `pieceGap` before the next one began and either was left unfinished (Soniox
+    ///   ends a piece cut by a pause with "—", a comma or no punctuation) or the next one carries it on:
+    ///   it starts with a preposition ("Do you usually cook?" + "At your restaurant?") or a joining word
+    ///   ("Define ganache." + "And provide common ratios…").
+    /// Fillers ("Okay.", "Um.") are never pieces.
     static func questionStart(_ heard: [Heard]) -> Int {
+        guard let last = heard.last else { return 0 }
         var first = heard.count - 1
-        while first > 0, heard.count - first < maxPieces {
-            let previous = heard[first - 1].text.trimmingCharacters(in: .whitespacesAndNewlines)
-            let next = heard[first].text.lowercased().split { !$0.isLetter }.first.map(String.init) ?? ""
-            let unfinished = previous.last.map { !".?!".contains($0) } ?? false
-            guard heard[first].start.timeIntervalSince(heard[first - 1].end) < pieceGap,
-                  unfinished || continuationWords.contains(next), !isFiller(previous)
-            else { break }
+        while first > 0 {
+            let previous = heard[first - 1]
+            let text = previous.text.trimmingCharacters(in: .whitespacesAndNewlines)
+            guard last.end.timeIntervalSince(previous.start) <= questionSpan, !isFiller(text) else { break }
+            let lastWord = text.lowercased().split { !$0.isLetter }.last.map(String.init) ?? ""
+            let nextWord = heard[first].text.lowercased().split { !$0.isLetter }.first.map(String.init) ?? ""
+            let dangling = danglingWords.contains(lastWord) && !text.hasSuffix("?") && !text.hasSuffix("!")
+            let unfinished = text.last.map { !".?!".contains($0) } ?? false
+            let close = heard[first].start.timeIntervalSince(previous.end) < pieceGap
+            guard dangling || (close && (unfinished || continuationWords.contains(nextWord))) else { break }
             first -= 1
         }
         return first
     }
+
+    /// Last words after which a sentence must go on.
+    private static let danglingWords: Set<String> = [
+        "and", "or", "but", "of", "in", "on", "at", "to", "with", "for", "from", "by", "about", "into", "as",
+        "than", "between", "the", "a", "an", "your", "my", "our", "their", "its", "such",
+    ]
 
     /// First words that carry on the previous piece rather than start a new question.
     private static let continuationWords: Set<String> = [
