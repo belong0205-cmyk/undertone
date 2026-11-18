@@ -13,6 +13,37 @@
 - Other: sea urchin, sea cucumber, caviar/roe.
 - Market forms: whole (round), gilled and gutted, dressed (scaled, gutted, head/fins removed), fillets, cutlets/steaks (cross-cut through the backbone), darnes (cutlets of round fish), tronçons (cutlets of flat fish on the bone), goujons (finger strips), paupiettes (rolled fillets), suprêmes (portion of fillet cut on the slant), butterfly, portions, smoked, salted, canned, frozen (IQF = individually quick frozen).
 
+## Common Australian species — texture, flavour, best methods
+| Fish | Notes |
+|---|---|
+| Barramundi | white, large moist flakes, mild buttery; pan-fry skin-on (crispy skin), grill, steam, bake |
+| Snapper | white, medium-firm, sweet; bake or steam whole, pan-fry or grill fillets |
+| Flathead | white, firm flakes, sweet, low oil; battered (fish and chips), crumbed, pan-fried |
+| King George whiting | fine delicate flakes, sweet; pan-fry, crumb or batter, cook fast |
+| John Dory | firm, fine white flesh, delicate sweet; thin fillets — pan-fry, poach, roast |
+| Flounder (flat fish) | soft, delicate; pan-fry whole (meunière), grill, bake |
+| Blue-eye trevalla, ling | firm, thick white flakes, mild; hold their shape — roast, pan-fry, curries, stews, fish and chips |
+| Murray cod (farmed) | white, rich, firm; pan-fry, roast |
+| Atlantic salmon, ocean trout | oily, orange-pink, rich; sashimi, pan-fry skin-on to medium, bake, cure (gravlax), smoke |
+| Yellowtail kingfish | medium-oily, firm, clean taste; sashimi, ceviche, grill, pan-fry — don't overcook |
+| Tuna | oily, dark red, meaty; sashimi or seared rare; dry if overcooked; keep cold (scombroid) |
+| Mackerel, sardines, mullet | oily, strong flavour; grill, barbecue, bake, smoke; sardines butterflied; scombroid risk; large Spanish mackerel can carry ciguatera |
+
+| Shellfish | Notes |
+|---|---|
+| Prawns (king, tiger, banana, school) | sweet, firm when cooked; devein; grill, stir-fry, poach (cocktail), tempura; 2–3 min until pink and C-shaped |
+| Moreton Bay and Balmain bugs | sweet, rich tail meat like lobster; split and grill, or poach |
+| Rock lobster (crayfish) | firm, sweet, rich, expensive; chill to kill humanely; grill split, poach, Thermidor, mornay |
+| Mud crab | rich, sweet, meaty claws; steam or boil, chilli crab, salt and pepper |
+| Blue swimmer crab | delicate sweet meat; steam or boil, picked meat for pasta, crab cakes, salads |
+| Oysters | Sydney rock: smaller, creamy, strong mineral taste; Pacific: bigger, milder, salty; alive, shuck to order, serve natural on ice, Kilpatrick or mornay |
+| Mussels | sweet, tender; scrub and debeard, steam 4–6 min until open (moules marinières); discard any open before or closed after cooking |
+| Scallops | sweet, delicate; remove the side muscle; sear 30–60 s each side, ceviche, sashimi |
+| Pipis, clams (vongole) | sweet, salty; purge sand in salted water; steam with garlic, chilli and wine; pasta vongole, XO pipis |
+| Squid (calamari), cuttlefish | score and cook very fast (under 2 min: salt and pepper squid, grill) or braise slowly (30+ min); in between = rubbery |
+| Octopus | tough raw; blanch, then simmer or braise 45–90 min until tender, then char-grill |
+| Abalone | very firm, expensive; tenderise, slice thin and cook seconds, or braise long |
+
 ## Freshness and quality checks
 | Fin fish fresh | Not fresh |
 |---|---|

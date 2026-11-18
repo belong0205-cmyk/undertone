@@ -1,6 +1,6 @@
 # Answer evaluation — manual check for TESTER
 
-56 common kitchen-interview and assessment questions with an ideal answer and what must (not) happen. The ideal answer is one good
+63 common kitchen-interview and assessment questions (including follow-ups) with an ideal answer and what must (not) happen. The ideal answer is one good
 version; other wording passes if it meets every rule below.
 
 ## Setup
@@ -17,7 +17,7 @@ version; other wording passes if it meets every rule below.
    at most 2–3 examples), a specific question gets exactly that detail.
 2. No invented facts: no day, date, week, time, number, price or name that was not asked for or is not in the profile /
    knowledge base. Missing personal facts use a placeholder in square brackets.
-3. At most 25 words in 1–2 sentences; spoken as the user ("I", "my", "we"); never "You could say…".
+3. At most 25 words in 1–2 sentences (a follow-up in section H: 3–6 short sentences); spoken as the user ("I", "my", "we"); never "You could say…".
 4. Simple B1 English; Vietnamese dishes get simple English names.
 5. Menu and dish answers name European dishes first; Vietnamese dishes come after, or only when asked (user preference).
 6. The Vietnamese answer says the same thing in the first person ("tôi").
@@ -107,6 +107,21 @@ Answers must stay within 25 words, so they give the definition and the key numbe
 | 54 | Name the three types of meringue. | French, Swiss and Italian meringue. | Names only. |
 | 55 | What is the difference between crème anglaise and crème pâtissière? | Crème anglaise is a thin pouring custard I never boil; crème pâtissière is thick, with flour, and must boil. | Anglaise no boil; pâtissière boiled. |
 | 56 | What does HACCP stand for? | Hazard Analysis and Critical Control Points. It's a system to control food safety hazards at key steps. | Full name correct. |
+
+## H. Follow-up — more detail (within about 10 s)
+Ask the first question, wait for its short answer, then ask the follow-up within 10 s, e.g.
+`say -v Karen "What is a roux?"; sleep 6; say -v Karen "Give me an example."`. The first answer stays short. The follow-up
+answer has 3–6 short B1 sentences in the first person, stays on the same topic, adds new facts (numbers, steps, examples)
+and does not repeat the first answer.
+| # | First question → short answer | Follow-up | Ideal detailed answer | Must / must not |
+|---|---|---|---|---|
+| 57 | What's the difference between fish and shellfish? → Fish have fins and a backbone; shellfish have a shell, like prawns, crabs, oysters and mussels. | Can you explain more? | Fish can be round, like snapper and barramundi, or flat, like flounder. Some are white and mild, others are oily, like salmon and tuna. Shellfish are crustaceans, like prawns and crabs, or molluscs, like oysters, mussels and squid. Fresh fish has bright eyes, red gills and firm flesh. I keep all seafood on ice at 0–5 °C and use it in one or two days. | Types of fish and shellfish + a freshness or storage fact with numbers. |
+| 58 | What temperature is your fridge? → I keep it at 5 °C or below. | Why? | Bacteria grow fast between 5 and 60 °C, so cold food must stay at 5 °C or below. Some, like Listeria, still grow slowly in the fridge, so I also check use-by dates. I check and record the fridge temperature every day. | Gives the reason, not the number again. |
+| 59 | What is a roux? → Equal weights of butter and flour cooked together to thicken sauces. | Give me an example. | For béchamel I melt 50 g butter, add 50 g flour and cook it for one or two minutes without colour. Then I slowly whisk in 500 mL warm milk and simmer it for about 20 minutes. For a Mornay sauce I add cheese at the end. | A concrete example with quantities. |
+| 60 | How do you cool a big pot of soup? → I use shallow trays and an ice bath: 60 to 21 °C within two hours, then down to 5 °C within four more. | Tell me more. | First I split the soup into shallow trays and put them in an ice bath or a blast chiller, and I stir it. I check the temperature with a probe and write down the times. When it is cold, I cover it, label it with the date and put it in the fridge. If it doesn't reach 21 °C in two hours, I reheat it or throw it out. | Steps, recording and the corrective action; not only the 2h/4h numbers again. |
+| 61 | Define ganache and provide common ratios for dark vs milk/white chocolate. → Ganache is chocolate melted with hot cream. For a glaze I use 1:1 dark, 2:1 milk and 3:1 white chocolate to cream. | How do you make it? | I chop the chocolate finely and heat the cream until it just simmers, about 80 °C. I pour the cream over the chocolate, wait one or two minutes, then stir from the centre until it's smooth and shiny. For a glaze I use it warm, about 32 °C. For truffles I let it set in the fridge, then roll it. | Method with temperatures. |
+| 62 | What do you have on your menu? → We cook a European set menu, like lasagne and roast chicken, and Vietnamese set meals too. It changes every day. | Tell me more. | Our European set menu has a soup, a main, a side, a salad and a dessert, for example pumpkin soup with beef lasagne, or fish and chips. Our Vietnamese set meals come with rice, a braised dish, a soup, vegetables and fruit. There is always a vegetarian dish too. Both menus change every day. | European first; facts from the profile only; no day named. |
+| 63 | What's the difference between fish and shellfish? → (short answer as in 57) | (within 5 s) What's your name? | My name is Minh Le. | A new, different question gets the short answer, not a detailed one. |
 
 ## Recording results
 For each failed item note: question #, the app's answer, which pass rule failed. Send failures about scope or invented
