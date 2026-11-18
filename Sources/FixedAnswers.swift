@@ -12,10 +12,9 @@ enum FixedAnswers {
         var vietnamese = ""
     }
 
-    /// Similarity needed to match: 1 is word for word; 0.8 allows about one misheard word in five.
-    static let threshold = 0.8
-    /// Words the utterance may have around the question ("Okay, next question: …").
-    static let extraWords = 5
+    /// Words with a meaning of their own the utterance may have around the question ("Okay, next
+    /// question: …", "…in a kitchen").
+    static let extraWords = 4
 
     static let entries: [Entry] = {
         guard let url = Bundle.main.resourceURL?.appendingPathComponent("Knowledge/\(fileName)"),
@@ -67,21 +66,66 @@ enum FixedAnswers {
         return entries
     }
 
-    /// The entry whose question (or another wording of it) the utterance asks, allowing a few misheard
-    /// words and a few words around it, or nil.
+    /// The entry whose question (or another wording of it) the utterance asks, or nil. Strict, because a
+    /// wrong fixed answer is worse than a normal one:
+    /// - every content word of that wording must be heard (any form: "clean", "cleaning"); only small
+    ///   words ("the", "a", "what's") may differ, so "…cleaning and disinfecting?" does not match;
+    /// - between them, only the wording's own words or small words;
+    /// - at most `extraWords` other words around them, none asking something more after it ("…and why…?");
+    /// - any other sentence in the utterance asks nothing ("Okay, next question." is fine, "And why is it
+    ///   important?" is not): then Claude answers the whole of it.
     static func match(_ utterance: String, in entries: [Entry] = entries) -> Entry? {
-        let heard = words(utterance)
-        guard !heard.isEmpty else { return nil }
-        var best: (entry: Entry, score: Double)?
-        for entry in entries {
-            for question in entry.questions {
-                let asked = words(question)
-                guard !asked.isEmpty, heard.count <= asked.count + extraWords else { continue }
-                let score = 1 - Double(distance(asked, within: heard)) / Double(asked.count)
-                if score >= threshold, score > best?.score ?? 0 { best = (entry, score) }
+        let sentences = utterance.split { ".?!".contains($0) }.map(String.init)
+            .filter { !words($0).isEmpty }
+        let asksMore = utterance.split(separator: "?").count > 1 // a second question mark
+        for (index, sentence) in sentences.enumerated() {
+            let others = sentences.enumerated().filter { $0.offset != index }.map(\.element)
+            guard !asksMore, others.allSatisfy({ words($0).allSatisfy { !askingWords.contains($0) } }) else { continue }
+            for entry in entries where entry.questions.contains(where: { asks(sentence, $0) }) {
+                return entry
             }
         }
-        return best?.entry
+        return nil
+    }
+
+    /// The sentence asks `question`, by the rules of `match`.
+    private static func asks(_ sentence: String, _ question: String) -> Bool {
+        let heard = words(sentence)
+        let asked = words(question).map(stem)
+        let required = Set(words(question).filter { !smallWords.contains($0) }.map(stem))
+        let stems = heard.map(stem)
+        guard !required.isEmpty, required.isSubset(of: Set(stems)),
+              let first = stems.firstIndex(where: required.contains),
+              let last = stems.lastIndex(where: required.contains)
+        else { return false }
+        let inside = heard[first...last].allSatisfy { asked.contains(stem($0)) || smallWords.contains($0) }
+        let before = heard[..<first], after = heard[(last + 1)...]
+        let extra = (before + after).filter { !asked.contains(stem($0)) && !smallWords.contains($0) }
+        return inside && extra.count <= extraWords
+            && before.allSatisfy { !["why", "how", "when", "where", "which", "who"].contains($0) }
+            && after.allSatisfy { !askingWords.contains($0) }
+    }
+
+    /// Words that may differ or be misheard: they carry no meaning of their own here.
+    private static let smallWords: Set<String> = [
+        "the", "a", "an", "what", "is", "are", "was", "be", "between", "and", "or", "of", "to", "in", "on", "at",
+        "for", "with", "me", "you", "your", "we", "us", "i", "can", "could", "would", "please", "okay", "ok", "so",
+        "now", "then", "just", "tell", "explain", "it", "this", "that", "do", "does",
+    ]
+
+    /// Words that ask something: after the question, or in another sentence, they mean a further question.
+    private static let askingWords: Set<String> = [
+        "why", "how", "what", "when", "where", "which", "who", "whose", "explain", "describe", "list", "name",
+        "give", "provide", "tell", "compare", "also", "example", "should",
+    ]
+
+    /// One form per word: "cleaning", "cleans", "clean" → "clean"; "sanitiser", "sanitise" → "sanitis".
+    private static func stem(_ word: String) -> String {
+        guard word.count > 4 else { return word }
+        for suffix in ["ings", "ing", "ers", "er", "es", "ed", "s", "e"] where word.hasSuffix(suffix) {
+            return String(word.dropLast(suffix.count))
+        }
+        return word
     }
 
     /// Lowercased words without punctuation, in one spelling: "What's" → "what is", "sanitizing" →
@@ -104,20 +148,5 @@ enum FixedAnswers {
                 }
                 return [word]
             }
-    }
-
-    /// Fewest word edits that turn `question` into some run of words inside `utterance` (words before
-    /// and after that run are free). `utterance` is not empty.
-    private static func distance(_ question: [String], within utterance: [String]) -> Int {
-        var previous = [Int](repeating: 0, count: utterance.count + 1) // the run may start anywhere
-        for i in 1...question.count {
-            var row = [Int](repeating: i, count: utterance.count + 1)
-            for j in 1...utterance.count {
-                let substitution = previous[j - 1] + (question[i - 1] == utterance[j - 1] ? 0 : 1)
-                row[j] = min(substitution, previous[j] + 1, row[j - 1] + 1)
-            }
-            previous = row
-        }
-        return previous.min() ?? question.count // and end anywhere
     }
 }

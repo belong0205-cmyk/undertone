@@ -176,6 +176,30 @@ for heard in ["How do you sanitise a chopping board?",
               "Why do we clean before we sanitise? Tell me about the chemicals you use and how you store them safely."] {
     check(FixedAnswers.match(heard, in: fixed) == nil, "no fixed answer for: \(heard)")
 }
+// TESTER's 17 cases (v0.5.6 block): every content word required, no further question.
+let testerCases: [(String, Bool)] = [
+    ("What is the difference between cleaning and sanitising?", true),
+    ("What's the difference between cleaning and sanitizing?", true),
+    ("Difference between cleaning and sanitising.", true),
+    ("Explain cleaning versus sanitising.", true),
+    ("Can you explain the difference between cleaning and sanitising?", true),
+    ("What is the difference between cleaning and sanitising in a kitchen?", true),
+    ("Okay, next question. What is the difference between cleaning and sanitising?", true),
+    ("What is the difference between clean and sanitise?", true),
+    ("What is the difference between cleaning and disinfecting?", false),
+    ("What is the difference between cleaning and sterilising?", false),
+    ("What is the difference between washing and sanitising?", false),
+    ("What is the difference between cleaning and sanitising? And why is it important?", false),
+    ("What is the difference between cleaning and sanitising and when do you do each?", false),
+    ("How do you sanitise a chopping board?", false),
+    ("What is the difference between a cook and a chef?", false),
+    ("Clean and sanitise the boards after service.", false),
+    ("Why is cleaning important before sanitising?", false),
+]
+for (heard, matches) in testerCases {
+    check((FixedAnswers.match(heard, in: fixed) != nil) == matches,
+          (matches ? "fixed answer for: " : "no fixed answer for: ") + heard)
+}
 check(FixedAnswers.words("What’s sanitizing vs cleaning?") == ["what", "is", "sanitising", "versus", "cleaning"],
       "words are normalised")
 

@@ -443,7 +443,7 @@ final class AppState: ObservableObject {
     }
 
     private func process(_ id: UUID) {
-        guard hasAPIKey, let index = rows.firstIndex(where: { $0.id == id }) else { return }
+        guard let index = rows.firstIndex(where: { $0.id == id }) else { return }
         if Prompt.isFiller(rows[index].english) {
             log("filler #\(DebugLog.tag(id)), no Claude call")
             return
@@ -478,6 +478,7 @@ final class AppState: ObservableObject {
             log("fixed answer #\(DebugLog.tag(id)), no Claude call")
             return
         }
+        guard hasAPIKey else { return } // fixed answers above need no key
         let message = Prompt.user(history: Array(pieces[..<first].suffix(10)), utterance: question, previous: previous)
         let profile = activeProfile?.promptBlock
         let client = ClaudeClient(apiKey: trimmedKey)
