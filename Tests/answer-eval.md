@@ -1,6 +1,6 @@
 # Answer evaluation — manual check for TESTER
 
-63 common kitchen-interview and assessment questions (including follow-ups) with an ideal answer and what must (not) happen. The ideal answer is one good
+76 common kitchen-interview and assessment questions (including follow-ups and Australian food safety and WHS) with an ideal answer and what must (not) happen. The ideal answer is one good
 version; other wording passes if it meets every rule below.
 
 ## Setup
@@ -69,7 +69,7 @@ version; other wording passes if it meets every rule below.
 | 29 | What is the temperature danger zone? | It's between 5 and 60 °C, so I keep cold food below 5 and hot food above 60. | 5–60 °C. |
 | 30 | How do you cool down a big pot of soup? | I use shallow trays and an ice bath: 60 to 21 °C within two hours, then down to 5 °C within four more. | 2h/4h rule. |
 | 31 | What core temperature do you cook chicken to? | I cook chicken to at least 75 °C in the thickest part. | 75 °C. |
-| 32 | What's the difference between cleaning and sanitising? | Cleaning removes dirt and grease, and sanitising kills bacteria. I always clean first, then sanitise. | Order: clean → sanitise. |
+| 32 | What's the difference between cleaning and sanitising? | Cleaning removes food, dirt and grease. Sanitising then reduces germs to a safe level with heat or chemicals. I always clean first. | Clean → sanitise; must not say sanitising kills all bacteria (FSANZ 3.2.2 cl 20). |
 | 33 | What is FIFO? | FIFO means first in, first out: we use older stock first and put new stock at the back. | — |
 | 34 | What are the five mother sauces? | They are béchamel, velouté, espagnole, tomato sauce and hollandaise. | All five. |
 | 35 | What is a brunoise? | Brunoise is a very small dice, about 2 mm, cut from julienne. | ~2 mm. |
@@ -122,6 +122,24 @@ and does not repeat the first answer.
 | 61 | Define ganache and provide common ratios for dark vs milk/white chocolate. → Ganache is chocolate melted with hot cream. For a glaze I use 1:1 dark, 2:1 milk and 3:1 white chocolate to cream. | How do you make it? | I chop the chocolate finely and heat the cream until it just simmers, about 80 °C. I pour the cream over the chocolate, wait one or two minutes, then stir from the centre until it's smooth and shiny. For a glaze I use it warm, about 32 °C. For truffles I let it set in the fridge, then roll it. | Method with temperatures. |
 | 62 | What do you have on your menu? → We cook a European set menu, like lasagne and roast chicken, and Vietnamese set meals too. It changes every day. | Tell me more. | Our European set menu has a soup, a main, a side, a salad and a dessert, for example pumpkin soup with beef lasagne, or fish and chips. Our Vietnamese set meals come with rice, a braised dish, a soup, vegetables and fruit. There is always a vegetarian dish too. Both menus change every day. | European first; facts from the profile only; no day named. |
 | 63 | What's the difference between fish and shellfish? → (short answer as in 57) | (within 5 s) What's your name? | My name is Minh Le. | A new, different question gets the short answer, not a detailed one. |
+
+## I. Australian food safety and WHS (answers must match the source)
+Short answers (1–2 sentences, B1, "I"). A Code requirement must not be swapped for a guidance figure, or the other way round.
+| # | Question | Ideal answer | Must / must not | Source |
+|---|---|---|---|---|
+| 64 | What temperature must potentially hazardous food be when you receive it? | Cold food must be 5 °C or below and hot food 60 °C or above. Frozen food must arrive frozen. | Both limits + frozen. | FSANZ 3.2.2 cl 5(3)–(4) |
+| 65 | How fast must you cool cooked food? | From 60 to 21 °C within two hours, then down to 5 °C within a further four hours. | Both stages. | 3.2.2 cl 7(3) |
+| 66 | What temperature do you reheat food to for hot holding? | I reheat it quickly to at least 60 °C, and I aim for 75 °C in the centre. I never reheat in a bain-marie. | 60 °C is the Code limit; 75 °C only as a recommendation. | 3.2.2 cl 7(4); FSANZ guidance |
+| 67 | What does sanitise mean? | Sanitising means using heat or chemicals on a clean surface to reduce germs to a safe level. | Must NOT say it kills all germs. | 3.2.2 cl 20(2) |
+| 68 | How can you sanitise utensils? | With hot water at 77 °C for 30 seconds, a chemical sanitiser used as the label says, or a dishwasher's sanitising cycle. | Heat, chemical, or both. | FSANZ cleaning and sanitising; Safe Food Australia App. 6 |
+| 69 | What must you do if you have diarrhoea? | I tell my supervisor and I don't handle food. I stay away from food until 48 hours after the symptoms stop. | Report + no food handling; 48 h as health advice. | 3.2.2 cl 14; state health guidance |
+| 70 | When must you wash your hands? | Before I handle food, after the toilet, after raw food before ready-to-eat food, and after coughing, sneezing, eating or touching my hair. | At least 3 of these times. | 3.2.2 cl 15(2)–(3) |
+| 71 | What does a food safety supervisor need? | A food safety supervisor certificate from the last five years, the authority to direct staff, and to be reasonably available. | 5 years. | 3.2.2A cl 2, 11 |
+| 72 | How long do you keep food safety records? | We're a category one business, so we keep them for at least three months. | 3 months. | 3.2.2A cl 12(2) |
+| 73 | Which allergens must be declared in Australia? | Milk, egg, peanut, tree nuts, sesame, soy, fish, crustacea, molluscs, wheat, lupin, gluten cereals and sulphites. | Lupin and sesame included; no "mustard" or "celery" (EU list). | FSANZ PEAL, Std 1.2.3 and Schedule 9 |
+| 74 | What is the hierarchy of control? | Eliminate the hazard, substitute it, isolate it, use engineering controls, then administrative controls, and PPE last. | Correct order. | Model WHS Regulations r 36 |
+| 75 | What is an SDS? | A Safety Data Sheet. It tells me a chemical's hazards, safe use, storage, PPE and first aid. | — | Model WHS Regulations; Safe Work Australia |
+| 76 | How do you lift a heavy box of stock safely? | I check the weight, use a trolley or get help if it's heavy, bend my knees and keep the box close to my body. | Assess first, aids or help. | Safe Work Australia Code of Practice: Hazardous manual tasks |
 
 ## Recording results
 For each failed item note: question #, the app's answer, which pass rule failed. Send failures about scope or invented

@@ -10,7 +10,7 @@
 | Commis chef | junior/apprentice cook working under a chef de partie |
 | Kitchen hand / kitchen porter / dishwasher (plongeur) | cleaning, dishwashing, basic prep |
 | Aboyeur / expediter | calls orders at the pass, coordinates timing between kitchen and front of house |
-Section (partie) names: saucier (sauces, sautéed dishes — often most senior CDP), poissonnier (fish), rôtisseur (roasts, grills, fried), grillardin (grill), friturier (fryer), entremetier (vegetables, soups, starches, eggs), potager (soups), légumier (vegetables), garde manger (larder — cold food, salads, charcuterie, butchery, cold sauces), boucher (butcher), pâtissier (pastry, desserts, breads), boulanger (baker), tournant/roundsman (relief cook working all sections), communard (staff meals).
+Sections (parties): saucier (sauces, sautéed dishes), poissonnier (fish), rôtisseur (roasts, grills), entremetier (vegetables, soups, eggs, starches), garde manger (larder: cold food, salads, charcuterie, butchery), pâtissier (pastry, desserts, bread), tournant (relief cook for all sections).
 Modern Australian kitchens are smaller and combine roles.
 
 ## Workflow and organisation
@@ -20,7 +20,7 @@ Modern Australian kitchens are smaller and combine roles.
 - Reading dockets/orders: number of covers, table number, dishes, modifications and allergies; courses fired ("away", "fire table 5 mains") on the chef's call; "check on" (new order), "service/pick-up" (ready at the pass), "86" (item is unavailable/finished), "all day" (total number of an item across orders), "on the fly" (needed immediately), "behind", "heard/yes chef" (acknowledgement).
 - Service periods: breakfast, lunch, dinner, functions; peak periods require teamwork and communication.
 - Menu types: à la carte (individually priced dishes cooked to order), table d'hôte (set menu with a fixed price and limited choice), set menu / banquet, degustation/tasting (many small courses), buffet, cyclical menu (repeats over a cycle — hospitals, schools), static/fixed menu, specials board, function/event menus, children's menu, room service.
-- Menu sequence (classical): hors d'oeuvre, soup, fish, entrée, main/relevé, roast, vegetables, salad, dessert, savoury, cheese, coffee. Modern: entrée (starter), main, dessert.
+- Menu sequence: classical menus had many courses (hors d'oeuvre, soup, fish, entrée, main, roast, salad, dessert, savoury, cheese, coffee); modern menus are entrée (starter), main, dessert.
 - Types of food service: plated (à la carte), silver service, family/share style, buffet/self-service, cafeteria, banquet/function, room service, takeaway/delivery.
 
 ## Working as a team and communicating
@@ -43,7 +43,7 @@ Modern Australian kitchens are smaller and combine roles.
 - Source local, seasonal, ethical produce; reduce packaging.
 
 ## Professional development and industry knowledge
-- Keep up to date: trade magazines, websites, industry associations (e.g. Australian Culinary Federation), food trends (plant-based, native Australian ingredients — wattleseed, finger lime, lemon myrtle, kangaroo, Davidson plum, quandong, saltbush, bush tomato, macadamia), competitions, short courses, mentoring, social media from reputable chefs.
+- Keep up to date: trade media, industry associations (e.g. Australian Culinary Federation), short courses, mentoring, food trends such as plant-based food and native Australian ingredients (wattleseed, finger lime, lemon myrtle, kangaroo, Davidson plum, saltbush, macadamia).
 - Career pathway: apprentice/commis → chef de partie → sous chef → head/executive chef; further study (Certificate IV in Kitchen Management SIT40521, Diploma of Hospitality Management).
 - Employment conditions: Fair Work Act, National Employment Standards, Restaurant Industry Award 2020 / Hospitality Industry (General) Award 2020 (rates, penalty rates, breaks, overtime), superannuation, contracts, EEO and anti-discrimination, WHS responsibilities.
 - Self-assessment: seek feedback from supervisors, identify skill gaps, set goals, keep a logbook of skills and service periods.

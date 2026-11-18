@@ -30,7 +30,7 @@ Balance of colour, texture, flavour, cooking methods and ingredients across the 
 
 ## Receiving stock (SITXINV006)
 1. Check delivery against the purchase order and delivery docket/invoice: product, quantity, size/weight, brand, price.
-2. Check quality: temperature (chilled ≤5°C, frozen hard ≤ −15°C, hot ≥60°C) using a probe (between packs, not piercing them), use-by/best-before dates, packaging intact (no dents, swelling, tears, leaks, broken vacuum seals), signs of pests, freshness (smell, colour, texture), correct labelling, delivery vehicle clean and refrigerated.
+2. Check quality: temperature (PHF 5°C or below or 60°C or above; frozen food frozen — 3.2.2 cl 5(3)–(4)) using a probe (between packs, not piercing them), use-by/best-before dates, packaging intact (no dents, swelling, tears, leaks, broken vacuum seals), signs of pests, freshness (smell, colour, texture), correct labelling, delivery vehicle clean and refrigerated.
 3. Reject or record non-conforming items (wrong, damaged, out of temperature, short-dated) — notify the supplier, request a credit note, record on the docket and in the goods-received log, inform the supervisor.
 4. Sign the delivery docket only when satisfied; record temperatures (Std 3.2.2A record).
 5. Store immediately — frozen first, then chilled, then dry goods.

@@ -48,21 +48,21 @@ middle of the range is the safe answer, and "follow workplace procedures / the s
 
 ## Numbers most often asked (Australia)
 ### Temperature control
-- Temperature danger zone: 5°C to 60°C (bacteria multiply fastest around 37°C).
-- Cold food: keep at 5°C or below (cool room / fridge ideally 1–4°C). Frozen storage: −18°C or below. Frozen deliveries must arrive hard frozen (commonly accepted at −15°C or colder).
-- Hot food: keep at 60°C or above (hot-holding, bain-marie, delivery).
-- Cooling cooked potentially hazardous food: from 60°C to 21°C within 2 hours, then from 21°C to 5°C within a further 4 hours (6 hours total).
+- Temperature danger zone: 5°C to 60°C (bacteria multiply fastest around 37°C). The Code's "temperature control" = 5°C or below, or 60°C or above (FSANZ 3.2.2 cl 1).
+- Cold food: 5°C or below (cool room / fridge ideally 1–4°C) when receiving, storing and displaying PHF (3.2.2 cl 5(3), 6(2), 8(5)). Frozen food must be received frozen and stay frozen (cl 5(4), 6(2)(b)); −18°C or below is the usual freezer setting (guidance, not a Code figure).
+- Hot food: 60°C or above when receiving, hot-holding, displaying and transporting (cl 5(3), 8(5), 10).
+- Cooling cooked potentially hazardous food: from 60°C to 21°C within 2 hours, then from 21°C to 5°C within a further 4 hours (6 hours total) (3.2.2 cl 7(3)).
 - 2-hour/4-hour rule for ready-to-eat potentially hazardous food that has been between 5°C and 60°C:
-  under 2 hours total → use or refrigerate; 2 to 4 hours → use immediately (do not put back in the fridge); over 4 hours → throw out.
-- Cook to a core temperature of 75°C or above: poultry, minced meat, sausages, rolled/stuffed meats, reheated leftovers and dishes containing egg/meat mixtures.
-- Reheat cooked-and-cooled food rapidly (within 2 hours, best practice to 75°C core), then hot-hold at 60°C or above. Reheat only once.
-- Thermometer: probe accurate to ±1°C (Standard 3.2.2). Check calibration in ice slurry (0°C) and boiling water (100°C at sea level). Clean and sanitise the probe between foods.
+  under 2 hours total → use or refrigerate; 2 to 4 hours → use immediately (do not put back in the fridge); over 4 hours → throw out. (Safe Food Australia, Appendix 2 — guidance on using time as a control.)
+- Cook poultry, minced meat, sausages and rolled/stuffed meats to 75°C or above in the centre (FSANZ guidance). The Code requires a process step that reduces pathogens to safe levels (3.2.2 cl 7(1)(b)(ii)).
+- Reheating cooked and cooled PHF to hold it hot: heat it rapidly to 60°C or above (3.2.2 cl 7(4)); many councils recommend 75°C in the centre. Never reheat in a bain-marie; reheat only once.
+- Thermometer: probe accurate to ±1°C (3.2.2 cl 22). Check calibration in ice slurry (0°C) and boiling water (100°C at sea level). Clean and sanitise the probe between foods.
 - Thawing: in the fridge (best), under cold running water in sealed packaging, or in the microwave and cook immediately. Never thaw at room temperature. Do not refreeze thawed raw food unless it is cooked first.
 ### Hygiene
-- Hand washing: warm running water and soap, at least 20 seconds, rinse, dry with single-use paper towel.
-- A food handler with vomiting or diarrhoea must report it and must not handle food until at least 48 hours after symptoms stop.
-- Food Safety Supervisor (FSS) certificate: must have been issued within the last 5 years (Standard 3.2.2A).
-- Sanitising with heat: typically hot water at 77°C or above for 30 seconds; commercial dishwasher wash ~60–65°C, final rinse ~80–82°C.
+- Hand washing (3.2.2 cl 15(4)): soap and warm running water, clean hands thoroughly (guidance: at least 20 seconds), dry on a single-use towel. When: before handling food, after the toilet, after raw food before ready-to-eat food, after coughing, sneezing, eating, smoking or touching hair or body (cl 15(2)–(3)).
+- Illness (3.2.2 cl 14): a food handler with a symptom (diarrhoea, vomiting, sore throat with fever, fever or jaundice) or a foodborne disease must tell the supervisor and not handle food that could be contaminated. Health departments advise no food handling until 48 hours after symptoms stop.
+- Food Safety Supervisor (FSS): certificate issued within the last 5 years, authority to direct food handlers, reasonably available (3.2.2A cl 2, 11). Category one businesses keep substantiation records for 3 months (3.2.2A cl 12).
+- Sanitising (3.2.2 cl 20), always after cleaning: heat (hot water at 77°C for 30 seconds), chemicals as the manufacturer directs (e.g. bleach 100 ppm in cold water or 50 ppm in warm water; 70% alcohol), or heat and chemicals (a dishwasher's sanitising cycle) (FSANZ cleaning and sanitising guidance; Safe Food Australia App. 6).
 ### Kitchen numbers
 - Deep-frying oil 160–190°C (most foods 175–180°C). Change oil when dark, foaming, smoking at normal temperature or smelling rancid.
 - Water boils 100°C; simmer ~85–95°C (gentle bubbles); poach ~70–85°C (liquid barely moving).
@@ -90,10 +90,10 @@ Purple is often used for allergen-free (e.g. gluten-free) preparation.
 ## Key legislation and standards
 - Food Act in each state/territory (e.g. Food Act 2003 NSW, Food Act 1984 Vic, Food Act 2006 Qld); enforced by local councils / state food authorities.
 - FSANZ Australia New Zealand Food Standards Code, Chapter 3 (Australia only):
-  Std 3.1.1 Interpretation and application; Std 3.2.1 Food Safety Programs (high-risk sectors such as hospitals, aged care, child care);
+  Std 3.1.1 Interpretation and application; Std 3.2.1 Food Safety Programs (only where state law requires); Std 3.3.1 Food Safety Programs for Food Service to Vulnerable Persons (hospitals, aged care, child care);
   Std 3.2.2 Food Safety Practices and General Requirements; Std 3.2.2A Food Safety Management Tools (in force from 8 December 2023);
   Std 3.2.3 Food Premises and Equipment.
-- Std 1.2.3 and PEAL (Plain English Allergen Labelling) — mandatory allergen declaration.
+- Std 1.2.3 and Schedule 9: Plain English Allergen Labelling (PEAL), in force from 25 February 2024 — allergens declared by plain-English names in bold, plus a "Contains" statement.
 - WHS: model Work Health and Safety Act 2011 and Regulations (adopted by most states; Victoria uses the Occupational Health and Safety Act 2004). Regulator e.g. SafeWork NSW, WorkSafe Victoria.
 - Employment: Fair Work Act 2009, National Employment Standards, Restaurant Industry Award 2020 / Hospitality Industry (General) Award 2020; anti-discrimination and equal employment opportunity laws.
 - Other: Australian Consumer Law (truthful menu descriptions), liquor laws (RSA) where relevant, local council waste and grease-trap rules.

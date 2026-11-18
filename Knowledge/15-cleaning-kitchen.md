@@ -1,8 +1,8 @@
 # Clean kitchen premises and equipment — SITHKOP009
 
 ## Definitions
-- Cleaning: removing visible dirt, food residue, grease and debris using detergent and water (and physical action).
-- Sanitising: reducing microorganisms on a clean surface to a safe level, using heat or a chemical sanitiser. Surfaces must be cleaned before sanitising — sanitisers don't work on dirty surfaces.
+- Cleaning: removing visible dirt, food residue, grease and debris using detergent and water (and physical action). Clean = clean to touch, no visible matter or bad smell (Std 3.1.1).
+- Sanitising: applying heat, chemicals, or heat and chemicals to a clean surface or utensil so micro-organisms are reduced to a level that does not compromise food safety (3.2.2 cl 20(2)). It reduces germs; it does not sterilise. Clean first — sanitisers don't work on dirty surfaces.
 - Disinfecting: destroying most microorganisms on non-food-contact surfaces (toilets, bins, drains) — stronger chemicals.
 - Detergent: removes grease and dirt (alkaline detergents for grease; acid descalers for limescale/mineral deposits; degreasers for heavy grease; abrasives for stubborn residue — avoid on stainless steel/non-stick).
 - Sanitiser examples: chlorine-based (bleach/hypochlorite — check concentration, corrosive), quaternary ammonium compounds (quats), iodine-based, alcohol-based, combined detergent-sanitisers ("two-in-one" — still clean first in a two-step process for heavy soil).
@@ -11,11 +11,12 @@
 1. Pre-clean: scrape, wipe or rinse off loose food and debris.
 2. Wash: hot water + detergent to remove grease and dirt (scrub).
 3. Rinse: clean water to remove detergent and loosened dirt.
-4. Sanitise: hot water (e.g. 77°C+ for 30 seconds) or chemical sanitiser at the correct concentration and contact time (follow label/SDS).
+4. Sanitise: heat (hot water at 77°C for 30 seconds), a chemical sanitiser at the manufacturer's concentration and contact time (e.g. bleach 100 ppm in cold or 50 ppm in warm water; 70% alcohol), or both (a dishwasher's sanitising cycle) (FSANZ; Safe Food Australia App. 6).
 5. Final rinse (if the sanitiser label requires).
 6. Dry: air-dry (preferred) or single-use paper towel — tea towels can recontaminate.
 
 ## When to clean and sanitise
+Code: eating and drinking utensils clean and sanitary immediately before each use; food contact surfaces whenever food on them is likely to be contaminated (3.2.2 cl 20(1)); premises and equipment with no build-up of garbage, food waste, dirt or grease (cl 19).
 Before starting food preparation; after each task (especially raw meat/poultry/seafood); between raw and RTE foods; after spills; at the end of the shift; according to the cleaning schedule; after deliveries; when interrupted (e.g. after touching the bin).
 
 ## Cleaning schedule
@@ -26,7 +27,7 @@ A written schedule listing: what is to be cleaned (area/equipment), how (method 
 - Slicer: set blade to zero, unplug, cut-resistant gloves, wipe from the centre outwards.
 - Deep fryer: cool oil, filter daily, drain, boil out with fryer cleaner per manufacturer instructions, rinse and dry thoroughly before refilling (water + hot oil = eruption).
 - Combi oven: built-in cleaning programs, descaling.
-- Dishwashers: scrape and pre-rinse, load correctly (don't overload), check wash (~60–65°C) and rinse (~80–82°C) temperatures or chemical sanitiser levels, clean filters and arms daily, check detergent/rinse-aid levels.
+- Dishwashers: scrape and pre-rinse, load correctly (don't overload), use the sanitising cycle and check temperatures or chemical levels against the manufacturer's settings, clean filters and arms daily, check detergent/rinse-aid levels.
 - Pot washing (manual): three-sink method — wash (detergent), rinse, sanitise — then air dry.
 - Chopping boards: scrub, sanitise; replace when deeply scored (bacteria hide in grooves).
 - Cloths: use colour-coded single-use or launder daily; keep separate cloths for food and non-food areas; dispose of single-use wipes.

@@ -39,10 +39,9 @@
 Reasons for uniform cuts: even cooking, consistent presentation, portion control, professional standard.
 
 ## Small equipment
-- Measuring: digital scales, measuring jugs/cups/spoons, probe thermometer, sugar (candy) thermometer, timer.
-- Pans: saucepans, sauteuse (sloped sides), sauté pan (straight sides), frying pan, wok, stockpot, braising pan/cocotte, roasting tray, griddle pan, bain-marie pots, fish kettle, crêpe pan, omelette pan.
-- Bakeware: cake tins, flan rings, tart tins, baking trays, silicone mats, piping bags and nozzles, rolling pins, pastry brushes, cutters, cooling racks, dariole/ramekin moulds.
-- Utensils: whisks (balloon and sauce), spatulas (rubber, palette), ladles, spiders, skimmers, slotted spoons, tongs, fish slice, colander, chinois (fine conical strainer), conical strainer, sieve/drum sieve (tamis), mouli (food mill), muslin, mandoline, grater, mortar and pestle, scoops, portion-control ladles.
+- Measuring: scales, jugs, spoons, probe and sugar thermometers, timer. Pans: saucepans, sauteuse (sloped sides), sauté pan (straight sides), frying pan, wok, stockpot, braising pan, roasting tray, fish kettle.
+- Bakeware: tins, flan rings, trays, silicone mats, piping bags, rolling pins, cutters, cooling racks, dariole moulds.
+- Utensils: whisks, spatulas, ladles, spiders, skimmers, tongs, fish slice, colander, chinois (fine conical strainer), drum sieve (tamis), mouli, muslin, mandoline, grater, mortar and pestle, portion scoops.
 - Gastronorm (GN) containers: standard sizes (1/1, 1/2, 1/3, 1/6, 1/9) used in bain-maries, fridges, combi ovens.
 
 ## Large equipment

@@ -1,4 +1,4 @@
-# Work health and safety — SITXWHS005 Participate in safe work practices (also SITXWHS006 basics)
+# Work health and safety — SITXWHS005 Participate in safe work practices (also SITXWHS006 basics; SITXWHS007 Implement and monitor WHS practices is the Certificate IV unit)
 
 ## Legislation and duties
 - Model Work Health and Safety (WHS) Act 2011 + WHS Regulations + Codes of Practice (Safe Work Australia). Victoria: Occupational Health and Safety Act 2004. Regulators: SafeWork NSW, WorkSafe Vic/Qld/WA, SafeWork SA, etc.
@@ -16,7 +16,7 @@
 - Risk: the likelihood that harm will occur and how severe it would be.
 - Risk control: action to eliminate or minimise the risk.
 - Incident: unplanned event that caused or could have caused injury/damage. Near miss: incident with no injury.
-- SDS: Safety Data Sheet — supplier document for each hazardous chemical: identity, hazards, safe handling and storage, PPE, first aid, spill and fire procedures. Must be accessible to workers and no more than 5 years old.
+- SDS: Safety Data Sheet from the manufacturer or importer for each hazardous chemical: identity, hazards, safe handling and storage, PPE, first aid, spills and fire. The PCBU must get the current SDS and keep it readily accessible; manufacturers review it at least every 5 years (model WHS Regulations r 330, 344).
 
 ## Risk management process
 1. Identify hazards (inspections, checklists, incident reports, consultation, SDS, manufacturer instructions).
@@ -24,7 +24,7 @@
 3. Control risks using the hierarchy of controls.
 4. Review controls (after incidents, changes, regularly).
 
-## Hierarchy of control (most effective to least)
+## Hierarchy of control (most effective to least; model WHS Regulations r 36, Safe Work Australia Code of Practice: How to manage WHS risks)
 1. Elimination — remove the hazard (e.g. remove a broken slicer from use).
 2. Substitution — replace with something safer (less toxic cleaning chemical, lighter containers).
 3. Isolation — separate people from the hazard (guards, barriers, lock-out).
@@ -39,9 +39,9 @@
 | Slips, trips, falls (wet/greasy floors, clutter, cords) | clean spills immediately, wet floor signs, non-slip shoes and mats, keep walkways clear, good lighting, don't run |
 | Cuts (knives, slicers, broken glass, can lids) | sharp knives, correct cutting technique, damp cloth under board, carry knives point down by your side, never leave knives in sink, machine guards, cut-resistant gloves, dustpan for glass |
 | Burns and scalds (hot oil, steam, ovens, hot pans) | dry oven cloths, call "hot behind/coming through", pan handles turned inward, open lids away from you, lower food into oil away from you, don't overfill fryers, let oil cool before filtering |
-| Manual handling (lifting stock, pots) | assess the load, plan the lift, get help or use trolleys, bend knees, keep back straight and load close, avoid twisting, store heavy items between knee and shoulder height |
+| Manual handling (lifting stock, pots) | assess the load, plan the lift, get help or use trolleys, bend knees, keep back straight and load close, avoid twisting, store heavy items between knee and shoulder height (Code of Practice: Hazardous manual tasks) |
 | Electrical | check cords/plugs, keep away from water, tag-and-test, don't use faulty equipment, report and tag out |
-| Hazardous chemicals | read labels and SDS, use correct dilution, PPE, never mix chemicals (e.g. bleach + ammonia/acid → toxic gas), store away from food, original labelled containers |
+| Hazardous chemicals | read labels and SDS, use correct dilution, PPE, never mix chemicals (e.g. bleach + ammonia/acid → toxic gas), store away from food, original labelled containers with GHS labels (Code of Practice: Managing risks of hazardous chemicals in the workplace) |
 | Fire | clean grease from hoods/filters, never leave oil unattended, know extinguisher types and evacuation routes |
 | Gas | check for leaks, ventilation, turn off when not in use; if leak: no flames/switches, ventilate, evacuate, call gas emergency |
 | Heat and fatigue/stress | ventilation, breaks, water, reasonable rosters |

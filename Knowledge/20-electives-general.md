@@ -13,7 +13,7 @@ Formal risk management: consult workers; identify hazards (workplace inspections
 - Record incidents and report to the supervisor; first-aid kits checked and restocked.
 
 ## BSBSUS211 Participate in sustainable work practices
-Identify environmental and resource efficiency issues (energy, water, waste, packaging, chemicals, emissions); follow workplace sustainability policies and environmental legislation; reduce, reuse, recycle; separate waste streams; save energy (switch off equipment, efficient appliances, close fridge doors, full loads) and water (fix leaks, efficient taps, no running-water thawing); buy local/seasonal and minimally packaged products; use environmentally preferred chemicals at correct dilution; report inefficiencies and suggest improvements; measure and record resource use.
+Follow sustainability policies; reduce, reuse, recycle and separate waste; save energy (switch off equipment, close fridge doors, full loads) and water (fix leaks, no running-water thawing); buy local, seasonal, low-packaging products; report inefficiencies and suggest improvements. See file 14 (waste minimisation).
 
 ## SITXCCS014 Provide service to customers
 Greet promptly and warmly; identify needs (listen, ask questions); communicate clearly and respectfully; provide accurate product information (menu, ingredients, allergens); meet special needs (disability, language, children, dietary); handle complaints (LEARN/LAST: Listen, Empathise/Apologise, Resolve/Solve, Thank; follow up; escalate to supervisor when outside authority); maintain personal presentation and hygiene; build rapport and repeat business; respect privacy.
@@ -24,8 +24,5 @@ See file 16 (purchasing section).
 ## SITXCOM007 Show social and cultural sensitivity
 Recognise and respect diversity (culture, religion, language, age, gender, disability, sexuality) among customers and colleagues; avoid stereotypes and discrimination (anti-discrimination legislation, EEO); adapt communication (plain English, gestures, visual aids, interpreters); respect religious dietary laws and holidays; resolve cross-cultural misunderstandings calmly; Aboriginal and Torres Strait Islander cultural awareness (respect for culture, native ingredients and acknowledgement of Country).
 
-## SITXCOM006 Source and present information
-Identify information needed, source it from reliable sources (industry bodies, government websites, suppliers, colleagues), evaluate accuracy and currency, organise and present it clearly (reports, menus, presentations), seek feedback and update it.
-
-## SIRXOSM002 / SIRXOSM003 Social media
-Follow the business's social media policy: protect customer and business privacy and confidential information, no offensive or defamatory content, respond professionally to reviews, follow copyright and consumer law (no misleading claims), use social media tools to promote menus with accurate photos and allergen information.
+## SITXCOM006, SIRXOSM002, SIRXOSM003 Information and social media
+Use reliable, current sources and present information clearly. Follow the social media policy: protect privacy, nothing offensive or misleading (Australian Consumer Law), reply to reviews professionally.

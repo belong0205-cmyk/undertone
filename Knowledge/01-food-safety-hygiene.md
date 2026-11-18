@@ -1,11 +1,11 @@
 # Food safety — SITXFSA005 Use hygienic practices for food safety, SITXFSA006 Participate in safe food handling practices
 
 ## Key definitions
-- Food safety program (FSP): documented system that identifies hazards, controls them and keeps records; based on HACCP. Mandatory under Std 3.2.1 for high-risk sectors; many businesses use one anyway.
-- Potentially hazardous food (PHF): food that must be kept at ≤5°C or ≥60°C to stop pathogens growing or toxins forming. Examples: raw and cooked meat, poultry, seafood, dairy, eggs and egg products, cooked rice and pasta, cooked vegetables and legumes, prepared salads and cut fruit, sandwiches, soups, sauces, gravies, foods containing these.
+- Food safety program (FSP): documented system that identifies hazards, controls them and keeps records; based on HACCP. Required for food service to vulnerable persons (Std 3.3.1) and where state law requires (Std 3.2.1).
+- Potentially hazardous food (PHF): food that must be kept at ≤5°C or ≥60°C to stop pathogens growing or toxins forming. Examples: raw and cooked meat, poultry, seafood, dairy, eggs and egg products, cooked rice and pasta, cooked vegetables and legumes, prepared salads and cut fruit, sandwiches, soups, sauces, gravies, foods containing these. (3.2.2 cl 1)
 - Ready-to-eat (RTE) food: eaten without further cooking (salads, sliced cold meats, desserts, sushi).
 - Contamination: presence of anything harmful or objectionable in food. Cross-contamination: transfer of hazards from one food/surface/person to another (e.g. raw chicken juice onto salad).
-- Clean = free of visible dirt, food waste, grease. Sanitary = microorganisms reduced to a safe level (by heat or chemical sanitiser).
+- Clean = clean to touch and free of extraneous visible matter and objectionable odour (Std 3.1.1). Clean and sanitary = clean, then heat, chemicals, or heat and chemicals applied so micro-organisms are reduced to a level that does not compromise food safety or spread infectious disease (3.2.2 cl 20(2)). Sanitising reduces germs to a safe level; it does not sterilise.
 - Food handler: anyone who handles food or surfaces that touch food. Food safety supervisor (FSS): certified person who supervises and advises food handlers.
 - Use-by date: food must not be sold or eaten after it (safety). Best-before date: food is still safe after it but quality may drop; it can be sold if not damaged/deteriorated.
 
@@ -33,42 +33,44 @@
 ## What bacteria need to grow (FATTOM)
 Food (protein-rich, moist), Acidity (pH above ~4.6 favours growth), Temperature (5–60°C), Time (they can double every 10–20 minutes in ideal conditions), Oxygen (some need it, some don't), Moisture (water activity). Controls: keep food out of the danger zone, limit time, use acidity/sugar/salt/drying.
 
-## Personal hygiene requirements (Std 3.2.2 Division 4)
+## Personal hygiene requirements (Std 3.2.2 Division 4, cl 13–18)
 - Wash hands: before starting work and handling food, after toilet, after handling raw meat/poultry/seafood, after touching hair/face/nose, smoking, eating, coughing, sneezing, using phone, handling waste or chemicals, cleaning, handling money, between raw and RTE food tasks, and before putting on gloves.
 - Hand-wash basin: used only for hands, with warm running water, soap and single-use towels, easily accessible.
-- Hand-washing steps: wet hands, apply soap, lather all surfaces (backs, between fingers, nails, wrists) for at least 20 seconds, rinse, dry with paper towel, turn off tap with the towel.
+- Hand-washing steps: wet hands, apply soap, lather all surfaces (backs, between fingers, nails, wrists) for at least 20 seconds (guidance; the Code requires soap or similar, warm running water and a single-use towel — cl 15(4)), rinse, dry with paper towel, turn off tap with the towel.
 - Clean uniform/apron; hair tied back and covered (hair net/hat); beard net if needed; short clean nails, no nail polish or false nails; minimal jewellery (plain band only usually); no strong perfume.
-- Cover cuts and wounds with a brightly coloured (blue) waterproof dressing plus a glove.
+- Cover cuts and wounds with a dressing fully covered by a waterproof covering (cl 15(1)(d)) — a brightly coloured (blue) waterproof plaster, plus a glove.
 - Don't eat, smoke, chew gum, spit or sneeze/cough over food or food-contact surfaces.
 - Gloves: wash hands before putting on; change when torn, after 30–60 minutes of continuous use, between raw and RTE tasks, after touching face/rubbish; gloves are not a substitute for hand washing.
-- Illness: report to supervisor if suffering from (or carrying) a food-borne illness, symptoms such as diarrhoea, vomiting, fever, sore throat with fever, jaundice, or infected skin lesions/discharges. Exclude from food handling until 48 hours after symptoms stop (or medical clearance).
+- Illness (cl 14): report to the supervisor a symptom (diarrhoea, vomiting, sore throat with fever, fever, jaundice), a foodborne disease or being a carrier, and do not handle food where it could be contaminated; also report a "condition" (infected skin lesion, discharge from ear, nose or eye) and tell the supervisor if you may have contaminated food. Health departments advise no food handling until 48 hours after symptoms stop.
 - Report to supervisor: personal health issues, hygiene hazards (no soap, broken equipment), incidents of contamination, pest sightings.
 
 ## Food handling controls through the flow of food
 1. Purchasing: approved/reputable suppliers only.
-2. Receiving: check temperature (chilled ≤5°C, frozen hard frozen, hot ≥60°C), packaging intact, labels/use-by dates, signs of pests, product quality (smell, colour, texture), quantity matches the order; reject/record non-conforming goods; put away chilled and frozen goods first and quickly.
-3. Storage: cover, label (product, date prepared/received, use-by, initials), FIFO / FEFO rotation; raw food below cooked/RTE food in the fridge; store off the floor; separate chemicals from food; don't overload fridges; check and record fridge/freezer temperatures (at least daily, often twice).
+2. Receiving (cl 5): check temperature (PHF 5°C or below or 60°C or above; frozen food frozen), packaging intact, labels/use-by dates, signs of pests, product quality (smell, colour, texture), quantity matches the order; reject/record non-conforming goods; put away chilled and frozen goods first and quickly.
+3. Storage (cl 6): cover, label (product, date prepared/received, use-by, initials), FIFO / FEFO rotation; raw food below cooked/RTE food in the fridge; store off the floor; separate chemicals from food; don't overload fridges; check and record fridge/freezer temperatures (at least daily, often twice).
 4. Thawing: in fridge on a tray at the bottom; record; use within the safe time.
 5. Preparation: minimise time in danger zone; prepare in small batches; separate raw and RTE preparation (colour-coded boards and knives, separate areas or times, clean and sanitise between tasks); wash fruit and vegetables.
-6. Cooking: to safe core temperatures (75°C for poultry, mince, sausages, stuffed meats, reheated food), measure with a clean sanitised probe in the thickest part.
-7. Cooling: shallow containers, divide into small portions, ice bath, stir, blast chiller; 60→21°C in 2 h then 21→5°C in 4 h; record times/temperatures.
-8. Reheating: rapidly (within 2 h), to 75°C core recommended; do not reheat in a bain-marie.
-9. Holding/display: hot ≥60°C, cold ≤5°C; sneeze guards; serving utensils for each dish; time-as-a-control (2h/4h rule) if out of temperature control.
-10. Serving/transport: hold correct temperatures, insulated containers, covered, clean vehicles.
-11. Disposal: discard food that is contaminated, out of date, recalled, temperature-abused or returned from a customer's plate. Never re-serve food returned from a table (except unopened packaged items).
+6. Cooking (cl 7(1)(b)(ii)): to safe core temperatures (FSANZ guidance 75°C for poultry, mince, sausages, rolled and stuffed meats), measure with a clean sanitised probe in the thickest part.
+7. Cooling (cl 7(3)): shallow containers, divide into small portions, ice bath, stir, blast chiller; 60→21°C in 2 h then 21→5°C in 4 h; record times/temperatures.
+8. Reheating to hold hot (cl 7(4)): heat rapidly to 60°C or above (75°C core recommended); never reheat in a bain-marie.
+9. Holding/display (cl 8): hot ≥60°C, cold ≤5°C; sneeze guards; serving utensils for each dish; time-as-a-control (2h/4h rule) if out of temperature control.
+10. Serving/transport (cl 10): hold correct temperatures, insulated containers, covered, clean vehicles.
+11. Disposal (cl 11): discard food that is contaminated, out of date, recalled, temperature-abused or returned from a customer's plate. Never re-serve food returned from a table (except unopened packaged items).
 
 ## Allergen management
 - Know the ingredients of every dish (standard recipes, ingredient labels, allergen matrix).
-- Mandatory declarable allergens in Australia (PEAL): milk, egg, peanut, tree nuts (almond, Brazil nut, cashew, hazelnut, macadamia, pecan, pine nut, pistachio, walnut), sesame, soy, fish, crustacea, mollusc, wheat, lupin; also gluten (wheat, rye, barley, oats) and added sulphites ≥10 mg/kg.
+- Mandatory declarable allergens in Australia (PEAL): milk, egg, peanut, tree nuts (almond, Brazil nut, cashew, hazelnut, macadamia, pecan, pine nut, pistachio, walnut), sesame, soy, fish, crustacea, mollusc, wheat, lupin; gluten-containing cereals (wheat, rye, barley, oats — declared with the word "gluten"); added sulphites 10 mg/kg or more (Std 1.2.3, Schedule 9; in force 25 Feb 2024).
 - Anaphylaxis = severe, life-threatening allergic reaction (swelling of throat/tongue, difficulty breathing, wheeze, collapse). Response: call 000, give adrenaline autoinjector (EpiPen) if available, lay person flat (or sit if breathing is difficult), do not let them stand or walk.
 - Preventing cross-contact: clean/sanitise equipment and benches first, use separate (often purple) boards and utensils, fresh oil for allergen-free frying, wash hands and change gloves, label and store allergen-free items separately/above, prepare allergen-free orders first, communicate with front of house; if unsure, tell the customer honestly that you cannot guarantee it.
 
 ## Food Standards Code obligations most often asked
-- Std 3.2.2: skills and knowledge for food handlers; notify the local council before operating; receive, store, process, display, package, transport, dispose and recall food safely; health and hygiene of food handlers and the business; cleaning, sanitising and maintenance; temperature-measuring device available (accurate ±1°C); single-use items not reused; animals and pests excluded.
-- Std 3.2.2A (from 8 Dec 2023) for food service, catering and retail businesses handling unpackaged PHF that is ready to eat:
-  - Category 1 (process unpackaged PHF into food that is RTE, e.g. restaurants, cafes, caterers): food safety supervisor + food handler training + substantiate (keep records showing) critical controls — temperatures of receiving, cold/hot holding, cooling, reheating; time-as-a-control; sanitising; kept for 3 months.
-  - Category 2 (handle unpackaged PHF that is RTE but don't make it, e.g. delis, service stations): FSS + food handler training.
-  - Food handler training must cover safe handling, contamination, cleaning and sanitising, personal hygiene and duties.
+- Std 3.2.2: skills and knowledge for food handlers (cl 3); notify the local council before operating (cl 4); receive, store, process, display, package, transport, dispose and recall food safely (cl 5–12); health and hygiene (cl 13–18); cleanliness, cleaning and sanitising, maintenance (cl 19–21); thermometer accurate to ±1°C (cl 22); single-use items not reused (cl 23); animals and pests excluded (cl 24).
+- Std 3.2.2A Food Safety Management Tools (from 8 Dec 2023), for caterers, food service and retailers handling unpackaged PHF that is ready to eat:
+  - Category one (cl 6: caterer or food service that makes unpackaged PHF into ready-to-eat PHF — restaurants, cafes, caterers): all three tools (cl 8) — food handler training (cl 10), a food safety supervisor (cl 11) and substantiation records (cl 12).
+  - Category two (cl 7: sells unpackaged ready-to-eat PHF it did not make, e.g. delis, service stations): FSS + food handler training (cl 9).
+  - Food handler training (cl 10): before the task, a food safety training course or skills and knowledge matching it (safe handling, contamination, cleaning and sanitising, personal hygiene).
+  - FSS (cl 2, 11): certificate from an RTO or recognised organisation issued within the last 5 years, authority to direct staff, appointed before handling starts and reasonably available. Hospitality FSS courses use SITXFSA005 + SITXFSA006 (e.g. NSW).
+  - Substantiation (cl 12): records of receipt, storage, display and transport temperatures, cooking, minimising time, cooling, reheating, and cleaning and sanitising (3.2.2 cl 5(3), 6(2)(a), 7(1)(b)(ii), 7(2)–(4), 8(5)(a), 10(b), 20); kept 3 months (cl 12(2)) unless compliance is shown another way (cl 12(3)).
 - Std 3.2.3: premises and equipment designed to be easily cleaned, adequate water supply, hand-wash facilities, ventilation, lighting, pest proofing, toilets, storage, waste and sewage disposal.
 
 ## HACCP (Hazard Analysis and Critical Control Points) — 7 principles

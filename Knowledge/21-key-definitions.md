@@ -65,12 +65,12 @@ One-line definitions with the numbers assessors expect. Details are in the unit 
 
 ## Food safety, WHS and kitchen management
 - Temperature danger zone: 5–60°C, where bacteria grow fastest.
-- Potentially hazardous food: food that must be kept at ≤5°C or ≥60°C to stay safe (meat, dairy, eggs, cooked rice, seafood).
+- Potentially hazardous food: food that must be kept at 5°C or below or 60°C or above to stay safe (meat, dairy, eggs, cooked rice, seafood) (3.2.2 cl 1).
 - Cross-contamination: moving bacteria or allergens from one food, surface or person to another.
 - HACCP: Hazard Analysis and Critical Control Points — a food safety system with 7 principles that controls hazards at critical points (receiving, cooking, cooling, storage).
 - Critical control point (CCP): a step where control is essential to keep food safe, e.g. cooking to 75°C.
-- 2-hour/4-hour rule: ready-to-eat potentially hazardous food out of temperature control under 2 h → use or refrigerate; 2–4 h → use now; over 4 h → throw out.
-- Cleaning vs sanitising: cleaning removes dirt and grease; sanitising reduces bacteria to a safe level; always clean first.
+- 2-hour/4-hour rule: ready-to-eat potentially hazardous food out of temperature control under 2 h → use or refrigerate; 2–4 h → use now; over 4 h → throw out (Safe Food Australia App. 2).
+- Cleaning vs sanitising: cleaning removes food, dirt and grease; sanitising then uses heat (77°C water for 30 s), chemicals or both to reduce micro-organisms to a safe level, not to zero (3.2.2 cl 20). Always clean first.
 - FIFO: first in, first out stock rotation. FEFO: first expired, first out.
 - Par level: the stock level needed between deliveries.
 - Standard recipe: the tested recipe with exact quantities, method, yield, portion size and cost, used every time for consistency.
