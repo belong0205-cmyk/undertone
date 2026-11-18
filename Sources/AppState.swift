@@ -469,8 +469,16 @@ final class AppState: ObservableObject {
         let answered = earlier.filter { !$0.answerEnglish.isEmpty && !$0.question.isEmpty }.suffix(1)
             .map { (exchange: Prompt.Exchange(question: $0.question, answer: $0.answerEnglish), end: $0.finishedAt ?? $0.startedAt) }
         let previous = Prompt.previousExchange(for: question, startedAt: pieces[first].start, answered: Array(answered))
-        let message = Prompt.user(history: Array(pieces[..<first].suffix(10)), utterance: question, previous: previous)
         rows[index].question = question
+        // A question the user settled an answer for: that answer, word for word, at once and without Claude.
+        // (A follow-up to it still goes to Claude, with it as the previous exchange.)
+        if previous == nil, let fixed = FixedAnswers.match(question) {
+            rows[index].answerEnglish = fixed.answer
+            rows[index].answerVietnamese = fixed.vietnamese
+            log("fixed answer #\(DebugLog.tag(id)), no Claude call")
+            return
+        }
+        let message = Prompt.user(history: Array(pieces[..<first].suffix(10)), utterance: question, previous: previous)
         let profile = activeProfile?.promptBlock
         let client = ClaudeClient(apiKey: trimmedKey)
         lastAPIUse = Date()

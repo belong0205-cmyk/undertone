@@ -12,7 +12,7 @@ enum KnowledgeBase {
         else { return "" }
 
         let notes = files
-            .filter { $0.pathExtension == "md" }
+            .filter { $0.pathExtension == "md" && $0.lastPathComponent != FixedAnswers.fileName } // answered without Claude
             .sorted { $0.lastPathComponent < $1.lastPathComponent }
             .compactMap { try? String(contentsOf: $0, encoding: .utf8) }
             .joined(separator: "\n\n")

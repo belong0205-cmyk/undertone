@@ -148,5 +148,36 @@ check(!Prompt.user(history: [], utterance: "Define ganache.", now: asked).contai
 check(Prompt.system.contains("<previous_exchange>") && Prompt.system.contains("3 to 6 short sentences"),
       "the prompt allows a longer answer for a follow-up")
 
+// Fixed answers: the file in Knowledge/, matched word for word or nearly, never on another question.
+let fixedText = try! String(contentsOfFile: "Knowledge/\(FixedAnswers.fileName)", encoding: .utf8)
+let fixed = FixedAnswers.parse(fixedText)
+let cleaning = "Cleaning removes dirt, food and grease with detergent and water. Sanitising kills bacteria, "
+    + "usually with a sanitiser or very hot water. We always clean first and sanitise after, because sanitiser "
+    + "does not work well on dirty surfaces."
+check(fixed.count == 1 && fixed.first?.questions.count == 4, "the file holds one entry with three other wordings")
+check(fixed.first?.answer == cleaning, "the answer is read word for word")
+check(fixed.first?.vietnamese.hasPrefix("Làm sạch là") == true, "the Vietnamese line is read")
+for heard in ["What is the difference between cleaning and sanitising?",
+              "What's the difference between cleaning and sanitizing?",
+              "Difference between cleaning and sanitising.",
+              "Explain cleaning versus sanitising.",
+              "Explain cleaning vs sanitizing.",
+              "Okay, next question. What is the difference between cleaning and sanitising?",
+              "What is the difference between clean and sanitising?",           // one word misheard
+              "What is a difference between cleaning and sanitizing?",
+              "So what is the difference between cleaning and sanitising in the kitchen?"] {
+    check(FixedAnswers.match(heard, in: fixed)?.answer == cleaning, "fixed answer for: \(heard)")
+}
+for heard in ["How do you sanitise a chopping board?",
+              "What is the difference between a cook and a chef?",
+              "What is the difference between baking and roasting?",
+              "Explain cleaning schedules.",
+              "How often do you clean and sanitise the cool room shelves and the floor drains every week?",
+              "Why do we clean before we sanitise? Tell me about the chemicals you use and how you store them safely."] {
+    check(FixedAnswers.match(heard, in: fixed) == nil, "no fixed answer for: \(heard)")
+}
+check(FixedAnswers.words("What’s sanitizing vs cleaning?") == ["what", "is", "sanitising", "versus", "cleaning"],
+      "words are normalised")
+
 print(failures == 0 ? "ALL PASSED" : "\(failures) FAILED")
 exit(failures == 0 ? 0 : 1)
