@@ -36,10 +36,9 @@ final class SonioxTranscriber {
     nonisolated private static let preRollBytes = 400 * 32
     /// When Soniox falls this far behind the audio sent, start a fresh stream and replay to it the
     /// audio after the last final word (see `history`), so nothing said is lost.
-    /// Only for a stream that really stopped: a busy Soniox swings 0.5-3 s behind and recovers on its
-    /// own, while a reconnect replays seconds of audio and leaves the new stream 3.5-5 s behind for 20 s
-    /// (measured; text then came in blocks after 2-3 sentences). Silent streams are caught by `stallSeconds`.
-    private static let maxLagMs = 10_000
+    /// (3 s, as in v0.5.2: a 10 s limit kept slow streams that tended to get slower; same-time A/B over
+    /// 5 audio sets x 3 runs had v0.5.2 ending utterances 1.2-3 s sooner in quiet audio and long sentences.)
+    private static let maxLagMs = 3_000
     /// Audio kept for a replay: the last 30 s sent on the stream, and at most 30 s captured while
     /// reconnecting.
     nonisolated private static let replayCapBytes = 30 * 32_000
@@ -50,9 +49,10 @@ final class SonioxTranscriber {
     nonisolated private static let catchUpSilentChunks = 600 / chunkMs
     /// While audio is being sent, no reply for this long means the stream stalled (measured: Soniox
     /// went silent for 18-20 s with our audio stuck unsent, then closed with 408); start a fresh one.
-    /// Soniox replies several times a second while it gets audio, but a busy server went 3-6 s without
-    /// one and recovered, while a reconnect replays seconds of audio; 8 s of nothing is a stall.
-    private static let stallSeconds = 8.0
+    /// Soniox replies several times a second while it gets audio, so 3 s of nothing is a stall. Once
+    /// audio has paused at a silence, the last speech still gets `pausedStallSeconds` to be answered.
+    private static let stallSeconds = 3.0
+    private static let pausedStallSeconds = 8.0
 
     private var apiKey = ""
     private var running = false
@@ -615,8 +615,9 @@ final class SonioxTranscriber {
     /// Counted from the first audio Soniox has not replied to, so a stall is caught even when the speech
     /// before it was short and audio paused at the next silence (it went 20 s to a 408 that way).
     private func reconnectIfStalled() {
-        let (socket, since) = lock.withLock { (self.socket, unansweredSince) }
-        guard let socket, let since, Date().timeIntervalSince(since) > Self.stallSeconds else { return }
+        let (socket, since, paused) = lock.withLock { (self.socket, unansweredSince, self.paused) }
+        let limit = paused ? Self.pausedStallSeconds : Self.stallSeconds
+        guard let socket, let since, Date().timeIntervalSince(since) > limit else { return }
         DebugLog.log(String(format: "soniox stalled: no reply for %.0f s, reconnecting", Date().timeIntervalSince(since)))
         socket.cancel(with: .goingAway, reason: nil) // the receive loop fails and reconnects
     }
