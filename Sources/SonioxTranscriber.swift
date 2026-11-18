@@ -106,6 +106,9 @@ final class SonioxTranscriber {
     /// End of the last final word on the current stream (stream ms); the replay starts here.
     /// (final_audio_proc_ms ran seconds behind the words already shown, so replays repeated them.)
     private var lastFinalEndMs = 0
+    /// A new stream started inside the utterance: its clock restarts at the replayed audio, which was
+    /// sped up and had silences cut, so the gap before its first final word says nothing about a pause.
+    private var gapAcrossReconnect = false
     /// Lowest lag seen on this stream. A replay starts a stream already behind by the replayed audio,
     /// which Soniox works through at about real time; only lag beyond this floor means a new stall.
     private var lagFloorMs = 0
@@ -494,8 +497,7 @@ final class SonioxTranscriber {
                     }
                     return catchUp.count
                 }
-                lastFinalEndMs = 0
-                lastSpokenEndMs = 0
+                streamOpened()
                 lagFloorMs = replayed / 32
                 if replayed > 0 { DebugLog.log("soniox replayed \(replayed / 32) ms") }
             }
@@ -639,7 +641,7 @@ final class SonioxTranscriber {
             // A sentence (full stop) followed by a pause under background music or noise, which keeps the
             // audio level from going quiet: the gap between the words decides (see `pauseSplitMs`). In
             // quiet audio the silence timer decides, as Soniox puts full stops after a slow speaker's fragments.
-            let afterPause = token.startMs.map { start in
+            let afterPause = !gapAcrossReconnect && token.startMs.map { start in
                 start - lastFinalEndMs >= Self.pauseSplitMs && Self.endsSentence(currentFinal)
                     && !hadQuietAudio(from: lastFinalEndMs, to: start)
             } == true
@@ -804,7 +806,27 @@ final class SonioxTranscriber {
         awaitingSilence = false
     }
 
+    /// Word timing restarts at 0 on a new stream (at the replayed audio, after the last final word).
+    private func streamOpened() {
+        lastFinalEndMs = 0
+        lastSpokenEndMs = 0
+        gapAcrossReconnect = !currentFinal.isEmpty || !heldWord.isEmpty
+    }
+
+    #if DEBUG
+    /// Test only: handle one Soniox response (JSON) as the receive loop does, without a network.
+    func debugReceive(_ json: String) {
+        guard let response = try? Self.decode(.string(json)) else { return }
+        apply(response.tokens ?? [])
+        if let processed = response.totalAudioProcMs { finishIfSilent(processedMs: processed) }
+    }
+
+    /// Test only: a new stream opened after a reconnect.
+    func debugStreamOpened() { streamOpened() }
+    #endif
+
     private func appendFinal(_ token: Response.Token) {
+        if !token.text.hasPrefix("<") { gapAcrossReconnect = false } // timing is this stream's from here
         currentFinal += token.text
         atBoundary = Self.endsUtterance(currentFinal)
         atStatementEnd = Self.endsStatement(currentFinal)
