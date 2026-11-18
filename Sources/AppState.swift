@@ -22,6 +22,7 @@ final class AppState: ObservableObject {
         var isProcessing = false
         var startedAt = Date() // first words on screen
         var finishedAt: Date? // final
+        var question = "" // what was sent to Claude for this row (pieces joined)
     }
 
     @Published var listenState: ListenState = .idle {
@@ -462,20 +463,28 @@ final class AppState: ObservableObject {
             log("claude #\(DebugLog.tag(row.id)) replaced: joins #\(DebugLog.tag(id))")
         }
         let question = pieces[first...].map(\.text).joined(separator: " ")
-        let message = Prompt.user(history: Array(pieces[..<first].suffix(10)), utterance: question)
+        // "Tell me more", "Why?"… right after an answer: send that exchange and allow a longer answer.
+        let firstRowID = heard.dropFirst(first).first?.id ?? id
+        let earlier = rows.prefix { $0.id != firstRowID }
+        let answered = earlier.filter { !$0.answerEnglish.isEmpty && !$0.question.isEmpty }.suffix(1)
+            .map { (exchange: Prompt.Exchange(question: $0.question, answer: $0.answerEnglish), end: $0.finishedAt ?? $0.startedAt) }
+        let previous = Prompt.previousExchange(for: question, startedAt: pieces[first].start, answered: Array(answered))
+        let message = Prompt.user(history: Array(pieces[..<first].suffix(10)), utterance: question, previous: previous)
+        rows[index].question = question
         let profile = activeProfile?.promptBlock
         let client = ClaudeClient(apiKey: trimmedKey)
         lastAPIUse = Date()
         rows[index].isProcessing = true
         let tag = DebugLog.tag(id)
-        log("claude #\(tag) start, \(tasks.count + 1) in flight")
+        log("claude #\(tag) start\(previous == nil ? "" : " (follow-up)"), \(tasks.count + 1) in flight")
 
         tasks[id] = Task { [weak self] in
             let started = Date()
             var output = ""
             var answerLogged = false
             do {
-                for try await chunk in client.stream(system: Self.systemPrompt, profile: profile, user: message) {
+                for try await chunk in client.stream(system: Self.systemPrompt, profile: profile, user: message,
+                                                     maxTokens: previous == nil ? 1024 : 2048) {
                     if Task.isCancelled { break } // replaced: a chunk already received must not bring it back
                     if output.isEmpty {
                         DebugLog.log(String(format: "claude #%@ first token %.2f s", tag, Date().timeIntervalSince(started)))

@@ -33,12 +33,12 @@ struct ClaudeClient {
     let apiKey: String
 
     /// Yields answer text as it streams in. `profile` is the active user profile block, if any.
-    func stream(system: String, profile: String?, user: String) -> AsyncThrowingStream<String, Error> {
+    func stream(system: String, profile: String?, user: String, maxTokens: Int = 1024) -> AsyncThrowingStream<String, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
                 do {
                     let request = try makeRequest(
-                        system: system, profile: profile, user: user, maxTokens: 1024, stream: true)
+                        system: system, profile: profile, user: user, maxTokens: maxTokens, stream: true)
                     let (bytes, response) = try await URLSession.shared.bytes(for: request)
                     let status = (response as? HTTPURLResponse)?.statusCode ?? 0
                     guard status == 200 else {
@@ -234,6 +234,12 @@ enum Prompt {
 
     Otherwise reply with exactly: -
 
+    A <previous_exchange> block, when present, holds the question asked just before and the answer the user \
+    gave, and the newest utterance asks to go deeper into it ("Tell me more", "Why?", "Give me an example", "What \
+    about the shellfish?"). Answer it in more detail: 3 to 6 short sentences, at most 90 words, still CEFR B1 and in \
+    the first person, with concrete numbers, steps or examples from the knowledge base. This replaces the 25-word \
+    limit above; without that block, keep answers short.
+
     Answer a general question in general terms: what usually or always happens. When the knowledge base or \
     profile lists details by day, date or shift (a menu, a prep list, a schedule), do not pick one of them on \
     your own; give the details for a particular day only when the question names that day (e.g. "today", \
@@ -330,11 +336,63 @@ enum Prompt {
 
     /// `history`: earlier utterances, oldest first; each line says how long ago it ended, so the model
     /// can tell pieces of one question from separate turns.
-    static func user(history: [Heard], utterance: String, now: Date = Date(), timeZone: TimeZone = .current) -> String {
+    /// A question and the answer shown for it.
+    struct Exchange {
+        let question: String
+        let answer: String
+    }
+
+    /// A follow-up within this long after the previous question's final gets that exchange as context
+    /// and a longer answer.
+    static let followUpWindow: TimeInterval = 20
+
+    /// The newest question asks to go deeper into the one before ("Can you explain more?", "Why?", "Give
+    /// me an example", "What about the shellfish?") rather than open a new topic.
+    static func isFollowUp(_ question: String) -> Bool {
+        let words = question.lowercased().replacingOccurrences(of: "’", with: "'")
+            .split { !$0.isLetter && $0 != "'" }.map(String.init)
+        guard let firstWord = words.first else { return false }
+        let text = " " + words.joined(separator: " ") + " " // whole words only: "go on" is not in "go only"
+        if followUpPhrases.contains(where: { text.contains(" \($0) ") }) { return true }
+        if followUpOpenings.contains(words.prefix(2).joined(separator: " ")) { return true }
+        // "Why?", "How so?", "Really?", "For example?": a bare question about what was just said.
+        return words.count <= 3
+            && (["why", "how", "really"].contains(firstWord) || words.contains("example") || words.contains("instance"))
+    }
+
+    private static let followUpPhrases = [
+        "tell me more", "say more", "explain more", "explain that", "explain it", "explain this",
+        "more detail", "more details", "in detail", "more about", "more on that", "elaborate", "expand on",
+        "go deeper", "dig deeper", "give me an example", "give an example", "give me some examples",
+        "what do you mean", "what does that mean", "what else", "like what",
+        "how do you do that", "how do you do it", "how did you do that", "why is that",
+    ]
+
+    /// First two words that turn to a related point: "What about the shellfish?", "And why?".
+    private static let followUpOpenings: Set<String> = [
+        "what about", "how about", "and what", "and how", "and why", "and then", "what if", "go on",
+    ]
+
+    /// The exchange a follow-up digs into: the latest answered question, when `question` is a follow-up
+    /// that began within `followUpWindow` of that question's final. Nil means a new topic: a short answer.
+    static func previousExchange(for question: String, startedAt start: Date,
+                                 answered: [(exchange: Exchange, end: Date)]) -> Exchange? {
+        guard isFollowUp(question), let last = answered.last,
+              start.timeIntervalSince(last.end) <= followUpWindow
+        else { return nil }
+        return last.exchange
+    }
+
+    static func user(history: [Heard], utterance: String, previous: Exchange? = nil,
+                     now: Date = Date(), timeZone: TimeZone = .current) -> String {
         var message = "<today>\(today(now, in: timeZone))</today>\n\n"
         if !history.isEmpty {
             let lines = history.map { "[\(max(0, Int(now.timeIntervalSince($0.end).rounded()))) s ago] \($0.text)" }
             message += "<recent_conversation>\n\(lines.joined(separator: "\n"))\n</recent_conversation>\n\n"
+        }
+        if let previous {
+            message += "<previous_exchange>\n<question>\(previous.question)</question>\n"
+                + "<answer>\(previous.answer)</answer>\n</previous_exchange>\n\n"
         }
         message += "<newest_utterance>\n\(utterance)\n</newest_utterance>"
         return message

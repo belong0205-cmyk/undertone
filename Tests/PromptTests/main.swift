@@ -88,5 +88,41 @@ check(Prompt.today(tuesdayMorningInHanoi, in: hanoi) == "2026-11-17 (Tuesday)", 
 check(Prompt.user(history: [], utterance: "Hi.", now: tuesdayMorningInHanoi, timeZone: hanoi)
       .hasPrefix("<today>2026-11-17 (Tuesday)</today>"), "the user message starts with <today>")
 
+// Follow-ups that dig into the last answer get it as context and a longer answer; anything else stays short.
+for text in ["Can you explain more?", "Tell me more about the poaching liquid.", "Why?", "Why so?", "How?",
+             "How do you do that?", "Give me an example.", "For example?", "What about the shellfish?",
+             "In more detail, please.", "And why?", "Really?", "What do you mean?", "Could you elaborate on that?",
+             "Can you go deeper into the ratios?", "Like what?"] {
+    check(Prompt.isFollowUp(text), "follow-up: \(text)")
+}
+for text in ["Why do you want to work in our kitchen?", "How many years have you worked as a chef?",
+             "List three mother sauces.", "Define ganache.", "Clean the station and then label the containers.",
+             "What time do you start your shift?", "Okay.", "Name two sauces such as béchamel.",
+             "How long do we braise the beef cheeks today?", "We go only on Mondays."] {
+    check(!Prompt.isFollowUp(text), "new question: \(text)")
+}
+let ganache = Prompt.Exchange(question: "Define ganache and give the ratios.",
+                              answer: "Ganache is chocolate melted with hot cream. I use 1 to 1 for dark chocolate.")
+let asked = Date(timeIntervalSince1970: 1_000)
+check(Prompt.previousExchange(for: "Can you explain more?", startedAt: asked.addingTimeInterval(8),
+                              answered: [(ganache, asked)])?.question == ganache.question,
+      "a follow-up 8 s later digs into the last exchange")
+check(Prompt.previousExchange(for: "Tell me more.", startedAt: asked.addingTimeInterval(19),
+                              answered: [(ganache, asked)]) != nil, "a follow-up 19 s later still counts")
+check(Prompt.previousExchange(for: "Tell me more.", startedAt: asked.addingTimeInterval(45),
+                              answered: [(ganache, asked)]) == nil, "45 s later it is a new, short answer")
+check(Prompt.previousExchange(for: "How many staff are in your kitchen?", startedAt: asked.addingTimeInterval(5),
+                              answered: [(ganache, asked)]) == nil, "an unrelated question stays short")
+check(Prompt.previousExchange(for: "Why?", startedAt: asked, answered: []) == nil, "no earlier answer, no context")
+let followUp = Prompt.user(history: [], utterance: "Can you explain more?", previous: ganache, now: asked)
+check(followUp.contains("<previous_exchange>\n<question>Define ganache and give the ratios.</question>")
+      && followUp.contains("<answer>Ganache is chocolate"), "the user message carries the previous exchange")
+check(followUp.range(of: "<previous_exchange>")!.lowerBound < followUp.range(of: "<newest_utterance>")!.lowerBound,
+      "the previous exchange comes before the newest utterance")
+check(!Prompt.user(history: [], utterance: "Define ganache.", now: asked).contains("previous_exchange"),
+      "a new question has no previous exchange")
+check(Prompt.system.contains("<previous_exchange>") && Prompt.system.contains("3 to 6 short sentences"),
+      "the prompt allows a longer answer for a follow-up")
+
 print(failures == 0 ? "ALL PASSED" : "\(failures) FAILED")
 exit(failures == 0 ? 0 : 1)
