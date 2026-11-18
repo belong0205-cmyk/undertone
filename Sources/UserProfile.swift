@@ -228,6 +228,15 @@ enum ProfileFileError: LocalizedError {
 enum ProfileFile {
     static let format = "undertone-profile"
     static let version = 1
+    static let fileExtension = "undertone-profile"
+    /// What both import buttons accept as a profile file: with "Nhập từ Word" next to "Nhập hồ sơ",
+    /// an exported profile picked with the Word button was greyed out and could not be chosen.
+    static let fileExtensions = [fileExtension, "json"]
+
+    /// An exported profile (read as it is), as opposed to a CV for the AI to read.
+    static func isProfileFile(_ url: URL) -> Bool {
+        fileExtensions.contains(url.pathExtension.lowercased())
+    }
 
     static func data(for profile: UserProfile) throws -> Data {
         let profileJSON = try JSONSerialization.jsonObject(with: JSONEncoder().encode(profile))

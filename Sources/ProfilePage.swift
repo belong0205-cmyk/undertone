@@ -110,7 +110,7 @@ struct ProfilePage: View {
     /// Reads a profile file and switches to the new profile.
     private func importFile() {
         let picker = NSOpenPanel()
-        picker.allowedContentTypes = [Self.fileExtension, "json"].compactMap { UTType(filenameExtension: $0) }
+        picker.allowedContentTypes = ProfileFile.fileExtensions.compactMap { UTType(filenameExtension: $0) }
         picker.allowsMultipleSelection = false
         picker.canChooseDirectories = false
         picker.message = "Chọn file hồ sơ: .undertone-profile hoặc .json"
@@ -119,6 +119,11 @@ struct ProfilePage: View {
         picker.sharingType = .none
         NSApp.activate()
         guard picker.runModal() == .OK, let url = picker.url else { return }
+        importProfileFile(url)
+    }
+
+    /// Adds the profile in an exported file and switches to it (no AI involved).
+    private func importProfileFile(_ url: URL) {
         do {
             let id = try state.importProfile(fromFile: url)
             state.activeProfileID = id
@@ -129,7 +134,7 @@ struct ProfilePage: View {
         }
     }
 
-    private static let fileExtension = "undertone-profile"
+    private static let fileExtension = ProfileFile.fileExtension
 
     @ViewBuilder private var importControl: some View {
         if importing {
@@ -148,15 +153,21 @@ struct ProfilePage: View {
     /// Picks a CV and lets Claude fill the active profile (a new one when there is none).
     private func chooseFile() {
         let picker = NSOpenPanel()
-        picker.allowedContentTypes = ["docx", "doc", "rtf", "txt"].compactMap { UTType(filenameExtension: $0) }
+        picker.allowedContentTypes = (["docx", "doc", "rtf", "txt"] + ProfileFile.fileExtensions)
+            .compactMap { UTType(filenameExtension: $0) }
         picker.allowsMultipleSelection = false
         picker.canChooseDirectories = false
-        picker.message = "Chọn CV hoặc hồ sơ: Word (.docx, .doc), .rtf hoặc .txt"
+        picker.message = "Chọn CV (.docx, .doc, .rtf, .txt) hoặc file hồ sơ đã xuất (.undertone-profile)"
         picker.prompt = "Nhập"
         picker.level = .modalPanel // above the floating overlay
         picker.sharingType = .none // like the overlay, kept out of screen sharing where macOS allows it
         NSApp.activate() // the overlay never activates the app, so the picker would open behind other apps
         guard picker.runModal() == .OK, let url = picker.url else { return }
+        // An exported profile is read as it is, never sent to Claude.
+        if ProfileFile.isProfileFile(url) {
+            importProfileFile(url)
+            return
+        }
 
         importResult = nil
         importing = true
