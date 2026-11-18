@@ -36,9 +36,10 @@ final class SonioxTranscriber {
     nonisolated private static let preRollBytes = 400 * 32
     /// When Soniox falls this far behind the audio sent, start a fresh stream and replay to it the
     /// audio after the last final word (see `history`), so nothing said is lost.
-    /// (3 s rather than 6 s: on a simulated 8 s network stall, the sentence caught in it was shown
-    /// whole 1.4 s after it ended instead of 3.7 s; no false reconnects in normal runs, lag ~0.4 s.)
-    private static let maxLagMs = 3_000
+    /// Only for a stream that really stopped: a busy Soniox swings 0.5-3 s behind and recovers on its
+    /// own, while a reconnect replays seconds of audio and leaves the new stream 3.5-5 s behind for 20 s
+    /// (measured; text then came in blocks after 2-3 sentences). Silent streams are caught by `stallSeconds`.
+    private static let maxLagMs = 10_000
     /// Audio kept for a replay: the last 30 s sent on the stream, and at most 30 s captured while
     /// reconnecting.
     nonisolated private static let replayCapBytes = 30 * 32_000
@@ -49,8 +50,9 @@ final class SonioxTranscriber {
     nonisolated private static let catchUpSilentChunks = 600 / chunkMs
     /// While audio is being sent, no reply for this long means the stream stalled (measured: Soniox
     /// went silent for 18-20 s with our audio stuck unsent, then closed with 408); start a fresh one.
-    /// Soniox replies several times a second while it gets audio, so 3 s of nothing is a stall.
-    private static let stallSeconds = 3.0
+    /// Soniox replies several times a second while it gets audio, but a busy server went 3 s without one
+    /// and the reconnect cost more than the wait; 5 s of nothing is a stall.
+    private static let stallSeconds = 5.0
 
     private var apiKey = ""
     private var running = false
@@ -70,11 +72,16 @@ final class SonioxTranscriber {
     private static let silenceAfterClauseMs = 1_500
     /// An <end> came and no word since: the utterance waits for silence to end it.
     private var awaitingSilence = false
-    /// Where the last spoken word ends in the stream's audio. Soniox shows words about 1 s after their
-    /// audio, so silence measured from here reads ~1 s long; it only backs up the audio level (`lastVoiceMs`)
-    /// when background noise keeps that from ever going quiet.
+    /// Where the last spoken word ends in the stream's audio. When background music or noise keeps the
+    /// audio level (`lastVoiceMs`) from ever going quiet, silence is measured from here instead, less
+    /// `wordDelayMs`: how far behind the processed audio Soniox shows words (1-2 s, varies with load).
     private var lastSpokenEndMs = 0
-    private static let tokenSilenceSlackMs = 1_500
+    private var wordDelayMs = 1_000
+    /// Words after a full stop start a new utterance when this much silence (by Soniox's word timing)
+    /// came before them and the sentence has at least `pauseSplitWords` words: a slow speaker's
+    /// fragments ("List 3 types. | Of fish.") stay together, consecutive sentences do not.
+    private static let pauseSplitMs = 800
+    private static let pauseSplitWords = 8
     /// Soniox translates finalized speech stretch by stretch: the final words of a stretch arrive, then
     /// its translation, which can cover several of our utterances (we split at sentence ends; Soniox may
     /// translate two sentences as one). `untranslated` collects final words per utterance since the last
@@ -110,6 +117,8 @@ final class SonioxTranscriber {
     nonisolated(unsafe) private var sentBytes = 0 // on the current stream
     /// End of the last chunk sent with audible sound (stream ms), for `awaitingSilence`.
     nonisolated(unsafe) private var lastVoiceMs = 0
+    /// Ends of recent chunks sent without sound (stream ms, last 30 s): was a pause really quiet?
+    nonisolated(unsafe) private var quietChunkEnds: [Int] = []
     nonisolated private let writtenLock = NSLock()
     nonisolated(unsafe) private var writtenBytes = 0 // of `sentBytes`, handed to the network (writtenLock)
     nonisolated(unsafe) private var silentChunks = 0 // consecutive digitally silent chunks
@@ -260,7 +269,12 @@ final class SonioxTranscriber {
     nonisolated private func send(_ chunk: Data, on socket: URLSessionWebSocketTask) {
         lastSentAt = Date()
         sentBytes += chunk.count
-        if Self.isVoiced(chunk) { lastVoiceMs = sentBytes / 32 }
+        if Self.isVoiced(chunk) {
+            lastVoiceMs = sentBytes / 32
+        } else {
+            quietChunkEnds.append(sentBytes / 32)
+            if let first = quietChunkEnds.first, first < sentBytes / 32 - 30_000 { quietChunkEnds.removeFirst() }
+        }
         history.append(chunk)
         if history.count > Self.replayCapBytes {
             let excess = history.count - Self.replayCapBytes
@@ -450,6 +464,7 @@ final class SonioxTranscriber {
                     self.socket = socket
                     sentBytes = 0
                     lastVoiceMs = 0
+                    quietChunkEnds = []
                     history = Data()
                     historyStart = 0
                     writtenLock.withLock { writtenBytes = 0 }
@@ -497,6 +512,11 @@ final class SonioxTranscriber {
                     failure = "Soniox lỗi \(code): \(response.errorMessage ?? "không rõ")"
                     fatal = [400, 401, 402, 403].contains(code) // retrying won't fix these
                     break loop
+                }
+                if let processed = response.totalAudioProcMs,
+                   let newest = response.tokens?.filter({ $0.translationStatus != "translation" && !$0.text.hasPrefix("<") })
+                       .compactMap(\.endMs).max(), newest > lastSpokenEndMs {
+                    wordDelayMs = (4 * wordDelayMs + max(0, processed - newest)) / 5 // a new word: how late it came
                 }
                 apply(response.tokens ?? [])
                 if let processed = response.totalAudioProcMs { finishIfSilent(processedMs: processed) }
@@ -608,6 +628,13 @@ final class SonioxTranscriber {
         var translated: [UUID] = [] // in order, to report
         var spaced = false
         for var token in tokens {
+            // A sentence (full stop) followed by a pause under background music or noise, which keeps the
+            // audio level from going quiet: the gap between the words decides (see `pauseSplitMs`). In
+            // quiet audio the silence timer decides, as Soniox puts full stops after a slow speaker's fragments.
+            let afterPause = token.startMs.map { start in
+                start - lastFinalEndMs >= Self.pauseSplitMs && Self.endsSentence(currentFinal)
+                    && !hadQuietAudio(from: lastFinalEndMs, to: start)
+            } == true
             if token.translationStatus != "translation", !token.text.hasPrefix("<") {
                 awaitingSilence = false // more speech: the utterance goes on
                 if let end = token.endMs { lastSpokenEndMs = max(lastSpokenEndMs, end) }
@@ -621,7 +648,7 @@ final class SonioxTranscriber {
             // A new stream's first word has no leading space; it continues the utterance kept open.
             if needsSpace, !spaced, token.translationStatus != "translation", !token.text.hasPrefix("<") {
                 spaced = true
-                if token.text.first?.isWhitespace != true { token = Response.Token(text: " " + token.text, isFinal: token.isFinal, translationStatus: token.translationStatus, endMs: token.endMs) }
+                if token.text.first?.isWhitespace != true { token = Response.Token(text: " " + token.text, isFinal: token.isFinal, translationStatus: token.translationStatus, startMs: token.startMs, endMs: token.endMs) }
                 if token.isFinal { needsSpace = false }
             }
             if token.text == "<end>" || token.text == "<fin>" { // endpoint, or our finalize at a pause
@@ -669,7 +696,7 @@ final class SonioxTranscriber {
                 // Someone talking without pauses never triggers <end>, so close the utterance at a
                 // sentence boundary instead; it can then be translated while they keep talking.
                 // Waiting for the next word (leading space) avoids splitting "3.5" or "e.g".
-                if atBoundary, token.text.first?.isWhitespace == true { finishUtterance() }
+                if atBoundary || afterPause, token.text.first?.isWhitespace == true { finishUtterance() }
                 currentFinal += token.text
                 atBoundary = Self.endsUtterance(currentFinal)
                 if untranslated.last?.id == currentID {
@@ -680,7 +707,7 @@ final class SonioxTranscriber {
             } else {
                 // The boundary itself is final, so the next word may start the new utterance even
                 // before it is final.
-                if atBoundary, pending.isEmpty, token.text.first?.isWhitespace == true { finishUtterance() }
+                if atBoundary || afterPause, pending.isEmpty, token.text.first?.isWhitespace == true { finishUtterance() }
                 pending += token.text
             }
         }
@@ -734,12 +761,26 @@ final class SonioxTranscriber {
         let text = currentFinal.trimmingCharacters(in: .whitespacesAndNewlines)
         guard awaitingSilence, !text.isEmpty, currentPending.isEmpty, let last = text.last else { return }
         let needed = ".!?".contains(last) ? Self.silenceAfterSentenceMs : Self.silenceAfterClauseMs
-        let quiet = processedMs - lock.withLock { lastVoiceMs }
-        let wordless = processedMs - lastSpokenEndMs - Self.tokenSilenceSlackMs
-        if quiet >= needed || wordless >= needed {
-            DebugLog.log("soniox utterance ends: quiet \(quiet) ms, no words \(processedMs - lastSpokenEndMs) ms")
+        let (voiceMs, noisy) = lock.withLock { () -> (Int, Bool) in
+            // No quiet audio for 5 s, pauses included: music or noise underneath, so the level can't tell.
+            (lastVoiceMs, (quietChunkEnds.last ?? 0) < sentBytes / 32 - 5_000)
+        }
+        let quiet = processedMs - voiceMs
+        // The first word after a pause shows up later than `wordDelayMs` (Soniox needs ~1 s of it), hence the margin.
+        let wordless = processedMs - lastSpokenEndMs - wordDelayMs - 800
+        if quiet >= needed || (noisy && wordless >= needed) {
+            DebugLog.log("soniox utterance ends: quiet \(quiet) ms, no words \(processedMs - lastSpokenEndMs) ms, word delay \(wordDelayMs) ms")
             finishUtterance()
         }
+    }
+
+    private func hadQuietAudio(from: Int, to: Int) -> Bool {
+        lock.withLock { quietChunkEnds.contains { $0 > from && $0 <= to + 100 } }
+    }
+
+    private static func endsSentence(_ text: String) -> Bool {
+        guard let last = text.trimmingCharacters(in: .whitespaces).last, ".!?".contains(last) else { return false }
+        return text.split(whereSeparator: \.isWhitespace).count >= pauseSplitWords
     }
 
     private func finishUtterance() {
@@ -802,6 +843,7 @@ final class SonioxTranscriber {
             /// "translation" for Vietnamese tokens; "original" or "none" for spoken ones.
             let translationStatus: String?
             /// Where a spoken token ends in the stream's audio; translations have none.
+            let startMs: Int?
             let endMs: Int?
         }
         let tokens: [Token]?
