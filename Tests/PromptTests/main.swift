@@ -61,6 +61,30 @@ check(joined([("What pan do you cook it in?", 0), ("Explain the steps for a beur
 let slow = (0..<12).map { ("word \($0) and", $0 == 0 ? 0.0 : 1.0) } + [("done.", 1.0)]
 check(joined(slow).hasPrefix("word 6 and"), "pieces beyond the 20 s span are left out")
 
+// Soniox now closes a line at a full stop, so a many-part instruction can arrive as two lines.
+check(joined([("List three types of fish.", 0),
+               ("Commonly used in a commercial kitchen and briefly describe their characteristics.", 0.4)])
+      == "List three types of fish. Commonly used in a commercial kitchen and briefly describe their characteristics.",
+      "a fragment starting \"Commonly used…\" joins the instruction before it")
+check(joined([("Name two sauces.", 0), ("Provide a cooking method for each.", 0.3)])
+      == "Name two sauces. Provide a cooking method for each.", "a second instruction joins the first")
+check(joined([("Define brunoise.", 0), ("Explain when you would use it.", 0.5)])
+      == "Define brunoise. Explain when you would use it.", "\"Define…\" + \"Explain…\" are one task")
+check(joined([("Name three cuts of beef.", 0), ("Used for braising.", 0.6)])
+      == "Name three cuts of beef. Used for braising.", "a participle fragment joins")
+check(joined([("List two mother sauces.", 0), ("Their main ingredients too.", 0.5)])
+      == "List two mother sauces. Their main ingredients too.", "a line pointing back with \"Their\" joins")
+check(joined([("Name two knives.", 0), ("For each, say what you cut with it.", 0.4)])
+      == "Name two knives. For each, say what you cut with it.", "\"For each…\" joins")
+check(joined([("I work as a cook.", 0), ("What do you have on the menu today?", 0.3)])
+      == "What do you have on the menu today?", "two whole sentences spoken back to back stay apart")
+check(joined([("How long do we braise the beef cheeks?", 0), ("Explain the steps for a beurre blanc.", 0.5)])
+      == "Explain the steps for a beurre blanc.", "an instruction after a separate question stays apart")
+check(joined([("We need more shallots.", 0), ("Need two boxes by noon.", 0.4)]) == "Need two boxes by noon.",
+      "\"need\" is not a participle")
+check(joined([("Name two sauces.", 0), ("Provide a cooking method for each.", 6.0)])
+      == "Provide a cooking method for each.", "an instruction long after the last stays apart")
+
 // Pieces seen with real Soniox (v0.5.0 probe).
 check(joined([("So, tell me, what kind of dishes—", 0), ("Do you usually cook?", 0.9), ("At your restaurant?", 2.3)])
       == "So, tell me, what kind of dishes— Do you usually cook? At your restaurant?",

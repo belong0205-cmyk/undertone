@@ -291,7 +291,10 @@ enum Prompt {
     /// - it ended less than `pieceGap` before the next one began and either was left unfinished (Soniox
     ///   ends a piece cut by a pause with "—", a comma or no punctuation) or the next one carries it on:
     ///   it starts with a preposition ("Do you usually cook?" + "At your restaurant?") or a joining word
-    ///   ("Define ganache." + "And provide common ratios…").
+    ///   ("Define ganache." + "And provide common ratios…"), is a fragment that is no sentence of its own
+    ///   ("List three types of fish." + "Commonly used in a commercial kitchen…", "…for each", "Their…"), or
+    ///   is a further instruction after one ("Name two sauces." + "Provide a cooking method for each.").
+    ///   Two whole sentences ("I work as a cook." + "What do you have on the menu today?") stay apart.
     /// Fillers ("Okay.", "Um.") are never pieces.
     static func questionStart(_ heard: [Heard]) -> Int {
         guard let last = heard.last else { return 0 }
@@ -302,10 +305,13 @@ enum Prompt {
             guard last.end.timeIntervalSince(previous.start) <= questionSpan, !isFiller(text) else { break }
             let lastWord = text.lowercased().split { !$0.isLetter }.last.map(String.init) ?? ""
             let nextWord = heard[first].text.lowercased().split { !$0.isLetter }.first.map(String.init) ?? ""
+            let previousWord = text.lowercased().split { !$0.isLetter }.first.map(String.init) ?? ""
             let dangling = danglingWords.contains(lastWord) && !text.hasSuffix("?") && !text.hasSuffix("!")
             let unfinished = text.last.map { !".?!".contains($0) } ?? false
             let close = heard[first].start.timeIntervalSince(previous.end) < pieceGap
-            guard dangling || (close && (unfinished || continuationWords.contains(nextWord))) else { break }
+            let carriedOn = unfinished || continuationWords.contains(nextWord) || isFragmentStart(nextWord)
+                || (instructionVerbs.contains(previousWord) && instructionVerbs.contains(nextWord))
+            guard dangling || (close && carriedOn) else { break }
             first -= 1
         }
         return first
@@ -315,6 +321,27 @@ enum Prompt {
     private static let danglingWords: Set<String> = [
         "and", "or", "but", "of", "in", "on", "at", "to", "with", "for", "from", "by", "about", "into", "as",
         "than", "between", "the", "a", "an", "your", "my", "our", "their", "its", "such",
+    ]
+
+    /// A first word that makes a line a fragment of the sentence before it: a participle or adverb
+    /// describing what was just named ("Commonly used…", "Served with…", "Cooked…"), or a word pointing
+    /// back at it ("Each…", "Both…", "Their…").
+    private static func isFragmentStart(_ word: String) -> Bool {
+        if fragmentWords.contains(word) { return true }
+        // Past participles: "used", "served", "poached"… (not "need", "speed", "indeed").
+        return word.count >= 4 && word.hasSuffix("ed") && !["need", "speed", "indeed", "breed", "seed", "feed"].contains(word)
+    }
+
+    private static let fragmentWords: Set<String> = [
+        "commonly", "usually", "typically", "often", "mainly", "mostly", "normally", "traditionally", "generally",
+        "briefly", "especially", "particularly", "ideally", "preferably", "made", "cut", "kept", "found", "known",
+        "chosen", "eaten", "suitable", "ideal", "each", "both", "them", "their", "its", "these", "those",
+    ]
+
+    /// Exam and teacher instructions; one right after another goes on the same task.
+    private static let instructionVerbs: Set<String> = [
+        "list", "name", "define", "describe", "explain", "provide", "give", "include", "state", "mention",
+        "compare", "suggest", "outline", "discuss", "identify", "add", "tell", "show", "write", "summarize",
     ]
 
     /// First words that carry on the previous piece rather than start a new question.
