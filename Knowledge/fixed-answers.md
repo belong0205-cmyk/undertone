@@ -30,6 +30,6 @@ VI: Vùng nhiệt độ nguy hiểm là từ 5 đến 60 độ C. Vi khuẩn ph�
 - Explain the 2-hour 4-hour rule
 - What is the two hour four hour rule
 
-A: It is for ready-to-eat food that has been between 5 and 60 degrees. Under 2 hours, I can use it or put it back in the fridge. Between 2 and 4 hours, I must use it straight away. Over 4 hours, I throw it out.
+A: It is for ready-to-eat food that has been out of the fridge, between 5 and 60 degrees. Under 2 hours, I can use it or put it back in the fridge. Between 2 and 4 hours, I must use it straight away. Over 4 hours, I throw it out.
 
-VI: Quy tắc này áp dụng cho thức ăn ăn liền đã ở trong khoảng 5 đến 60 độ. Dưới 2 giờ, tôi có thể dùng hoặc cho lại vào tủ lạnh. Từ 2 đến 4 giờ, tôi phải dùng ngay. Quá 4 giờ, tôi bỏ đi.
+VI: Quy tắc này áp dụng cho thức ăn ăn liền đã để ngoài tủ lạnh, trong khoảng 5 đến 60 độ. Dưới 2 giờ, tôi có thể dùng hoặc cho lại vào tủ lạnh. Từ 2 đến 4 giờ, tôi phải dùng ngay. Quá 4 giờ, tôi bỏ đi.

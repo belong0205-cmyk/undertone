@@ -37,8 +37,8 @@ Ice cream base: crème anglaise (pasteurised), chilled, churned (incorporates ai
 - Melt gently over a bain-marie or microwave in short bursts; no water or steam (it seizes — becomes thick and grainy); don't overheat (burns, grainy).
 - Tempering (for shine, snap and shrink from moulds): dark — melt 45–50°C, cool to 27–28°C, rewarm to 31–32°C (milk 29–30°C, white 28–29°C). Methods: tabling (on marble), seeding (add chopped tempered chocolate), microwave. Test: a smear sets glossy and snaps at room temperature in a few minutes. Bloom = grey/white streaks (fat bloom from poor tempering/heat; sugar bloom from moisture).
 ### Ganache
-- Definition: a smooth emulsion of chocolate and hot cream (35% fat), sometimes with butter, glucose or liqueur. Uses: sauce, glaze/drip, cake or tart filling, whipped frosting, macaron filling, truffle centres.
-- Ratio = chocolate : cream by weight; more chocolate → firmer. Milk and white chocolate have less cocoa solids and more sugar/milk, so they set softer and need more chocolate than dark. Typical starting ratios (adjust to the brand and the standard recipe):
+- Definition: ganache is a smooth emulsion of chocolate and hot cream (35% fat). It may have butter, glucose or liqueur. Uses: sauce, glaze or drip, cake or tart filling, whipped frosting, macaron filling, truffle centres.
+- Ratio = chocolate : cream by weight. More chocolate gives a firmer set. Milk and white chocolate have less cocoa solids and more sugar and milk, so they set softer and need more chocolate than dark. Typical starting ratios:
 
 | Use | Dark (55–70%) | Milk | White |
 |---|---|---|---|
@@ -47,16 +47,16 @@ Ice cream base: crème anglaise (pasteurised), chilled, churned (incorporates ai
 | Firm: truffles, piping, set tart filling | 2 : 1 | 2.5 : 1 to 3 : 1 | 3 : 1 to 4 : 1 |
 
   Example: dark truffles 200 g chocolate + 100 g cream.
-- Method: chop chocolate finely; heat cream to just simmering (80–85°C); pour over, rest 1–2 minutes, stir gently from the centre outwards (or stick blender under the surface) until smooth and glossy; soft butter at 35–40°C for shine. Glaze at 32–35°C; set in the fridge for piping or truffles (scoop, roll, coat in cocoa, nuts or tempered chocolate); chill then whip for whipped ganache.
-- Faults: split/oily or grainy (too hot, stirred too hard) → blend in a little warm cream; too soft → add melted chocolate; too firm → add warm cream; seized (water got in) → use it in a baked item. Storage: contains cream — cover, ≤5°C, label and date, usually a few days to 2 weeks.
+- Method: I chop the chocolate finely. I heat the cream to just simmering (80–85°C) and pour it over. I rest it 1–2 minutes, then stir gently from the centre outwards until smooth and glossy, or use a stick blender under the surface. Soft butter at 35–40°C adds shine. I glaze at 32–35°C. For piping or truffles I set it in the fridge, then scoop, roll and coat in cocoa, nuts or tempered chocolate.
+- Faults: split, oily or grainy (too hot or stirred too hard) → I blend in a little warm cream. Too soft → add melted chocolate. Too firm → add warm cream. Seized (water got in) → I use it in a baked item. Storage: it contains cream, so I cover it, keep it ≤5°C, label and date it. It keeps from a few days to 2 weeks.
 
 ## Dessert sauces
 Crème anglaise, chocolate, caramel or butterscotch, fruit coulis, sabayon, Chantilly cream.
 
 ## Plating and presentation
 Contrast of temperature, texture (tuiles, praline, crumbs), colour and flavour; correct portion (e.g. 2 scoops ice cream, 1/12 of a 22 cm cake); height; neat sauce (dots, swipes, quenelles); edible garnish; clean rim; cold plates for cold desserts, warm for hot; serve frozen and hot items at once.
-- Quality indicators: texture true to type (smooth custard, light airy mousse, crisp pastry, clean set — no lumps, ice crystals, weeping or cracks), balanced flavour (sweet against acid, bitter or salt — not cloying), correct serving temperature and portion, neat clean plating, fresh garnish.
+- Quality indicators: the texture is true to type — smooth custard, light mousse, crisp pastry, a clean set, with no lumps, ice crystals, weeping or cracks. The flavour is balanced: sweet against acid, bitter or salt, not cloying. Correct serving temperature and portion. Neat, clean plating with a fresh garnish.
 
 ## Food safety for desserts
-Desserts containing dairy, eggs, cream, custard and fresh fruit are PHF — store ≤5°C, cover, label and date; use pasteurised eggs for uncooked/lightly cooked egg desserts (mousse, tiramisu, French meringue); cool custards rapidly; cream-filled pastries kept chilled, used within 2–3 days, never refrozen. Dessert allergens: milk, egg, gluten, nuts, soy (chocolate), sesame — keep an allergen matrix for every dessert and garnish, tell floor staff, mark allergies on the docket, label packaged desserts with the allergens in bold (PEAL).
+Desserts with dairy, eggs, cream, custard or fresh fruit are PHF. I store them ≤5°C, covered, labelled and dated. I use pasteurised eggs for raw or lightly cooked egg desserts (mousse, tiramisu, French meringue). I cool custards fast. Cream-filled pastries stay chilled, are used within 2–3 days and are never refrozen. Dessert allergens: milk, egg, gluten, nuts, soy (chocolate), sesame. I keep an allergen matrix for every dessert and garnish, tell the floor staff, mark allergies on the docket and label packaged desserts with allergens in bold (PEAL).
 Gluten-free desserts: GF flours (rice, almond meal, cornflour, GF blend + xanthan), clean equipment and separate sieves, check labels (biscuit crumbs, malt, oats), call it GF only when it has no gluten. Examples: pavlova, flourless chocolate cake, panna cotta, crème brûlée, sorbet, orange and almond cake.
