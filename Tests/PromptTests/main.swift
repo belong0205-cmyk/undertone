@@ -219,7 +219,12 @@ for (heard, expected) in [("What is the temperature danger zone?", dangerZone),
                           ("What is the two hour four hour rule?", twoFour),
                           ("What is the cooling rule, 2 hours then 4 hours?", nil),
                           ("What is the difference between the temperature danger zone and the 2-hour 4-hour rule?", nil),
-                          ("Compare the 2-hour 4-hour rule with the cooling rule.", nil)] {
+                          ("Compare the 2-hour 4-hour rule with the cooling rule.", nil),
+                          ("What is the difference between cleaning and sanitising?", cleaningEntry),
+                          ("What is the difference between cleaning, sanitising and disinfecting?", nil),
+                          ("What is the difference between cleaning and sanitising and the sterilising?", nil),
+                          ("Explain cleaning versus sanitising versus disinfecting.", nil),
+                          ("What is the difference between cleaning and sanitising or disinfecting?", nil)] {
     check(FixedAnswers.match(heard, in: fixed) == expected,
           (expected == nil ? "no fixed answer for: " : "fixed answer for: ") + heard)
 }

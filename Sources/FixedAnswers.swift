@@ -107,7 +107,13 @@ enum FixedAnswers {
         let extra = (before + after).filter { !asked.contains(stem($0)) && !smallWords.contains($0) }
         // A word of its own right before the question's words names another thing ("the cooling rule").
         let modified = first > 0 && !asked.contains(stem(heard[first - 1])) && !smallWords.contains(heard[first - 1])
-        return inside && !modified && extra.count <= extraWords
+        // Another thing joined on after the question's words ("cleaning, sanitising and disinfecting").
+        let joiners: Set<String> = ["and", "or", "versus"]
+        let lastTerm = heard.indices.last { required.contains(stems[$0]) && !joiners.contains(heard[$0]) } ?? last
+        let joinedOn = heard[(lastTerm + 1)...].first.map(joiners.contains) == true
+            && heard[(lastTerm + 1)...].first(where: { !joiners.contains($0) && !["the", "a", "an"].contains($0) })
+                .map { !asked.contains(stem($0)) && !smallWords.contains($0) } == true
+        return inside && !modified && !joinedOn && extra.count <= extraWords
             && before.allSatisfy { !["why", "how", "when", "where", "which", "who"].contains($0) }
             && after.allSatisfy { !askingWords.contains($0) }
     }
