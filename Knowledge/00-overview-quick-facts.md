@@ -58,9 +58,7 @@ middle of the range is the safe answer, and "follow workplace procedures / the s
 - Deep-frying oil 160–190°C (most foods 175–180°C). Change oil when dark, foaming, smoking at normal temperature or smelling rancid.
 - Water boils 100°C; simmer ~85–95°C (gentle bubbles); poach ~70–85°C (liquid barely moving).
 - Roux: equal weights of fat and flour. Thin sauce ≈ 50 g roux per 500 mL liquid, coating sauce ≈ 100 g per 500 mL, panada (binding) ≈ 200 g per 500 mL (roux = fat + flour combined).
-- Vinaigrette: 3 parts oil to 1 part acid.
 - Fresh egg pasta: about 100 g flour ('00') per 1 egg.
-- Crème anglaise: cook to 82–84°C until it coats the back of a spoon (nappe); never boil.
 - Sugar stages: thread 106–112°C, soft ball 112–116°C, firm ball 118–120°C, hard ball 121–130°C, soft crack 132–143°C, hard crack 149–154°C, caramel 160–177°C.
 - Chocolate tempering (dark): melt 45–50°C, cool to 27–28°C, rework to 31–32°C. Milk: 40–45 → 26–27 → 29–30°C. White: 40 → 25–26 → 28–29°C.
 - Yeast dough ideal temperature ~26–28°C; yeast dies around 55–60°C.
