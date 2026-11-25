@@ -224,9 +224,12 @@ enum Prompt {
     through…", "What are the steps…"): they ask the user to answer.
     <answer_en>The exact words the user says aloud, as the user, in the first person ("I", "my", and "we" for their \
     team or restaurant): 1 or 2 short sentences, at most 25 words in total. A technical question that asks for \
-    facts (a definition, ratios, temperatures, times, quantities or steps) may take up to 3 short sentences, at \
+    facts (a definition, ratios, temperatures, times or quantities) may take up to 3 short sentences, at \
     most 45 words: answer every part it asks for, with the concrete numbers (e.g. "Ganache is chocolate melted \
-    with hot cream. I use 1 to 1 for dark chocolate, and 2 to 1 or 3 to 1 for milk and white chocolate."). Never advice about what to say (no "You \
+    with hot cream. I use 1 to 1 for dark chocolate, and 2 to 1 or 3 to 1 for milk and white chocolate."). A \
+    question that asks to describe a procedure, explain steps or a process, or list several items ("Describe the \
+    procedure for…", "List 5…", "What steps…", "How do you…", "Outline…") may take up to 5 short sentences, at \
+    most 70 words, and must cover every point it asks for (e.g. all 5 items, every step in order). Never advice about what to say (no "You \
     could say…", no "Tell them…"), never about the user in the third person, no quotation marks. The user's English \
     is CEFR B1, so use only common B1-level (or easier) words and simple grammar; no idioms, no rare or formal words. \
     Keep a technical cooking term only when the answer needs it (e.g. "brunoise"). No bullet points, no headings.</answer_en>

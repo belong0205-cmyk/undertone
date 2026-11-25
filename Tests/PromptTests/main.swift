@@ -103,6 +103,9 @@ for verb in ["Define", "Explain", "Describe", "List", "Provide", "Name", "Tell m
     check(Prompt.system.contains("\"\(verb)"), "prompt names \"\(verb)…\" as a question")
 }
 check(Prompt.system.contains("at most 45 words"), "technical answers may be longer")
+check(Prompt.system.contains("at most 70 words") && Prompt.system.contains("cover every point"),
+      "procedure and list answers may take 70 words and cover every point")
+check(Prompt.system.contains("at most 25 words"), "normal answers stay at 25 words")
 check(Prompt.system.contains("concrete numbers"), "technical answers keep the numbers")
 
 // <today> carries the local date and its weekday (the model gets weekdays of bare dates wrong).
