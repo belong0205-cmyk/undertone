@@ -2,7 +2,9 @@
 
 ## Stocks
 Definition: flavoured liquid made by gently simmering bones/vegetables/seafood with aromatics in water; base for soups, sauces, braises. Stock vs broth: stock is mainly bones, unseasoned, a base; broth is made with meat (and vegetables), seasoned and served as a light soup.
-Components: nourishing element (bones, shells, vegetables), mirepoix (onion, carrot, celery — roughly 10% of bone weight; white mirepoix for white/fish stocks: onion, leek, celery, mushroom trimmings, no carrot), bouquet garni (thyme, bay leaf, parsley stalks, peppercorns, tied in leek or muslin), liquid (cold water).
+Components: nourishing element (bones, shells, vegetables), mirepoix (rough-cut onion, carrot, celery in about 2 : 1 : 1 — 50% onion, 25% carrot, 25% celery; roughly 10% of bone weight; adds flavour, sweetness and colour; white mirepoix for white/fish stocks: onion, leek, celery, mushroom trimmings, no carrot), bouquet garni (thyme, bay leaf, parsley stalks, peppercorns, tied in leek or muslin), liquid (cold water).
+Uses: white stock → velouté, cream soups, braising, risotto, poaching; brown stock → espagnole, demi-glace, jus, gravies, braises; fish stock → fish velouté, fish soups and bisques, shallow poaching; vegetable stock → vegetarian and vegan dishes, risotto, soups.
+Hygiene controls when making stock: bones fresh and kept ≤5°C until used, clean sanitised pots and strainers, skim scum and fat, never leave stock warm in the pot overnight — strain and cool fast (ice bath, shallow containers, 60→21°C in 2 h, 21→5°C in 4 h), label with name and date, refrigerate 3–4 days or freeze.
 Typical ratio: about 1 kg bones to 2–2.5 L water (bones just covered).
 
 | Stock | Method | Simmer time |
@@ -39,6 +41,7 @@ Typical ratio: about 1 kg bones to 2–2.5 L water (bones just covered).
 | Hollandaise (warm emulsion) | egg yolks cooked over a bain-marie with reduction (vinegar, peppercorns, shallots) or lemon, then clarified butter whisked in | Béarnaise (tarragon/shallot reduction, chervil, tarragon), Choron (Béarnaise + tomato), Foyot (Béarnaise + meat glaze), Maltaise (blood orange), Mousseline (+ whipped cream), Paloise (mint) |
 - Hollandaise points: yolks cooked to a sabayon (~65–70°C) without scrambling; add warm (not hot) clarified butter slowly; hold warm (around 60°C) for a short time only — make in small batches, use pasteurised yolks, discard after 2 hours (bacteria risk). Splits if too hot (scrambles), too cold, or butter added too fast. Fix: whisk a spoonful of warm water or a new yolk in a clean bowl and slowly whisk the split sauce in.
 - Clarified butter: melted butter with milk solids and water removed — higher smoke point, used for hollandaise, frying.
+- Demi-glace: classically equal parts espagnole and brown stock, simmered and reduced by half, skimmed and strained; modern kitchens often reduce brown stock alone (jus) or add a little starch (jus lié). Reduce further to a glace (syrupy glaze). Quality: deep glossy brown, clear, coats the back of a spoon (nappe), rich meaty flavour, not salty, bitter or burnt, no fat on top.
 
 ## Contemporary and other sauces
 Jus / jus lié, pan gravy, beurre blanc (shallot, wine and vinegar reduction mounted with cold butter; beurre rouge with red wine), compound butters (maître d'hôtel, garlic, café de Paris), salsas, salsa verde, pesto, chimichurri, romesco, gremolata, coulis, gastrique, sabayon; sweet: crème anglaise, chocolate, caramel, fruit coulis; Asian: soy, oyster, hoisin, sweet chilli, nuoc cham, satay, teriyaki; cold: mayonnaise family, vinaigrettes, mint, cranberry, horseradish cream, apple sauce.

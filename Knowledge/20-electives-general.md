@@ -1,13 +1,9 @@
 # Group C electives — General
 
-## SITXWHS006 Identify hazards, assess and control safety risks
-Formal risk management: consult workers, identify hazards, assess with a risk matrix (likelihood × consequence), control with the hierarchy of control, record in a risk register, monitor and review. See file 02.
-
-## HLTAID011 Provide First Aid
-DRSABCD: Danger, Response (talk and touch), Send for help (000), Airway, Breathing (look, listen, feel 10 s), CPR (30 compressions : 2 breaths, 100–120/min, one-third of chest depth), Defibrillation (AED). Burns: cool running water 20 min, no ice or creams, cover loosely, medical help for large, deep, face/hands, chemical or electrical burns. Bleeding: direct pressure, elevate, bandage. Choking: cough; up to 5 back blows then 5 chest thrusts; 000. Anaphylaxis: adrenaline autoinjector (outer thigh), lay flat, 000, second dose after 5 min. Shock: lay down, keep warm, 000. Record and report incidents; keep kits stocked.
-
-## BSBSUS211 Participate in sustainable work practices
-Follow sustainability policies; reduce, reuse, recycle; save energy and water; buy local and seasonal; suggest improvements (see file 14).
+## Other Group C electives (short notes)
+- SITXWHS006 risk management: see file 02 (identify, assess with a risk matrix, control with the hierarchy of control, review; risk register).
+- HLTAID011 first aid: DRSABCD, burns and bleeding — see file 02. Choking: 5 back blows, 5 chest thrusts. Anaphylaxis: adrenaline autoinjector in the outer thigh, lay flat, call 000, second dose after 5 min.
+- BSBSUS211 sustainability: reduce, reuse, recycle; save energy and water; local and seasonal buying (see file 14).
 
 ## SITXCCS014 Provide service to customers
 - Customer service: meeting or exceeding customer expectations with friendly, prompt, accurate and professional service.
@@ -26,11 +22,4 @@ Follow sustainability policies; reduce, reuse, recycle; save energy and water; b
 - Front and back of house teamwork: pass on orders, timing, 86'd items, specials, allergies, feedback and complaints; briefings; respect.
 - Records: complaint and feedback register, incident and allergen reports, refunds and comps, follow-up actions.
 
-## SITXINV007 Purchase goods
-See file 16 (purchasing section).
-
-## SITXCOM007 Show social and cultural sensitivity
-Respect diversity among customers and colleagues; no stereotypes or discrimination (anti-discrimination law, EEO); adapt communication (plain English, gestures, visuals, interpreters); respect religious food laws and holidays; Aboriginal and Torres Strait Islander cultural awareness.
-
-## SITXCOM006, SIRXOSM002, SIRXOSM003 Information and social media
-Use reliable, current sources and present information clearly. Follow the social media policy: protect privacy, nothing offensive or misleading (Australian Consumer Law), reply to reviews professionally.
+- SITXINV007 purchasing: see file 16. SITXCOM007 cultural sensitivity: respect diversity, no stereotypes or discrimination (anti-discrimination law), plain English, respect religious food laws, Aboriginal and Torres Strait Islander cultural awareness. SITXCOM006/SIRXOSM002/003: reliable information; follow the social media policy (privacy, nothing misleading, reply to reviews professionally).

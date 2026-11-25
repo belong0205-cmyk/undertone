@@ -12,7 +12,7 @@
   - Molluscs (soft body): univalves/gastropods (one shell: abalone, periwinkles, whelks), bivalves (two hinged shells: oysters — Sydney rock and Pacific, mussels, scallops, clams/vongole, pipis, cockles), cephalopods (no external shell: squid/calamari, octopus, cuttlefish).
 - Other: sea urchin, sea cucumber, caviar/roe.
 - Hard-shell: crustaceans with a hard outer shell (crab, lobster, bugs) and bivalves (oysters, mussels, clams). Soft-shell: soft-shell crab (just moulted, eaten whole, usually fried) and cephalopods (squid, octopus — no outer shell).
-- Market forms: loin (thick boneless centre cut of large fish — tuna, swordfish, salmon), whole, gilled and gutted, dressed, fillets, cutlets/steaks (darnes from round fish, tronçons from flat fish), goujons (finger strips), paupiettes (rolled fillets), suprêmes, butterflied, smoked, canned, frozen (IQF).
+- Market forms and cuts: whole, gilled and gutted, dressed; fillet (whole side off the bone — pan-fry, grill, bake, poach); loin (thick boneless centre cut of large fish — tuna, swordfish, salmon — searing, sashimi, roasting); steak/cutlet (cross-cut with bone: darne from round fish, tronçon from flat fish — grill, barbecue, bake); portion (single-serve piece cut from a fillet, usually 160–200 g for a main, 80–100 g entrée); goujons (finger strips — crumbed or battered and fried); paupiettes (rolled fillets — poached); suprêmes (prime boneless skinless cut); butterflied (sardines, prawns); smoked, canned, frozen (IQF).
 
 ## Common Australian species — texture, flavour, best methods
 | Fish | Notes |
@@ -72,6 +72,7 @@
 ## Cooking methods and examples
 - Seafood cooks quickly (little connective tissue) — overcooking makes it dry, tough and rubbery (squid/octopus: cook very fast — under 2 min — or very slowly).
 - Fish is cooked when the flesh turns opaque and flakes easily (core around 60–63°C); prawns turn pink/orange and curl into a "C" (overcooked = "O").
+- Delicate fish (whiting, flounder, John Dory, flathead, sole): use gentle methods — shallow poach, steam, bake en papillote, gentle pan-fry (meunière) with a light flour coating, or crumb/batter to protect the flesh; cook briefly, turn once with a fish slice, avoid hard grilling or boiling that breaks the flakes.
 - Methods: pan-fry (meunière — floured, butter, lemon, parsley), grill/char-grill/barbecue (oily fish, prawns, octopus, whole fish), bake/roast (whole fish, en papillote, crusted fillets), shallow poach (sole Bonne Femme, fillets in fumet and wine, sauce made from the cooking liquor), deep poach (whole salmon in court bouillon), steam (Asian-style whole fish with ginger and shallot), deep fry (beer-battered fish, salt and pepper squid, tempura, crumbed calamari, whitebait), stew/braise (bouillabaisse, cioppino, seafood curries), stir-fry, sous vide, smoke (hot smoked vs cold smoked), cure (gravlax — salt, sugar, dill), raw (sashimi, oysters, ceviche — "cooked" by citrus acid, carpaccio, tartare — use sashimi-grade fish).
 - Classic dishes: fish and chips, sole meunière, sole Bonne Femme, lobster Thermidor or mornay, moules marinières, oysters natural/Kilpatrick/mornay, garlic prawns, prawn cocktail (Marie Rose), paella, bouillabaisse (with rouille), seafood chowder, salt and pepper squid, chilli crab, fish en papillote, salmon with beurre blanc.
 - Frying fish: dry, season, coat (flour → batter, or flour, egg, crumbs), fry at 175–180°C in small batches, drain on a rack, salt, serve at once. Greasy = oil too cool, fryer overloaded, old oil or thin batter → let the oil recover between batches, change oil. Stop sticking: clean, very hot, oiled grill or pan; dry the fish and oil it; skin-side down and don't move it until it releases.
@@ -81,7 +82,7 @@
 - Bacteria: Vibrio (raw seafood), Listeria (smoked/RTE seafood), norovirus and hepatitis A (raw oysters from polluted waters).
 - Toxins: scombroid/histamine poisoning (tuna, mackerel, mahi-mahi not kept cold — histamine is not destroyed by cooking: keep cold from catch to cooking); ciguatera (large reef fish from tropical waters, e.g. Spanish mackerel, coral trout — toxin not destroyed by cooking); paralytic shellfish poisoning (algal blooms — buy from approved harvest areas).
 - Parasites (e.g. anisakis worms) in raw fish — freezing (e.g. −20°C for 7 days or per supplier) kills them; buy sashimi-grade.
-- Allergens: fish, crustacea and molluscs are separate declarable allergens — prevent cross-contact (separate blue boards, oil, utensils).
+- Allergens: fish, crustacea and molluscs are three separate declarable allergens (Standard 1.2.3; PEAL from 25 Feb 2024) — prevent cross-contact (separate blue boards, oil, utensils, no shared fryer). Service obligations: declare them in menu descriptions or tell the customer on request, give accurate information (never guess — check the recipe and the chef), record the allergy on the docket, prepare the dish separately, and have the chef or supervisor confirm before it leaves the pass.
 - Physical: bones, shell fragments.
 
 ## Sustainability

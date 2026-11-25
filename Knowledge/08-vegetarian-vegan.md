@@ -20,7 +20,7 @@ Also: fryer oil shared with meat/fish, utensils and boards used for meat (cross-
 ## Nutrition — key nutrients and plant sources
 | Nutrient | Plant sources | Notes |
 |---|---|---|
-| Protein | legumes (lentils, chickpeas, beans), tofu, tempeh, seitan (wheat gluten), TVP, nuts, seeds, quinoa, grains; eggs and dairy for vegetarians | combine legumes + grains (e.g. dhal with rice, beans on toast, hummus with pita) to get all essential amino acids — complementary proteins; soy and quinoa are complete proteins |
+| Protein | legumes (lentils, chickpeas, beans), tofu, tempeh, seitan (wheat gluten), TVP, nuts, seeds, quinoa, grains; eggs and dairy for vegetarians | complete protein = has all 9 essential amino acids (soy/tofu/tempeh, quinoa, buckwheat, hemp, chia; eggs, dairy); incomplete = low in one or more (most grains, legumes, nuts) — combine legumes + grains (dhal with rice, beans on toast, hummus with pita, peanut butter on wholegrain bread) over the day to get all of them — complementary proteins |
 | Iron | legumes, dark leafy greens, fortified cereals, tofu, dried fruit, seeds | non-haem iron absorbs better with vitamin C (citrus, capsicum, tomato) |
 | Vitamin B12 | fortified plant milks, nutritional yeast, fortified foods, supplements | not found naturally in plant foods — vegans need fortified foods/supplement |
 | Calcium | fortified soy/plant milks, calcium-set tofu, almonds, tahini, leafy greens (kale, bok choy) | |
@@ -34,11 +34,13 @@ Also: fryer oil shared with meat/fish, utensils and boards used for meat (cross-
 - Tempeh: fermented whole soybeans pressed into a cake, nutty, firm — slice, steam/marinate, fry, grill.
 - Seitan: wheat gluten — chewy, meat-like (not for coeliacs).
 - TVP (textured vegetable protein): dried soy, rehydrate — mince substitute.
-- Legumes: dried beans soaked overnight (8–12 h), drained, boiled rapidly for at least 10 minutes then simmered (red kidney beans contain lectin toxins destroyed only by proper boiling); lentils don't need soaking (red lentils cook in 15–20 min). Canned legumes: drain and rinse. Cooked legumes are PHF (Bacillus cereus, Clostridium perfringens) — cool quickly, keep ≤5°C.
+- Legumes: sort (remove stones, dirt and broken or shrivelled beans), rinse, dried beans soaked overnight (8–12 h) in plenty of cold water (or quick-soak: boil 2 min, stand 1 h), drained and rinsed again, boiled rapidly for at least 10 minutes then simmered until tender (45–90 min; salt and acid at the end) (red kidney beans contain lectin toxins destroyed only by proper boiling); lentils don't need soaking (red lentils cook in 15–20 min). Canned legumes: drain and rinse. Cooked legumes are PHF (Bacillus cereus, Clostridium perfringens) — cool quickly, keep ≤5°C.
 - Vegan patties: chickpea + carrot + breadcrumbs + flax egg; black bean + sweet potato + oats + cumin; lentil + mushroom + walnut + chickpea flour. Binders: flax or chia egg, chickpea flour, mashed potato, oats or breadcrumbs, aquafaba; chill before cooking.
 - Commercial plant-based meat alternatives, jackfruit (pulled "pork" texture), mushrooms (meaty umami), eggplant, cauliflower steaks.
 - Egg replacers (vegan): aquafaba (chickpea liquid — whips like egg white for meringue/mousse), flax egg (1 tbsp ground flaxseed + 3 tbsp water), chia egg, mashed banana, apple purée, silken tofu, commercial egg replacer.
 - Dairy replacers: soy/oat/almond/coconut/rice milks, coconut cream, cashew cream, vegan butter/margarine, nutritional yeast (cheesy flavour), plant-based cheeses and yoghurts.
+- Gelatine replacers (vegan desserts): agar-agar (seaweed; sets firmer, about 1 tsp powder per 500 mL, must be boiled), pectin (jams, fruit jellies), carrageenan, cornflour or arrowroot for soft set. Vegan dessert swaps: egg → aquafaba, flax or chia egg, banana or apple purée; dairy → coconut cream, cashew cream, plant milks, vegan margarine; gelatine → agar-agar.
+- Mise en place for a vegetarian/vegan section: separate (or freshly cleaned and sanitised) boards, knives, pans, tongs and oil; vegetable stock made and ready; every ingredient label checked (fish sauce, rennet, gelatine, egg, whey); vegetables, legumes, tofu and grains prepped, portioned, labelled (V)/(VG) and dated; stored covered above and apart from meat; allergen matrix at the station; dishes confirmed with the chef and front of house.
 - Umami boosters: soy sauce/tamari, miso, mushrooms (dried shiitake), tomato paste, seaweed (kombu), nutritional yeast, roasted vegetables, fermented foods.
 
 ## Typical dishes

@@ -8,13 +8,14 @@
 | Bulbs | onion, garlic, shallot, leek, spring onion, fennel |
 | Leaves / leafy greens | lettuce, spinach, silverbeet, kale, bok choy, cabbage, rocket |
 | Brassicas (cruciferous) | cabbage, broccoli, cauliflower, Brussels sprouts, kale, broccolini |
-| Stems / shoots | celery, asparagus, bamboo shoots, kohlrabi |
+| Stems / shoots | celery, asparagus, bamboo shoots, kohlrabi, rhubarb, lemongrass, cardoon |
 | Flowers | broccoli, cauliflower, globe artichoke, zucchini flowers |
 | Fruit vegetables | tomato, capsicum, eggplant, zucchini, cucumber, avocado, chilli, pumpkin, squash |
 | Legumes / pods / seeds | peas, green beans, snow peas, broad beans, corn, dried beans, lentils, chickpeas |
 | Fungi | button, Swiss brown, field, shiitake, oyster, enoki, porcini, truffle |
 | Sea vegetables | nori, kombu, wakame |
 Quality: firm, bright colour, no wilting, bruising, mould, sprouting or soft spots; correct size; in season (better flavour, cheaper).
+Storage: most vegetables unwashed in the cool room at 1–4°C in perforated bags or ventilated crates, away from raw meat and from ethylene producers (apples, bananas, tomatoes, avocados speed up ripening and wilting); potatoes, onions, garlic and pumpkin in a cool, dark, dry, airy store, not the fridge; tomatoes and avocados ripen at room temperature; herbs wrapped in damp paper; mushrooms in paper, not plastic. FIFO, label with the delivery date, check daily and remove spoiled items.
 Seasons (Australia): summer — tomatoes, zucchini, eggplant, capsicum, corn, cucumber, beans, stone fruit, mangoes, berries, watermelon; winter — cabbage, cauliflower, broccoli, Brussels sprouts, leeks, parsnips, pumpkin, kale, citrus, apples, pears, kiwifruit, rhubarb.
 Potato types: waxy (low starch – Kipfler, Nicola, Chat, Pink Eye — hold shape: salads, boiling) vs floury/starchy (high starch – Russet/Burbank, Sebago, King Edward, Coliban — mash, chips, roasting, baked). Store potatoes in a cool, dark, dry place (light turns them green — solanine, toxic; cut away green parts or discard).
 
@@ -57,7 +58,9 @@ Potato types: waxy (low starch – Kipfler, Nicola, Chat, Pink Eye — hold shap
 ### Rice
 - Long grain (basmati, jasmine — fluffy, separate grains), medium grain (calrose), short grain (arborio, carnaroli, vialone nano — risotto; sushi rice; glutinous/sticky rice), brown rice (bran retained, longer cooking), wild rice (actually a grass seed).
 - Methods: boiling (large amount of water, drain), absorption (measured water, e.g. 1 : 1.5–2, covered), steaming, pilaf/pilau (rice sweated in fat with onion, then stock added, cooked covered in oven), risotto (short-grain rice toasted in butter/oil with onion, deglazed with wine, hot stock added a ladle at a time while stirring; ~18 min; finished off the heat with butter and parmesan — mantecatura; creamy, "all'onda" (flows like a wave)), paella, fried rice (use cold cooked rice), sushi rice (seasoned with rice vinegar, sugar, salt).
-- Food safety: Bacillus cereus — cool cooked rice rapidly, refrigerate, hold hot ≥60°C, reheat once only.
+- Food safety: Bacillus cereus (spores survive cooking and make toxins in warm cooked rice and pasta) — spread cooked rice or pasta in shallow trays, cool rapidly (60→21°C in 2 h, 21→5°C in 4 h), cover, label and refrigerate ≤5°C, use within 2–3 days, hold hot ≥60°C, reheat once only to 75°C; never leave it warm in the rice cooker or on the bench.
+- Gelatinisation: when starch is heated in liquid (about 60–80°C), the starch granules absorb water, swell and burst, and the liquid thickens or the starch becomes soft and edible. It happens when cooking pasta, rice, polenta, couscous, gnocchi and potatoes, and in roux-based sauces and starch slurries. Retrogradation is the reverse on cooling (cold rice goes hard; set polenta).
+- Plating side dishes (vegetable/farinaceous): correct portion (about 80–100 g vegetables, 100–150 g starch), even cuts and sizes, bright colour (don't overcook), light seasoning or glaze, well drained (no water on the plate), served hot on hot plates, simple edible garnish (herbs, toasted nuts, grated parmesan), clean rim, consistent with the standard recipe photo.
 ### Other grains and farinaceous items
 - Gnocchi: potato (floury baked/boiled potatoes riced while hot + flour + egg/yolk + salt — overworking makes them tough; cooked when they float + ~30 s; good = light, tender, holds shape; heavy = too much flour, overworked, potatoes riced cold; falls apart = wet or waxy potatoes, too little flour or egg, water boiling too hard), Parisienne (choux paste), Roman (semolina, baked).
 - Polenta (coarse cornmeal): soft polenta (stirred, creamy, with butter and parmesan) or set polenta (spread, chilled, cut and grilled/fried).

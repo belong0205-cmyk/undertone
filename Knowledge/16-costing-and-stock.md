@@ -33,29 +33,20 @@ Typical food cost targets 25–35% (fine dining may be lower; cafés/pubs vary).
 Balance of colour, texture, flavour, cooking methods and ingredients across the menu (avoid repetition — e.g. not two cream sauces or two pastry dishes); seasonality and local produce; nutritional balance and dietary options (V, VG, GF); target market and price point; kitchen equipment and staff skill; storage capacity; cost and profitability; menu descriptions must be accurate (Australian Consumer Law — no misleading claims e.g. "fresh" or "local").
 
 ## Receiving stock (SITXINV006)
-1. Check delivery against the purchase order and delivery docket/invoice: product, quantity, size/weight, brand, price.
-2. Check quality: temperature (PHF 5°C or below or 60°C or above; frozen food frozen — 3.2.2 cl 5(3)–(4)) using a probe (between packs, not piercing them), use-by/best-before dates, packaging intact (no dents, swelling, tears, leaks, broken vacuum seals), signs of pests, freshness (smell, colour, texture), correct labelling, delivery vehicle clean and refrigerated.
-3. Reject or record non-conforming items (wrong, damaged, out of temperature, short-dated) — notify the supplier, request a credit note, record on the docket and in the goods-received log, inform the supervisor.
-4. Sign the delivery docket only when satisfied; record temperatures (Std 3.2.2A record).
-5. Store immediately — frozen first, then chilled, then dry goods.
+1. Check the delivery against the purchase order and docket/invoice: product, quantity, size/weight, brand, price.
+2. Check quality: temperature with a probe between packs (PHF ≤5°C or ≥60°C, frozen food frozen — 3.2.2 cl 5(3)–(4)), use-by/best-before dates, packaging intact (no dents, swelling, tears, leaks, broken vacuum seals), no pests, fresh smell, colour and texture, correct labels, clean refrigerated vehicle.
+3. Reject or record non-conforming items (wrong, damaged, out of temperature, short-dated): tell the supplier, request a credit note, note it on the docket and goods-received log, inform the supervisor.
+4. Sign the docket only when satisfied; record temperatures (Std 3.2.2A). Store at once — frozen first, then chilled, then dry goods.
 
 ## Storing stock
-- Dry store: cool (approx. 10–21°C, ideally below ~15°C), dry, well ventilated, pest-proof, out of direct sunlight; goods on shelves at least 15 cm off the floor; opened goods decanted into labelled, covered food-grade containers; chemicals stored separately.
-- Cool room/refrigerator ≤5°C (ideally 1–4°C): raw meat, poultry and seafood on the bottom shelves; cooked/RTE food above; dairy, desserts; covered and labelled; air circulation (don't overload); door closed.
-- Freezer −18°C or below: wrapped tightly to prevent freezer burn, labelled, dated, FIFO.
-- Labels: product name, date received/prepared, use-by date, batch, initials, allergens.
-- Stock rotation: FIFO (first in, first out — new stock behind older stock) or FEFO (first expired, first out).
-- Monitor and record fridge/freezer temperatures (at least daily); report faults.
-- Storage of specific items: fruit and vegetables — most refrigerated, but potatoes, onions, pumpkin, garlic, bananas and tomatoes in a cool dry area; eggs refrigerated; bread at room temperature or frozen.
+- Dry store: cool (about 10–21°C, ideally below 15°C), dry, ventilated, pest-proof, out of sunlight; goods at least 15 cm off the floor; opened goods decanted into labelled covered food-grade containers; chemicals stored separately.
+- Cool room ≤5°C (ideally 1–4°C): raw meat, poultry and seafood on the bottom shelves, cooked/RTE food above; covered, labelled, air circulation, door closed. Freezer ≤−18°C: wrapped tightly (freezer burn), labelled, dated.
+- Labels: product, date received/prepared, use-by, batch, initials, allergens. Rotation: FIFO (new stock behind old) or FEFO (first expired, first out). Record fridge/freezer temperatures at least daily; report faults.
 
 ## Maintaining stock
-- Par level (par stock): the minimum quantity required between deliveries; order enough to bring stock back up to par. Order quantity = par level − stock on hand (+ expected usage before delivery, if applicable).
-- Reorder point / minimum stock levels; maximum levels to avoid overstock.
-- Stocktake: physical count of stock at regular intervals (weekly/monthly) to calculate usage, cost of goods sold, identify losses/waste/theft and slow-moving items.
-- Food cost for a period (cost of goods sold) = opening stock + purchases − closing stock (− staff meals/credits).
-- Stock control documents: purchase orders, requisitions (from store to kitchen), delivery dockets, invoices, credit notes, stock cards/bin cards, inventory software, wastage sheets, transfer notes.
-- Report and record waste, spoiled, damaged, expired or out-of-date stock; dispose of it correctly; investigate causes.
-- Security: lock stores, limit access, monitor deliveries and stock movement.
+- Par level: the minimum stock needed between deliveries; order quantity = par level − stock on hand (+ expected usage before delivery).
+- Stocktake: physical count at regular intervals (weekly/monthly) to find usage, cost of goods sold, losses, waste, theft and slow movers. Cost of goods sold = opening stock + purchases − closing stock.
+- Documents: purchase orders, requisitions, delivery dockets, invoices, credit notes, stock/bin cards, inventory software, wastage sheets, transfer notes. Record and dispose of spoiled, damaged or expired stock; investigate causes; lock stores and limit access.
 - Overstocking: spoilage, cash and space tied up, theft. Understocking: 86'd items, unhappy customers, costly emergency buys.
 
 ## Purchasing (SITXINV007)

@@ -1,6 +1,6 @@
 # Answer evaluation — manual check for TESTER
 
-95 common kitchen-interview and assessment questions (including follow-ups, Australian food safety and WHS, and SA Cook questionnaire topics) with an ideal answer and what must (not) happen. The ideal answer is one good
+103 common kitchen-interview and assessment questions (including follow-ups, Australian food safety and WHS, and SA Cook questionnaire topics) with an ideal answer and what must (not) happen. The ideal answer is one good
 version; other wording passes if it meets every rule below.
 
 ## Setup
@@ -165,6 +165,14 @@ Short answers (1–2 sentences, B1, "I"). The KB fact column names the knowledge
 | 93 | Name six mise en place tasks before dinner service. | I read the prep list, portion the meat and fish, make stocks and sauces, cut vegetables and garnishes, set up pans and boards, and label and stock my station. | Six tasks from the KB list. | 14 Mise en place |
 | 94 | Give three examples of cross-contamination. | Raw chicken juice dripping onto a salad; using one board for raw meat and then salad; touching ready-to-eat food with unwashed hands. | Three examples; raw → ready-to-eat. | 01 Cross-contamination examples |
 | 95 | How do you clean a deep fryer? | I switch it off and let the oil cool fully, drain it into the used-oil drum, boil it out with fryer cleaner, rinse, then dry it completely before refilling. | Cool first; dry before refilling (water + hot oil); PPE acceptable extra. | 15 Deep fryer (SITHKOP009) |
+| 96 | What is gelatinisation? | When starch is heated in liquid to about 60 to 80 °C, the granules take in water, swell and thicken the liquid. It happens in pasta, rice, polenta and roux sauces. | Starch + heat + liquid; swell/thicken; ~60–80 °C; a farinaceous example. | 07 Gelatinisation (SITHCCC030) |
+| 97 | What is mirepoix and what's the ratio? | Mirepoix is rough-cut onion, carrot and celery, about half onion and a quarter each of carrot and celery. It gives stock flavour, sweetness and colour. | Onion, carrot, celery; 2:1:1 (50/25/25). | 06 Mirepoix (SITHCCC029) |
+| 98 | How is demi-glace made? | I mix equal parts espagnole and brown stock and reduce it by half, skimming and straining. It should be glossy, deep brown and coat a spoon. | Espagnole + brown stock, reduced by half; at least 2 quality signs. | 06 Demi-glace |
+| 99 | What's a complete protein? | A complete protein has all nine essential amino acids, like soy, quinoa, eggs and dairy. Most grains and legumes are incomplete, so I combine them, like dhal with rice. | 9 essential amino acids; one complete example; a combination. | 08 Complete vs incomplete proteins (SITHCCC031) |
+| 100 | What can replace gelatine in a vegan dessert? | I use agar-agar, which comes from seaweed and sets firmer, or pectin for fruit jellies. Agar has to be boiled to set. | Agar-agar named; must NOT suggest gelatine-based or animal products. | 08 Gelatine replacers |
+| 101 | Which cooking methods suit delicate fish? | For whiting or John Dory I poach, steam, bake in paper or pan-fry gently with a light flour coating, and I turn it only once. | Gentle methods (≥2 of poach/steam/en papillote/gentle pan-fry); must NOT say hard grilling or boiling. | 10 Delicate fish (SITHCCC037) |
+| 102 | A customer asks if a dish has shellfish. What are your obligations? | Fish, crustacea and molluscs are three separate allergens. I check the recipe with the chef, never guess, tell the customer, and write it on the docket. | Three separate allergens; check, never guess; docket. | 10 Seafood allergens, Standard 1.2.3 |
+| 103 | Name two ways to emulsify a salad dressing. | I can whisk or shake oil and vinegar with a little mustard for a temporary emulsion, or whisk oil slowly into egg yolk for a permanent one like mayonnaise. | Temporary (whisk/shake) and permanent (yolk, slow oil). | 05 Emulsification (SITHCCC028) |
 
 ## Recording results
 For each failed item note: question #, the app's answer, which pass rule failed. Send failures about scope or invented
