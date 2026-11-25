@@ -81,7 +81,11 @@ enum FixedAnswers {
         for (index, sentence) in sentences.enumerated() {
             let others = sentences.enumerated().filter { $0.offset != index }.map(\.element)
             guard !asksMore, others.allSatisfy({ words($0).allSatisfy { !askingWords.contains($0) } }) else { continue }
-            for entry in entries where entry.questions.contains(where: { asks(sentence, $0) }) {
+            // A comparison the entry's own wordings do not make ("difference between the danger zone and
+            // the 2-hour 4-hour rule") asks something else.
+            let comparing = Set(words(sentence)).intersection(comparisonWords)
+            for entry in entries where entry.questions.contains(where: { asks(sentence, $0) })
+                && comparing.isSubset(of: Set(entry.questions.flatMap(words))) {
                 return entry
             }
         }
@@ -101,7 +105,9 @@ enum FixedAnswers {
         let inside = heard[first...last].allSatisfy { asked.contains(stem($0)) || smallWords.contains($0) }
         let before = heard[..<first], after = heard[(last + 1)...]
         let extra = (before + after).filter { !asked.contains(stem($0)) && !smallWords.contains($0) }
-        return inside && extra.count <= extraWords
+        // A word of its own right before the question's words names another thing ("the cooling rule").
+        let modified = first > 0 && !asked.contains(stem(heard[first - 1])) && !smallWords.contains(heard[first - 1])
+        return inside && !modified && extra.count <= extraWords
             && before.allSatisfy { !["why", "how", "when", "where", "which", "who"].contains($0) }
             && after.allSatisfy { !askingWords.contains($0) }
     }
@@ -111,6 +117,11 @@ enum FixedAnswers {
         "the", "a", "an", "what", "is", "are", "was", "be", "between", "and", "or", "of", "to", "in", "on", "at",
         "for", "with", "me", "you", "your", "we", "us", "i", "can", "could", "would", "please", "okay", "ok", "so",
         "now", "then", "just", "tell", "explain", "it", "this", "that", "do", "does",
+    ]
+
+    /// Words that compare two things.
+    private static let comparisonWords: Set<String> = [
+        "difference", "differences", "different", "compare", "compared", "comparing", "comparison", "versus",
     ]
 
     /// Words that ask something: after the question, or in another sentence, they mean a further question.

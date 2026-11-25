@@ -160,9 +160,12 @@ let fixed = FixedAnswers.parse(fixedText)
 let cleaning = "Cleaning removes dirt, food and grease with detergent and water. Sanitising kills bacteria, "
     + "usually with a sanitiser or very hot water. We always clean first and sanitise after, because sanitiser "
     + "does not work well on dirty surfaces."
-check(fixed.count == 1 && fixed.first?.questions.count == 4, "the file holds one entry with three other wordings")
-check(fixed.first?.answer == cleaning, "the answer is read word for word")
-check(fixed.first?.vietnamese.hasPrefix("Làm sạch là") == true, "the Vietnamese line is read")
+check(!fixed.isEmpty && fixed.allSatisfy { !$0.questions[0].isEmpty && !$0.answer.isEmpty && !$0.vietnamese.isEmpty },
+      "every entry in the file has a question, an answer and a Vietnamese line")
+let cleaningEntry = fixed.first { $0.questions[0] == "What is the difference between cleaning and sanitising?" }
+check(cleaningEntry?.questions.count == 4, "the cleaning entry has three other wordings")
+check(cleaningEntry?.answer == cleaning, "the answer is read word for word")
+check(cleaningEntry?.vietnamese.hasPrefix("Làm sạch là") == true, "the Vietnamese line is read")
 for heard in ["What is the difference between cleaning and sanitising?",
               "What's the difference between cleaning and sanitizing?",
               "Difference between cleaning and sanitising.",
@@ -205,6 +208,20 @@ let testerCases: [(String, Bool)] = [
 for (heard, matches) in testerCases {
     check((FixedAnswers.match(heard, in: fixed) != nil) == matches,
           (matches ? "fixed answer for: " : "no fixed answer for: ") + heard)
+}
+// Other entries, and questions that only share their words (TESTER, f0be2e0).
+let dangerZone = fixed.first { $0.questions[0] == "What is the temperature danger zone?" }
+let twoFour = fixed.first { $0.questions[0] == "What is the 2-hour 4-hour rule?" }
+check(dangerZone != nil && twoFour != nil, "the danger zone and 2-hour 4-hour entries are read")
+for (heard, expected) in [("What is the temperature danger zone?", dangerZone),
+                          ("Okay. Define the temperature danger zone.", dangerZone),
+                          ("Explain the 2-hour 4-hour rule.", twoFour),
+                          ("What is the two hour four hour rule?", twoFour),
+                          ("What is the cooling rule, 2 hours then 4 hours?", nil),
+                          ("What is the difference between the temperature danger zone and the 2-hour 4-hour rule?", nil),
+                          ("Compare the 2-hour 4-hour rule with the cooling rule.", nil)] {
+    check(FixedAnswers.match(heard, in: fixed) == expected,
+          (expected == nil ? "no fixed answer for: " : "fixed answer for: ") + heard)
 }
 check(FixedAnswers.words("What’s sanitizing vs cleaning?") == ["what", "is", "sanitising", "versus", "cleaning"],
       "words are normalised")
