@@ -1,16 +1,16 @@
 # Work health and safety — SITXWHS005 Participate in safe work practices (also SITXWHS006)
 
 ## Legislation and duties
-- The law is the model Work Health and Safety (WHS) Act 2011, the WHS Regulations and Codes of Practice (Safe Work Australia). Victoria has its own OHS Act 2004. The regulators are SafeWork SA and WorkSafe Vic.
+- The law is the model Work Health and Safety (WHS) Act 2011. The WHS Regulations and Codes of Practice (Safe Work Australia) add the detail. Victoria has its own OHS Act 2004. The regulators are SafeWork SA and WorkSafe Vic.
 - PCBU (person conducting a business or undertaking, i.e. the employer/business) has the primary duty of care: safe workplace, safe plant and systems of work, safe use/storage of substances, adequate facilities, information/training/supervision, monitoring health and conditions, consultation with workers.
 - As a worker I take reasonable care of my own and others' safety. I follow reasonable instructions and procedures. I use the PPE provided. I report hazards, incidents and injuries.
-- Consultation happens through health and safety representatives (HSR), committees and toolbox talks. Notifiable incidents (a death, serious injury or illness, or a dangerous incident) go to the regulator at once. The site is left as it is.
+- Consultation happens through health and safety representatives (HSR), committees and toolbox talks. Notifiable incidents go to the regulator at once. These are a death, a serious injury or illness, or a dangerous incident. The site is left as it is.
 
 ## Key terms
 - Hazard: anything with the potential to cause harm (hot oil, wet floor, sharp knife).
 - Risk: the likelihood that harm will occur and how severe it would be.
 - Incident: unplanned event that caused or could have caused injury/damage. Near miss: incident with no injury.
-- SDS: the Safety Data Sheet from the maker or importer of each hazardous chemical. It gives the identity, hazards, safe handling and storage, PPE, first aid, spills and fire. The PCBU keeps the current SDS easy to reach (WHS Regulations r 344).
+- SDS: the Safety Data Sheet from the maker or importer of each hazardous chemical. It lists identity, hazards, safe handling, storage, PPE, first aid, spills and fire. The PCBU keeps the current SDS easy to reach (WHS Regulations r 344).
 
 ## Risk management process
 1. Identify hazards (inspections, checklists, incident reports, consultation, SDS, manufacturer instructions).
@@ -36,7 +36,7 @@
 | Electrical | check cords/plugs, keep away from water, tag-and-test, don't use faulty equipment, report and tag out |
 | Hazardous chemicals | read labels and SDS, use correct dilution, PPE, never mix chemicals (e.g. bleach + ammonia/acid → toxic gas), store away from food, original labelled containers with GHS labels (Code of Practice: Managing risks of hazardous chemicals in the workplace) |
 | Fire | clean hood filters, never leave hot oil unattended, know extinguishers and exits |
-| Gas | turn off when not in use; if you smell gas: no flames or switches, ventilate, evacuate, report |
+| Gas | turn off when not in use. If I smell gas: no flames or switches. Ventilate, evacuate, report |
 | Cool rooms | inside release handle, freezer jacket, limit time |
 
 ## Fires — classes and extinguishers (Australia)

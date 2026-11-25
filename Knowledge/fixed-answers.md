@@ -21,6 +21,9 @@ VI: Làm sạch là loại bỏ bụi bẩn, thức ăn và dầu mỡ bằng ch
 ## Q: What is the temperature danger zone?
 - Define the temperature danger zone
 - What's the temperature danger zone
+- What is the danger zone
+- What's the danger zone
+- Define the danger zone
 
 A: The temperature danger zone is between 5 and 60 degrees Celsius. Bacteria grow fastest there. So I keep cold food at 5 degrees or below and hot food at 60 degrees or above.
 

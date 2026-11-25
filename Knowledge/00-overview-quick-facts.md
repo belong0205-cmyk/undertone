@@ -6,7 +6,7 @@ Exact numbers can differ slightly between RTOs, textbooks and workplaces; where 
 middle of the range is the safe answer, and "follow workplace procedures / the standard recipe" is always correct to add.
 
 ## Qualification
-- The qualification has 25 units: 20 core and 5 electives. For SITHCCC043 I must work at least 48 food service shifts in a commercial kitchen. I record them in a logbook.
+- The qualification has 25 units: 20 core and 5 electives. SITHCCC043: I must work at least 48 food service shifts in a commercial kitchen. I record them in a logbook.
 
 ## Numbers most often asked (Australia)
 ### Temperature control
@@ -15,9 +15,9 @@ middle of the range is the safe answer, and "follow workplace procedures / the s
 - Hot food: 60°C or above when receiving, hot-holding, displaying and transporting (cl 5(3), 8(5), 10).
 - Cooling cooked potentially hazardous food: from 60°C to 21°C within 2 hours, then from 21°C to 5°C within a further 4 hours (6 hours total) (3.2.2 cl 7(3)).
 - 2-hour/4-hour rule for ready-to-eat potentially hazardous food that has been between 5°C and 60°C:
-  Under 2 hours in total: I can use it or put it back in the fridge. 2 to 4 hours: I must use it now and not chill it again. Over 4 hours: I throw it out (Safe Food Australia, App. 2). Example: sandwiches come out of the fridge at 10:00. I can chill them again until 12:00. I must use them between 12:00 and 14:00. After 14:00 I throw them out. The times add up over the day.
+  Under 2 hours in total: I can use it or chill it again. 2 to 4 hours: I must use it now and not chill it again. Over 4 hours: I throw it out (Safe Food Australia, App. 2). Example: sandwiches come out of the fridge at 10:00. I can chill them again until 12:00. I must use them between 12:00 and 14:00. After 14:00 I throw them out. The times add up over the day.
 - Cook poultry, minced meat, sausages and rolled/stuffed meats to 75°C or above in the centre (FSANZ guidance). The Code requires a process step that reduces pathogens to safe levels (3.2.2 cl 7(1)(b)(ii)).
-- Reheating cooled PHF to hold it hot: I heat it fast to 60°C or above (3.2.2 cl 7(4); FSANZ: within 2 hours). I reheat only once, never in a bain-marie.
+- To hold cooled PHF hot, I reheat it fast to 60°C or above. FSANZ says within 2 hours (3.2.2 cl 7(4)). I reheat only once, never in a bain-marie.
 - Thermometer: probe accurate to ±1°C (3.2.2 cl 22). Check calibration in ice slurry (0°C) and boiling water (100°C at sea level). Clean and sanitise the probe between foods.
 - Thawing: in the fridge (best), under cold running water in sealed packaging, or in the microwave and cook immediately. Never thaw at room temperature. Do not refreeze thawed raw food unless it is cooked first.
 ### Hygiene
@@ -46,4 +46,4 @@ Purple is often used for allergen-free (e.g. gluten-free) preparation.
   Std 3.2.3 Food Premises and Equipment.
 - Std 1.2.3 and Schedule 9: Plain English Allergen Labelling (PEAL), in force from 25 February 2024 — allergens declared by plain-English names in bold, plus a "Contains" statement.
 - WHS: model Work Health and Safety Act 2011 and Regulations (adopted by most states; Victoria uses the Occupational Health and Safety Act 2004). Regulator e.g. SafeWork NSW, WorkSafe Victoria.
-- Employment law: Fair Work Act 2009, Restaurant Industry Award 2020 or Hospitality Industry (General) Award 2020, anti-discrimination laws. Australian Consumer Law: menu descriptions must be true.
+- Employment law: Fair Work Act 2009 and anti-discrimination laws. Awards: Restaurant Industry Award 2020 or Hospitality Industry (General) Award 2020. Australian Consumer Law: menu descriptions must be true.
