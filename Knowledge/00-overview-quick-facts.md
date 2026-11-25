@@ -67,14 +67,7 @@ middle of the range is the safe answer, and "follow workplace procedures / the s
 - Chocolate tempering (dark): melt 45–50°C, cool to 27–28°C, rework to 31–32°C. Milk: 40–45 → 26–27 → 29–30°C. White: 40 → 25–26 → 28–29°C.
 - Yeast dough ideal temperature ~26–28°C; yeast dies around 55–60°C.
 - Meat doneness (core, before resting): rare 50–52°C, medium-rare 55–57°C, medium 60–63°C, medium-well 65–68°C, well done 70°C+. Minced meat, sausages and poultry: 75°C.
-### Costing
-- Food cost % = food cost ÷ selling price (excluding GST) × 100. Typical target 25–35%.
-- Selling price ex-GST = food cost ÷ target food cost %. Add GST: × 1.1 (GST is 10%).
-- Gross profit = selling price (ex-GST) − food cost.
-- Yield % = usable (edible portion, EP) weight ÷ as-purchased (AP) weight × 100.
-- Real cost per kg of usable product = AP price per kg ÷ yield (as a decimal).
-- Scaling (conversion) factor = required yield ÷ original recipe yield; multiply every ingredient by it.
-- Portion cost = total recipe cost ÷ number of portions.
+- Costing formulas: file 16.
 
 ## Chopping board colour coding (common in Australia; follow workplace system)
 Red = raw meat; Yellow = raw poultry; Blue = raw seafood; Green = fruit and vegetables/salad; White = dairy and bakery; Brown = cooked meats.

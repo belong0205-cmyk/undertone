@@ -29,6 +29,10 @@ One-line definitions with the numbers assessors expect. Details are in the unit 
 - Sous vide: vacuum-sealed food cooked in a precisely controlled water bath at a low temperature.
 - En papillote: food baked in a sealed paper or foil parcel so it steams in its own juices.
 - Al dente: pasta or vegetables cooked until firm to the bite.
+- Au gratin: topped with cheese or breadcrumbs and browned under a salamander or in the oven.
+- Dredge: coat food lightly in flour (or sugar), then shake off the excess.
+- Macerate: soak fruit in sugar, liqueur or juice to soften it and add flavour.
+- Smorgasbord: a Scandinavian-style buffet of many cold and hot dishes.
 - Maillard reaction: browning of proteins and sugars with dry heat above about 140°C (flavour and colour).
 - Caramelisation: browning of sugar, from about 160°C.
 - Gelatinisation: starch granules absorb liquid and swell when heated, thickening it (sauces, rice).

@@ -1,6 +1,6 @@
 # Answer evaluation — manual check for TESTER
 
-76 common kitchen-interview and assessment questions (including follow-ups and Australian food safety and WHS) with an ideal answer and what must (not) happen. The ideal answer is one good
+89 common kitchen-interview and assessment questions (including follow-ups, Australian food safety and WHS, and SA Cook questionnaire topics) with an ideal answer and what must (not) happen. The ideal answer is one good
 version; other wording passes if it meets every rule below.
 
 ## Setup
@@ -140,6 +140,24 @@ Short answers (1–2 sentences, B1, "I"). A Code requirement must not be swapped
 | 74 | What is the hierarchy of control? | Eliminate the hazard, substitute it, isolate it, use engineering controls, then administrative controls, and PPE last. | Correct order. | Model WHS Regulations r 36 |
 | 75 | What is an SDS? | A Safety Data Sheet. It tells me a chemical's hazards, safe use, storage, PPE and first aid. | — | Model WHS Regulations; Safe Work Australia |
 | 76 | How do you lift a heavy box of stock safely? | I check the weight, use a trolley or get help if it's heavy, bend my knees and keep the box close to my body. | Assess first, aids or help. | Safe Work Australia Code of Practice: Hazardous manual tasks |
+
+## J. SA Cook questionnaire topics (answers must match the KB)
+Short answers (1–2 sentences, B1, "I"). The KB fact column names the knowledge file and the note the answer must agree with.
+| # | Question | Ideal answer | Must / must not | KB fact |
+|---|---|---|---|---|
+| 77 | I had gastro but I feel better this morning. What do you do? | I phone my supervisor before my shift and stay home. I come back only 48 hours after the symptoms stop. | Phone, not text; 48 h. Must NOT say feeling better is enough. | 01 Sick procedure (SITXFSA005) |
+| 78 | How do you check that a probe thermometer is accurate? | I put the probe in crushed ice with a little water for about 30 seconds. It must read 0 °C, within 1 °C. | Ice point 0 °C, ±1 °C. | 01 Thermometer ice-point check; 3.2.2 cl 22 |
+| 79 | Your thermometer reads 6 °C in ice water. What do you do? | It's 6 degrees out, so I stop using it, tag it and use a backup. I tell my supervisor and recheck food it measured. | Outside ±1 °C → stop using it. Must NOT call 6 °C fine because it is near 5 °C. | 01 Ice-point check, 6 °C case |
+| 80 | How do you store food in the cool room, from top to bottom? | I put cooked and ready-to-eat food on top, then vegetables, raw seafood, raw meat, mince, and raw chicken at the bottom. | Ready-to-eat on top, raw poultry at the bottom; raw never above ready-to-eat. | 01 Cool room order |
+| 81 | Two cooks are arguing during service. What do you do? | I calmly ask them to stop and step away from the line, call the supervisor, and we sort it out after service. | Safety, supervisor, private talk after service; must not take sides. | 14 Two cooks arguing (SITHCCC043) |
+| 82 | What do you write in a handover note? | I write the prep done and still to do, food cooling with its start time, low stock, equipment faults and allergen notes. | At least 3 items from the KB list. | 14 Handover notes |
+| 83 | What do you go through in a shift briefing? | We go through covers and bookings, specials and menu changes, 86'd items, allergies and dietary requests, and our sections. | Allergies + at least 2 more items. | 14 Shift briefing |
+| 84 | What's the difference between cross-contamination and cross-contact? | Cross-contamination moves bacteria onto food; cross-contact moves an allergen into allergen-free food. Cooking doesn't remove allergens. | Allergen = cross-contact; cooking does not remove allergens. | 13 Cross-contamination vs cross-contact |
+| 85 | A customer has an allergic reaction to a dish. What do you do? | I call 000 and give first aid, tell the manager, keep the dish and packaging, and write an incident report. | 000 and first aid first; keep the dish. | 13 Allergen incident |
+| 86 | A chicken pasta costs $4.50 a portion and the target food cost is 30%. What's the menu price? | $4.50 divided by 0.30 is $15 without GST, so the menu price is $16.50 with GST. | $15.00 ex-GST, $16.50 with GST; must NOT use $4.50 × 1.3. | 16 Costing a chicken pasta dish |
+| 87 | The price of seafood goes up a lot. What do you do? | I re-cost the recipe, then raise the price a little, trim the portion, use a cheaper fish or talk to suppliers. | Re-cost first + at least 2 options. | 16 Supplier price rise |
+| 88 | How do you handle a customer complaint? | I listen, apologise, solve the problem and thank the customer. If I can't fix it, I get my supervisor. | LAST order (Listen, Apologise, Solve, Thank); escalate. | 20 Complaints (SITXCCS014) |
+| 89 | How do you answer the phone at work? | I answer within three rings with a greeting, our business name and my name, and I speak clearly. | Three rings; greeting, business name, own name. | 20 Phone (SITXCCS014) |
 
 ## Recording results
 For each failed item note: question #, the app's answer, which pass rule failed. Send failures about scope or invented
