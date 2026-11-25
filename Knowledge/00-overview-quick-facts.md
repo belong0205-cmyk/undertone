@@ -5,16 +5,8 @@ Answers should use Australian standards and terminology (FSANZ Food Standards Co
 Exact numbers can differ slightly between RTOs, textbooks and workplaces; where a range is given, the
 middle of the range is the safe answer, and "follow workplace procedures / the standard recipe" is always correct to add.
 
-## Packaging rules
-- 25 units = 20 core + 5 electives: 3 from Group A (Cookery and Catering) or Group B (Asian Cookery),
-  plus 2 more from Group A, B or C (General).
-- SITHCCC043 Work effectively as a cook requires work in a commercial kitchen over at least 48 complete food service periods (shifts), recorded in a logbook.
-
-## Core units (20) → knowledge file
-SITHCCC023 food preparation equipment (03); 027 basic methods of cookery (04); 028 appetisers and salads (05); 029 stocks, sauces and soups (06); 030 vegetable, fruit, eggs and farinaceous (07); 031 vegetarian and vegan (08); 035 poultry and 036 meat (09); 037 seafood (10); 041 cakes, pastries and breads (11); 042 special dietary requirements (13); 043 work effectively as a cook (14); SITHKOP009 clean kitchen premises and equipment (15); KOP010 plan and cost recipes (16); SITHPAT016 desserts (12); SITXFSA005 hygienic practices and FSA006 safe food handling (01); SITXHRM007 coach others (17); SITXINV006 receive, store and maintain stock (16); SITXWHS005 safe work practices (02).
-
-## Electives
-Group A cookery and catering (file 18; sandwiches in 05): SITHCCC025/026/032/033/038/039/040/044, SITHPAT014, SITXFSA007. Group B Asian cookery (19): SITHASC020–028, 033. Group C general (20): SITXWHS006, HLTAID011, BSBSUS211, SITXCCS014 customer service, SITXINV007, SITXCOM006/007, SIRXOSM002/003.
+## Qualification
+- 25 units = 20 core + 5 electives. SITHCCC043 Work effectively as a cook requires work in a commercial kitchen over at least 48 complete food service periods (shifts), recorded in a logbook.
 
 ## Numbers most often asked (Australia)
 ### Temperature control
@@ -47,7 +39,7 @@ Red = raw meat; Yellow = raw poultry; Blue = raw seafood; Green = fruit and vege
 Purple is often used for allergen-free (e.g. gluten-free) preparation.
 
 ## Key legislation and standards
-- Food Act in each state/territory (e.g. Food Act 2003 NSW, Food Act 1984 Vic, Food Act 2006 Qld); enforced by local councils / state food authorities.
+- Food Act in each state/territory (South Australia: Food Act 2001, enforced by SA Health and local councils; NSW Food Act 2003; Vic Food Act 1984).
 - FSANZ Australia New Zealand Food Standards Code, Chapter 3 (Australia only):
   Std 3.1.1 Interpretation and application; Std 3.2.1 Food Safety Programs (only where state law requires); Std 3.3.1 Food Safety Programs for Food Service to Vulnerable Persons (hospitals, aged care, child care);
   Std 3.2.2 Food Safety Practices and General Requirements; Std 3.2.2A Food Safety Management Tools (in force from 8 December 2023);

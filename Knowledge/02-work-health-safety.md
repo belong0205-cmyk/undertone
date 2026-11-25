@@ -1,10 +1,10 @@
-# Work health and safety — SITXWHS005 Participate in safe work practices (also SITXWHS006 basics; SITXWHS007 Implement and monitor WHS practices is the Certificate IV unit)
+# Work health and safety — SITXWHS005 Participate in safe work practices (also SITXWHS006)
 
 ## Legislation and duties
-- Model Work Health and Safety (WHS) Act 2011 + WHS Regulations + Codes of Practice (Safe Work Australia); Victoria has its own OHS Act 2004. Regulators: SafeWork SA, SafeWork NSW, WorkSafe Vic/Qld/WA.
+- Model Work Health and Safety (WHS) Act 2011 + WHS Regulations + Codes of Practice (Safe Work Australia); Victoria has its own OHS Act 2004. Regulators: SafeWork SA, WorkSafe Vic.
 - PCBU (person conducting a business or undertaking, i.e. the employer/business) has the primary duty of care: safe workplace, safe plant and systems of work, safe use/storage of substances, adequate facilities, information/training/supervision, monitoring health and conditions, consultation with workers.
-- Workers must take reasonable care for their own and others' safety, follow reasonable instructions and procedures, use the PPE provided, and report hazards, incidents and injuries; visitors and contractors must take reasonable care too.
-- Consultation through health and safety representatives (HSR), committees and toolbox talks; workers may stop unsafe work if there is a serious risk. Notifiable incidents (death, serious injury or illness, dangerous incident) go to the regulator immediately and the site is preserved.
+- Workers must take reasonable care for their own and others' safety, follow reasonable instructions and procedures, use the PPE provided, and report hazards, incidents and injuries.
+- Consultation: health and safety representatives (HSR), committees, toolbox talks. Notifiable incidents (death, serious injury or illness, dangerous incident) go to the regulator immediately; preserve the site.
 
 ## Key terms
 - Hazard: anything with the potential to cause harm (hot oil, wet floor, sharp knife).
@@ -55,4 +55,4 @@
 - First aid DRSABCD (HLTAID011): Danger, Response, Send for help (000), Airway, Breathing, CPR (30 compressions : 2 breaths), Defibrillation (AED).
 
 ## Safe work practices for cooks
-Follow manufacturer instructions and procedures; use only equipment you are trained on; tag faulty equipment "Out of service" and report it; full uniform (long-sleeved jacket, long pants, apron, enclosed non-slip shoes, hat); clean as you go; call "behind", "hot", "sharp", "corner"; manage breaks, hydration, fatigue and stress.
+Follow manufacturer instructions and procedures; use only equipment you are trained on; tag faulty equipment "Out of service" and report it; full uniform (long-sleeved jacket, long pants, apron, enclosed non-slip shoes, hat); clean as you go; call "behind", "hot", "sharp", "corner"; manage fatigue and stress.
