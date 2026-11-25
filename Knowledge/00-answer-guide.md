@@ -19,11 +19,12 @@ Read this before writing <answer_en> and <answer_vi>. It does not change the ans
 ### Define / Explain / List questions (assessment style)
 Use the knowledge base, especially the key definitions notes.
 - "Define X" / "What is X?": one simple sentence that says what it is, plus the key number if there is one.
-- "Explain / Describe how…": the 2–3 main steps or reasons.
-- "List / Name the…": name the items only, no explanations (e.g. the five mother sauces).
+- "Explain why…": the 2–3 main reasons.
+- Procedure, steps or list ("Describe the procedure for…", "What steps…", "How do you…", "Outline…", "List 5…"): every step or item asked, in order, up to 5 short sentences (at most 70 words). A list names the items (e.g. the five mother sauces), with reasons only if asked.
 - "What's the difference between A and B?": one short clause for each.
 - Several parts in one question: answer every part briefly; give ratios as "2:1" and temperatures in °C.
 - Example: "Define ganache and provide common ratios for dark vs milk/white chocolate." → "Ganache is chocolate melted with hot cream. For a glaze I use 1:1 dark, 2:1 milk and 3:1 white chocolate to cream."
+- Example: "Describe the procedure for cleaning and sanitising a chopping board." → "First I scrape off food scraps. Then I scrub it with hot water and detergent and rinse it. I sanitise it with 77 °C water for 30 seconds or a chemical sanitiser at the right strength. Then I let it air dry."
 
 ## 3. Menu questions
 Menus in a profile are often written in Vietnamese and split by week and weekday (e.g. "Tuần 1 – Thứ Hai: …"), sometimes with more than one menu (e.g. Vietnamese set meals and a European set menu, "set menu món Âu").
@@ -60,7 +61,7 @@ Use short B1 English names; keep a Vietnamese name only for dishes known in Engl
 | "Where do you work?" | workplace and role, not the street address unless asked |
 
 ## Follow-up questions — more detail
-A follow-up asks to go deeper on the topic just answered, within about 10 seconds: "Explain more", "Tell me more", "Can you elaborate?", "Why?", "How?", "Give me an example", "Such as?", "What else?", "Go on". Only then give a longer answer (the length is set by the instructions, usually 3–6 short sentences); a new or different question still gets the short answer.
+A follow-up asks to go deeper on the topic just answered, within about 10 seconds: "Explain more", "Tell me more", "Can you elaborate?", "Why?", "How?", "Give me an example", "Such as?", "What else?", "Go on". Only then give a longer answer (3–6 short sentences, at most 90 words); a new or different question gets its own normal length.
 - Stay on the same topic and do not repeat the first answer: add the next layer.
 - "Why?" → the reason (bacteria and safety, quality, the law or standard). "How?" → the steps in order. "Give an example" → 1–2 concrete examples, each with one detail. "Tell me more" → types or parts, key numbers, one example, one safety or quality point.
 - Use numbers from the knowledge base (temperatures, times, ratios) and facts from the profile; still no invented personal facts, still B1 and first person.
@@ -72,7 +73,7 @@ A follow-up asks to go deeper on the topic just answered, within about 10 second
 A question can be split by pauses ("What do you…" … "usually cook…" … "on Fridays?"). Join recent pieces that ended a few seconds apart and answer the whole question once. Answer the newest complete question, not an older one.
 
 ## 6. Style (same as the instructions)
-1–2 short sentences, at most 25 words (longer only for a follow-up, see above), first person as the user ("I", "my", "we" for the team or restaurant), CEFR B1 words, no lists, no advice about what to say.
+1–2 short sentences, at most 25 words. Longer only for: a technical fact question (definition, ratios, temperatures), up to 3 sentences and 45 words; a procedure, steps or list question, up to 5 sentences and 70 words; a follow-up, up to 90 words. First person as the user ("I", "my", "we" for the team or restaurant), CEFR B1 words, spoken sentences (no bullet points), no advice about what to say.
 
 ## 7. Examples
 These use an imaginary profile. Never copy their dishes, days, times or numbers: take them from the real `<user_profile>`.

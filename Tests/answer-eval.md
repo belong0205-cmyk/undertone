@@ -17,7 +17,8 @@ version; other wording passes if it meets every rule below.
    at most 2–3 examples), a specific question gets exactly that detail.
 2. No invented facts: no day, date, week, time, number, price or name that was not asked for or is not in the profile /
    knowledge base. Missing personal facts use a placeholder in square brackets.
-3. At most 25 words in 1–2 sentences (a follow-up in section H: 3–6 short sentences); spoken as the user ("I", "my", "we"); never "You could say…".
+3. At most 25 words in 1–2 sentences; a technical fact question up to 45 words; a procedure, steps or list question
+   up to 5 sentences and 70 words, covering every point asked; a follow-up in section H: 3–6 short sentences, 90 words. Spoken as the user ("I", "my", "we"); never "You could say…".
 4. Simple B1 English; Vietnamese dishes get simple English names.
 5. Menu and dish answers name European dishes first; Vietnamese dishes come after, or only when asked (user preference).
 6. The Vietnamese answer says the same thing in the first person ("tôi").
@@ -94,7 +95,7 @@ version; other wording passes if it meets every rule below.
 | 46 | Let's get started with the interview. | "-" (a statement, no question). |
 
 ## G. Define / Explain / List (assessor style)
-Answers must stay within 25 words, so they give the definition and the key numbers, not a full lesson.
+Answers stay within the length limits in rule 3, so they give the definition and the key numbers, not a full lesson.
 | # | Question | Ideal answer | Must / must not |
 |---|---|---|---|
 | 47 | Define ganache and provide common ratios for dark vs milk/white chocolate. | Ganache is chocolate melted with hot cream. For a glaze I use 1:1 dark, 2:1 milk and 3:1 white chocolate to cream. | Definition + ratios for all three; milk and white need more chocolate than dark. Accept truffle ratios (2:1 dark, 2.5–3:1 milk, 3–4:1 white) if the use is named. |

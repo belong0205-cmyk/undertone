@@ -53,9 +53,7 @@ middle of the range is the safe answer, and "follow workplace procedures / the s
 - Thawing: in the fridge (best), under cold running water in sealed packaging, or in the microwave and cook immediately. Never thaw at room temperature. Do not refreeze thawed raw food unless it is cooked first.
 ### Hygiene
 - Hand washing (3.2.2 cl 15(4)): soap and warm running water, clean hands thoroughly (guidance: at least 20 seconds), dry on a single-use towel. When: before handling food, after the toilet, after raw food before ready-to-eat food, after coughing, sneezing, eating, smoking or touching hair or body (cl 15(2)–(3)).
-- Illness (3.2.2 cl 14): a food handler with a symptom (diarrhoea, vomiting, sore throat with fever, fever or jaundice) or a foodborne disease must tell the supervisor and not handle food that could be contaminated. Health departments advise no food handling until 48 hours after symptoms stop.
-- Food Safety Supervisor (FSS): certificate issued within the last 5 years, authority to direct food handlers, reasonably available (3.2.2A cl 2, 11). Category one businesses keep substantiation records for 3 months (3.2.2A cl 12).
-- Sanitising (3.2.2 cl 20), always after cleaning: heat (hot water at 77°C for 30 seconds), chemicals as the manufacturer directs (e.g. bleach 100 ppm in cold water or 50 ppm in warm water; 70% alcohol), or heat and chemicals (a dishwasher's sanitising cycle) (FSANZ cleaning and sanitising guidance; Safe Food Australia App. 6).
+- Illness, food safety supervisor and records: file 01. Sanitising methods: file 15.
 ### Kitchen numbers
 - Deep-frying oil 160–190°C (most foods 175–180°C). Change oil when dark, foaming, smoking at normal temperature or smelling rancid.
 - Water boils 100°C; simmer ~85–95°C (gentle bubbles); poach ~70–85°C (liquid barely moving).
