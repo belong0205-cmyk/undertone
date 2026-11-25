@@ -24,6 +24,10 @@
 ## Pricing considerations
 Food cost and labour cost, overheads (rent, energy, equipment), target profit, competitor prices, customer market and perceived value, type of establishment and menu, portion size, seasonal availability of ingredients, popularity (menu engineering: stars = popular & profitable, ploughhorses = popular & low profit, puzzles = profitable & unpopular, dogs = neither).
 Typical food cost targets 25–35% (fine dining may be lower; cafés/pubs vary).
+- Supplier price rise (e.g. seafood): re-cost the recipe; raise the price, trim the portion slightly, use a cheaper species or garnish, make it a market-price special, or negotiate with suppliers.
+- Costing a chicken pasta dish: list every ingredient and quantity, unit cost from invoices (after yield), quantity × unit cost, add 2–5% sundries, total ÷ portions = portion cost; e.g. $4.50 at a 30% target → $15.00 ex-GST → $16.50 with GST.
+- Popular but low profit (ploughhorse): re-cost, slightly smaller portion or cheaper side, small price rise, pair with high-margin sides or drinks, keep quality.
+- Degustation portions too big and waste high: smaller tasting portions, lighter courses between rich ones, standard recipes with weighed portions, trial and get feedback, track plate waste.
 
 ## Menu planning principles
 Balance of colour, texture, flavour, cooking methods and ingredients across the menu (avoid repetition — e.g. not two cream sauces or two pastry dishes); seasonality and local produce; nutritional balance and dietary options (V, VG, GF); target market and price point; kitchen equipment and staff skill; storage capacity; cost and profitability; menu descriptions must be accurate (Australian Consumer Law — no misleading claims e.g. "fresh" or "local").
@@ -52,7 +56,7 @@ Balance of colour, texture, flavour, cooking methods and ingredients across the 
 - Stock control documents: purchase orders, requisitions (from store to kitchen), delivery dockets, invoices, credit notes, stock cards/bin cards, inventory software, wastage sheets, transfer notes.
 - Report and record waste, spoiled, damaged, expired or out-of-date stock; dispose of it correctly; investigate causes.
 - Security: lock stores, limit access, monitor deliveries and stock movement.
-- Problems of overstocking: spoilage, cash tied up, storage space, theft. Under-stocking: running out (86'd items), unhappy customers, emergency purchases at higher prices.
+- Overstocking: spoilage, cash and space tied up, theft. Understocking: 86'd items, unhappy customers, costly emergency buys.
 
 ## Purchasing (SITXINV007)
-Approved suppliers (quality, price, reliability, delivery times, food safety certification, credit terms), quotes and tenders, specifications (product, grade, size, packaging, temperature), ordering by phone/online/standing orders, ethical and sustainable purchasing, checking prices against invoices.
+Approved suppliers (quality, price, reliability, food safety certification, credit terms), quotes, specifications (product, grade, size, packaging, temperature), ordering, ethical and sustainable buying, check invoices against prices.

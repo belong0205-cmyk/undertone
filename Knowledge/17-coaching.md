@@ -1,7 +1,7 @@
 # Coach others in job skills — SITXHRM007
 
 ## Coaching vs training
-Coaching is on-the-job, one-to-one (or small group) guidance by an experienced colleague to help someone learn or improve a specific practical skill (e.g. how to use the slicer, fillet a fish, make a béchamel, set up a station). Training is usually more formal and structured. Coaching may be needed for new staff, staff changing sections, new equipment/menu items/procedures, or when performance needs improving.
+Coaching = on-the-job, one-to-one guidance from an experienced colleague to learn or improve a practical skill (use the slicer, fillet a fish, make béchamel). Training is more formal. Needed for new staff, new sections, equipment, menu items or procedures, or poor performance.
 
 ## Coaching process
 1. Identify the need: observe performance, talk with the trainee and supervisor, check job descriptions and standards, new procedures or equipment.
@@ -13,16 +13,11 @@ Coaching is on-the-job, one-to-one (or small group) guidance by an experienced c
 7. Follow up: monitor progress on the job, provide further practice, identify further needs, report progress to supervisor, record the coaching (training records).
 Common shorthand: Tell → Show → Do → Review (or "Explain, Demonstrate, Practise, Feedback").
 
-## Principles of adult learning
-Adults learn best when the learning is relevant to their job, builds on their experience, is practical/hands-on, involves participation, is respectful, gives regular feedback and allows them to practise. Learning styles: visual (watch), auditory (listen), kinaesthetic (do).
+## Adult learning and communication
+Adults learn best when it is relevant, practical, builds on experience, respectful, with practice and regular feedback; learning styles visual, auditory, kinaesthetic. Use clear simple language, explain jargon, listen actively, ask open questions, be patient, demonstrate for language or cultural differences.
 
-## Communication skills for coaching
-Clear, simple language; avoid jargon or explain it; active listening; open questions (what, how, why) to check understanding; patience; positive body language; respect for cultural and language differences (use demonstrations, pictures, check understanding without embarrassing the learner).
-
-## Problems and how to handle them
-- Learner not progressing: identify the cause (task too complex, language barriers, lack of confidence, poor timing, personal issues), break the skill into smaller steps, extra practice, different approach, discuss with supervisor.
-- Performance problems persisting: report to the supervisor/manager for further training or other action.
-- Learner unsafe: stop the activity immediately, explain and demonstrate the safe method.
+## Problems
+Not progressing: find the cause (too complex, language, confidence, timing), smaller steps, more practice, another approach, tell the supervisor. Unsafe: stop at once, explain and demonstrate the safe way.
 
 ## Records
 Record date, skill coached, learner, outcome and further needs on a training record/log — evidence of competence for WHS and food safety (Std 3.2.2A food handler training) and for staff development.

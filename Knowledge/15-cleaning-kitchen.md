@@ -20,7 +20,7 @@ Code: eating and drinking utensils clean and sanitary immediately before each us
 Before starting food preparation; after each task (especially raw meat/poultry/seafood); between raw and RTE foods; after spills; at the end of the shift; according to the cleaning schedule; after deliveries; when interrupted (e.g. after touching the bin).
 
 ## Cleaning schedule
-A written schedule listing: what is to be cleaned (area/equipment), how (method and chemicals, dilution, PPE), when/how often (after use, daily, weekly, monthly), who is responsible, and sign-off by the person and checked by a supervisor. Examples: benches, chopping boards and utensils — after each use; floors — daily and after spills; fridges — wipe daily, deep clean weekly; ovens, fryers (boil-out), exhaust hood filters — weekly; cool rooms, walls, ceilings, grease trap — monthly or as scheduled; pest control — contracted service.
+Written schedule: what, how (method, chemical, dilution, PPE), when (after use, daily, weekly, monthly), who, and sign-off checked by a supervisor. E.g. benches, boards, utensils after each use; floors daily; fridges daily wipe, weekly deep clean; ovens, fryers, hood filters weekly; cool rooms and grease trap monthly; pest control by contractor.
 
 ## Equipment cleaning
 - Large equipment: switch off and isolate (unplug, gas off), let it cool, dismantle removable parts (slicer blade guard, mixer bowl, food processor blades), wash/rinse/sanitise parts, wipe fixed parts, dry, reassemble correctly, test, report faults, follow manufacturer instructions.
@@ -46,11 +46,8 @@ A written schedule listing: what is to be cleaned (area/equipment), how (method 
 - Broken glass: sweep with dustpan, wrap/container labelled "broken glass", never put hands in bins.
 - Follow local council and environmental regulations; reduce, reuse, recycle.
 
-## Linen and uniforms
-Clean uniforms daily; launder tea towels, cloths and aprons regularly at high temperature; store clean linen separately from dirty.
-
 ## Pest control
-Keep premises clean, food covered and stored off the floor, bins closed, gaps sealed, screens on windows, door seals; licensed pest control contractor with reports; report signs of pests immediately.
+Keep it clean, food covered and off the floor, bins closed, gaps sealed, screens and door seals; licensed contractor; report signs at once (see food safety notes).
 
 ## Environmental and efficiency practices when cleaning
 Use correct chemical dilutions (no overuse), environmentally friendly products where possible, conserve water (don't leave taps running, full dishwasher loads), switch off equipment, recycle packaging.

@@ -15,18 +15,19 @@
 | Fungi | button, Swiss brown, field, shiitake, oyster, enoki, porcini, truffle |
 | Sea vegetables | nori, kombu, wakame |
 Quality: firm, bright colour, no wilting, bruising, mould, sprouting or soft spots; correct size; in season (better flavour, cheaper).
+Seasons (Australia): summer — tomatoes, zucchini, eggplant, capsicum, corn, cucumber, beans, stone fruit, mangoes, berries, watermelon; winter — cabbage, cauliflower, broccoli, Brussels sprouts, leeks, parsnips, pumpkin, kale, citrus, apples, pears, kiwifruit, rhubarb.
 Potato types: waxy (low starch – Kipfler, Nicola, Chat, Pink Eye — hold shape: salads, boiling) vs floury/starchy (high starch – Russet/Burbank, Sebago, King Edward, Coliban — mash, chips, roasting, baked). Store potatoes in a cool, dark, dry place (light turns them green — solanine, toxic; cut away green parts or discard).
 
 ## Vegetable cookery
 - Boiling: green vegetables into boiling salted water, uncovered, cook quickly, refresh (blanch and refresh) to keep colour; root vegetables start in cold water.
 - Steaming, roasting (root vegetables, pumpkin, caramelised), grilling/char-grilling (zucchini, eggplant, capsicum), stir-frying, sautéing, deep frying (tempura, chips), braising (red cabbage, fennel, leeks), glazing (carrots with butter, sugar, a little water until syrupy), puréeing, baking (jacket potatoes, gratins), stuffing (capsicum, mushrooms).
-- Potato dishes: mashed/duchess (mash + yolks, piped and baked), croquettes, Lyonnaise (sautéed with onions), Anna (layered sliced potatoes with butter, baked in a mould), dauphinoise (sliced potatoes baked in cream and garlic), boulangère (sliced with onion baked in stock), rösti (grated, pan-fried), fondant (cylinders browned then cooked in stock and butter), château, parmentier, hasselback, pommes frites/chips, wedges, gratin, hash browns, gnocchi.
+- Potato dishes: mash, duchess (mash + yolks, piped, baked), croquettes, Lyonnaise (with onions), Anna (layered, baked in butter), dauphinoise (baked in cream and garlic), boulangère (baked in stock with onion), rösti, fondant, château, hasselback, chips, wedges, gnocchi.
 - Nutrients: water-soluble vitamins (B, C) are lost into cooking water and by long cooking — cook as close to service as possible, in minimal water, don't soak cut vegetables, don't add bicarbonate of soda (destroys vitamins).
 - Colour changes: green chlorophyll turns olive-brown with acid and long cooking (cook uncovered, quickly); red (anthocyanin — red cabbage) stays red with acid, turns blue/purple with alkali; white vegetables stay white with acid (add lemon to cauliflower/celeriac water); orange (carotene) is stable.
 
 ## Fruit
 - Classification: citrus (orange, lemon, lime, mandarin, grapefruit), stone fruit (peach, plum, apricot, cherry, nectarine, mango), pome (apple, pear, quince), berries (strawberry, blueberry, raspberry), tropical (pineapple, papaya, banana, passionfruit, lychee, mango), melons (watermelon, rockmelon, honeydew), vine (grape, kiwi), dried fruit.
-- Uses: fresh fruit salads, poached (pears in red wine or syrup), baked (apples), grilled, stewed/compote, purées and coulis, fritters, jams, chutneys, sorbets, garnishes, savoury dishes (apple sauce, orange with duck).
+- Uses: fruit salads, poached, baked, grilled, compote, purées and coulis, fritters, jams, chutneys, sorbets, savoury dishes.
 - Enzymic browning (apple, banana, avocado, pear): prevent with acid (lemon juice), acidulated water, cover, prepare just before service.
 - Ripening: bananas, avocados, tomatoes, stone fruit ripen after picking (store at room temperature then refrigerate); ethylene gas from ripe fruit speeds ripening of others.
 - Rockmelon: Listeria risk — wash whole melon, cut on clean board, keep cut melon ≤5°C.
@@ -49,16 +50,16 @@ Potato types: waxy (low starch – Kipfler, Nicola, Chat, Pink Eye — hold shap
 ## Farinaceous dishes (pasta, rice, grains, gnocchi, polenta)
 ### Pasta
 - Dried pasta (durum wheat semolina + water, extruded) vs fresh pasta (flour – usually '00' – and eggs, approx 100 g flour : 1 egg; can be coloured with spinach, squid ink, beetroot, tomato, saffron).
-- Shapes: long (spaghetti, linguine, fettuccine, tagliatelle, pappardelle, angel hair/capellini), short/tubular (penne, rigatoni, macaroni, fusilli, farfalle, orecchiette, conchiglie), filled (ravioli, tortellini, agnolotti, cannelloni), sheets (lasagne).
-- Cooking: plenty of boiling salted water (~10 parts water : 1 part pasta, ~10 g salt per litre), stir at the start, cook al dente (firm to the bite; fresh pasta 2–4 min, dried 8–12 min), reserve some pasta water to adjust sauce, don't rinse unless serving cold or holding for service (then refresh, oil lightly, reheat by plunging).
-- Classic sauces: Bolognese (ragù), carbonara (eggs, pecorino/parmesan, guanciale/pancetta, pepper — no cream traditionally), Napoletana (tomato), arrabbiata (chilli tomato), puttanesca (olives, capers, anchovy), Alfredo (butter, cream, parmesan), aglio e olio (garlic, oil, chilli), marinara (seafood/tomato), pesto Genovese, primavera (vegetables), vongole (clams).
-- Match sauce to shape: long thin pasta with smooth/oil sauces; tubes and twists hold chunky sauces; flat wide noodles with rich creamy/meat sauces.
+- Fresh pasta dough: flour well, eggs in the centre, mix with a fork, knead 8–10 min until smooth and elastic, wrap and rest 30 min (gluten relaxes), roll from the widest setting, fold, thin, cut. Too dry or crumbly: a few drops of water or beaten egg; too wet or sticky: knead in a little flour; rest again.
+- Shapes: long (spaghetti, linguine, fettuccine, tagliatelle, pappardelle), short (penne, rigatoni, fusilli, farfalle, orecchiette), filled (ravioli, tortellini, cannelloni), sheets (lasagne). Long thin pasta with smooth or oil sauces; tubes and twists with chunky sauces; wide ribbons with rich sauces.
+- Cooking: plenty of boiling salted water (~10 parts water : 1 part pasta, ~10 g salt per litre), stir at the start, cook al dente (fresh 2–4 min, dried 8–12 min), keep some pasta water for the sauce, don't rinse unless serving cold or holding (then refresh, oil lightly, reheat by plunging).
+- Classic sauces: Bolognese, carbonara (eggs, pecorino, guanciale, pepper — no cream), Napoletana, arrabbiata, puttanesca, Alfredo, aglio e olio, marinara, pesto, primavera, vongole.
 ### Rice
 - Long grain (basmati, jasmine — fluffy, separate grains), medium grain (calrose), short grain (arborio, carnaroli, vialone nano — risotto; sushi rice; glutinous/sticky rice), brown rice (bran retained, longer cooking), wild rice (actually a grass seed).
 - Methods: boiling (large amount of water, drain), absorption (measured water, e.g. 1 : 1.5–2, covered), steaming, pilaf/pilau (rice sweated in fat with onion, then stock added, cooked covered in oven), risotto (short-grain rice toasted in butter/oil with onion, deglazed with wine, hot stock added a ladle at a time while stirring; ~18 min; finished off the heat with butter and parmesan — mantecatura; creamy, "all'onda" (flows like a wave)), paella, fried rice (use cold cooked rice), sushi rice (seasoned with rice vinegar, sugar, salt).
 - Food safety: Bacillus cereus — cool cooked rice rapidly, refrigerate, hold hot ≥60°C, reheat once only.
 ### Other grains and farinaceous items
-- Gnocchi: potato (floury baked/boiled potatoes riced while hot + flour + egg/yolk + salt — overworking makes them tough; cooked when they float + ~30 s), Parisienne (choux paste), Roman (semolina, baked).
+- Gnocchi: potato (floury baked/boiled potatoes riced while hot + flour + egg/yolk + salt — overworking makes them tough; cooked when they float + ~30 s; good = light, tender, holds shape; heavy = too much flour, overworked, potatoes riced cold; falls apart = wet or waxy potatoes, too little flour or egg, water boiling too hard), Parisienne (choux paste), Roman (semolina, baked).
 - Polenta (coarse cornmeal): soft polenta (stirred, creamy, with butter and parmesan) or set polenta (spread, chilled, cut and grilled/fried).
 - Couscous (steamed semolina granules), burghul/bulgur (cracked wheat — tabbouleh), quinoa (seed, gluten-free, rinse to remove bitter saponins), barley (pearl barley — orzotto), freekeh, farro, buckwheat (soba noodles; gluten-free).
 - Noodles: egg noodles, rice noodles (vermicelli, rice sticks — pho, pad Thai), udon (wheat), soba (buckwheat), glass/bean thread noodles (mung bean starch).

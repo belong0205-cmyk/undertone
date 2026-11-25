@@ -13,7 +13,6 @@
 | Palette knife | spreading, lifting, icing cakes |
 | Sharpening steel | hones/realigns the edge between uses (does not remove metal) |
 | Whetstone (sharpening stone) | sharpens by grinding a new edge (coarse then fine grit), used with water/oil |
-| Turning knife, zester, channel knife, peeler, melon baller, mandoline | specialised cuts and garnishes |
 - Knife safety: keep knives sharp (a blunt knife slips and needs more force); use the right knife; cut on a stable board (damp cloth underneath); claw grip (fingertips tucked, knuckles guide the blade); cut away from the body; never try to catch a falling knife; carry pointing down beside your leg, blade facing backwards; don't leave knives in sinks or on bench edges; store in knife rolls, magnetic racks or blocks; clean and sanitise immediately after use, especially between raw and cooked food.
 - Honing angle on a steel approximately 15–20°.
 
@@ -39,10 +38,7 @@
 Reasons for uniform cuts: even cooking, consistent presentation, portion control, professional standard.
 
 ## Small equipment
-- Measuring: scales, jugs, spoons, probe and sugar thermometers, timer. Pans: saucepans, sauteuse (sloped sides), sauté pan (straight sides), frying pan, wok, stockpot, braising pan, roasting tray, fish kettle.
-- Bakeware: tins, flan rings, trays, silicone mats, piping bags, rolling pins, cutters, cooling racks, dariole moulds.
-- Utensils: whisks, spatulas, ladles, spiders, skimmers, tongs, fish slice, colander, chinois (fine conical strainer), drum sieve (tamis), mouli, muslin, mandoline, grater, mortar and pestle, portion scoops.
-- Gastronorm (GN) containers: standard sizes (1/1, 1/2, 1/3, 1/6, 1/9) used in bain-maries, fridges, combi ovens.
+Scales, measuring jugs and spoons, probe and sugar thermometers, timers; saucepans, sauteuse, sauté pan, frying pan, wok, stockpot, roasting tray, fish kettle; cake tins, flan rings, silicone mats, piping bags, cutters, dariole moulds; whisks, spatulas, ladles, spiders, tongs, fish slice, colander, chinois, drum sieve, mouli, muslin, grater, mortar and pestle, portion scoops; gastronorm (GN) containers 1/1, 1/2, 1/3, 1/6, 1/9.
 
 ## Large equipment
 | Equipment | Use / safety |
@@ -76,6 +72,13 @@ Reasons for uniform cuts: even cooking, consistent presentation, portion control
 4. Use safely: guards, pusher, PPE, never leave running unattended, switch off and unplug before cleaning or removing attachments.
 5. After use: dismantle, clean, sanitise, dry, reassemble and store; report maintenance needs.
 6. Minimise waste and energy use: preheat only when needed, switch off when not in use, full loads in dishwashers.
+- Lock-out/tag-out (isolation): switch off and unplug or lock the isolating switch (gas off) and attach a "Danger – Do not operate" tag so no one can start the machine while it is cleaned, repaired, jammed or faulty.
+- Broken guard (e.g. mixer): stop, switch off and unplug, tag "Out of service", tell the supervisor, record it in the maintenance log, use other equipment — never run it without the guard.
+- Slicer and mandoline: risk of deep cuts. Controls: guard and food pusher every time, cut-resistant glove, blade set to zero after use, no distractions, trained staff only, unplug before cleaning.
+- Common faults: blunt or chipped blades, frayed cords or broken plugs, missing guards, wrong thermostat temperature (fryer, oven, fridge above 5°C), torn door seals, gas smell or pilot out, leaks, strange noise or burning smell. Report: stop, tag out, tell the supervisor, write it in the fault log.
+- Hot equipment and oil: dry oven cloths or heat-resistant gloves, long-sleeved jacket, apron, enclosed non-slip shoes; face shield or goggles when filtering or changing oil. Ovens and steamers: stand back and open doors away from you to let steam out, pull racks with dry cloths, liquids on lower shelves.
+- Used oil: cool, filter into the used-oil drum for a licensed recycler — never down the sink (blocks grease traps; illegal).
+- Shared equipment: clean and sanitise between raw and ready-to-eat or allergen tasks; colour-coded boards and knives. Store cleaned equipment dry, covered or upside down, on clean shelves off the floor, away from chemicals.
 
 ## Preparation techniques asked in this unit
-Peeling, slicing, dicing, chopping, mincing, grating, puréeing, blending, juicing, whisking, folding, kneading, rolling, piping, portioning, marinating, crumbing (pané: flour → egg wash → breadcrumbs), battering, trussing, larding/barding, tenderising, blanching and refreshing, segmenting citrus (suprêmes), zesting, shucking, turning vegetables.
+Peeling, slicing, dicing, mincing, grating, puréeing, whisking, folding, kneading, piping, portioning, marinating, crumbing (flour → egg wash → breadcrumbs), battering, trussing, blanching and refreshing, segmenting citrus, shucking, turning vegetables.

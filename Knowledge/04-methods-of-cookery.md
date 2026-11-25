@@ -12,13 +12,13 @@ Cooking in liquid at 100°C with rapid bubbling. Foods: pasta, green vegetables 
 ### Simmering
 Liquid just below boiling (~85–95°C), small bubbles. Stocks, soups, sauces, stews, root vegetables, tougher meats (corned beef). Gentle — keeps stock clear, meat tender.
 ### Poaching
-Gentle cooking in liquid ~70–85°C with no bubbles. Shallow poaching: food partly covered in a little liquid (fish fillets with fumet and wine, covered with cartouche; liquid used for the sauce). Deep poaching: fully submerged (eggs in water with vinegar, whole fish in court bouillon, chicken, fruit in syrup). Tender, delicate foods; liquid must stay below boiling.
+Gentle cooking in liquid ~70–85°C with no bubbles. Shallow poaching: food partly covered in a little liquid (fish fillets with fumet and wine, covered with cartouche; liquid used for the sauce). Deep poaching: fully submerged (eggs in water with vinegar, whole fish in court bouillon, chicken, fruit in syrup). Tender, delicate foods; liquid must stay below boiling. Poached egg ready: white set and opaque, yolk soft and runny, neat oval with no wispy white, well drained.
 ### Steaming
-Cooking in steam (atmospheric or pressure steamer, bamboo basket, combi oven). Fish, vegetables, dumplings, puddings, rice. Healthy (retains nutrients, colour, no fat), food doesn't get waterlogged. Care when opening lids — steam burns.
+Cooking in steam (atmospheric or pressure steamer, bamboo basket, combi oven). Fish, vegetables, dumplings, puddings, rice. Oven steaming: combi or steam oven with perforated GN trays. Healthy (retains nutrients, colour, no fat), food doesn't get waterlogged. Care when opening lids — steam burns.
 ### Stewing
 Small, even pieces of food fully covered in liquid, cooked slowly in a covered pan on the stove or in the oven; liquid served as part of the dish. Tough, cheaper cuts with connective tissue (chuck, gravy beef, shin, lamb shoulder, chicken legs). Types: brown stew (meat seared first, e.g. ragoût, goulash, beef bourguignon), white stew (fricassée — meat not browned, sauce made with velouté; blanquette — meat blanched, sauce finished with cream/liaison), curry, Irish stew. Collagen breaks down to gelatine → tender.
 ### Braising
-Large pieces or joints seared, then cooked slowly in a covered pan with a small amount of liquid (one-third to two-thirds coverage) and mirepoix, usually in the oven (~150–160°C). Beef cheeks, lamb shanks, osso buco, short ribs, pork belly, braised cabbage, celery, leeks. Liquid reduced to make the sauce.
+Large pieces or joints seared, then cooked slowly in a covered pan with a small amount of liquid (one-third to two-thirds coverage) and mirepoix, usually in the oven (~150–160°C). Beef cheeks, lamb shanks, osso buco, short ribs, pork belly, braised cabbage, celery, leeks. Liquid reduced to make the sauce. Tough braise: not cooked long enough (keep going until fork-tender), cooked too hot or boiled (gentle, ~150°C oven), wrong cut (use collagen-rich shin, chuck, cheek), liquid dried out (top up, cover), sliced with the grain.
 ### Roasting
 Cooking with dry heat in an oven (or on a spit) with fat, uncovered. Tender joints (beef sirloin, rib, rack of lamb, whole chicken, pork loin), root vegetables. Points: seal/brown, baste, cook on a trivet/mirepoix, check core temperature, rest meat 10–20 minutes before carving (juices redistribute, carry-over cooking), use juices to make jus/gravy (deglaze). Pork crackling: score and salt the dry rind, start hot.
 ### Pot roasting (poêlé)
@@ -26,7 +26,7 @@ Cooking a joint in a covered pot on a bed of root vegetables with butter, in the
 ### Baking
 Dry convection heat in an oven, no fat added (unlike roasting). Bread, cakes, pastries, potatoes, fish en papillote (in paper parcel — steams in its own juices), pies, gratins.
 ### Grilling (broiling)
-Fast, high radiant heat from above (salamander) or below (char-grill, barbecue). Tender, quick-cooking cuts: steaks, cutlets, chicken breast, sausages, fish, vegetables, halloumi. Points: preheat, oil the food not the grill, crosshatch marks by turning 90°, don't move too often, turn with tongs not a fork, rest meat.
+Fast, high radiant heat from above (salamander) or below (char-grill, barbecue). Tender, quick-cooking cuts: steaks, cutlets, chicken breast, sausages, fish, vegetables, halloumi. Points: preheat, oil the food not the grill, crosshatch marks by turning 90°, don't move too often, turn with tongs not a fork, rest meat. Faults: dry (overcooked, too lean, not rested, pierced); burnt outside, raw inside (heat too high for the thickness — sear, then finish on a cooler part or in the oven; even thickness); sticking (grill not hot, clean or oiled).
 ### Shallow frying
 Cooking in a small amount of hot fat in a pan. Types: pan-frying (meat, fish à la meunière — floured, cooked in butter, finished with nut-brown butter, lemon and parsley), sautéing (small pieces tossed quickly over high heat — "sauter" means to jump), stir-frying (wok, very high heat, small even pieces, constant movement), griddling. Points: hot pan before food, presentation side down first, don't overcrowd (stews instead of fries).
 ### Deep frying
@@ -40,15 +40,7 @@ Microwaves agitate water molecules to produce heat; uneven heating — stir, cov
 Consider: the cut/quality of the food (tender cuts → fast dry heat; tough cuts with connective tissue → slow moist heat), the dish/recipe and menu style, desired texture and colour, nutrition, equipment available, time and volume.
 
 ## Changes during cooking
-- Protein coagulates (sets) — eggs set at ~62–70°C; overcooked proteins become tough and dry, squeeze out moisture.
-- Collagen (connective tissue) converts to gelatine with slow, moist cooking.
-- Starch gelatinises (swells and thickens) in liquid at ~60–80°C+, e.g. sauces, rice.
-- Maillard reaction: browning of protein and sugars at high dry heat (>140°C) — flavour and colour in seared meat, toast, crust.
-- Caramelisation: browning of sugar (~160°C+).
-- Fat melts; water evaporates; vitamins (B, C) leach into water or are destroyed by heat; green vegetables turn olive with acid or long cooking (keep lid off, cook quickly).
-
-## Common cooking terms
-Al dente (firm to the bite), au gratin (browned topping, cheese/breadcrumbs), bain-marie (water bath), baste, blanch, braise, brunoise, caramelise, chiffonade, clarify, concassé, deglaze (dissolve pan residue/fond with liquid), dredge, emulsion, en papillote, flambé, fold, garnish, glaze, infuse, jus (natural meat juices), julienne, liaison (egg yolk + cream thickener), macerate, marinate, mise en place (everything in its place – preparation before service), mount (monter au beurre: whisk cold butter into sauce), nappe (coats the back of a spoon), pané, purée, reduce, refresh, render, rest, roux, sauté, score, sear, season, skim, sweat (cook gently without colour), temper, truss, zest.
+Proteins coagulate (eggs ~62–70°C; overcooked = tough, dry); collagen turns to gelatine with slow moist cooking; starch gelatinises (~60–80°C+); Maillard browning above ~140°C (searing — flavour, colour; it does not seal in juices); sugar caramelises ~160°C+; fat melts, water evaporates; vitamins B and C leach out or are destroyed; green vegetables turn olive with acid or long cooking.
 
 ## Quality of finished dishes
 Correct temperature (hot food hot, cold food cold), colour, texture, flavour and seasoning (taste before serving), portion size per standard recipe, clean plate rim, appropriate garnish and sauce, served promptly.

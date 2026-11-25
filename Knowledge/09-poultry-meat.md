@@ -19,6 +19,15 @@
 - Stuffing/farce: cook stuffing separately or ensure the centre reaches 75°C; stuff just before cooking.
 - Cooking methods: roasting (whole birds — rest 10–15 min), grilling/char-grilling (breast, thigh, spatchcock), pan-frying, deep frying (crumbed/battered — southern fried, karaage, schnitzel), poaching (breast, whole chicken — in stock), steaming, braising/stewing (coq au vin, cacciatore, fricassée, curries), stir-frying, sous vide, smoking. Duck confit: legs salted/cured, then cooked slowly submerged in duck fat at a low temperature until tender, stored in the fat.
 - Classic dishes: roast chicken, chicken Kiev (garlic butter-filled, crumbed, deep fried), chicken cordon bleu (ham and cheese), chicken parmigiana, coq au vin (red wine, lardons, mushrooms, pearl onions), chicken chasseur, chicken cacciatore, chicken fricassée (white stew), chicken supreme with mushroom cream sauce, butter chicken, satay, Thai green curry, Peking duck, duck à l'orange (bigarade), roast turkey with cranberry sauce.
+### Poultry assessment answers
+- Crispy duck skin: score the skin without cutting the meat, dry uncovered in the fridge (salt), start skin-side down in a cold or medium pan to render the fat slowly, pour off fat, finish in the oven; whole duck: scald, dry overnight, roast on a rack.
+- Confit: cure legs in salt, garlic and thyme 12–24 h, rinse, dry, cover in duck fat, cook slowly (oven about 120–140°C, 2–3 h) until tender; store covered in the fat ≤5°C, labelled; crisp the skin before service; reheat thoroughly. Risk: low-oxygen fat storage (C. botulinum) — keep cold, use-by. Duck legs aren't poached: water doesn't render fat or crisp skin and the meat goes stringy; fat keeps it moist and rich.
+- Offal (livers, hearts, gizzards): high moisture, spoils fast — ≤5°C on the bottom shelf, use in 1–2 days or freeze; cook chicken livers through (Campylobacter).
+- Pale roast chicken skin: oven too cool, wet skin, no fat on the skin, bird covered or crowded (steams). Fix: raise the heat or finish under the salamander, brush with butter; next time dry the skin.
+- 8 pieces: cut the skin between leg and body, pop the hip joint, remove the legs; split each at the knee (thigh, drumstick); remove the wings; cut out the backbone; split the breast in two. Sharp boning knife, yellow board, stable surface, sanitise after.
+- Juicy breast: brine, even thickness, cook to the safe core then rest (carry-over), baste, skin on; don't overcook.
+- Raw poultry dripped in the cool room: throw out any ready-to-eat food it touched, move the poultry to a covered tray on the bottom shelf, clean and sanitise shelves and floor, wash hands, record and report.
+- Portions: weigh to the standard recipe (e.g. 180–220 g breast, half or quarter bird).
 
 ## Meat
 ### Structure and tenderness
@@ -42,25 +51,32 @@
 | | Shin/gravy beef, osso buco (cross-cut shin) | stew, braise, stock |
 | Offal | liver, kidney, heart, tongue, tail (oxtail), cheek, tripe, sweetbreads, bone marrow | varies |
 ### Veal
-Meat from young calves (pale pink, low fat, mild); cuts: leg (schnitzel/escalopes — topside), loin (cutlets), shank (osso buco — braised with gremolata), shoulder; dishes: wiener schnitzel, veal saltimbocca (prosciutto, sage), veal scaloppine, vitello tonnato.
+Young calf, pale and lean: schnitzel/escalopes (leg), cutlets (loin), osso buco (braised shank with gremolata), saltimbocca, scaloppine, vitello tonnato.
 ### Lamb
 - Classes: lamb (under 12 months/no permanent incisor teeth), hogget (one to two permanent incisors), mutton (older, stronger flavour).
-- Cuts: rack (French-trimmed ribs; cutlets; crown roast), loin (loin chops, backstrap/eye of loin — lean, quick cooking), leg (roast whole, butterflied, chump, topside, steaks), shoulder (slow roast, braise, diced for curries/navarin), shank (braise), neck (stew, neck fillet), breast/flap (slow cook), lamb mince.
-- Dishes: roast leg of lamb with rosemary and garlic, rack of lamb with herb crust, slow-roasted lamb shoulder, lamb navarin (brown stew with vegetables), Irish stew (white stew with potato and onion), moussaka, shepherd's pie, lamb tagine, lamb kofta, souvlaki, rogan josh, braised lamb shanks.
+- Cuts: rack (French-trimmed; cutlets), loin (chops, backstrap — lean, quick), leg (roast, butterflied, steaks), shoulder (slow roast, braise, curries), shank (braise), neck (stew), breast/flap (slow cook), mince.
+- Dishes: roast leg, herb-crusted rack, slow-roast shoulder, navarin, Irish stew, moussaka, shepherd's pie, tagine, kofta, rogan josh, braised shanks.
 ### Pork
 - Cuts: loin (roast, cutlets, chops, rack), fillet/tenderloin, belly (roast for crackling, braise, cure for bacon/pancetta), leg (roast, ham), shoulder/forequarter (scotch fillet/collar butt, blade — slow roast, pulled pork, char siu), spare ribs, hock and trotters, mince.
 - Crackling: score the rind, dry well (refrigerate uncovered), rub with oil and salt, start in a hot oven (220–240°C) then reduce.
-- Dishes: roast pork with crackling and apple sauce, pork belly, pork schnitzel, sweet and sour pork, char siu, pulled pork, carnitas, pork and fennel sausages, saltimbocca, Vietnamese caramelised pork.
+- Dishes: roast pork with crackling and apple sauce, pork belly, schnitzel, sweet and sour pork, char siu, pulled pork, Vietnamese caramelised pork.
 ### Processed and cured meats
-Sausages, bacon (cured/smoked belly or loin), ham (cured leg), prosciutto (dry-cured ham), pancetta, salami, chorizo, corned beef (brined silverside/brisket), pastrami, bresaola, terrines and pâtés (elective SITHCCC039).
+Sausages, bacon, ham, prosciutto, pancetta, salami, chorizo, corned beef, pastrami, bresaola, terrines and pâtés.
 ### Mince
 Highest risk because surface bacteria are mixed through — use within 1–2 days, cook to 75°C. Dishes: burgers, meatballs, rissoles, Bolognese, lasagne, cottage pie (beef) and shepherd's pie (lamb), chilli con carne, kofta.
+### Meat assessment answers
+- Spoilage — reject or discard: slimy or sticky surface, sour or off smell, grey-green colour, swollen or leaking vacuum packs, above 5°C on delivery, past use-by.
+- Pork belly: score the skin, dry uncovered overnight, rub with salt, slow-roast about 150–160°C for 2–3 h to render the fat, then blast at 220–240°C to crackle (or braise, press, chill, portion and crisp).
+- Beef cheek braise: trim sinew, season, sear hard, remove; sweat mirepoix, add tomato paste, deglaze with red wine and reduce; return cheeks, add brown stock two-thirds up and a bouquet garni; cover, braise ~150°C for 3–4 h until fork-tender; strain, reduce the sauce to nappe, season.
+- Slice against the grain: cuts the muscle fibres short, so the meat is tender to chew.
+- Less shrinkage and yield loss: moderate cooking temperatures, don't overcook (probe), rest before slicing, accurate trimming and portioning with scales, carve correctly, use trimmings and juices.
+- Receiving and storage records: delivery temperature, supplier, use-by and batch, pack condition, rejections, fridge temperature log, labels and rotation.
 
 ## Preparation techniques for meat and poultry
 Trimming fat and sinew, removing silverskin, boning out, French-trimming racks and cutlets (exposing bone), butterflying, batting out (escalopes, schnitzel), portioning to standard weights (e.g. 200–250 g steak), dicing for stews (2–3 cm), tying/trussing joints (even shape, even cooking), larding (inserting fat strips into lean meat) and barding (wrapping lean meat in fat/bacon), marinating, crumbing (pané), stuffing, mincing, scoring, brining, dry rubs, seasoning just before cooking.
 
 ## Accompaniments and sauces (classic pairings)
-Roast beef — Yorkshire pudding, horseradish, red wine jus/gravy; steak — Béarnaise, pepper sauce, Diane sauce, mushroom sauce, chips, salad; lamb — mint sauce/jelly, rosemary jus, redcurrant; pork — apple sauce, crackling, sage and onion stuffing, mustard; chicken — bread sauce, gravy, stuffing, cranberry (turkey); duck — orange, cherry, plum, hoisin; osso buco — gremolata and risotto Milanese.
+Roast beef — Yorkshire pudding, horseradish, red wine jus; steak — Béarnaise, pepper, Diane or mushroom sauce; lamb — mint, rosemary jus; pork — apple sauce, sage and onion stuffing; chicken — bread sauce, gravy; turkey — cranberry; duck — orange, cherry, plum; osso buco — gremolata, risotto Milanese.
 
 ## Food safety for meat and poultry
 Receive ≤5°C (vacuum packs intact, no swelling/off smell), store bottom shelf ≤5°C covered, separate raw from RTE, colour-coded boards (red meat, yellow poultry), sanitise after use, cook to safe core temperatures, cool leftovers within the 2h/4h rule, label everything with date and use-by.

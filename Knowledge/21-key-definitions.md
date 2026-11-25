@@ -18,15 +18,6 @@ One-line definitions with the numbers assessors expect. Details are in the unit 
 - Clarified butter: butter with water and milk solids removed; higher smoke point; used for hollandaise and frying.
 - Jus: natural meat juices from roasting, often lightly reduced; jus lié is lightly thickened.
 
-## Stocks and soups
-- Stock: flavoured liquid made by simmering bones/vegetables with mirepoix and a bouquet garni; never salted. Times: fish 20–30 min, chicken 2–3 h, beef/veal 6–8 h.
-- Mirepoix: rough-cut onion, carrot and celery (white mirepoix: no carrot) for flavour.
-- Bouquet garni: thyme, bay leaf, parsley stalks (and peppercorns) tied together, removed after cooking.
-- Fumet: concentrated fish stock made with white wine.
-- Court bouillon: water with acid (wine, vinegar or lemon) and aromatics, for poaching fish and seafood.
-- Consommé: a clear soup made by clarifying a strong stock with a raft (lean mince, egg whites, mirepoix).
-- Velouté soup / cream soup / purée soup / bisque: thickened with roux and liaison / finished with cream / thickened by the puréed main ingredient / shellfish soup.
-
 ## Cooking terms and methods
 - Mise en place: everything prepared and in its place before service.
 - Blanch and refresh: cook briefly in boiling water, then plunge into iced water to stop cooking and keep colour.
@@ -44,22 +35,16 @@ One-line definitions with the numbers assessors expect. Details are in the unit 
 - Coagulation: proteins setting with heat or acid (eggs set at about 62–70°C).
 - Carry-over cooking: food keeps cooking from its own heat after it leaves the heat; rest meat.
 - Bain-marie: a water bath for gentle cooking or for keeping food hot (≥60°C), not for reheating.
-- Julienne / brunoise / macédoine / paysanne / chiffonade: fine strips about 2 × 2 mm × 4–5 cm / about 2 mm dice / about 5 mm dice / thin slices of even shapes / fine ribbons of leaves.
 
 ## Pastry and desserts
-- Tempering chocolate: melting, cooling and rewarming chocolate to set stable cocoa butter crystals for shine and snap. Dark: 45–50°C → 27–28°C → 31–32°C; milk 29–30°C and white 28–29°C working temperature.
 - Tempering eggs: slowly whisking hot liquid into eggs to raise their temperature without scrambling them (custards).
-- Ganache: chocolate and hot cream emulsion. Chocolate : cream — dark 1:2 sauce, 1:1 glaze/filling, 2:1 truffles; milk about 1:1, 2:1, 2.5–3:1; white about 1–1.5:1, 3:1, 3–4:1.
 - Crème anglaise vs crème pâtissière: anglaise is a pouring custard (milk/cream, yolks, sugar) cooked to 82–84°C, never boiled; pâtissière is a thick pastry cream with flour/cornflour and must be boiled 1–2 minutes.
 - Sabayon: egg yolks and sugar (and wine) whisked over heat to a light foam.
-- Meringues — list: French (sugar whisked into raw whites), Swiss (whites and sugar warmed over a bain-marie, then whisked), Italian (hot sugar syrup at 118–121°C poured onto whisked whites; most stable).
 - Chantilly cream: cream whipped with sugar and vanilla.
 - Gluten: the elastic network formed by wheat proteins (glutenin and gliadin) when flour is mixed with water and kneaded.
 - Proving: letting a yeast dough rise; knock back to remove large gas pockets.
 - Lamination: folding butter into dough in many thin layers (puff pastry, croissants); steam lifts the layers.
 - Blind baking: baking a pastry case lined with paper and baking weights before filling, to stop a soggy base.
-- Creaming method: beating butter and sugar until light and fluffy to trap air. Rubbing-in method: rubbing fat into flour to a breadcrumb texture (scones, shortcrust). Whisking (foaming) method: whisking eggs and sugar to the ribbon stage (sponge, génoise). Folding: gently mixing to keep air in.
-- Raising agents — list: chemical (baking powder, bicarbonate of soda), biological (yeast), mechanical/physical (air and steam).
 - Bloom (chocolate): grey/white streaks from fat (poor tempering, heat) or sugar (moisture).
 - Seized chocolate: thick and grainy because a little water got in.
 
@@ -78,4 +63,3 @@ One-line definitions with the numbers assessors expect. Details are in the unit 
 - Hierarchy of control — list: elimination, substitution, isolation, engineering controls, administrative controls, PPE.
 - SDS: Safety Data Sheet — the supplier's safety information for a chemical.
 - PPE: personal protective equipment (gloves, non-slip shoes, apron, goggles, oven mitts).
-- Kitchen brigade: the team structure — executive/head chef, sous chef, chef de partie, demi chef, commis, kitchen hand.

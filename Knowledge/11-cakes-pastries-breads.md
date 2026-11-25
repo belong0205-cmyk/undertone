@@ -21,6 +21,7 @@
 | Melting | melt fat, sugar and syrup together, cool slightly, mix into dry ingredients | gingerbread, brownies, Anzac biscuits, some muffins |
 | All-in-one / blending | all ingredients beaten together (usually with extra baking powder/soft margarine) | quick cakes, commercial batters |
 | Muffin method | mix wet and dry separately, combine briefly (lumpy batter — overmixing = tough, tunnels) | muffins, pancakes |
+- Sponge types: Genoise (whisked whole eggs, melted butter — fine, moist), Victoria (creamed butter — denser, sandwich), fatless sponge (whisked eggs and sugar — very light, Swiss roll), chiffon (oil and whipped whites — moist, tall), angel food (whites only — white, airy).
 - Baking: preheat oven (cakes usually 160–180°C), prepare tins (grease, line, flour), fill to about two-thirds, centre of the oven, don't open the door early (collapse).
 - Test if cooked: skewer comes out clean, springs back when lightly pressed, shrinks from the sides of the tin, golden colour. Cool in the tin ~5–10 min then on a wire rack.
 - Faults: sunken centre (underbaked, too much raising agent/sugar, door opened early, oven too cool), peaked/cracked top (oven too hot, too much flour), heavy/dense (too little raising agent, mixture curdled, overmixed after flour, under-creamed), tunnels (overmixed), dry (overbaked, too little fat/liquid), fruit sunk (batter too thin, fruit wet — toss in flour), burnt outside raw inside (oven too hot).
@@ -34,10 +35,10 @@
 | Puff pastry (feuilletage) | dough (détrempe) + slab of butter folded and rolled repeatedly (laminated) creating hundreds of layers; rises by steam. Methods: French (butter enclosed in dough like an envelope), English (butter on two-thirds of dough, folded in thirds), Scotch / rough puff (butter cubes mixed into dough, then folded — quick). Folds: single (book in three) and double (book fold) turns, resting chilled between turns | vol-au-vents, beef Wellington, sausage rolls, mille-feuille, palmiers, pie tops |
 | Choux pastry (pâte à choux) | water/milk + butter boiled, flour added all at once and cooked (panada) until it leaves the sides of the pan, cooled slightly, eggs beaten in gradually to a piping consistency; baked at high heat (~200–220°C) then lowered — rises by steam, hollow | profiteroles, éclairs, croquembouche, gougères, Paris-Brest, churros |
 | Filo (phyllo) | paper-thin sheets (usually bought), brushed with melted butter/oil, kept covered with a damp cloth so it doesn't dry out | baklava, spanakopita, strudel, samosas |
-| Hot water crust | hot water + lard boiled and mixed into flour; moulded while warm | raised pork pies |
-| Suet pastry | flour + suet, steamed or baked | steak and kidney pudding, dumplings |
-| Flaky pastry | partly laminated (fat added in stages) | Eccles cakes, pie lids |
-| Strudel dough | stretched paper-thin | apple strudel |
+| Others | hot water crust (lard, moulded warm — pork pies), suet (steamed puddings), flaky (partly laminated), strudel (stretched paper-thin) | |
+- Frangipane (almond cream): butter and sugar creamed, eggs, almond meal (a little flour); spread in tart cases under fruit (pear and almond tart, Bakewell), pithivier; baked until set and golden; tree-nut allergen.
+- Choux rises because the water turns to steam and the egg and cooked starch set around the hollow. Fixes for flat, soggy or not hollow: bake until dry and golden, keep the door shut, add egg gradually, pierce and dry out, fill close to service.
+- Quiche custard: about 1 egg per 100–125 mL cream or milk, salt, pepper, nutmeg. Controls: blind-bake and seal the case (egg wash), filling first then custard, bake ~150–160°C until just set with a slight wobble (overbaked = curdled, weeping); PHF — ≤5°C.
 - Rules for short pastry: keep everything cold, don't overwork (gluten → tough, shrinks), rest in fridge (relaxes gluten, firms fat), roll evenly in one direction, blind bake (line with paper, fill with baking beans/rice, bake, remove weights, dry out) for wet fillings to avoid soggy bottoms; egg wash for colour/seal.
 - Pastry faults: tough (overhandled, too much water, too little fat), shrinking (not rested, stretched when lining tin), crumbly (too little water, too much fat), soggy base (not blind baked, oven too cool), puff not rising (butter melted into the dough, not rested, oven too cool, edges sealed with egg wash), choux flat/not hollow (too much egg, underbaked, oven door opened, panada undercooked).
 
@@ -49,11 +50,12 @@
 - Dough methods: straight dough (all ingredients mixed at once), sponge and dough / pre-ferments (poolish, biga — part of the flour/water/yeast fermented first for flavour), sourdough (natural leaven/starter of wild yeasts and lactic acid bacteria), no-knead (long slow fermentation), enriched doughs (with butter, eggs, sugar, milk — brioche, challah, bun dough, doughnuts), laminated yeast doughs (croissant, Danish — yeast dough + butter layers).
 - Products: white/wholemeal loaves, rolls, baguette, ciabatta, focaccia, sourdough, rye, pizza, pita, naan, brioche, hot cross buns, fruit buns, doughnuts, croissants, Danish pastries, bagels (boiled then baked), English muffins, flatbreads.
 - Bread faults: dense/heavy (underproved, too little yeast, old/dead yeast, flour too weak, too much salt), collapsed/large holes or sour (overproved), pale crust (oven too cool, not enough sugar), cracked/burst sides (underproved, oven too hot), close texture (insufficient kneading).
+- Baguette: lean dough (flour, water, salt, yeast), long and thin, crisp golden crust, open irregular crumb, slashed, baked with steam. Ciabatta: very wet dough, big holes. Sourdough: natural starter, tangy, chewy. Brioche: butter and eggs, soft, rich. Focaccia: olive oil, dimpled.
 - Quick breads (no yeast): scones, soda bread (bicarbonate + buttermilk), damper (Australian), muffins, banana bread, cornbread.
-- Scones: rubbing-in method, light handling, cut straight down (don't twist cutter), bake hot (~220°C), served with jam and cream.
+- Scones: rubbing-in, light handling, cut straight down, bake hot (~220°C).
 
 ## Biscuits and slices
-Methods: creaming (shortbread, cookies), melting (Anzac biscuits — rolled oats, golden syrup, coconut, bicarb), rubbing-in; slices (lemon slice, caramel slice, brownies, vanilla slice with puff pastry and custard). Store airtight; label allergens (nuts, gluten, egg, milk).
+Creaming (shortbread, cookies), melting (Anzac biscuits), rubbing-in; slices (lemon, caramel, brownies, vanilla slice). Store airtight; label allergens.
 
 ## Storage and presentation
-Cool completely before filling, icing or storing. Store cakes airtight at room temperature unless they contain cream, custard, cream cheese or fresh fruit (refrigerate ≤5°C). Freeze unfilled sponges, pastries and doughs well-wrapped. Label with name, date and allergens. Present with neat even slices (hot clean knife), consistent portions (cake marker), appropriate garnish and sauces.
+Cool completely before filling, icing or storing. Store cakes airtight at room temperature unless they contain cream, custard, cream cheese or fresh fruit (refrigerate ≤5°C). Freeze unfilled sponges, pastries and doughs well-wrapped. Label with name, date and allergens (gluten, egg, milk, nuts, sesame); custard and cream fillings are PHF — cool fast, ≤5°C; separate equipment and no flour dust for gluten-free items. Present with neat even slices (hot clean knife), consistent portions (cake marker), appropriate garnish and sauces.

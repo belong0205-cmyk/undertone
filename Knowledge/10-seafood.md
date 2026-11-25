@@ -11,7 +11,8 @@
   - Crustaceans (hard jointed outer shell, legs): prawns, rock lobster/crayfish, Moreton Bay bugs, Balmain bugs, crabs (mud crab, blue swimmer, spanner), marron, yabbies, scampi/langoustines.
   - Molluscs (soft body): univalves/gastropods (one shell: abalone, periwinkles, whelks), bivalves (two hinged shells: oysters — Sydney rock and Pacific, mussels, scallops, clams/vongole, pipis, cockles), cephalopods (no external shell: squid/calamari, octopus, cuttlefish).
 - Other: sea urchin, sea cucumber, caviar/roe.
-- Market forms: whole (round), gilled and gutted, dressed (scaled, gutted, head/fins removed), fillets, cutlets/steaks (cross-cut through the backbone), darnes (cutlets of round fish), tronçons (cutlets of flat fish on the bone), goujons (finger strips), paupiettes (rolled fillets), suprêmes (portion of fillet cut on the slant), butterfly, portions, smoked, salted, canned, frozen (IQF = individually quick frozen).
+- Hard-shell: crustaceans with a hard outer shell (crab, lobster, bugs) and bivalves (oysters, mussels, clams). Soft-shell: soft-shell crab (just moulted, eaten whole, usually fried) and cephalopods (squid, octopus — no outer shell).
+- Market forms: loin (thick boneless centre cut of large fish — tuna, swordfish, salmon), whole, gilled and gutted, dressed, fillets, cutlets/steaks (darnes from round fish, tronçons from flat fish), goujons (finger strips), paupiettes (rolled fillets), suprêmes, butterflied, smoked, canned, frozen (IQF).
 
 ## Common Australian species — texture, flavour, best methods
 | Fish | Notes |
@@ -65,14 +66,15 @@
 - Smoked salmon and RTE seafood: Listeria risk — strict use-by, ≤5°C.
 
 ## Preparation techniques
-- Scaling (tail to head with the back of a knife or scaler), gutting (cut belly, remove guts and bloodline, rinse), removing gills, trimming fins, skinning, filleting (round fish: two fillets along the backbone; flat fish: four fillets), pin-boning (tweezers), portioning (e.g. 160–200 g main), cutting cutlets/darnes, butterflying (sardines, prawns), cleaning and deveining prawns (remove intestinal tract), removing the beard (byssus) from mussels just before cooking and scrubbing shells, shucking oysters (oyster knife, protective glove, hinge end), cleaning squid (remove head/tentacles, quill/cartilage, skin; score and cut tubes into rings or flattened pieces), tenderising octopus (blanch, slow braise or tumble), killing crustaceans humanely (chill to insensibility in an ice slurry/freezer then quickly split or cook, following animal welfare guidelines), cleaning crab (remove apron and gills), splitting lobster/bugs.
+- Scaling (tail to head), gutting (remove guts and bloodline, rinse), removing gills, trimming fins, skinning, filleting (round fish: two fillets; flat fish: four), pin-boning, portioning (e.g. 160–200 g main), cutting cutlets, butterflying (sardines, prawns), deveining prawns, debearding and scrubbing mussels just before cooking, shucking oysters (oyster knife, protective glove, hinge end), cleaning squid (head, quill, skin; score, cut rings), tenderising octopus, killing crustaceans humanely (chill to insensibility, then split or cook quickly), cleaning crab (apron, gills), splitting lobster and bugs.
 - Fish stock from trimmings (bones of white non-oily fish; no gills/blood).
 
 ## Cooking methods and examples
 - Seafood cooks quickly (little connective tissue) — overcooking makes it dry, tough and rubbery (squid/octopus: cook very fast — under 2 min — or very slowly).
 - Fish is cooked when the flesh turns opaque and flakes easily (core around 60–63°C); prawns turn pink/orange and curl into a "C" (overcooked = "O").
 - Methods: pan-fry (meunière — floured, butter, lemon, parsley), grill/char-grill/barbecue (oily fish, prawns, octopus, whole fish), bake/roast (whole fish, en papillote, crusted fillets), shallow poach (sole Bonne Femme, fillets in fumet and wine, sauce made from the cooking liquor), deep poach (whole salmon in court bouillon), steam (Asian-style whole fish with ginger and shallot), deep fry (beer-battered fish, salt and pepper squid, tempura, crumbed calamari, whitebait), stew/braise (bouillabaisse, cioppino, seafood curries), stir-fry, sous vide, smoke (hot smoked vs cold smoked), cure (gravlax — salt, sugar, dill), raw (sashimi, oysters, ceviche — "cooked" by citrus acid, carpaccio, tartare — use sashimi-grade fish).
-- Classic dishes: fish and chips, sole meunière, sole Véronique (grapes), sole Bonne Femme (mushrooms, white wine sauce), Thermidor (lobster, mustard cream, gratinated), lobster mornay, moules marinières (mussels with white wine, shallots, parsley), oysters natural/Kilpatrick (bacon and Worcestershire)/mornay, garlic prawns, prawn cocktail (Marie Rose), paella, bouillabaisse (Provençal fish stew with rouille), seafood chowder, salt and pepper squid, chilli crab, seafood risotto, fish en papillote, laksa, salmon with beurre blanc, barramundi with lemon butter.
+- Classic dishes: fish and chips, sole meunière, sole Bonne Femme, lobster Thermidor or mornay, moules marinières, oysters natural/Kilpatrick/mornay, garlic prawns, prawn cocktail (Marie Rose), paella, bouillabaisse (with rouille), seafood chowder, salt and pepper squid, chilli crab, fish en papillote, salmon with beurre blanc.
+- Frying fish: dry, season, coat (flour → batter, or flour, egg, crumbs), fry at 175–180°C in small batches, drain on a rack, salt, serve at once. Greasy = oil too cool, fryer overloaded, old oil or thin batter → let the oil recover between batches, change oil. Stop sticking: clean, very hot, oiled grill or pan; dry the fish and oil it; skin-side down and don't move it until it releases.
 - Sauces and accompaniments: lemon wedges, tartare sauce, beurre blanc, hollandaise, salsa verde, aioli/rouille, Marie Rose, sweet chilli, nam jim, dill/caper sauces.
 
 ## Seafood hazards
@@ -83,4 +85,4 @@
 - Physical: bones, shell fragments.
 
 ## Sustainability
-Choose sustainable species and certified sources (e.g. MSC/ASC labels, Australian sustainable seafood guides), respect seasons, minimum legal sizes and bag limits, use the whole fish (bones for stock, trimmings for fish cakes) to reduce waste.
+Choose sustainable species and certified sources (e.g. MSC/ASC labels, Australian sustainable seafood guides), respect seasons, minimum legal sizes and bag limits, use the whole fish (bones for stock, trimmings for fish cakes) to reduce waste; weigh portions and cut evenly from the fillet.

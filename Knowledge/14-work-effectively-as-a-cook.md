@@ -17,16 +17,25 @@ Modern Australian kitchens are smaller and combine roles.
 - Mise en place: "everything in its place" — all preparation completed before service (ingredients prepped, equipment ready, sauces made, garnishes cut, station stocked and labelled).
 - Prep lists / production schedules: list tasks from the menu and bookings/forecast numbers (covers), prioritised by time needed (long-cooking items first — stocks, braises, doughs), assigned to staff, with quantities from par levels.
 - Time management: prioritise, do tasks in a logical order, combine tasks, use waiting time (e.g. while stock simmers), clean as you go, keep the station tidy, check progress against the plan.
-- Reading dockets/orders: number of covers, table number, dishes, modifications and allergies; courses fired ("away", "fire table 5 mains") on the chef's call; "check on" (new order), "service/pick-up" (ready at the pass), "86" (item is unavailable/finished), "all day" (total number of an item across orders), "on the fly" (needed immediately), "behind", "heard/yes chef" (acknowledgement).
+- Dockets: covers, table, dishes, changes and allergies; "away"/"fire" (start cooking), "check on" (new order), "service/pick-up" (ready at the pass), "86" (finished), "all day" (total of an item), "on the fly" (needed now), "heard/yes chef".
 - Service periods: breakfast, lunch, dinner, functions; peak periods require teamwork and communication.
 - Menu types: à la carte (individually priced dishes cooked to order), table d'hôte (set menu with a fixed price and limited choice), set menu / banquet, degustation/tasting (many small courses), buffet, cyclical menu (repeats over a cycle — hospitals, schools), static/fixed menu, specials board, function/event menus, children's menu, room service.
-- Menu sequence: classical menus had many courses (hors d'oeuvre, soup, fish, entrée, main, roast, salad, dessert, savoury, cheese, coffee); modern menus are entrée (starter), main, dessert.
-- Types of food service: plated (à la carte), silver service, family/share style, buffet/self-service, cafeteria, banquet/function, room service, takeaway/delivery.
+- Food service types: plated, silver service, share style, buffet, cafeteria, banquet, room service, takeaway. Modern menu sequence: entrée, main, dessert.
 
 ## Working as a team and communicating
-- Follow instructions from senior chefs; ask questions when unsure; confirm orders ("yes chef").
-- Communicate clearly and respectfully with kitchen and front-of-house staff, suppliers and customers; use correct terminology; handle complaints politely and refer to the supervisor.
-- Contribute to a positive culture: punctual, reliable, professional appearance and hygiene, help colleagues, share workload, respect cultural diversity, no harassment or bullying.
+- Working effectively: on time in clean uniform, follow standard recipes, food safety and WHS procedures, finish mise en place and the prep list on time, communicate, support the team, take direction, clean as you go, minimise waste, respect everyone.
+- Communication in service: call back orders ("yes chef", "heard"), call "behind", "hot", "sharp", tell the pass when a dish is ready or an item is running low (86), check allergy dockets with the chef.
+- Assertive = calm, clear, respectful, states the need and listens ("I'm behind on prep — can you finish the herbs before 5?"). Aggressive = shouting, blaming, insults ("Why are you so useless?"). Passive = saying nothing.
+- Conflict causes: unclear roles or instructions, workload and stress at peak times, poor communication, personality or cultural differences, unfair rosters, shared tasks not done. Prevent: clear prep lists and roles, briefings, respectful talk, fair rosters, deal with issues early.
+- Colleague keeps skipping your prep list: talk privately and calmly ("I" statements), check if they understood or are overloaded, agree who does what; if it continues, tell the sous or head chef; meanwhile prioritise so service stays safe.
+- Two cooks arguing during service: calmly tell them to stop and step away from the line (knives, hot oil), get the supervisor, keep service going, sort it out privately after service, report per policy — safety first, customers can hear, the team loses focus.
+- Disagreeing with the chef: follow reasonable instructions; raise concerns calmly and privately at a good time, not in service; if it is unsafe or illegal (food safety, allergens, WHS), don't do it, explain why and escalate.
+- Feedback: listen without interrupting, don't get defensive, ask questions, thank them, agree on actions, apply them, ask for a follow-up check.
+- Shift briefing confirms: covers, bookings and functions, menu changes and specials, 86'd items, allergies and dietary requests, VIPs, sections and roles, prep priorities, equipment problems, deliveries, safety alerts.
+- Handover notes keep shifts continuous so nothing is missed: prep done and still to do (quantities), food cooling (start time), low stock and orders placed, equipment faults, specials and allergen notes, unfinished cleaning.
+- Peak periods: stock sections before service, help when your section is clear, communicate constantly, follow the pass, clean as you go, stay calm. Timing matters: every dish for a table must be ready together, hot and on time; long tasks first; avoids delays, waste and food left out too long.
+- Workplace documents: standard recipes, prep lists, dockets, menus, allergen matrix, food safety program and HACCP records, cleaning schedules, SDS, SOPs and equipment manuals, rosters, incident forms, code of conduct. Hazards and incidents: see WHS notes (incident reporting).
+- Conduct: follow the code of conduct, be punctual and respectful, no bullying, harassment or discrimination (Fair Work Act, anti-discrimination laws), follow drug and alcohol and social media policies, report misconduct.
 - Resolve conflict: stay calm, listen, focus on the issue, seek help from a supervisor.
 - Customer feedback/complaints about food: listen, apologise, take the dish back, inform the chef, remake promptly, record and use feedback to improve.
 
@@ -36,17 +45,9 @@ Modern Australian kitchens are smaller and combine roles.
 - Evaluate dishes after service: customer feedback, waste, chef's feedback; suggest improvements.
 
 ## Waste minimisation and sustainability
-- Accurate forecasting and ordering, par levels, FIFO stock rotation, correct storage and labelling, proper portion control.
-- Use trimmings (stocks, soups, staff meals, sauces), nose-to-tail and root-to-stem cooking, specials to use surplus stock, preserve (pickle, freeze).
-- Separate waste: general landfill, recycling (glass, cardboard, plastics, cans), organic/food waste (compost, worm farms, food donation where safe — e.g. OzHarvest), used cooking oil (collected and recycled into biodiesel), grease trap maintenance; never pour fats down the drain.
-- Save energy and water: switch off equipment when not in use, don't preheat too early, full dishwasher loads, fix leaks, thaw in the fridge instead of running water, efficient equipment (induction), close cool room doors.
-- Source local, seasonal, ethical produce; reduce packaging.
+- Accurate forecasting and ordering, par levels, FIFO, correct storage and labels, portion control; use trimmings (stocks, soups, staff meals), nose-to-tail and root-to-stem, specials for surplus, preserve.
+- Separate waste: landfill, recycling, organics (compost, food donation where safe — OzHarvest), used oil (recycled into biodiesel), grease trap; never pour fat down the drain.
+- Save energy and water: switch off equipment, don't preheat too early, full dishwasher loads, fix leaks, thaw in the fridge, close cool room doors; buy local, seasonal produce with less packaging.
 
-## Professional development and industry knowledge
-- Keep up to date: trade media, industry associations (e.g. Australian Culinary Federation), short courses, mentoring, food trends such as plant-based food and native Australian ingredients (wattleseed, finger lime, lemon myrtle, kangaroo, Davidson plum, saltbush, macadamia).
-- Career pathway: apprentice/commis → chef de partie → sous chef → head/executive chef; further study (Certificate IV in Kitchen Management SIT40521, Diploma of Hospitality Management).
-- Employment conditions: Fair Work Act, National Employment Standards, Restaurant Industry Award 2020 / Hospitality Industry (General) Award 2020 (rates, penalty rates, breaks, overtime), superannuation, contracts, EEO and anti-discrimination, WHS responsibilities.
-- Self-assessment: seek feedback from supervisors, identify skill gaps, set goals, keep a logbook of skills and service periods.
-
-## Typical assessment logbook evidence for SITHCCC043
-Work over at least 48 service periods across different sections and menus; prepare and present dishes to standard recipes within service times; follow food safety, WHS and hygiene procedures; communicate with team and supervisors; manage mise en place and clean up; minimise waste; reflect on performance and feedback.
+## Professional development and employment
+Keep up to date (trade media, Australian Culinary Federation, short courses, mentoring, trends such as plant-based food and native ingredients); career: commis → chef de partie → sous chef → head chef, further study Certificate IV in Kitchen Management (SIT40521); employment: Fair Work Act, National Employment Standards, Restaurant Industry Award 2020 / Hospitality Industry (General) Award 2020, superannuation; self-assess, seek feedback, keep the logbook (48 service periods).

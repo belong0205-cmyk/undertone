@@ -5,9 +5,14 @@
 - Hot appetisers: arancini, spring rolls, dim sum, croquettes, fritters, satay skewers, bruschetta, vol-au-vents, quiche tartlets, stuffed mushrooms, tempura, empanadas, samosas, chicken wings, crumbed calamari.
 - Cold appetisers: canapés, crudités and dips, antipasto platters, terrines and pâtés, carpaccio, ceviche, gravlax, oysters, prawn cocktail, sushi, rice paper rolls, bruschetta with cold topping, stuffed eggs (devilled eggs), cheese boards.
 - Canapé components: base (crouton, cracker, blini, pastry, cucumber round), spread (butter, cream cheese, mousse — seals the base and holds the topping), topping (smoked salmon, prawn, ham), garnish (herb sprig, caviar, citrus zest). Bite-sized (one or two bites), prepared close to service so bases don't go soggy.
-- Dips: hummus (chickpea, tahini — sesame allergen), baba ganoush (eggplant), tzatziki (yoghurt, cucumber, garlic), guacamole (avocado — add lime to slow browning), salsa, taramasalata (fish roe), aioli.
+- Dips: hummus (sesame), baba ganoush, tzatziki, guacamole (lime slows browning), salsa, taramasalata, aioli.
 - Antipasto: cured meats (prosciutto, salami, bresaola), marinated vegetables (olives, artichokes, roasted capsicum), cheeses (bocconcini, pecorino), grissini.
 - Classical terms: amuse-bouche (complimentary single bite from the chef), hors d'oeuvre (small dishes before the meal), entrée (in Australia = starter course), tapas (Spain), mezze (Middle East/Greece).
+- Hors d'oeuvres = general term for small savoury items before a meal (hot or cold, can be plated); canapé = one- or two-bite item on an edible base; finger food = anything eaten by hand at stand-up functions, often bigger (mini burgers, skewers, arancini).
+- Canapé consistency: same-size bases (cutters), piped toppings, set weights, photo standard; about 4–6 pieces per guest before a meal, more for a canapé-only function.
+- Soggy canapé base: assembled too early, no fat barrier, wet topping not drained, humid storage → crisp bases, spread to the edges, drain toppings, assemble close to service.
+- Farinaceous = starchy foods from flour, grains or starchy vegetables (pasta, rice, couscous, burghul, quinoa, noodles, potato, polenta, bread). Starch salads: potato, pasta, rice, couscous, tabbouleh, quinoa, noodle salad.
+- Ready-to-eat appetiser risks: no cooking step to kill bacteria, lots of handling (Staphylococcus), Listeria (smoked salmon, cured meats, soft cheese), raw egg, time out of the fridge at functions — keep ≤5°C, 2h/4h rule.
 
 ## Salads
 ### Types
@@ -18,7 +23,7 @@
 - Salad components: base (leaves), body (main ingredient), dressing, garnish.
 - Other bases: grains (tabbouleh — burghul, parsley, mint, tomato, lemon), legumes (bean salad), pasta, rice, fruit salads.
 ### Salad leaves and greens
-Cos/romaine, iceberg, butter lettuce, oak leaf, mesclun mix, rocket (arugula), baby spinach, radicchio, endive/witlof, frisée, watercress, mizuna, lamb's lettuce, microherbs.
+Cos, iceberg, butter lettuce, oak leaf, mesclun, rocket, baby spinach, radicchio, witlof, frisée, watercress, microherbs.
 ### Preparation and quality
 - Wash thoroughly in cold water, dry well (salad spinner) — dressing doesn't cling to wet leaves and wet leaves dilute dressing.
 - Tear delicate leaves to avoid bruising/browning; cut sturdier ones with a sharp stainless knife.
@@ -28,7 +33,7 @@ Cos/romaine, iceberg, butter lettuce, oak leaf, mesclun mix, rocket (arugula), b
 
 ## Dressings
 - Vinaigrette (temporary emulsion): 3 parts oil to 1 part acid (vinegar/citrus) + salt, pepper, mustard (stabiliser). Variations: French (Dijon), balsamic, citrus, herb, Asian (soy, sesame oil, rice vinegar, ginger).
-- Mayonnaise (permanent emulsion): egg yolks + mustard + vinegar/lemon + slowly whisked oil (about 1 yolk per 150–250 mL oil). Lecithin in egg yolk is the emulsifier. If split: start with a fresh yolk (or a spoon of warm water) and whisk the split mixture in slowly. Use pasteurised yolks in commercial kitchens (Salmonella risk); keep ≤5°C, label, short shelf life.
+- Mayonnaise (permanent emulsion): egg yolks + mustard + vinegar/lemon + slowly whisked oil (about 1 yolk per 150–250 mL oil). Roles: yolk = emulsifier (lecithin) and richness; oil = body; vinegar or lemon = flavour, thins, lowers pH; mustard = flavour and extra emulsifier; salt = seasoning. If split: start with a fresh yolk (or a spoon of warm water) and whisk the split mixture in slowly. Use pasteurised yolks in commercial kitchens (Salmonella risk); keep ≤5°C, label, short shelf life.
 - Mayonnaise derivatives: aioli (garlic), tartare (capers, gherkins, shallots, parsley), rémoulade (mustard, capers, gherkins, herbs, anchovy), Marie Rose / cocktail (tomato sauce, Worcestershire, Tabasco, brandy/lemon), thousand island, verte/green (herbs), gribiche (made from hard-boiled eggs).
 - Dairy-based: yoghurt, sour cream, buttermilk, ranch, blue cheese.
 - Other: Caesar dressing, salsa verde, pesto, nam jim (Thai: lime, fish sauce, palm sugar, chilli, garlic, coriander root).
@@ -38,12 +43,7 @@ Cos/romaine, iceberg, butter lettuce, oak leaf, mesclun mix, rocket (arugula), b
 Correct portion size; height and shape; contrast of colours and textures; odd numbers look natural on a plate; clean rims; edible garnish relevant to the dish; appropriate service ware; cold food on chilled plates; serve immediately; for platters, arrange in rows or clusters and avoid overcrowding.
 
 ## Storage
-Cover, label and refrigerate components separately ≤5°C; prepare in small batches; store dressings separately; discard any appetisers/salads left at room temperature beyond the 2h/4h rule; avoid cross-contamination between raw seafood and RTE salad items.
+Cover, label and refrigerate components separately ≤5°C; dress to order; use within the workplace shelf life (often same day once dressed); prepare in small batches; store dressings separately; discard any appetisers/salads left at room temperature beyond the 2h/4h rule; avoid cross-contamination between raw seafood and RTE salad items.
 
 ## Sandwiches (elective SITHCCC025)
-- Types: closed (two slices), open (one slice with topping, e.g. smørrebrød, bruschetta), club/triple-decker (three slices, toasted, chicken/bacon/lettuce/tomato), wraps, rolls/baguettes/subs, pinwheel/ribbon (finger) sandwiches for functions, toasted/grilled (croque-monsieur, Reuben, panini, jaffle), hot sandwiches (steak sandwich, burger), tea sandwiches (crusts removed, cut in fingers or triangles).
-- Breads: white, wholemeal, multigrain, rye, sourdough, focaccia, ciabatta, Turkish, pita, lavash, brioche, gluten-free.
-- Spreads act as a moisture barrier and add flavour: butter, margarine, mayonnaise, cream cheese, hummus, pesto, avocado.
-- Fillings: meats, poultry, seafood, eggs, cheeses, salad vegetables, pickles, relishes.
-- Production: mise en place, assembly-line method for volume, spread to the edges, even fillings, wet ingredients (tomato) between dry ones or kept separate, cut with a serrated knife cleanly, wrap in cling film/containers, label with date and allergens, store ≤5°C.
-- Shelf life: freshly made best; pre-made sandwiches usually sold the same day. Sandwiches are PHF — keep ≤5°C, apply 2h/4h rule at events.
+Types: closed, open (bruschetta, smørrebrød), club (three slices, toasted), wraps, rolls and baguettes, ribbon/finger sandwiches for functions, toasted (croque-monsieur, Reuben, panini, jaffle), hot (steak sandwich, burger). Spread to the edges as a moisture barrier (butter, mayonnaise, cream cheese, hummus); keep wet fillings between dry ones; assembly line for volume; cut cleanly with a serrated knife; wrap, label with date and allergens, keep ≤5°C (PHF), usually sold the same day.

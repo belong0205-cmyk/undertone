@@ -1,7 +1,7 @@
 # Stocks, sauces and soups — SITHCCC029 Prepare stocks, sauces and soups
 
 ## Stocks
-Definition: flavoured liquid made by gently simmering bones/vegetables/seafood with aromatics in water; base for soups, sauces, braises.
+Definition: flavoured liquid made by gently simmering bones/vegetables/seafood with aromatics in water; base for soups, sauces, braises. Stock vs broth: stock is mainly bones, unseasoned, a base; broth is made with meat (and vegetables), seasoned and served as a light soup.
 Components: nourishing element (bones, shells, vegetables), mirepoix (onion, carrot, celery — roughly 10% of bone weight; white mirepoix for white/fish stocks: onion, leek, celery, mushroom trimmings, no carrot), bouquet garni (thyme, bay leaf, parsley stalks, peppercorns, tied in leek or muslin), liquid (cold water).
 Typical ratio: about 1 kg bones to 2–2.5 L water (bones just covered).
 
@@ -19,7 +19,7 @@ Typical ratio: about 1 kg bones to 2–2.5 L water (bones just covered).
 - Rules: start with cold water (impurities coagulate and rise to be skimmed); simmer, never boil (boiling emulsifies fat and makes stock cloudy); skim regularly; never add salt (stock is reduced later); strain through a chinois/muslin without pressing; cool quickly (ice bath, shallow containers, 2h/4h cooling rule); label and refrigerate (3–4 days) or freeze (up to 3 months).
 - Remouillage: second, weaker stock from bones used once. Glace: stock reduced to a syrupy glaze (glace de viande from brown stock, glace de volaille from chicken). Jus: natural roasting juices/light reduced stock.
 - Faults: cloudy (boiled, not skimmed, started hot, starchy ingredients), bitter (fish stock cooked too long, burnt bones), greasy (not skimmed), weak (too little bones, too short, too much water), sour (left in danger zone → spoiled, discard).
-- Convenience products: stock powders, bouillon, concentrates — consistent but often high salt; check allergens (gluten, celery, MSG).
+- Convenience stocks: consistent but salty; check allergens (gluten, celery).
 
 ## Thickening agents
 - Roux: equal weights of fat (butter) and flour cooked together. White roux (cooked 1–2 min, no colour — béchamel), blond roux (cooked until sandy/light straw colour — velouté), brown roux (cooked until nut brown — espagnole; less thickening power). Add cold liquid to hot roux or warm liquid to cooled roux to avoid lumps; whisk; simmer to cook out flour taste (~20 min).
@@ -41,15 +41,8 @@ Typical ratio: about 1 kg bones to 2–2.5 L water (bones just covered).
 - Clarified butter: melted butter with milk solids and water removed — higher smoke point, used for hollandaise, frying.
 
 ## Contemporary and other sauces
-- Jus / jus lié (thickened lightly with arrowroot/cornflour), pan gravy (deglaze roasting tray, add flour/stock).
-- Beurre blanc (white butter sauce): shallot, white wine and vinegar reduction, mounted with cold diced butter — warm emulsion; beurre rouge with red wine.
-- Compound (flavoured) butters: maître d'hôtel (parsley, lemon), garlic/café de Paris, anchovy — rolled, chilled and sliced onto grilled meats/fish.
-- Salsas (fresh chopped vegetables/fruit), salsa verde (herbs, capers, anchovy, oil), pesto (basil, pine nuts, parmesan, garlic, oil), chimichurri, romesco, gremolata.
-- Coulis (puréed, strained fruit or vegetable sauce), reduction, gastrique (caramel + vinegar), sabayon.
-- Sweet sauces: crème anglaise, chocolate, caramel/butterscotch, fruit coulis, sabayon/zabaglione.
-- Asian: soy, oyster, hoisin, sweet chilli, nuoc cham, satay (peanut), teriyaki, curry sauces.
-- Cold: mayonnaise and derivatives, vinaigrettes, mint sauce, cranberry, horseradish cream, apple sauce, Cumberland.
-- Sauce pairings: Béarnaise – grilled steak; hollandaise – eggs Benedict, asparagus, poached fish; apple sauce – roast pork; mint sauce – roast lamb; horseradish – roast beef; cranberry – turkey; tartare – fried fish; Mornay – cauliflower cheese, gratins; Bordelaise – beef; beurre blanc – fish.
+Jus / jus lié, pan gravy, beurre blanc (shallot, wine and vinegar reduction mounted with cold butter; beurre rouge with red wine), compound butters (maître d'hôtel, garlic, café de Paris), salsas, salsa verde, pesto, chimichurri, romesco, gremolata, coulis, gastrique, sabayon; sweet: crème anglaise, chocolate, caramel, fruit coulis; Asian: soy, oyster, hoisin, sweet chilli, nuoc cham, satay, teriyaki; cold: mayonnaise family, vinaigrettes, mint, cranberry, horseradish cream, apple sauce.
+Pairings: Béarnaise – steak; hollandaise – eggs Benedict, asparagus, poached fish; apple sauce – pork; mint – lamb; horseradish – roast beef; cranberry – turkey; tartare – fried fish; Mornay – cauliflower cheese; Bordelaise – beef; beurre blanc – fish.
 
 ## Sauce quality and faults
 - Good sauce: correct consistency (coats the back of a spoon — nappe), smooth, glossy, well-seasoned, correct colour, no raw flour taste.
@@ -67,7 +60,7 @@ Typical ratio: about 1 kg bones to 2–2.5 L water (bones just covered).
 | Chowders | clam chowder, seafood/corn chowder | chunky, milk/cream, potato, bacon |
 | Broths / potages (chunky) | minestrone, Scotch broth, Irish stew-style, chicken noodle | vegetables, pasta/grains in stock |
 | Cold soups | gazpacho (raw tomato, cucumber, capsicum, bread, olive oil), vichyssoise (chilled leek & potato cream soup), chilled fruit soups, ajo blanco | serve ≤5°C |
-| International | tom yum, laksa, borscht (beetroot), mulligatawny (Anglo-Indian curry soup), gumbo, ramen, avgolemono, harira, wonton soup | |
+| International | tom yum, laksa, borscht, mulligatawny, gumbo, ramen, wonton soup | |
 
 ### Consommé clarification
 - Clarification mix (raft): lean minced meat (or fish for fish consommé), egg whites, finely chopped mirepoix, tomato, herbs, mixed with cold well-flavoured stock.
@@ -80,4 +73,5 @@ Typical ratio: about 1 kg bones to 2–2.5 L water (bones just covered).
 - Entrée 200–250 mL; main course 300–350 mL; cup ~150–200 mL.
 - Serve hot soups ≥75°C at service (very hot), in warmed bowls; cold soups in chilled bowls.
 - Garnish: croutons, chopped herbs, cream swirl, grated cheese, crispy bacon, oil drizzle, gremolata.
-- Store: cool rapidly, refrigerate up to 3 days; reheat to 75°C once; cream/liaison added only to the portion being served.
+- Finishing: taste, then adjust salt, acid (lemon, vinegar) to brighten, fat (cream, butter, oil) for richness, fresh herbs at the end; check consistency.
+- Store: cool rapidly (shallow containers, ice bath; 60→21°C in 2 h, 21→5°C in 4 h), refrigerate up to 3 days; reheat to 75°C once; cream/liaison added only to the portion being served.

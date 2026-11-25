@@ -31,7 +31,7 @@
 | Vibrio | raw seafood | keep cold, cook seafood |
 
 ## What bacteria need to grow (FATTOM)
-Food (protein-rich, moist), Acidity (pH above ~4.6 favours growth), Temperature (5–60°C), Time (they can double every 10–20 minutes in ideal conditions), Oxygen (some need it, some don't), Moisture (water activity). Controls: keep food out of the danger zone, limit time, use acidity/sugar/salt/drying.
+Food (protein-rich, moist), Acidity (pH above ~4.6), Temperature (5–60°C), Time (doubling every 10–20 min), Oxygen, Moisture. Controls: temperature control, limit time, acidity, sugar, salt, drying.
 
 ## Personal hygiene requirements (Std 3.2.2 Division 4, cl 13–18)
 - Wash hands: before starting work and handling food, after toilet, after handling raw meat/poultry/seafood, after touching hair/face/nose, smoking, eating, coughing, sneezing, using phone, handling waste or chemicals, cleaning, handling money, between raw and RTE food tasks, and before putting on gloves.
@@ -43,6 +43,17 @@ Food (protein-rich, moist), Acidity (pH above ~4.6 favours growth), Temperature 
 - Gloves: wash hands before putting on; change when torn, after 30–60 minutes of continuous use, between raw and RTE tasks, after touching face/rubbish; gloves are not a substitute for hand washing.
 - Illness (cl 14): report to the supervisor a symptom (diarrhoea, vomiting, sore throat with fever, fever, jaundice), a foodborne disease or being a carrier, and do not handle food where it could be contaminated; also report a "condition" (infected skin lesion, discharge from ear, nose or eye) and tell the supervisor if you may have contaminated food. Health departments advise no food handling until 48 hours after symptoms stop.
 - Report to supervisor: personal health issues, hygiene hazards (no soap, broken equipment), incidents of contamination, pest sightings.
+- Sick procedure: phone (not text) the supervisor before the shift, say your symptoms, stay home; the supervisor records it and covers the shift. Come back only after 48 h with no symptoms (medical clearance if required, e.g. hepatitis A). "Feeling better" is not safe: you can still shed bacteria or viruses (e.g. norovirus) for days and pass them to food on your hands.
+
+## More SITXFSA005/006 answers
+- Unlabelled sanitiser bottle: don't use it; set it aside and tell the supervisor; dispose of it safely; refill a clean bottle from the original container and label it (product, dilution); SDS available. Why: unknown chemical or wrong strength → chemical contamination, poor sanitising, injury; WHS law requires hazardous chemical containers to be labelled.
+- Business consequences of poor hygiene: customers sick (even deaths), fines and penalty notices, prosecution under the Food Act, improvement notices or closure orders, public listing (e.g. NSW Food Authority "Name and Shame"), legal claims, bad reviews and lost reputation, lost income and jobs.
+- Hygiene and safety PPE: hair net or hat, apron, disposable gloves, chef jacket, enclosed non-slip shoes, cut-resistant gloves, oven mitts, rubber gloves and goggles for chemicals.
+- Thermometer ice-point check: glass of crushed ice + a little cold water, stir, wait 1 min, probe in the centre (not touching the glass) for about 30 s → 0°C (±1°C); adjust or replace and record. Check as the workplace says (commonly weekly or monthly) and after a drop or odd readings — a wrong probe lets unsafe food pass. Reads 6°C in ice slurry = 6°C too high, outside ±1°C (cl 22): stop using it, tag it, recalibrate or replace, use a backup, recheck foods it measured (hot food read as 60°C may be only 54°C), record and report.
+- High-risk (vulnerable) customers: pregnant women, babies and young children, the elderly, people with weak immune systems (cancer treatment, HIV, transplants, diabetes), people who are ill or in hospital or aged care.
+- Cool room order, top to bottom: cooked and ready-to-eat food, dairy and desserts; washed fruit and vegetables; raw seafood; raw whole meat cuts; raw mince and sausages; raw poultry at the bottom (needs the highest cooking temperature). All covered, labelled, on trays, off the floor.
+- Single-use items (not reused — 3.2.2 cl 23): disposable gloves, cling film and foil, paper towels, piping bags, takeaway containers, cups, straws, skewers, disposable cutlery. Use once and bin; store covered. Reusing them is risky: they can't be cleaned and sanitised, can tear, and carry bacteria, allergens or chemicals to the next food.
+- Chicken fully cooked: 75°C in the thickest part (probe), clear juices, white opaque flesh with no pink, leg moves loosely, meat comes away from the bone. Follow workplace procedure because its food safety program and records (Std 3.2.2A) are built on those limits.
 
 ## Food handling controls through the flow of food
 1. Purchasing: approved/reputable suppliers only.
@@ -87,4 +98,4 @@ Typical records: goods received log, fridge/freezer temperature log, cooking/coo
 Signs: droppings, gnaw marks, nests, grease marks, dead insects, egg cases, damaged packaging, smell. Prevention: seal gaps, fly screens, door strips, store food covered off the floor, clean spills promptly, keep bins closed and emptied, licensed pest controller. If found: report to supervisor, isolate/discard affected food, clean and sanitise, record.
 
 ## Food recall
-Follow the business's recall plan (if a manufacturer/wholesaler) and FSANZ recall notices: identify and isolate affected stock, do not use/sell, label "Do not use – recall", return or dispose as directed, record.
+Follow the recall plan and FSANZ notices: isolate affected stock, label "Do not use – recall", return or dispose as directed, record.

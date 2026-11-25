@@ -35,16 +35,9 @@ middle of the range is the safe answer, and "follow workplace procedures / the s
 | SITXWHS005 | Participate in safe work practices | 02 |
 
 ## Electives
-- Group A Cookery and Catering: SITHCCC026 Package prepared foodstuffs; SITHCCC025 Prepare and present sandwiches;
-  SITHCCC040 Prepare and serve cheese; SITHCCC044 Prepare specialised food items; SITHCCC038 Produce and serve food for buffets;
-  SITHCCC032 Produce cook-chill and cook-freeze foods; SITHCCC039 Produce pates and terrines; SITHPAT014 Produce yeast-based bakery products;
-  SITHCCC033 Re-thermalise chilled and frozen foods; SITXFSA007 Transport and store food. (file 18)
-- Group B Asian Cookery: SITHASC020 basic methods of Asian cookery; SITHASC021 Asian appetisers and snacks; SITHASC022 Asian stocks and soups;
-  SITHASC023 Asian sauces, dips and accompaniments; SITHASC024 Asian salads; SITHASC025 Asian rice and noodles; SITHASC026 curry pastes and powders;
-  SITHASC027 Asian cooked dishes; SITHASC028 Asian desserts; SITHASC033 dim sum. (file 19)
-- Group C General: SITXWHS006 Identify hazards, assess and control safety risks; SIRXOSM002 ethical use of social media; BSBSUS211 Participate in sustainable work practices;
-  HLTAID011 Provide First Aid; SITXCCS014 Provide service to customers; SITXINV007 Purchase goods; SITXCOM007 Show social and cultural sensitivity;
-  SITXCOM006 Source and present information; SIRXOSM003 Use social media and online tools. (file 20)
+- Group A Cookery and Catering (file 18): SITHCCC026 package foodstuffs, SITHCCC025 sandwiches (file 05), SITHCCC040 cheese, SITHCCC044 specialised food items, SITHCCC038 buffets, SITHCCC032 cook-chill/cook-freeze, SITHCCC039 pâtés and terrines, SITHPAT014 yeast-based bakery, SITHCCC033 re-thermalise, SITXFSA007 transport and store food.
+- Group B Asian Cookery (file 19): SITHASC020–028 (basic methods, appetisers, stocks and soups, sauces, salads, rice and noodles, curry pastes, cooked dishes, desserts), SITHASC033 dim sum.
+- Group C General (file 20): SITXWHS006 hazards and risks, HLTAID011 first aid, BSBSUS211 sustainability, SITXCCS014 customer service, SITXINV007 purchasing, SITXCOM007 cultural sensitivity, SITXCOM006 information, SIRXOSM002/003 social media.
 
 ## Numbers most often asked (Australia)
 ### Temperature control

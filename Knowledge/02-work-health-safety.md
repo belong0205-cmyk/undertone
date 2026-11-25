@@ -3,13 +3,9 @@
 ## Legislation and duties
 - Model Work Health and Safety (WHS) Act 2011 + WHS Regulations + Codes of Practice (Safe Work Australia). Victoria: Occupational Health and Safety Act 2004. Regulators: SafeWork NSW, WorkSafe Vic/Qld/WA, SafeWork SA, etc.
 - PCBU (person conducting a business or undertaking, i.e. the employer/business) has the primary duty of care: safe workplace, safe plant and systems of work, safe use/storage of substances, adequate facilities, information/training/supervision, monitoring health and conditions, consultation with workers.
-- Officers (directors/managers) must exercise due diligence.
-- Workers must: take reasonable care for their own health and safety and that of others, comply with reasonable instructions, follow policies and procedures, use PPE provided, report hazards, incidents and injuries.
-- Others at the workplace (visitors, customers, contractors) must take reasonable care too.
-- Consultation: through health and safety representatives (HSR), health and safety committees, toolbox talks, staff meetings.
-- Workers have the right to cease unsafe work if there is a serious risk.
-- Workers compensation and return-to-work: report injuries promptly; employer must hold workers compensation insurance.
-- Notifiable incidents (death, serious injury/illness, dangerous incident) must be reported to the regulator immediately and the site preserved.
+- Officers (directors/managers) must exercise due diligence. Workers must take reasonable care for their own and others' safety, follow reasonable instructions and procedures, use the PPE provided, and report hazards, incidents and injuries; visitors and contractors must take reasonable care too.
+- Consultation through health and safety representatives (HSR), committees, toolbox talks and staff meetings. Workers may stop unsafe work if there is a serious risk.
+- Report injuries promptly (workers compensation, return to work). Notifiable incidents (death, serious injury or illness, dangerous incident) go to the regulator immediately and the site is preserved.
 
 ## Key terms
 - Hazard: anything with the potential to cause harm (hot oil, wet floor, sharp knife).
@@ -65,8 +61,4 @@
 - First aid DRSABCD (HLTAID011): Danger, Response, Send for help (000), Airway, Breathing, CPR (30 compressions : 2 breaths), Defibrillation (AED).
 
 ## Safe work practices for cooks
-- Follow equipment manufacturer instructions and workplace procedures; only use equipment you are trained on; report faulty equipment and tag it "Out of service".
-- Wear correct uniform: chef jacket (long sleeves protect from burns), long pants, apron, enclosed non-slip shoes, hat/hair net.
-- Keep the work area clean and organised ("clean as you go").
-- Communicate: "behind", "hot", "sharp", "corner".
-- Manage personal wellbeing: breaks, hydration, fatigue, stress, rest between shifts.
+Follow manufacturer instructions and procedures; use only equipment you are trained on; tag faulty equipment "Out of service" and report it; full uniform (long-sleeved jacket, long pants, apron, enclosed non-slip shoes, hat); clean as you go; call "behind", "hot", "sharp", "corner"; manage breaks, hydration, fatigue and stress.
