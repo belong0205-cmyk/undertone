@@ -1,6 +1,6 @@
 # Answer evaluation — manual check for TESTER
 
-89 common kitchen-interview and assessment questions (including follow-ups, Australian food safety and WHS, and SA Cook questionnaire topics) with an ideal answer and what must (not) happen. The ideal answer is one good
+95 common kitchen-interview and assessment questions (including follow-ups, Australian food safety and WHS, and SA Cook questionnaire topics) with an ideal answer and what must (not) happen. The ideal answer is one good
 version; other wording passes if it meets every rule below.
 
 ## Setup
@@ -147,7 +147,7 @@ Short answers (1–2 sentences, B1, "I"). The KB fact column names the knowledge
 | # | Question | Ideal answer | Must / must not | KB fact |
 |---|---|---|---|---|
 | 77 | I had gastro but I feel better this morning. What do you do? | I phone my supervisor before my shift and stay home. I come back only 48 hours after the symptoms stop. | Phone, not text; 48 h. Must NOT say feeling better is enough. | 01 Sick procedure (SITXFSA005) |
-| 78 | How do you check that a probe thermometer is accurate? | I put the probe in crushed ice with a little water for about 30 seconds. It must read 0 °C, within 1 °C. | Ice point 0 °C, ±1 °C. | 01 Thermometer ice-point check; 3.2.2 cl 22 |
+| 78 | How do you check that a probe thermometer is accurate? | I put the probe in crushed ice with a little water and wait about 3 minutes. It must read 0 °C, within 1 °C. | Ice point 0 °C, ±1 °C; about 3 minutes (FSANZ). | 01 Thermometer ice-point check; 3.2.2 cl 22 |
 | 79 | Your thermometer reads 6 °C in ice water. What do you do? | It's 6 degrees out, so I stop using it, tag it and use a backup. I tell my supervisor and recheck food it measured. | Outside ±1 °C → stop using it. Must NOT call 6 °C fine because it is near 5 °C. | 01 Ice-point check, 6 °C case |
 | 80 | How do you store food in the cool room, from top to bottom? | I put cooked and ready-to-eat food on top, then vegetables, raw seafood, raw meat, mince, and raw chicken at the bottom. | Ready-to-eat on top, raw poultry at the bottom; raw never above ready-to-eat. | 01 Cool room order |
 | 81 | Two cooks are arguing during service. What do you do? | I calmly ask them to stop and step away from the line, call the supervisor, and we sort it out after service. | Safety, supervisor, private talk after service; must not take sides. | 14 Two cooks arguing (SITHCCC043) |
@@ -159,6 +159,12 @@ Short answers (1–2 sentences, B1, "I"). The KB fact column names the knowledge
 | 87 | The price of seafood goes up a lot. What do you do? | I re-cost the recipe, then raise the price a little, trim the portion, use a cheaper fish or talk to suppliers. | Re-cost first + at least 2 options. | 16 Supplier price rise |
 | 88 | How do you handle a customer complaint? | I listen, apologise, solve the problem and thank the customer. If I can't fix it, I get my supervisor. | LAST order (Listen, Apologise, Solve, Thank); escalate. | 20 Complaints (SITXCCS014) |
 | 89 | How do you answer the phone at work? | I answer within three rings with a greeting, our business name and my name, and I speak clearly. | Three rings; greeting, business name, own name. | 20 Phone (SITXCCS014) |
+| 90 | Explain the 2-hour/4-hour rule with an example. | Under 2 hours out of the fridge I can use it or chill it again; 2 to 4 hours I must use it now; over 4 hours I throw it out. Sandwiches out at 10 go back in the fridge by 12, or get used by 2, then they're binned. | All three bands; times add up; a worked example. | 00 2-hour/4-hour rule (Safe Food Australia App. 2) |
+| 91 | How fast must you reheat cooked food to hold it hot? | I reheat it quickly to 60 °C or above, within 2 hours, and I aim for 75 °C in the centre. I only reheat it once. | ≥60 °C within 2 h (FSANZ); reheat once; must NOT say reheat in the bain-marie. | 00/01 Reheating, 3.2.2 cl 7(4) |
+| 92 | How often do you calibrate your thermometer? | The Code gives no set time, so I follow our food safety program. We check it weekly, and always after a drop or an odd reading. | Says no fixed legal time; workplace schedule; after a drop or odd reading. | 01 Thermometer check frequency (NSW Food Authority ≥ 6-monthly) |
+| 93 | Name six mise en place tasks before dinner service. | I read the prep list, portion the meat and fish, make stocks and sauces, cut vegetables and garnishes, set up pans and boards, and label and stock my station. | Six tasks from the KB list. | 14 Mise en place |
+| 94 | Give three examples of cross-contamination. | Raw chicken juice dripping onto a salad; using one board for raw meat and then salad; touching ready-to-eat food with unwashed hands. | Three examples; raw → ready-to-eat. | 01 Cross-contamination examples |
+| 95 | How do you clean a deep fryer? | I switch it off and let the oil cool fully, drain it into the used-oil drum, boil it out with fryer cleaner, rinse, then dry it completely before refilling. | Cool first; dry before refilling (water + hot oil); PPE acceptable extra. | 15 Deep fryer (SITHKOP009) |
 
 ## Recording results
 For each failed item note: question #, the app's answer, which pass rule failed. Send failures about scope or invented

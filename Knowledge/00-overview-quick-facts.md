@@ -46,9 +46,9 @@ middle of the range is the safe answer, and "follow workplace procedures / the s
 - Hot food: 60°C or above when receiving, hot-holding, displaying and transporting (cl 5(3), 8(5), 10).
 - Cooling cooked potentially hazardous food: from 60°C to 21°C within 2 hours, then from 21°C to 5°C within a further 4 hours (6 hours total) (3.2.2 cl 7(3)).
 - 2-hour/4-hour rule for ready-to-eat potentially hazardous food that has been between 5°C and 60°C:
-  under 2 hours total → use or refrigerate; 2 to 4 hours → use immediately (do not put back in the fridge); over 4 hours → throw out. (Safe Food Australia, Appendix 2 — guidance on using time as a control.)
+  under 2 hours total → use or refrigerate; 2 to 4 hours → use immediately (do not put back in the fridge); over 4 hours → throw out. (Safe Food Australia, Appendix 2 — guidance on using time as a control.) Example: sandwiches out of the fridge at 10:00 → use or refrigerate by 12:00; use at once between 12:00 and 14:00; throw out after 14:00. The times add up over the day.
 - Cook poultry, minced meat, sausages and rolled/stuffed meats to 75°C or above in the centre (FSANZ guidance). The Code requires a process step that reduces pathogens to safe levels (3.2.2 cl 7(1)(b)(ii)).
-- Reheating cooked and cooled PHF to hold it hot: heat it rapidly to 60°C or above (3.2.2 cl 7(4)); many councils recommend 75°C in the centre. Never reheat in a bain-marie; reheat only once.
+- Reheating cooked and cooled PHF to hold it hot: heat it rapidly to 60°C or above (3.2.2 cl 7(4); FSANZ guidance: within 2 hours); many councils recommend 75°C in the centre. Never reheat in a bain-marie; reheat only once.
 - Thermometer: probe accurate to ±1°C (3.2.2 cl 22). Check calibration in ice slurry (0°C) and boiling water (100°C at sea level). Clean and sanitise the probe between foods.
 - Thawing: in the fridge (best), under cold running water in sealed packaging, or in the microwave and cook immediately. Never thaw at room temperature. Do not refreeze thawed raw food unless it is cooked first.
 ### Hygiene

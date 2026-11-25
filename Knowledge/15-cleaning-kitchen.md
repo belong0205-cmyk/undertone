@@ -25,7 +25,7 @@ Written schedule: what, how (method, chemical, dilution, PPE), when (after use, 
 ## Equipment cleaning
 - Large equipment: switch off and isolate (unplug, gas off), let it cool, dismantle removable parts (slicer blade guard, mixer bowl, food processor blades), wash/rinse/sanitise parts, wipe fixed parts, dry, reassemble correctly, test, report faults, follow manufacturer instructions.
 - Slicer: set blade to zero, unplug, cut-resistant gloves, wipe from the centre outwards.
-- Deep fryer: cool oil, filter daily, drain, boil out with fryer cleaner per manufacturer instructions, rinse and dry thoroughly before refilling (water + hot oil = eruption).
+- Deep fryer: switch off and let the oil cool completely (never drain hot oil); filter daily; drain into the used-oil drum for recycling; boil out with fryer cleaner per manufacturer instructions; rinse, then dry thoroughly before refilling (water + hot oil = eruption). PPE: apron, heat-resistant gloves, goggles.
 - Combi oven: built-in cleaning programs, descaling.
 - Dishwashers: scrape and pre-rinse, load correctly (don't overload), use the sanitising cycle and check temperatures or chemical levels against the manufacturer's settings, clean filters and arms daily, check detergent/rinse-aid levels.
 - Pot washing (manual): three-sink method — wash (detergent), rinse, sanitise — then air dry.
