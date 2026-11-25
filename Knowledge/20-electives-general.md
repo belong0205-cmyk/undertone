@@ -6,7 +6,7 @@
 - BSBSUS211 sustainability: reduce, reuse, recycle; save energy and water; local and seasonal buying (see file 14).
 
 ## SITXCCS014 Provide service to customers
-- Customer service: meeting or exceeding customer expectations with friendly, prompt, accurate and professional service.
+- Customer service: meeting or exceeding customer expectations with friendly, prompt, accurate and professional service. Standards: greet promptly, know the menu, take orders accurately, serve on time, follow the workplace's service standards and policies.
 - Verbal: words, tone, speed, clear language. Non-verbal: smile, eye contact, posture, gestures, facial expression, appearance.
 - Active listening: eye contact and nodding, don't interrupt, repeat back or paraphrase, ask clarifying questions, take notes.
 - Open questions: "What would you like to drink?", "How was your meal?", "What flavours do you enjoy?", "How would you like your steak cooked?", "What dietary needs should we know about?". Closed: "Do you have a booking?", "Would you like water?", "Is it a table for two?", "Any allergies?", "Would you like dessert?".

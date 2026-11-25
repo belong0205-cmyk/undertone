@@ -36,7 +36,6 @@ Modern Australian kitchens are smaller and combine roles.
 - Peak periods: stock sections before service, help when your section is clear, communicate constantly, follow the pass, clean as you go, stay calm. Timing matters: every dish for a table must be ready together, hot and on time; long tasks first; avoids delays, waste and food left out too long.
 - Workplace documents: standard recipes, prep lists, dockets, menus, allergen matrix, food safety program and HACCP records, cleaning schedules, SDS, SOPs and equipment manuals, rosters, incident forms, code of conduct. Hazards and incidents: see WHS notes (incident reporting).
 - Conduct: follow the code of conduct, be punctual and respectful, no bullying, harassment or discrimination (Fair Work Act, anti-discrimination laws), follow drug and alcohol and social media policies, report misconduct.
-- Resolve conflict: stay calm, listen, focus on the issue, seek help from a supervisor.
 - Customer feedback/complaints about food: listen, apologise, take the dish back, inform the chef, remake promptly, record and use feedback to improve.
 
 ## Quality and presentation

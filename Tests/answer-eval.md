@@ -1,6 +1,6 @@
 # Answer evaluation — manual check for TESTER
 
-103 common kitchen-interview and assessment questions (including follow-ups, Australian food safety and WHS, and SA Cook questionnaire topics) with an ideal answer and what must (not) happen. The ideal answer is one good
+114 common kitchen-interview and assessment questions (including follow-ups, Australian food safety and WHS, and SA Cook questionnaire topics) with an ideal answer and what must (not) happen. The ideal answer is one good
 version; other wording passes if it meets every rule below.
 
 ## Setup
@@ -173,6 +173,17 @@ Short answers (1–2 sentences, B1, "I"). The KB fact column names the knowledge
 | 101 | Which cooking methods suit delicate fish? | For whiting or John Dory I poach, steam, bake in paper or pan-fry gently with a light flour coating, and I turn it only once. | Gentle methods (≥2 of poach/steam/en papillote/gentle pan-fry); must NOT say hard grilling or boiling. | 10 Delicate fish (SITHCCC037) |
 | 102 | A customer asks if a dish has shellfish. What are your obligations? | Fish, crustacea and molluscs are three separate allergens. I check the recipe with the chef, never guess, tell the customer, and write it on the docket. | Three separate allergens; check, never guess; docket. | 10 Seafood allergens, Standard 1.2.3 |
 | 103 | Name two ways to emulsify a salad dressing. | I can whisk or shake oil and vinegar with a little mustard for a temporary emulsion, or whisk oil slowly into egg yolk for a permanent one like mayonnaise. | Temporary (whisk/shake) and permanent (yolk, slow oil). | 05 Emulsification (SITHCCC028) |
+| 104 | How do you truss a chicken and why? | I tuck the wing tips under, cross the legs and tie them with butcher's string, then loop it around the body. The bird stays compact, so it cooks evenly and carves neatly. | Method with string; even cooking or shape. | 09 Trussing (SITHCCC035) |
+| 105 | How do you check poultry is cooked? | I probe the thickest part of the thigh, off the bone, for 75°C. The juices run clear, the leg moves freely and the flesh is firm. | 75°C thigh, clear juices, a texture cue. | 09 Doneness checks (SITHCCC035) |
+| 106 | How do you reheat a chicken dish safely? | I reheat it once only, fast, to 75°C in the centre, then serve it or hold it at 60°C or above. Never in a bain-marie. | Once only; rapid; 75°C or ≥60°C; no bain-marie. | 09 Reheating poultry dishes (SITHCCC035) |
+| 107 | Define carry-over cooking. | After the meat leaves the heat the core keeps rising about 3 to 5 degrees, so I take it off early and rest it. | Core keeps rising; pull early. | 09 Carry-over cooking (SITHCCC036) |
+| 108 | A steak is tough and dry. Give three causes. | It was overcooked, it was not rested or was cut with the grain, or it was a tough cut cooked fast. | Three distinct causes. | 09 Tough, dry steak (SITHCCC036) |
+| 109 | What does the Maillard reaction do when you sear meat? | Above about 140°C the dry surface browns, which gives a crust, colour and deep flavour. It does not seal in the juices. | Browning and flavour; must not claim it seals in juices. | 09 Searing and the Maillard reaction (SITHCCC036) |
+| 110 | Give five causes of choux failure and a fix for each. | Collapsed: underbaked, bake until dry. Not hollow: too much egg, add it gradually. Soggy: filled too early, fill near service. Flat: mix too soft, piping consistency. Cracked: piped unevenly. | At least collapsed, not hollow and soggy, each with a fix. | 11 Choux failures and fixes (SITHCCC041) |
+| 111 | What is yeast fermentation and how does it affect bread? | Yeast feeds on sugars and makes carbon dioxide and alcohol. The gas lifts the dough and opens the crumb, and the alcohol and acids add flavour. | CO₂ lifts dough; flavour. | 11 Fermentation (SITHCCC041) |
+| 112 | What are the quality indicators of a finished dessert? | The texture is true to type, the flavour is balanced, it is served at the right temperature and portion, and the plating is neat with a fresh garnish. | Texture, flavour balance, presentation. | 12 Quality indicators (SITHPAT016) |
+| 113 | A customer says "I'm allergic to gluten" but orders soy sauce. What do you do? | I explain that regular soy sauce contains wheat, offer tamari that is labelled gluten-free or leave it out, ask if it is coeliac disease, then mark the docket and tell the chef. | Explain wheat; offer tamari or omit; docket and chef. | 13 Soy sauce scenario (SITHCCC042) |
+| 114 | Give five sources each of protein, carbohydrates and fats. | Protein: meat, fish, eggs, dairy, legumes. Carbohydrate: bread, rice, pasta, potatoes, oats. Fats: olive oil, butter, avocado, nuts, oily fish. | Five correct items in each group. | 13 Five sources (SITHCCC042) |
 
 ## Recording results
 For each failed item note: question #, the app's answer, which pass rule failed. Send failures about scope or invented

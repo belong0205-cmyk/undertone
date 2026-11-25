@@ -10,34 +10,11 @@ middle of the range is the safe answer, and "follow workplace procedures / the s
   plus 2 more from Group A, B or C (General).
 - SITHCCC043 Work effectively as a cook requires work in a commercial kitchen over at least 48 complete food service periods (shifts), recorded in a logbook.
 
-## Core units (20)
-| Code | Title | Knowledge file |
-|---|---|---|
-| SITHCCC023 | Use food preparation equipment | 03 |
-| SITHCCC027 | Prepare dishes using basic methods of cookery | 04 |
-| SITHCCC028 | Prepare appetisers and salads | 05 |
-| SITHCCC029 | Prepare stocks, sauces and soups | 06 |
-| SITHCCC030 | Prepare vegetable, fruit, eggs and farinaceous dishes | 07 |
-| SITHCCC031 | Prepare vegetarian and vegan dishes | 08 |
-| SITHCCC035 | Prepare poultry dishes | 09 |
-| SITHCCC036 | Prepare meat dishes | 09 |
-| SITHCCC037 | Prepare seafood dishes | 10 |
-| SITHCCC041 | Produce cakes, pastries and breads | 11 |
-| SITHCCC042 | Prepare food to meet special dietary requirements | 13 |
-| SITHCCC043 | Work effectively as a cook | 14 |
-| SITHKOP009 | Clean kitchen premises and equipment | 15 |
-| SITHKOP010 | Plan and cost recipes | 16 |
-| SITHPAT016 | Produce desserts | 12 |
-| SITXFSA005 | Use hygienic practices for food safety | 01 |
-| SITXFSA006 | Participate in safe food handling practices | 01 |
-| SITXHRM007 | Coach others in job skills | 17 |
-| SITXINV006 | Receive, store and maintain stock | 16 |
-| SITXWHS005 | Participate in safe work practices | 02 |
+## Core units (20) → knowledge file
+SITHCCC023 food preparation equipment (03); 027 basic methods of cookery (04); 028 appetisers and salads (05); 029 stocks, sauces and soups (06); 030 vegetable, fruit, eggs and farinaceous (07); 031 vegetarian and vegan (08); 035 poultry and 036 meat (09); 037 seafood (10); 041 cakes, pastries and breads (11); 042 special dietary requirements (13); 043 work effectively as a cook (14); SITHKOP009 clean kitchen premises and equipment (15); KOP010 plan and cost recipes (16); SITHPAT016 desserts (12); SITXFSA005 hygienic practices and FSA006 safe food handling (01); SITXHRM007 coach others (17); SITXINV006 receive, store and maintain stock (16); SITXWHS005 safe work practices (02).
 
 ## Electives
-- Group A Cookery and Catering (file 18): SITHCCC026 package foodstuffs, SITHCCC025 sandwiches (file 05), SITHCCC040 cheese, SITHCCC044 specialised food items, SITHCCC038 buffets, SITHCCC032 cook-chill/cook-freeze, SITHCCC039 pâtés and terrines, SITHPAT014 yeast-based bakery, SITHCCC033 re-thermalise, SITXFSA007 transport and store food.
-- Group B Asian Cookery (file 19): SITHASC020–028 (basic methods, appetisers, stocks and soups, sauces, salads, rice and noodles, curry pastes, cooked dishes, desserts), SITHASC033 dim sum.
-- Group C General (file 20): SITXWHS006 hazards and risks, HLTAID011 first aid, BSBSUS211 sustainability, SITXCCS014 customer service, SITXINV007 purchasing, SITXCOM007 cultural sensitivity, SITXCOM006 information, SIRXOSM002/003 social media.
+Group A cookery and catering (file 18; sandwiches in 05): SITHCCC025/026/032/033/038/039/040/044, SITHPAT014, SITXFSA007. Group B Asian cookery (19): SITHASC020–028, 033. Group C general (20): SITXWHS006, HLTAID011, BSBSUS211, SITXCCS014 customer service, SITXINV007, SITXCOM006/007, SIRXOSM002/003.
 
 ## Numbers most often asked (Australia)
 ### Temperature control
@@ -77,5 +54,4 @@ Purple is often used for allergen-free (e.g. gluten-free) preparation.
   Std 3.2.3 Food Premises and Equipment.
 - Std 1.2.3 and Schedule 9: Plain English Allergen Labelling (PEAL), in force from 25 February 2024 — allergens declared by plain-English names in bold, plus a "Contains" statement.
 - WHS: model Work Health and Safety Act 2011 and Regulations (adopted by most states; Victoria uses the Occupational Health and Safety Act 2004). Regulator e.g. SafeWork NSW, WorkSafe Victoria.
-- Employment: Fair Work Act 2009, National Employment Standards, Restaurant Industry Award 2020 / Hospitality Industry (General) Award 2020; anti-discrimination and equal employment opportunity laws.
-- Other: Australian Consumer Law (truthful menu descriptions), liquor laws (RSA) where relevant, local council waste and grease-trap rules.
+- Employment: Fair Work Act 2009, Restaurant Industry Award 2020 / Hospitality Industry (General) Award 2020, anti-discrimination laws. Australian Consumer Law: truthful menu descriptions.

@@ -1,7 +1,7 @@
 # Special dietary requirements — SITHCCC042 Prepare food to meet special dietary requirements
 
 ## Why customers have special requirements
-- Health/medical: food allergies, intolerances, coeliac disease, diabetes, heart disease (low fat, low cholesterol), hypertension (low sodium), kidney disease (low protein/potassium/phosphorus), weight management, dysphagia (swallowing difficulty — texture modified), pregnancy (avoid Listeria-risk foods, raw/undercooked foods, high-mercury fish, alcohol), elderly, infants and children, illness recovery (high energy/protein), food-related conditions like IBS (low FODMAP).
+- Health/medical: food allergies and intolerances, coeliac disease, diabetes, heart disease (low fat), hypertension (low salt), kidney disease, weight management, dysphagia (texture modified), pregnancy (Listeria-risk foods, high-mercury fish, alcohol), elderly, children, recovery (high energy/protein), IBS (low FODMAP).
 - Lifestyle/ethical: vegetarian, vegan, paleo, keto (low carb), organic, raw food.
 - Cultural/religious: halal, kosher, Hindu, Buddhist, Jain, Seventh-day Adventist, fasting periods (Ramadan, Lent).
 
@@ -43,32 +43,27 @@ The 11 usually listed: peanut, tree nuts, milk, egg, sesame, soy, fish, crustace
 - Menu and allergen information: every ingredient including sauces and garnishes, allergen matrix, symbols, "please tell staff about allergies", and "we can't guarantee allergen-free" where true.
 - Label reading: ingredient list with allergens in bold, "Contains" and "May contain" statements, other names (casein, whey = milk; albumin = egg; semolina, spelt = wheat; tahini = sesame); recheck when a brand or supplier changes.
 - Allergen incident: first aid and 000, tell the manager, write an incident report (customer, dish, ingredients and labels, time, symptoms, actions, staff), keep the dish and packaging, find the cause, retrain, update procedures.
+- Nut-free service: check every label (pesto, praline, marzipan, satay, nut oils and milks, "may contain" warnings), store nuts sealed and apart, dedicated boards and utensils, clean and sanitise before prep, no nut garnishes near the pass, allergen matrix up to date, brief the floor staff, chef confirms the plate.
+- "I'm allergic to gluten" but orders soy sauce: explain politely that regular soy sauce contains wheat, offer tamari (label must say gluten-free) or leave it out, ask whether it is coeliac disease or a preference, confirm the change, mark the docket and tell the chef — never serve it quietly.
 
 ## Diet types and how to adapt dishes
-- Gluten-free: replace flour with rice flour, cornflour, potato starch, tapioca, buckwheat, chickpea (besan) flour, GF blends; use GF pasta/bread, tamari, polenta, rice, quinoa; thicken sauces with cornflour/arrowroot or reduction; separate fryer.
+- Gluten-free: replace flour with rice flour, cornflour, potato starch, tapioca, buckwheat, chickpea (besan) flour, GF blends; use GF pasta/bread, tamari, polenta, rice, quinoa; thicken sauces with cornflour/arrowroot or reduction. GF in a shared kitchen: docket marked, every label checked (stock, sauces, crumbs), prep before any flour is used or in a flour-free area (flour dust floats), bench and hands cleaned, dedicated purple boards, utensils, sieves, toaster and fryer, GF pasta in fresh water, plated separately, covered and labelled, chef confirms at the pass.
 - Dairy-free/lactose-free: plant milks, coconut cream, dairy-free spreads, oil; lactose-free milk (lactose intolerance only — not suitable for milk allergy).
 - Egg-free: aquafaba, flax egg, commercial egg replacer; egg-free pasta and mayonnaise.
-- Diabetic (diabetes type 1 and 2): control carbohydrate portions, low GI carbohydrates (wholegrains, legumes), limit added sugar, high fibre, healthy fats, regular meals; artificial sweeteners in desserts; avoid sugary sauces.
-- Low-fat / heart-healthy: lean meat, remove skin from poultry, grill/steam/poach/bake instead of frying, unsaturated oils, low-fat dairy, avoid cream and butter sauces, more vegetables and wholegrains.
-- Low sodium (salt): cook from scratch, use herbs, spices, citrus, garlic, vinegar for flavour; avoid stock powders, soy sauce, processed meats, cheese, salty snacks.
-- High fibre: wholegrains, legumes, vegetables, fruit with skin, nuts and seeds.
-- High protein/high energy (recovery, athletes, elderly): enrich foods with milk powder, eggs, cream, nut butters, small frequent meals.
-- Low FODMAP (IBS): limit onion, garlic, wheat, some fruits (apple, pear, stone fruit), legumes, lactose, sweeteners — use garlic-infused oil, green parts of spring onion.
-- Texture-modified (dysphagia — IDDSI): food levels 3 liquidised to 7 regular, drinks 0 thin to 4 extremely thick; follow the speech pathologist exactly.
-- Pregnancy: avoid deli meats, pâté, soft cheeses (brie, camembert, ricotta unless cooked), raw seafood, smoked salmon, pre-cut salads and fruit, raw eggs, undercooked meat; limit high-mercury fish (shark/flake, swordfish, marlin); no alcohol.
+- Diabetic: controlled carbohydrate portions, low GI (wholegrains, legumes), little added sugar, high fibre, regular meals. Low-fat/heart-healthy: lean meat, no skin, grill/steam/poach instead of frying, unsaturated oils, no cream or butter sauces. Low salt: herbs, spices, citrus, garlic for flavour; no stock powders, soy sauce, processed meats. High fibre: wholegrains, legumes, vegetables, fruit with skin. High protein/energy: enrich with milk powder, eggs, cream, nut butters, small frequent meals.
+- Low FODMAP (IBS): limit onion, garlic, wheat, apple, pear, stone fruit, legumes, lactose — use garlic-infused oil, green spring onion tops. Texture-modified (dysphagia — IDDSI levels 3–7 food, 0–4 drinks): follow the speech pathologist exactly.
+- Pregnancy: no deli meats, pâté, soft cheeses (unless cooked), raw seafood, smoked salmon, pre-cut salads, raw eggs, undercooked meat; limit high-mercury fish (flake, swordfish, marlin); no alcohol.
 
 ## Cultural and religious requirements
 | Group | Requirements |
 |---|---|
 | Islam (halal) | permitted foods only; meat from animals slaughtered by a Muslim according to Islamic rites (certified halal); no pork or pork products (lard, gelatine from pork, bacon), no alcohol (including in cooking — wine, beer batter, vanilla extract with alcohol), no blood. Haram = forbidden. Fasting during Ramadan (sunrise to sunset) |
 | Judaism (kosher) | only kosher-certified meat from animals with split hooves that chew the cud (beef, lamb — not pork); no shellfish or fish without fins and scales; meat and dairy never cooked, served or eaten together (separate equipment); slaughter by a shochet; Passover — no leavened products |
-| Hinduism | many are vegetarian; no beef (cow is sacred); some avoid onion, garlic, alcohol; fasting days |
-| Buddhism | many vegetarian or vegan; some avoid onion/garlic and alcohol |
-| Jainism | strict vegetarian, no root vegetables (onion, garlic, potato, carrot), no eggs, no honey |
-| Sikhism, Seventh-day Adventist, Christianity | Sikh: no ritually slaughtered meat, many vegetarian, no alcohol; Adventist: often vegetarian, no pork or shellfish; Christian: some no meat on Lent Fridays, Orthodox fasts |
+| Hinduism, Buddhism, Jainism | Hindu: many vegetarian, no beef (cow is sacred), fasting days; Buddhist: many vegetarian or vegan, some avoid onion, garlic, alcohol; Jain: strict vegetarian, no root vegetables, eggs or honey |
+| Sikh, Seventh-day Adventist, Christian | Sikh: no halal/kosher meat, many vegetarian; Adventist: often vegetarian, no pork or shellfish; some Christians: no meat on Lent Fridays |
 
 ## Australian Dietary Guidelines (basis of healthy menus)
-Five food groups: vegetables and legumes; fruit; grain foods (mostly wholegrain); lean meat, poultry, fish, eggs, tofu, nuts, seeds, legumes; milk, yoghurt, cheese and alternatives. Limit saturated fat, salt, added sugar, alcohol. Macronutrients: carbohydrate (energy), protein (growth, repair), fat (energy, vitamins A, D, E, K); micronutrients: vitamins and minerals; plus fibre and water.
+Five food groups: vegetables and legumes; fruit; grain foods (mostly wholegrain); lean meat, poultry, fish, eggs, tofu, nuts, seeds, legumes; milk, yoghurt, cheese and alternatives. Limit saturated fat, salt, added sugar, alcohol. Macronutrients: carbohydrate (energy), protein (growth, repair), fat (energy, vitamins A, D, E, K); micronutrients: vitamins and minerals; plus fibre and water. Five sources — protein: meat, poultry, fish, eggs, dairy, legumes, tofu, nuts; carbohydrate: bread, rice, pasta, potatoes, oats, legumes, fruit; fats: olive oil, butter, avocado, nuts and seeds, oily fish, cheese.
 
 ## Communicating with customers
 Listen and confirm the need, explain ingredients accurately, offer alternatives, never promise what the kitchen can't guarantee, write it clearly on the docket, communicate front to back of house. Menu symbols: V, VG/VE, GF, DF, H; allergen information available on request.
