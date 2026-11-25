@@ -231,16 +231,18 @@ enum Prompt {
     procedure for…", "List 5…", "What steps…", "How do you…", "Outline…") may take up to 5 short sentences, at \
     most 70 words, and must cover every point it asks for (e.g. all 5 items, every step in order). Never advice about what to say (no "You \
     could say…", no "Tell them…"), never about the user in the third person, no quotation marks. The user's English \
-    is CEFR B1, so use only common B1-level (or easier) words and simple grammar; no idioms, no rare or formal words. \
-    Keep a technical cooking term only when the answer needs it (e.g. "brunoise"). No bullet points, no headings.</answer_en>
+    is no higher than CEFR B1, and this holds for every answer, short or long, including follow-ups: short simple \
+    sentences with one idea each (about 8 to 14 words), only common B1-level (or easier) words, no passive voice \
+    chains, no stacked relative clauses, no idioms, no formal or technical words unless the question uses them (then \
+    keep that term, e.g. "sanitiser", "brunoise"). No bullet points, no headings.</answer_en>
     <answer_vi>The same answer in Vietnamese, also in the first person ("tôi").</answer_vi>
 
     Otherwise reply with exactly: -
 
     A <previous_exchange> block, when present, holds the question asked just before and the answer the user \
     gave, and the newest utterance asks to go deeper into it ("Tell me more", "Why?", "Give me an example", "What \
-    about the shellfish?"). Answer it in more detail: 3 to 6 short sentences, at most 90 words, still CEFR B1 and in \
-    the first person, with concrete numbers, steps or examples from the knowledge base. This replaces the 25-word \
+    about the shellfish?"). Answer it in more detail: 3 to 6 short sentences, at most 90 words, in \
+    the first person and under the same strict B1 rules (short simple sentences, common words only), with concrete numbers, steps or examples from the knowledge base. This replaces the 25-word \
     limit above; without that block, keep answers short.
 
     Answer a general question in general terms: what usually or always happens. When the knowledge base or \

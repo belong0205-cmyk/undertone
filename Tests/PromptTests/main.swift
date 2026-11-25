@@ -106,6 +106,9 @@ check(Prompt.system.contains("at most 45 words"), "technical answers may be long
 check(Prompt.system.contains("at most 70 words") && Prompt.system.contains("cover every point"),
       "procedure and list answers may take 70 words and cover every point")
 check(Prompt.system.contains("at most 25 words"), "normal answers stay at 25 words")
+check(Prompt.system.contains("every answer, short or long, including follow-ups")
+      && Prompt.system.contains("one idea each") && Prompt.system.contains("same strict B1 rules"),
+      "strict B1 applies to every tier, follow-ups included")
 check(Prompt.system.contains("concrete numbers"), "technical answers keep the numbers")
 
 // <today> carries the local date and its weekday (the model gets weekdays of bare dates wrong).
