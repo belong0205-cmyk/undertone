@@ -102,10 +102,15 @@ check(joined([("Okay.", 0), ("And list the mother sauces.", 1.0)]) == "And list 
 for verb in ["Define", "Explain", "Describe", "List", "Provide", "Name", "Tell me", "Give me", "What are the steps"] {
     check(Prompt.system.contains("\"\(verb)"), "prompt names \"\(verb)…\" as a question")
 }
-check(Prompt.system.contains("at most 45 words"), "technical answers may be longer")
-check(Prompt.system.contains("at most 70 words") && Prompt.system.contains("cover every point"),
-      "procedure and list answers may take 70 words and cover every point")
-check(Prompt.system.contains("at most 25 words"), "normal answers stay at 25 words")
+check(Prompt.system.range(of: #"at most \d+ words|\d+ to \d+ short sentences|up to \d+ short sentences"#,
+                          options: .regularExpression) == nil, "answers have no word or sentence-count cap")
+check(Prompt.system.contains("as short as possible but complete and accurate")
+      && Prompt.system.contains("Start with the direct answer in the first sentence")
+      && Prompt.system.contains("one short sentence for each point the question asks for")
+      && Prompt.system.contains("every item of \"List 5…\""),
+      "answers lead with the direct answer and cover every point asked")
+check(Prompt.system.contains("no introduction, no repetition, no closing line, no restating the question"),
+      "answers add nothing extra")
 check(Prompt.system.contains("every answer, short or long, including follow-ups")
       && Prompt.system.contains("one idea each") && Prompt.system.contains("same strict B1 rules"),
       "strict B1 applies to every tier, follow-ups included")
@@ -151,8 +156,8 @@ check(followUp.range(of: "<previous_exchange>")!.lowerBound < followUp.range(of:
       "the previous exchange comes before the newest utterance")
 check(!Prompt.user(history: [], utterance: "Define ganache.", now: asked).contains("previous_exchange"),
       "a new question has no previous exchange")
-check(Prompt.system.contains("<previous_exchange>") && Prompt.system.contains("3 to 6 short sentences"),
-      "the prompt allows a longer answer for a follow-up")
+check(Prompt.system.contains("<previous_exchange>") && Prompt.system.contains("add only the new information"),
+      "a follow-up answers in more detail with only the new information")
 
 // Fixed answers: the file in Knowledge/, matched word for word or nearly, never on another question.
 let fixedText = try! String(contentsOfFile: "Knowledge/\(FixedAnswers.fileName)", encoding: .utf8)

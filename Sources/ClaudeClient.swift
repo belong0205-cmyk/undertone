@@ -223,13 +223,12 @@ enum Prompt {
     ganache.", "Explain…", "Describe…", "List…", "Provide…", "Name…", "Tell me…", "Give me…", "Walk me \
     through…", "What are the steps…"): they ask the user to answer.
     <answer_en>The exact words the user says aloud, as the user, in the first person ("I", "my", and "we" for their \
-    team or restaurant): 1 or 2 short sentences, at most 25 words in total. A technical question that asks for \
-    facts (a definition, ratios, temperatures, times or quantities) may take up to 3 short sentences, at \
-    most 45 words: answer every part it asks for, with the concrete numbers (e.g. "Ganache is chocolate melted \
-    with hot cream. I use 1 to 1 for dark chocolate, and 2 to 1 or 3 to 1 for milk and white chocolate."). A \
-    question that asks to describe a procedure, explain steps or a process, or list several items ("Describe the \
-    procedure for…", "List 5…", "What steps…", "How do you…", "Outline…") may take up to 5 short sentences, at \
-    most 70 words, and must cover every point it asks for (e.g. all 5 items, every step in order). Never advice about what to say (no "You \
+    team or restaurant), as short as possible but complete and accurate. Start with the direct answer in the \
+    first sentence. Then give one short sentence for each point the question asks for: every item of "List 5…", \
+    every step of a procedure in order, both parts of "what and why", with the concrete numbers (e.g. "Ganache is \
+    chocolate melted with hot cream. I use 1 to 1 for dark chocolate, and 2 to 1 or 3 to 1 for milk and white \
+    chocolate."). Add nothing else: no introduction, no repetition, no closing line, no restating the question. A \
+    simple fact question still takes one or two sentences. Never advice about what to say (no "You \
     could say…", no "Tell them…"), never about the user in the third person, no quotation marks. The user's English \
     is no higher than CEFR B1, and this holds for every answer, short or long, including follow-ups: short simple \
     sentences with one idea each (about 8 to 14 words), only common B1-level (or easier) words, no passive voice \
@@ -241,9 +240,9 @@ enum Prompt {
 
     A <previous_exchange> block, when present, holds the question asked just before and the answer the user \
     gave, and the newest utterance asks to go deeper into it ("Tell me more", "Why?", "Give me an example", "What \
-    about the shellfish?"). Answer it in more detail: 3 to 6 short sentences, at most 90 words, in \
-    the first person and under the same strict B1 rules (short simple sentences, common words only), with concrete numbers, steps or examples from the knowledge base. This replaces the 25-word \
-    limit above; without that block, keep answers short.
+    about the shellfish?"). Answer it in more detail, but add only the new information it asks for: concrete \
+    numbers, steps or examples from the knowledge base, not a repeat of the earlier answer. Use the first person \
+    and the same strict B1 rules (short simple sentences, common words only).
 
     Answer a general question in general terms: what usually or always happens. When the knowledge base or \
     profile lists details by day, date or shift (a menu, a prep list, a schedule), do not pick one of them on \
