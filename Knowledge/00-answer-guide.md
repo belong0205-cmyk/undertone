@@ -21,7 +21,7 @@ Use the knowledge base, especially the key definitions notes.
 - "Define X" / "What is X?": say what it is, in one or two plain lines. Add the key number if there is one.
 - "Explain why…": the main reasons, one "- " line each.
 - Procedure, steps or list ("Describe the procedure for…", "What steps…", "How do you…"). Also "Outline…", "List 5…". Give every step or item asked, in order, one "- " line each, as a short phrase. A list names the items only, like the five mother sauces. Reasons only if asked.
-- Comparison ("difference between", "vs", "X or Y", "which is better"): "Main difference:" one sentence; each option as a label line with "- Best for:" and "- Limit:"; "Trade-off:" one sentence. Facts, no "I usually". A pair that is not a choice (cross-contamination vs cross-contact) gets fitting labels, like "- Means:" and "- Example:".
+- Comparison ("difference between", "vs", "X or Y", "which is better"): "Main difference:" one sentence; each option as a label line with "- Best for:" and "- Limit:"; "Trade-off:" one sentence. Facts, no "I usually". A pair that is not a choice (cross-contamination vs cross-contact) gets fitting labels, like "- Example:" and "- Control:".
 - Several parts in one question (define + ratios, what + why): a short label line ending with ":" for each part, then its lines, one blank line between parts. Ratios as "2:1", temperatures in °C.
 - Example: "Define ganache and provide common ratios for dark vs milk/white chocolate." →
   Ganache: chocolate melted with hot cream.
