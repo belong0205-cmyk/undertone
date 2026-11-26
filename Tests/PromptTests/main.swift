@@ -119,7 +119,7 @@ check(Prompt.system.contains("When asked for an example, give one concrete examp
 for (phrase, what) in [
     ("never your reasoning", "no thinking aloud (#6 on Haiku)"),
     ("Use only facts from the knowledge base or profile.", "facts only from KB or profile"),
-    ("Never invent a number or size (e.g. \"5 cm deep\"), a dish, experience, a qualification, a company or project, "
+    ("Never invent a number or size, a dish, experience, a qualification, a company or project, "
          + "or restaurant details (menu, team, schedule, "
          + "working days or hours).", "no invented numbers, dishes or restaurant details (#6 \"crispy fish\")"),
     ("Never mention \"the profile\".", "no 'the profile' (#23)"),
@@ -144,17 +144,17 @@ for (phrase, what) in [
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
          "day question gets suggestions"),
     ("When the profile lacks a detail asked (name, date, place, number), put a hinted blank in the spoken sentence "
-         + "(e.g. \"Before that, I worked at [restaurant name].\"). Never say you or the menu have none (\"I do not have "
-         + "any ... to tell you about\") unless the profile says so, and never talk to the user about a blank. Use "
-         + "[brackets] only for such blanks.",
-         "missing detail = hinted blank inside the spoken sentence, never 'none', never to the user (#135, #129)"),
+         + "(e.g. \"Before my current job, I worked at [restaurant name].\"); never contradict it. Never say you or the "
+         + "menu have none (\"I do not have any ... to tell you about\") unless the profile says so; never explain a "
+         + "blank. Use [brackets] only for such blanks.",
+         "missing detail = hinted blank anchored in the spoken sentence, never contradicted, never 'none' (#135, #129)"),
     ("If the profile has nothing on your certificates, qualifications or signature dishes, say in one short "
          + "sentence that you have none yet.", "none yet for certificates, no brackets (#23)"),
     ("A procedure keeps every step, including checks and records.", "procedures keep the record step (#60)"),
     // Any comparison, not only in interviews (#132 on 7fc1602 ignored the interview-only line).
     ("\n- Any comparison (\"difference between\", \"vs\", \"X or Y\", \"which is better\") uses this shape, never "
-         + "paragraphs, with facts as facts (\"Braising uses...\"), not \"I usually...\":\n  Main difference: one line\n"
-         + "  Option A:\n  - Best for: ...\n  - Limit: ...\n  Option B: the same two lines\n  Trade-off: one line\n",
+         + "paragraphs, with facts as facts (\"Braising uses...\"), not \"I usually...\":\n  Main difference: one sentence\n"
+         + "  Option A:\n  - Best for: ...\n  - Limit: ...\n  Option B: the same two lines\n  Trade-off: one sentence\n",
          "comparison shape for every question, facts not 'I usually' (#132)"),
     // Interview answers (user request 2026-11-26): sources first, STAR with hinted blanks, vague questions,
     // help when stuck, questions for the employer.
@@ -181,6 +181,10 @@ for line in Prompt.rules.split(separator: "\n") where line.hasPrefix("  - ") {
 for profileText in ["dipping sauce", "iced tea", "stir-fry", "Soup, main", "salad, bread", "Bò hầm rượu vang"] {
     check(!Prompt.rules.contains(profileText), "the rules hold no profile menu text: \(profileText)")
 }
+// #135 on 0c4fc0f copied "Before that, ..." with nothing before it: the example anchors on the current job.
+check(!Prompt.rules.contains("Before that, I worked at"), "the blank example names what it comes before")
+// #132 on 0c4fc0f joined two sentences on the "Main difference" and "Trade-off" lines.
+check(!Prompt.rules.contains(": one line\n"), "comparison shape asks for one sentence per line")
 // Ceiling: 2,800 after the merge (6501aed); raised for the interview rules (user request); 4,000 = leader max.
 check(Prompt.rules.count < 4000, "the rules block stays short (\(Prompt.rules.count) chars)")
 // Answers are laid out to skim (user request): one idea per line, "- " list lines, labelled parts with a blank
