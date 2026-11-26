@@ -133,15 +133,15 @@ for (phrase, what) in [
     ("In answer_en, give dish names in English (\"Vịt nướng cam\" -> \"Roast duck with orange\", \"món mặn\" -> \"savoury main\"); answer_vi keeps "
          + "the Vietnamese names.", "English dish names (#3)"),
     ("General food or recipe (\"How do you make an omelette?\"): classic European dishes from the knowledge "
-         + "base, not the profile menu.", "branch 1: general food"),
+         + "base, not the menu.", "branch 1: general food"),
     ("What you cook or make, no restaurant named (\"What soup do you make?\"): only European dishes from the profile "
-         + "menu, no days or menu details. If it has none of that kind, classic European dishes, as your own.", "branch 2: what you cook (#2, #12, #129)"),
+         + "menu, no days or menu details. If it has none, classic European dishes, as your own.", "branch 2: what you cook (#2, #12, #129)"),
     ("Restaurant, its menu or your workplace named (\"What do you serve?\"): the whole menu.",
          "branch 3: whole menu (European first via the next rule, #4)"),
     ("\n- When the profile has more than one menu, cover each one in full, European first even if listed "
          + "second. Name a vegetarian option only if the profile lists one; never say there is none. Shape for "
          + "\"What does one meal come with?\":\n  European menu:\n  - Its parts, a few per line\n  - Vegetarian option: "
-         + "its dish, if listed\n\n  Vietnamese menu: the same lines\n",
+         + "its dish; omit the line if none\n\n  Vietnamese menu: the same lines\n",
          "every menu, European first, vegetarian only if listed, said naturally (#4; dc1671d said \"I do not have a "
              + "vegetarian option\", bd441bf said \"Vegetarian dish also listed\")"),
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
@@ -149,10 +149,10 @@ for (phrase, what) in [
     ("\n- Menu or dishes asked (\"What is on your menu?\"): at least 6 dishes in total, all if fewer, not 3 or 4; "
          + "each a \"- \" line: name, then 3-6 words.\n- When the profile has more than one menu",
          "menu question lists at least 6 dishes in total, not 3 (user request, 0.5.22-A/B); its own rule before the menu shape"),
-    ("When the profile lacks a detail asked (name, date, place, number), put a hinted blank in the spoken sentence "
+    ("When the profile lacks a detail asked (name, date, place, number), put a hinted blank inside the spoken sentence, not on its own "
          + "(e.g. \"Before my current job, I worked at [restaurant name].\"); never contradict it. Never say you have none or none to name (\"I do not have any/other ...\") unless the profile says so; never explain a "
          + "blank. Use [brackets] only for such blanks; a blank names its content (\"[job title]\", not \"[your role]\").",
-         "missing detail = hinted blank anchored in the spoken sentence, never contradicted, never 'none' or 'none to name' (#135, #129; 4dae09c said \"I do not have other workplaces to name here.\")"),
+         "missing detail = hinted blank anchored in the spoken sentence, never contradicted, never on its own (#135 on 914b2d6: \"The restaurant name was [restaurant name].\"), never 'none' or 'none to name' (#135, #129; 4dae09c said \"I do not have other workplaces to name here.\")"),
     ("If the profile has nothing on your certificates, qualifications or signature dishes, say in one short "
          + "sentence that you have none yet.", "none yet for certificates, no brackets (#23)"),
     ("A procedure keeps every step, checks and records.", "procedures keep the record step (#60)"),
@@ -172,7 +172,7 @@ for (phrase, what) in [
     ("Vague: answer what the interviewer wants to judge.", "interview: vague question"),
     ("No answer in the sources: lines for the user: a clarifying question, a fair assumption, short steps.",
          "interview: help when stuck, said by the user (model still shows no reasoning)"),
-    ("\"Do you have any questions?\": 2 or 3 about the role, team, success measures or company.",
+    ("\"Do you have any questions?\": 2 or 3 about the role, team, success or company.",
          "interview: questions for the employer"),
     ("cover every item and part asked", "every item and part covered"),
 ] {

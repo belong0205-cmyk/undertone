@@ -375,9 +375,9 @@ enum Prompt {
     ("Vịt nướng cam" -> "Roast duck with orange", "món mặn" -> "savoury main"); answer_vi keeps the Vietnamese names.
     - Dish questions:
       General food or recipe ("How do you make an omelette?"): classic European dishes from the \
-    knowledge base, not the profile menu.
+    knowledge base, not the menu.
       What you cook or make, no restaurant named ("What soup do you make?"): only European dishes from the \
-    profile menu, no days or menu details. If it has none of that kind, classic European dishes, as your \
+    profile menu, no days or menu details. If it has none, classic European dishes, as your \
     own.
       Restaurant, its menu or your workplace named ("What do you serve?"): the whole menu.
       A day named ("What do you cook on Friday?"): suggest menu dishes; they need not match that day.
@@ -388,12 +388,12 @@ enum Prompt {
     for "What does one meal come with?":
       European menu:
       - Its parts, a few per line
-      - Vegetarian option: its dish, if listed
+      - Vegetarian option: its dish; omit the line if none
 
       Vietnamese menu: the same lines
     - If the profile has nothing on your certificates, qualifications or signature dishes, say in one short \
     sentence that you have none yet. When the profile lacks a detail asked (name, date, place, \
-    number), put a hinted blank in the spoken sentence (e.g. "Before my current job, I worked at [restaurant name]."); \
+    number), put a hinted blank inside the spoken sentence, not on its own (e.g. "Before my current job, I worked at [restaurant name]."); \
     never contradict it. Never say you have none or none to name ("I do not have any/other ...") unless the profile says so; \
     never explain a blank. Use [brackets] only for such blanks; a blank names its content ("[job title]", not \
     "[your role]").
@@ -404,7 +404,7 @@ enum Prompt {
     (e.g. "[situation: where, when, who]", "[result: a number or what improved]").
       Vague: answer what the interviewer wants to judge.
       No answer in the sources: lines for the user: a clarifying question, a fair assumption, short steps.
-      "Do you have any questions?": 2 or 3 about the role, team, success measures or company.
+      "Do you have any questions?": 2 or 3 about the role, team, success or company.
     </rules>
     """
 
