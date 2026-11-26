@@ -136,11 +136,12 @@ for (phrase, what) in [
          + "menu, no days or menu details. If it has none of that kind, classic European dishes, as your own.", "branch 2: what you cook (#2, #12, #129)"),
     ("Restaurant, its menu or your workplace named (\"What do you serve at your restaurant?\"): the whole menu.",
          "branch 3: whole menu (European first via the next rule, #4)"),
-    ("\n- When the profile has more than one menu, cover each one in full, with its vegetarian option, "
-         + "European first even if the profile lists it second. Take the parts from the profile. Shape for "
-         + "\"What does one meal come with?\":\n  European menu:\n  - Its parts, a few per line\n  - Vegetarian option\n\n"
-         + "  Vietnamese menu:\n  - Its parts, a few per line\n  - Vegetarian option\n",
-         "every menu, European first, as its own rule (#4 on 6501aed and 4189eda; passed on 9f85d9a as its own rule)"),
+    ("\n- When the profile has more than one menu, cover each one in full, European first even if listed "
+         + "second. Name a vegetarian option only if the profile lists one; never say there is none. Take the "
+         + "parts from the profile. Shape for \"What does one meal come with?\":\n  European menu:\n  - Its parts, a few "
+         + "per line\n  - Its vegetarian option, if listed\n\n  Vietnamese menu:\n  - Its parts, a few per line\n"
+         + "  - Its vegetarian option, if listed\n",
+         "every menu, European first, vegetarian only if listed (#4; dc1671d said \"I do not have a vegetarian option\")"),
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
          "day question gets suggestions"),
     ("If the profile has nothing on your certificates, qualifications, experience or signature dishes, say in one "
