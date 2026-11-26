@@ -310,6 +310,8 @@ enum Prompt {
     If the question names no day, give dishes with no day names.
     - A menu dish is European only if it is under a menu heading that says European ("món Âu"). Dishes under \
     a Vietnamese heading ("món Việt") are Vietnamese, even on the same day. Never call them European.
+    - In answer_en, write menu dish names in English (e.g. "Bò hầm rượu vang" -> "Beef stew in red wine"); \
+    answer_vi keeps the Vietnamese names.
     - The profile menu is a list of suggested dishes, not a fixed plan by day. For a question about a day \
     (e.g. "What do you cook on Friday?"), suggest dishes from the menu; they need not match that day.
     - Never state working days or hours unless the profile says them.
