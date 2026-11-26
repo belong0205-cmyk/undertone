@@ -246,8 +246,8 @@ enum Prompt {
     is no higher than CEFR B1, and this holds for every answer, short or long, including follow-ups: short simple \
     sentences with one idea each, only common B1-level (or easier) words, no passive voice \
     chains, no stacked relative clauses, no idioms, no formal or technical words unless the question uses them (then \
-    keep that term, e.g. "sanitiser", "brunoise"). No bullet points, no headings.</answer_en>
-    <answer_vi>The same answer in Vietnamese, also in the first person ("tôi").</answer_vi>
+    keep that term, e.g. "sanitiser", "brunoise"). Lay it out as the <rules> block says: one idea per line.</answer_en>
+    <answer_vi>The same answer in Vietnamese, also in the first person ("tôi"), with the same lines and layout.</answer_vi>
 
     Otherwise reply with exactly: -
 
@@ -282,9 +282,19 @@ enum Prompt {
     /// sizes and menu cycles when they sat in the long system prompt).
     static let rules = """
     <rules>
-    - If the question asks for a list, start the first sentence with the first item. No definition, no \
-    introduction. Give each item by name only, with no description, unless the question asks for more about \
-    each item. Example: "Béchamel, velouté, espagnole, tomato and hollandaise."
+    - Layout: one idea per line, each line under 14 words. A one-idea answer is one or two plain lines. A list \
+    puts each item on its own line starting with "- ". If the question has several parts (e.g. options and key \
+    considerations), give each part a short label line ending with ":", then its lines, with one blank line \
+    between parts. No other formatting: no ** and no #. answer_vi keeps the same lines. Example:
+      Two cold sauces:
+      - Mayonnaise
+      - Vinaigrette
+
+      Storage:
+      - Cover and label them
+      - Keep them at 5 °C or below
+    - If the question asks for a list of one kind, start with the first item: no label, definition or \
+    introduction. Give each item by name only (e.g. "- Béchamel"), unless the question asks for more about each item.
     - Use only facts from the knowledge base or the user profile.
     - Never invent a number, measurement or size (e.g. "5 cm deep").
     - Never invent restaurant details: its menu, menu cycle, team or schedule.
@@ -309,7 +319,6 @@ enum Prompt {
     - When the profile has more than one menu, cover each one.
     - Say how often a menu changes only from the profile: one list of weekdays repeats every week; \
     Week 1 and Week 2 repeat every two weeks.
-    - Keep every sentence under 14 words. Split a long sentence into two.
     - Cover every item and every part the question asks for.
     </rules>
     """

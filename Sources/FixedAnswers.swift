@@ -24,7 +24,7 @@ enum FixedAnswers {
     }()
 
     /// Reads `## Q:` sections: `- ` lines are other wordings, `A:` the answer, `VI:` its translation
-    /// (either may go on over several lines).
+    /// (either may go on over several lines; its line breaks and blank lines are kept for display).
     static func parse(_ text: String) -> [Entry] {
         enum Field { case answer, vietnamese }
         var entries: [Entry] = []
@@ -46,8 +46,11 @@ enum FixedAnswers {
                 if line.hasPrefix("## Q:") {
                     entry = Entry(questions: [String(line.dropFirst(5)).trimmingCharacters(in: .whitespaces)])
                 }
-            } else if entry == nil || line.isEmpty {
-                continue // the file's own notes, or a blank line
+            } else if entry == nil {
+                continue // the file's own notes
+            } else if line.isEmpty {
+                // A blank line inside an answer separates its parts; trailing ones are trimmed in `close`.
+                if field == .answer { entry?.answer += "\n" } else if field == .vietnamese { entry?.vietnamese += "\n" }
             } else if line.hasPrefix("A:") {
                 field = .answer
                 entry?.answer = String(line.dropFirst(2))
@@ -55,9 +58,9 @@ enum FixedAnswers {
                 field = .vietnamese
                 entry?.vietnamese = String(line.dropFirst(3))
             } else if field == .answer {
-                entry?.answer += " " + line
+                entry?.answer += "\n" + line
             } else if field == .vietnamese {
-                entry?.vietnamese += " " + line
+                entry?.vietnamese += "\n" + line
             } else if line.hasPrefix("- ") {
                 entry?.questions.append(String(line.dropFirst(2)).trimmingCharacters(in: .whitespaces))
             }

@@ -161,31 +161,43 @@ struct AnswerText: View {
     private struct Line {
         let isBullet: Bool
         let content: AttributedString
+        /// A blank line came before it: it starts a new part of the answer.
+        let startsPart: Bool
     }
 
     private var lines: [Line] {
         let options = AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace)
-        return text.components(separatedBy: "\n").compactMap { raw in
+        var lines: [Line] = []
+        var blankBefore = false
+        for raw in text.components(separatedBy: "\n") {
             var line = raw.trimmingCharacters(in: .whitespaces)
-            guard !line.isEmpty else { return nil }
+            guard !line.isEmpty else {
+                blankBefore = !lines.isEmpty
+                continue
+            }
             let marker = line.range(of: #"^[-*•]\s+"#, options: .regularExpression)
             if let marker { line.removeSubrange(marker) }
             let content = (try? AttributedString(markdown: line, options: options)) ?? AttributedString(line)
-            return Line(isBullet: marker != nil, content: content)
+            lines.append(Line(isBullet: marker != nil, content: content, startsPart: blankBefore))
+            blankBefore = false
         }
+        return lines
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             ForEach(Array(lines.enumerated()), id: \.offset) { _, line in
-                if line.isBullet {
-                    HStack(alignment: .firstTextBaseline, spacing: 7) {
-                        Text("•").foregroundStyle(Theme.accent)
+                Group {
+                    if line.isBullet {
+                        HStack(alignment: .firstTextBaseline, spacing: 7) {
+                            Text("•").foregroundStyle(Theme.accent)
+                            Text(line.content)
+                        }
+                    } else {
                         Text(line.content)
                     }
-                } else {
-                    Text(line.content)
                 }
+                .padding(.top, line.startsPart ? 7 : 0)
             }
         }
         .font(.system(size: Theme.answerSize * textScale))

@@ -139,16 +139,27 @@ for rule in ["Use only facts from the knowledge base or the user profile.",
              "When the profile has more than one menu, cover each one.",
              "Say how often a menu changes only from the profile: one list of weekdays repeats every week; "
                  + "Week 1 and Week 2 repeat every two weeks.",
-             "Keep every sentence under 14 words. Split a long sentence into two.",
              "Cover every item and every part the question asks for."] {
     check(Prompt.rules.contains("- " + rule), "rule: \(rule)")
 }
-// A list answer starts with its first item and gives names only (#50, live: it opened with a definition, then
-// described each sauce), so the list rule comes first.
-check(Prompt.rules.hasPrefix("<rules>\n- If the question asks for a list, start the first sentence with the first item. "
-                             + "No definition, no introduction. Give each item by name only, with no description, unless the question "
-                             + "asks for more about each item. Example: \"Béchamel, velouté, espagnole, tomato and hollandaise.\"\n"),
-      "the list rule is first and starts the answer with the first item")
+// Answers are laid out to skim (user request): one idea per line, "- " list lines, labelled parts with a blank
+// line between, nothing else; the layout rule comes first, then the one-kind list rule (#50: names only).
+check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, each line under 14 words. A one-idea answer is one or "
+                             + "two plain lines. A list puts each item on its own line starting with \"- \". If the question "
+                             + "has several parts (e.g. options and key considerations), give each part a short label line "
+                             + "ending with \":\", then its lines, with one blank line between parts. No other formatting: "
+                             + "no ** and no #. answer_vi keeps the same lines. Example:\n"),
+      "the layout rule comes first")
+check(Prompt.rules.contains("  Two cold sauces:\n  - Mayonnaise\n  - Vinaigrette\n\n  Storage:\n"),
+      "the layout example has a label, list lines and a blank line between parts")
+check(Prompt.rules.contains("\n- If the question asks for a list of one kind, start with the first item: no label, "
+                            + "definition or introduction. Give each item by name only (e.g. \"- Béchamel\"), unless the "
+                            + "question asks for more about each item.\n"),
+      "a one-kind list starts with its first item and gives names only")
+check(!Prompt.rules.contains("Keep every sentence under 14 words"), "the 14-word limit is part of the layout rule")
+check(!Prompt.system.contains("No bullet points") && Prompt.system.contains("Lay it out as the <rules> block says")
+      && Prompt.system.contains("with the same lines and layout.</answer_vi>"),
+      "the system prompt allows list lines and keeps the Vietnamese layout the same")
 let ruled = Prompt.user(history: [], utterance: "What is on the menu?", now: Date(timeIntervalSince1970: 0))
 check(ruled.hasSuffix(Prompt.rules + "\n\n<newest_utterance>\nWhat is on the menu?\n</newest_utterance>"),
       "the rules come right before the newest utterance")
@@ -245,6 +256,13 @@ let cleaningEntry = fixed.first { $0.questions[0] == "What is the difference bet
 check(cleaningEntry?.questions.count == 4, "the cleaning entry has three other wordings")
 check(cleaningEntry?.answer == cleaning, "the answer is read word for word")
 check(cleaningEntry?.vietnamese.hasPrefix("Làm sạch là") == true, "the Vietnamese line is read")
+// A fixed answer written over several lines keeps its lines and blank lines for display, word for word.
+let multiLine = FixedAnswers.parse("## Q: Name two cold sauces.\nA: Two cold sauces:\n- Mayonnaise\n- Vinaigrette\n\n"
+                                   + "Storage:\n- Keep them cold\n\nVI: Hai loại sốt lạnh:\n- Mayonnaise\n\n## Q: Next?\nA: Yes.")
+check(multiLine.first?.answer == "Two cold sauces:\n- Mayonnaise\n- Vinaigrette\n\nStorage:\n- Keep them cold"
+      && multiLine.first?.vietnamese == "Hai loại sốt lạnh:\n- Mayonnaise"
+      && multiLine.first?.questions == ["Name two cold sauces."] && multiLine.count == 2,
+      "a fixed answer keeps its line breaks; its list lines are not read as other wordings")
 for heard in ["What is the difference between cleaning and sanitising?",
               "What's the difference between cleaning and sanitizing?",
               "Difference between cleaning and sanitising.",
