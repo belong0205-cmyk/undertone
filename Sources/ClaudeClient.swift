@@ -269,12 +269,12 @@ enum Prompt {
     answer_en rules. If there is no profile, or it does not contain what was asked: for a fixed personal fact (a \
     name, age or birthday, address or workplace), answer with a placeholder in square brackets for that fact only \
     (e.g. "My name is [your name]."), and the same placeholder in answer_vi. For a record of the user's own \
-    (certificates, qualifications, experience, signature dishes), say in one short first-person sentence that \
+    (certificates, qualifications, signature dishes), say in one short first-person sentence that \
     you have none yet (e.g. "I do not have any certificates yet."), with no brackets. For anything else about the user \
     (hobbies, likes, goals, feelings, daily life), give one short, plausible, general first-person answer with no \
     brackets and no template text (e.g. "In my free time, I like cooking and walking."), with no specific places \
     or dates. Never add a placeholder \
-    to an answer that has other content (except the blanks of a STAR answer in <rules>), never invent a name, age, address, workplace or dish, and never ask the \
+    to an answer that has other content (except the blanks that <rules> allows), never invent a name, age, address, workplace or dish, and never ask the \
     user for them.
     """
 
@@ -324,21 +324,24 @@ enum Prompt {
       Vietnamese menu:
       - Its parts, a few per line
       - Its vegetarian option, if listed
-    - If the profile has nothing on your certificates, qualifications, experience or signature dishes, say in \
-    one short sentence that you have none yet. Use [brackets] only for a missing name, age, address or workplace, or the blanks of a STAR answer.
-    - Interview questions: use the job ad, CV and notes in the profile or knowledge base first. Sound \
-    confident but modest, professional but natural.
+    - If the profile has nothing on your certificates, qualifications or signature dishes, say in one short \
+    sentence that you have none yet. When the profile lacks a detail asked (name, date, place, \
+    number), give a blank with a hint (e.g. "[restaurant name]"); never say you have none or never did unless \
+    the profile says so. Use [brackets] only for such blanks.
+    - Interview questions: use the job ad, CV and notes first. Say knowledge-base facts as facts ("Braising \
+    uses..."), never as your own story ("I usually..."). Sound confident but \
+    modest.
       Behaviour ("Tell me about a time..."): one strong example from the profile, as four labels: \
     "Situation:", "Task:", "Action:", "Result:". If the profile has none, each label gets only a blank with a \
-    hint (e.g. "[situation: where, when, who]", "[result: a number or what improved]"). Never tell \
-    knowledge-base advice as your own story.
-      Technical: explain the idea clearly. When it compares options, give each one's strength and limit, \
-    then a "Trade-off:" line.
+    hint (e.g. "[situation: where, when, who]", "[result: a number or what improved]").
+      Technical: for a comparison ("difference between", "vs", "X or Y", "which is better"): one line on the \
+    main difference, then a label line per option with "- Best for:" and "- Limit:", then a "Trade-off:" line. No \
+    paragraphs.
       Vague: answer what the interviewer wants to judge.
-      No answer in the sources: lines for the user to say: one clarifying question, one fair assumption, \
-    then short steps to a useful answer.
-      "Do you have any questions?": 2 or 3 questions about the role, team, how success is measured, or \
-    the company.
+      No answer in the sources: lines for the user: a clarifying question, a fair assumption, then short \
+    steps to an answer.
+      "Do you have any questions?": 2 or 3 about the role, team, how success is measured, or the \
+    company.
     </rules>
     """
 

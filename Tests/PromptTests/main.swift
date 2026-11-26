@@ -144,25 +144,29 @@ for (phrase, what) in [
          "every menu, European first, vegetarian only if listed (#4; dc1671d said \"I do not have a vegetarian option\")"),
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
          "day question gets suggestions"),
-    ("If the profile has nothing on your certificates, qualifications, experience or signature dishes, say in one "
-         + "short sentence that you have none yet. Use [brackets] only for a missing name, age, address or workplace, "
-         + "or the blanks of a STAR answer.",
-         "none yet, no brackets (#23)"),
+    ("When the profile lacks a detail asked (name, date, place, number), give a blank with a hint (e.g. "
+         + "\"[restaurant name]\"); never say you have none or never did unless the profile says so. Use [brackets] "
+         + "only for such blanks.",
+         "missing detail = hinted blank, never 'none' (#135 \"I do not have any restaurant experience before\")"),
+    ("If the profile has nothing on your certificates, qualifications or signature dishes, say in one short "
+         + "sentence that you have none yet.", "none yet for certificates, no brackets (#23)"),
     ("A procedure keeps every step, including checks and records.", "procedures keep the record step (#60)"),
-    // Interview answers (user request 2026-11-26): sources first, STAR with blanks, technical trade-offs,
-    // vague questions, help when stuck, questions for the employer.
-    ("- Interview questions: use the job ad, CV and notes in the profile or knowledge base first.", "interview: sources first"),
-    ("confident but modest, professional but natural", "interview: tone"),
+    // Interview answers (user request 2026-11-26): sources first, KB as facts, STAR with hinted blanks,
+    // comparisons as lists with a trade-off, vague questions, help when stuck, questions for the employer.
+    ("- Interview questions: use the job ad, CV and notes first.", "interview: sources first"),
+    ("Say knowledge-base facts as facts (\"Braising uses...\"), never as your own story (\"I usually...\").",
+         "interview: KB as facts, not a story (#132, conflict question on 2544242)"),
+    ("Sound confident but modest.", "interview: tone"),
     ("as four labels: \"Situation:\", \"Task:\", \"Action:\", \"Result:\". If the profile has none, each label gets "
-         + "only a blank with a hint (e.g. \"[situation: where, when, who]\", \"[result: a number or what improved]\"). "
-         + "Never tell knowledge-base advice as your own story.",
-         "interview: STAR; no profile example = all four labels blank with hints, no KB advice told as a story (2544242)"),
-    ("Technical: explain the idea clearly. When it compares options, give each one's strength and limit, then a "
-         + "\"Trade-off:\" line.", "interview: technical comparison ends with a trade-off (braising vs stewing)"),
+         + "only a blank with a hint (e.g. \"[situation: where, when, who]\", \"[result: a number or what improved]\").",
+         "interview: STAR; no profile example = all four labels blank with hints (2544242)"),
+    ("Technical: for a comparison (\"difference between\", \"vs\", \"X or Y\", \"which is better\"): one line on the main "
+         + "difference, then a label line per option with \"- Best for:\" and \"- Limit:\", then a \"Trade-off:\" line. No "
+         + "paragraphs.", "interview: comparison triggers, list layout and trade-off (#132 on 8aeae31)"),
     ("Vague: answer what the interviewer wants to judge.", "interview: vague question"),
-    ("lines for the user to say: one clarifying question, one fair assumption, then short steps to a useful answer.",
-         "interview: help when stuck, said by the user (model still shows no reasoning)"),
-    ("\"Do you have any questions?\": 2 or 3 questions about the role, team, how success is measured, or the company.",
+    ("No answer in the sources: lines for the user: a clarifying question, a fair assumption, then short steps to "
+         + "an answer.", "interview: help when stuck, said by the user (model still shows no reasoning)"),
+    ("\"Do you have any questions?\": 2 or 3 about the role, team, how success is measured, or the company.",
          "interview: questions for the employer"),
     ("cover every item and part asked", "every item and part covered"),
 ] {
@@ -177,8 +181,8 @@ for line in Prompt.rules.split(separator: "\n") where line.hasPrefix("  - ") {
 for profileText in ["dipping sauce", "iced tea", "stir-fry", "Soup, main", "salad, bread", "Bò hầm rượu vang"] {
     check(!Prompt.rules.contains(profileText), "the rules hold no profile menu text: \(profileText)")
 }
-// Ceiling: 2,800 after the merge (6501aed); raised for the interview rules (user request), with ~60 chars spare.
-check(Prompt.rules.count < 3900, "the rules block stays short (\(Prompt.rules.count) chars)")
+// Ceiling: 2,800 after the merge (6501aed); raised for the interview rules (user request); 4,000 = leader max.
+check(Prompt.rules.count < 4000, "the rules block stays short (\(Prompt.rules.count) chars)")
 // Answers are laid out to skim (user request): one idea per line, "- " list lines, labelled parts with a blank
 // line between, nothing else; the layout rule comes first, then the minimal rule, then the one-kind list rule.
 check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, every line under 14 words; break a long line into \"- \" "
@@ -237,7 +241,7 @@ for question in ["How do you make a classic French omelette?", "What do you serv
           "the general-or-menu rules come before: \(question)")
 }
 // A missing certificate is not a bracket placeholder (#23, live: "I have [your certificate].").
-check(Prompt.system.contains("For a record of the user's own (certificates, qualifications, experience, signature "
+check(Prompt.system.contains("For a record of the user's own (certificates, qualifications, signature "
                              + "dishes), say in one short first-person sentence that you have none yet")
       && Prompt.system.contains("(e.g. \"I do not have any certificates yet.\"), with no brackets"),
       "a missing certificate or other record gets a plain 'none yet' answer")
