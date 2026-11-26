@@ -80,6 +80,3 @@ Trimming fat, sinew and silverskin; boning out; French-trimming racks (exposing 
 
 ## Accompaniments and sauces (classic pairings)
 Roast beef — Yorkshire pudding, horseradish, red wine jus. Steak — Béarnaise, pepper or Diane sauce. Lamb — mint, rosemary jus. Pork — apple sauce. Chicken — gravy. Turkey — cranberry. Duck — orange or cherry. Osso buco — gremolata.
-
-## Food safety for meat and poultry
-I receive and store meat ≤5°C. Vacuum packs must be intact, with no swelling or off smell. It goes on the bottom shelf, covered, raw apart from RTE. Red board for meat, yellow for poultry. I cook to safe core temperatures and cool by the 2h/4h rule. I label with date and use-by.

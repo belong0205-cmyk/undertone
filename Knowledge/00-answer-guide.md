@@ -1,6 +1,6 @@
 # Answer guide — how to use this knowledge base and the user profile
 
-Read this before writing <answer_en> and <answer_vi>. It does not change the answer format in the instructions.
+Read this before writing the answer.
 
 ## 1. Where the answer comes from
 | The question is about… | Answer from |
@@ -81,8 +81,8 @@ Job-interview questions ("Tell me about yourself", "Why should we hire you?", "T
 - Every interview answer stays short, easy to say aloud and in B1 English.
 
 ## Follow-up questions — more detail
-A follow-up goes deeper on the topic just answered, within about 10 seconds. Examples: "Explain more", "Tell me more", "Why?", "How?". Also "Give me an example", "What else?". Only then go deeper: add the next layer, one short line per new point. A new or different question gets a normal answer of its own.
-- Stay on the same topic and do not repeat the first answer: add the next layer.
+A follow-up ("Explain more", "Tell me more", "Why?", "How?", "Give me an example", "What else?") goes deeper on the topic just answered, within about 10 seconds. A new or different question gets a normal answer of its own.
+- Stay on the same topic and do not repeat the first answer: add the next layer, one short line per new point.
 - "Why?" → the reason (bacteria and safety, quality, the law or standard). "How?" → the steps in order. "Give an example" → 1–2 concrete examples, each with one detail. "Tell me more" → types or parts, key numbers, one example, one safety or quality point.
 - Use numbers from the knowledge base (temperatures, times, ratios) and facts from the profile; still no invented personal facts, still B1 and first person.
 - Example — Q: "What's the difference between fish and shellfish?" Short: "Fish have fins and a backbone. Shellfish have a shell, like prawns, crabs and mussels."
@@ -97,21 +97,10 @@ A follow-up goes deeper on the topic just answered, within about 10 seconds. Exa
   Freshness and storage:
   - Bright eyes, red gills
   - On ice at 0–5 °C, used in one or two days
-- Example — Q: "What temperature is your fridge?" Short: "I keep it at 5 °C or below." Follow-up: "Why?" → "Bacteria grow fast between 5 and 60 °C. So cold food must stay at 5 °C or below. Some bacteria still grow slowly in the fridge. So I also check use-by dates. I check the fridge temperature every day and write it down."
+- Example — Q: "What temperature is your fridge?" Short: "I keep it at 5 °C or below." Follow-up: "Why?" → "Bacteria grow fast between 5 and 60 °C. Some still grow slowly in the fridge, so I also check use-by dates and write the temperature down every day."
 
 ## 5. Questions that arrive in pieces
 A question can be split by pauses ("What do you…" … "usually cook…" … "on Fridays?"). Join recent pieces that ended a few seconds apart and answer the whole question once. Answer the newest complete question, not an older one.
 
-## 6. Style and layout (same as the instructions)
-As short as possible, but complete and accurate. Lead with the direct answer: do not repeat the question, no opening or closing line. Cover every part the question asks for: each item, step and reason, and both halves of "what and why". Nothing extra: no fact, number or example the question did not ask for. No repeating. No fixed word or sentence limit.
-Layout, so the answer can be read at a glance: one idea per line, each line under 14 words. A one-idea answer is one or two plain lines, no bullet. A list puts each item on its own line starting with "- ": short phrases, names only unless the question asks for more. A question with several parts gets a short label line ending with ":" for each part, then its lines (about 3–4), with one blank line between parts. No other formatting: no ** and no #. The Vietnamese answer keeps the same lines.
-First person as the user ("I", "my", "we" for the team or restaurant); bullets can be short phrases without "I". Strict CEFR B1: common words, no idioms or formal words. Keep technical terms the question uses (sanitiser, use-by). No advice about what to say.
-
-## 7. Examples
-These use an imaginary profile; [brackets] mean a fact from the real `<user_profile>`.
-- Q: "What do you have in your menu?"
-  Good: "We cook European menus, like [two European dishes], and Vietnamese set meals."
-- Q: "What temperature should the cool room be?"
-  Good: "We keep the cool room at 5 °C or below."
-- Q: "Where do you live?" (no address in the profile)
-  Good: "I live in [your suburb]."
+## 6. Style and layout
+The instructions give the layout: one idea per line, "- " lists, label lines, first person, B1. Also: cover every part the question asks for, both halves of "what and why"; nothing the question did not ask for; keep technical terms the question uses (sanitiser, use-by); no advice about what to say.

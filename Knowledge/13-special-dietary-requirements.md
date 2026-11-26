@@ -14,7 +14,7 @@
 - Hidden gluten: soy sauce (use tamari), stock powders, gravies, roux-thickened sauces, batters and crumbs, beer, malt vinegar, sausages, processed meats, imitation crab, some spice mixes, communal fryer oil.
 
 ## Common allergens and what to watch
-The 11 usually listed: peanut, tree nuts, milk, egg, sesame, soy, fish, crustacea, mollusc, wheat (gluten), lupin; PEAL also requires barley, oats and rye (gluten) and added sulphites ≥10 mg/kg to be declared.
+The 11 usually listed: peanut, tree nuts, milk, egg, sesame, soy, fish, crustacea, mollusc, wheat (gluten), lupin; PEAL also requires barley, oats and rye (gluten) and added sulphites ≥10 mg/kg to be declared; the cereal is named in bold and "gluten" goes in the "Contains" statement.
 | Allergen | Hidden sources / notes |
 |---|---|
 | Peanut | satay, Asian sauces, peanut oil, praline, desserts, crushed nuts as garnish |

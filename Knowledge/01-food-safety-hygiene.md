@@ -5,7 +5,6 @@
 - Potentially hazardous food (PHF): food that must be kept at ≤5°C or ≥60°C to stop pathogens growing or toxins forming. Examples: raw and cooked meat, poultry, seafood, dairy, eggs and egg products, cooked rice and pasta, cooked vegetables and legumes, prepared salads and cut fruit, sandwiches, soups, sauces, gravies, foods containing these. (3.2.2 cl 1)
 - Ready-to-eat (RTE) food: eaten without further cooking (salads, sliced cold meats, desserts, sushi).
 - Contamination means something harmful or unwanted is in the food. Cross-contamination means a hazard moves from one food, surface or person to another. Examples: raw chicken juice drips onto salad below it. One board or knife is used for raw meat and then for salad. Dirty hands or a dirty cloth touch ready-to-eat food.
-- Clean (Std 3.1.1) and sanitise (3.2.2 cl 20(2)): definitions in file 15.
 - Food handler: anyone who handles food or surfaces that touch food. Food safety supervisor (FSS): certified person who supervises and advises food handlers.
 - Use-by date: food must not be sold or eaten after it (safety). Best-before date: food is still safe after it but quality may drop; it can be sold if not damaged/deteriorated.
 
@@ -13,7 +12,7 @@
 - Biological: bacteria, viruses, parasites, moulds/yeasts, toxins (e.g. Salmonella, Listeria, norovirus).
 - Chemical: cleaning chemicals, pesticides, sanitiser residue, pest baits, heavy metals, natural toxins (e.g. green potatoes – solanine; red kidney beans – lectin if undercooked; ciguatoxin; histamine/scombroid).
 - Physical: glass, metal, hair, jewellery, bandages, plastic, bone, stones, pests and droppings, fingernails.
-- Allergenic: undeclared allergens or cross-contact (milk, egg, peanut, tree nuts, sesame, soy, fish, crustacea, molluscs, wheat/gluten, lupin; sulphites).
+- Allergenic: undeclared allergens or allergen cross-contact.
 
 ## Common pathogens (know source + control)
 | Pathogen | Typical sources | Control |
@@ -48,12 +47,10 @@ Food (protein-rich, moist), Acidity (pH above ~4.6), Temperature (5–60°C), Ti
 ## More SITXFSA005/006 answers
 - Unlabelled sanitiser bottle: don't use it; set it aside and tell the supervisor; dispose of it safely; refill a clean bottle from the original container and label it (product, dilution); SDS available. Why: unknown chemical or wrong strength → chemical contamination, poor sanitising, injury; WHS law requires hazardous chemical containers to be labelled.
 - Business consequences of poor hygiene: customers sick (even deaths), fines and penalty notices, prosecution under the Food Act, improvement notices or closure orders, public listing (e.g. NSW Food Authority "Name and Shame"), legal claims, bad reviews and lost reputation, lost income and jobs.
-- Hygiene and safety PPE: hair net or hat, apron, disposable gloves, chef jacket, enclosed non-slip shoes, cut-resistant gloves, oven mitts, rubber gloves and goggles for chemicals.
 - Thermometer ice-point check (FSANZ method). I fill a cup with crushed ice and a little cold water. The ice must not float. I put the probe in the centre, not touching the cup. After about 3 minutes it must read 0°C, within ±1°C (cl 22). I repeat up to three times, then adjust or replace it and record. How often: the Code sets no fixed time. I follow our food safety program. NSW Food Authority says at least every 6 months. Many kitchens check weekly or monthly. I also check after a drop, a knock or an odd reading. A wrong probe lets unsafe food pass. If it reads 6°C in ice slurry, it is 6°C too high. Hot food read as 60°C may be only 54°C. I stop using it, tag it, and recalibrate or replace it. I recheck the foods it measured, then record and report it.
 - High-risk (vulnerable) customers: pregnant women, babies and young children, the elderly, people with weak immune systems (cancer treatment, HIV, transplants, diabetes), people who are ill or in hospital or aged care.
 - Cool room order, top to bottom: cooked and ready-to-eat food, dairy and desserts; washed fruit and vegetables; raw seafood; raw whole meat cuts; raw mince and sausages; raw poultry at the bottom (needs the highest cooking temperature). All covered, labelled, on trays, off the floor.
 - Single-use items (not reused — 3.2.2 cl 23): disposable gloves, cling film and foil, paper towels, piping bags, takeaway containers, cups, straws, skewers, disposable cutlery. Use once and bin; store covered. Reusing them is risky: they can't be cleaned and sanitised, can tear, and carry bacteria, allergens or chemicals to the next food.
-- Chicken fully cooked: 75°C in the thickest part (probe), clear juices, white opaque flesh with no pink, leg moves loosely, meat comes away from the bone. Follow workplace procedure because its food safety program and records (Std 3.2.2A) are built on those limits.
 
 ## Food handling controls through the flow of food
 1. Purchasing: approved/reputable suppliers only.
@@ -68,11 +65,8 @@ Food (protein-rich, moist), Acidity (pH above ~4.6), Temperature (5–60°C), Ti
 10. Serving/transport (cl 10): hold correct temperatures, insulated containers, covered, clean vehicles.
 11. Disposal (cl 11): discard food that is contaminated, out of date, recalled, temperature-abused or returned from a customer's plate. Never re-serve food returned from a table (except unopened packaged items).
 
-## Allergen management
-- Know the ingredients of every dish (standard recipes, ingredient labels, allergen matrix).
-- Mandatory declarable allergens in Australia (PEAL): milk, egg, peanut, tree nuts (almond, Brazil nut, cashew, hazelnut, macadamia, pecan, pine nut, pistachio, walnut), sesame, soy, fish, crustacea, mollusc, wheat, lupin; gluten-containing cereals — the cereal is named in bold in the ingredient list (wheat always; barley, oats or rye when they contain gluten) and the word "gluten" goes in the "Contains" summary statement; added sulphites 10 mg/kg or more (Std 1.2.3, Schedule 9; in force 25 Feb 2024).
+## Anaphylaxis
 - Anaphylaxis = severe, life-threatening allergic reaction (swelling of throat/tongue, difficulty breathing, wheeze, collapse). Response: call 000, give adrenaline autoinjector (EpiPen) if available, lay person flat (or sit if breathing is difficult), do not let them stand or walk.
-- Preventing cross-contact: clean/sanitise equipment and benches first, use separate (often purple) boards and utensils, fresh oil for allergen-free frying, wash hands and change gloves, label and store allergen-free items separately/above, prepare allergen-free orders first, communicate with front of house; if unsure, tell the customer honestly that you cannot guarantee it.
 
 ## Food Standards Code obligations most often asked
 - Std 3.2.2: skills and knowledge for food handlers (cl 3); notify the local council before operating (cl 4); receive, store, process, display, package, transport, dispose and recall food safely (cl 5–12); health and hygiene (cl 13–18); cleanliness, cleaning and sanitising, maintenance (cl 19–21); thermometer accurate to ±1°C (cl 22); single-use items not reused (cl 23); animals and pests excluded (cl 24).
@@ -93,9 +87,6 @@ Food (protein-rich, moist), Acidity (pH above ~4.6), Temperature (5–60°C), Ti
 6. Establish verification procedures (audits, calibration, review of records).
 7. Establish record keeping and documentation.
 Typical records: goods received log, fridge/freezer temperature log, cooking/cooling/reheating logs, cleaning schedule sign-off, pest control reports, thermometer calibration log, staff training records, supplier list, recall procedure.
-
-## Pests
-Signs: droppings, gnaw marks, nests, grease marks, dead insects, egg cases, damaged packaging, smell. Prevention: seal gaps, fly screens, door strips, store food covered off the floor, clean spills promptly, keep bins closed and emptied, licensed pest controller. If found: report to supervisor, isolate/discard affected food, clean and sanitise, record.
 
 ## Food recall
 Follow the recall plan and FSANZ notices: isolate affected stock, label "Do not use – recall", return or dispose as directed, record.

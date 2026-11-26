@@ -31,7 +31,6 @@ Cos, iceberg, butter lettuce, oak leaf, mesclun, rocket, baby spinach, radicchio
 - Tear delicate leaves to avoid bruising/browning; cut sturdier ones with a sharp stainless knife.
 - Keep chilled (≤5°C), crisp; dress just before service (acid wilts leaves), except marinated/robust salads (coleslaw, potato salad).
 - Balance colour, texture (crunch from nuts, croutons, seeds), flavour (sweet, salty, sour, bitter), shape.
-- Prevent browning of cut fruit (apple, avocado, banana) by tossing with lemon juice/acidulated water.
 
 ## Dressings
 - Vinaigrette (temporary emulsion): 3 parts oil to 1 part acid (vinegar/citrus) + salt, pepper, mustard (stabiliser). Variations: French (Dijon), balsamic, citrus, herb, Asian (soy, sesame oil, rice vinegar, ginger).
