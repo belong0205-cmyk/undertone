@@ -1,6 +1,6 @@
 # Answer evaluation — manual check for TESTER
 
-128 common kitchen-interview and assessment questions (including follow-ups, Australian food safety and WHS, and SA Cook questionnaire topics) with an ideal answer and what must (not) happen. The ideal answer is one good
+129 common kitchen-interview and assessment questions (including follow-ups, Australian food safety and WHS, and SA Cook questionnaire topics) with an ideal answer and what must (not) happen. The ideal answer is one good
 version; other wording passes if it meets every rule below.
 
 ## Setup
@@ -45,6 +45,7 @@ version; other wording passes if it meets every rule below.
 | 10 | What do you serve on Sunday? | No dishes are listed for Sunday. It is not a working day for us. | The first sentence alone also passes. Must not invent Sunday dishes, or any days or hours not in the profile. "Not a working day" is allowed only because the profile gives the working days (notes, shifts, opening hours). |
 | 11 | Do you serve any European food? | Yes, we have a European set menu every day. It has dishes like beef lasagne and fish and chips. | No day needed. |
 | 12 | What soup do you make? | I make soups like pumpkin soup, mushroom soup and French onion soup. | "What you cook" branch: only European soups that are on the profile menu. Must not name Vietnamese soups, menu details, or a weekday unless the question does. If the profile menu has no European soup, classic European soups from the KB pass instead. |
+| 129 | What risotto do you make? | I make classic risottos, like risotto alla milanese, mushroom risotto and seafood risotto. | "What you cook" branch, fallback: the eval-profile menu has no risotto, so 2–3 classic European risottos from the KB (file 07). Must NOT say the menu or profile lacks the dish ("The profile menu has no risotto." fails); no Vietnamese dishes, no invented menu items, no day. |
 
 ## B. Questions about the user — exact scope
 | # | Question | Ideal answer | Must / must not |
