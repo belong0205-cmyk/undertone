@@ -9,8 +9,8 @@
 - Customer service means meeting or beating what customers expect. Service is friendly, prompt, accurate and professional. Standards: I greet promptly, know the menu, take orders accurately and serve on time. I follow workplace policies.
 - Verbal: words, tone, speed, clear language. Non-verbal: smile, eye contact, posture, gestures, facial expression, appearance.
 - Active listening: eye contact and nodding, don't interrupt, repeat back or paraphrase, ask clarifying questions, take notes.
-- Open questions start with what, how or why. Examples: "What would you like to drink?", "How was your meal?". Closed questions get a yes or no. Examples: "Do you have a booking?", "Any allergies?".
-- Phone: answer within three rings with a greeting, the business name and my name. Speak clearly and smile. Note name, number, date, time, numbers and requests. Ask before putting on hold and check back. Say who I am transferring the caller to and pass on the details. Confirm details, thank them, let them hang up first.
+- Open questions start with what, how or why. Example: "What would you like to drink?". Closed questions get a yes or no. Example: "Do you have a booking?".
+- Phone: answer within three rings with a greeting, the business name and my name. Speak clearly and smile. Note name, number, date, time, numbers and requests. Ask before putting on hold and check back. Confirm details, thank them, let them hang up first.
 - Greeting: "Good evening, welcome to [restaurant]. Do you have a booking? Right this way. My name is [name], and I will look after you tonight."
 - Upset about the wait: apologise sincerely, acknowledge it, explain briefly without blaming, give an honest time, check with the kitchen, offer something within your authority (bread, a drink), tell the supervisor, follow up.
 - Presentation: clean pressed uniform, name badge, hair neat and tied back, short clean nails, minimal jewellery, good hygiene, no strong perfume, no phone.

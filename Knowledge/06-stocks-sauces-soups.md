@@ -77,4 +77,4 @@ Pairings: Béarnaise – steak; hollandaise – eggs Benedict, asparagus, poache
 - Serve hot soups ≥75°C at service (very hot), in warmed bowls; cold soups in chilled bowls.
 - Garnish: croutons, chopped herbs, cream swirl, grated cheese, crispy bacon, oil drizzle, gremolata.
 - Finishing: taste, then adjust salt, acid (lemon, vinegar) to brighten, fat (cream, butter, oil) for richness, fresh herbs at the end; check consistency.
-- Store: cool rapidly (shallow containers, ice bath; 60→21°C in 2 h, 21→5°C in 4 h), refrigerate up to 3 days; reheat to 75°C once; cream/liaison added only to the portion being served.
+- Store: cool rapidly (shallow containers, ice bath; 2h/4h cooling rule), refrigerate up to 3 days; reheat to 75°C once; cream/liaison added only to the portion being served.

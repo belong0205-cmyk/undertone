@@ -62,7 +62,7 @@ Food (protein-rich, moist), Acidity (pH above ~4.6), Temperature (5–60°C), Ti
 4. Thawing: in fridge on a tray at the bottom; record; use within the safe time.
 5. Preparation: minimise time in danger zone; prepare in small batches; separate raw and RTE preparation (colour-coded boards and knives, separate areas or times, clean and sanitise between tasks); wash fruit and vegetables.
 6. Cooking (cl 7(1)(b)(ii)): to safe core temperatures (FSANZ guidance 75°C for poultry, mince, sausages, rolled and stuffed meats), measure with a clean sanitised probe in the thickest part.
-7. Cooling (cl 7(3)): shallow containers, divide into small portions, ice bath, stir, blast chiller; 60→21°C in 2 h then 21→5°C in 4 h; record times/temperatures.
+7. Cooling (cl 7(3)): shallow containers, divide into small portions, ice bath, stir, blast chiller; 60→21°C in 2 h then 21→5°C in 4 h; record times/temperatures. If the food misses these times, it is unsafe and I throw it out. Reheating does not make it safe: toxins and many bacteria survive (Safe Food Australia).
 8. Reheating to hold hot (cl 7(4)): I heat it fast to 60°C or above. FSANZ says within 2 hours. A 75°C core is recommended. I reheat once only, never in a bain-marie.
 9. Holding/display (cl 8): hot ≥60°C, cold ≤5°C; sneeze guards; serving utensils for each dish; time-as-a-control (2h/4h rule) if out of temperature control.
 10. Serving/transport (cl 10): hold correct temperatures, insulated containers, covered, clean vehicles.
@@ -81,7 +81,7 @@ Food (protein-rich, moist), Acidity (pH above ~4.6), Temperature (5–60°C), Ti
   - Category two (cl 7: sells unpackaged ready-to-eat PHF it did not make, e.g. delis, service stations): FSS + food handler training (cl 9).
   - Food handler training (cl 10): before the task, a food safety training course or skills and knowledge matching it (safe handling, contamination, cleaning and sanitising, personal hygiene).
   - FSS (cl 2, 11): certificate from an RTO or recognised organisation issued within the last 5 years, authority to direct staff, appointed before handling starts and reasonably available. Hospitality FSS courses use SITXFSA005 + SITXFSA006 (e.g. NSW).
-  - Substantiation (cl 12): records of receipt, storage, display and transport temperatures, cooking, minimising time, cooling, reheating, and cleaning and sanitising (3.2.2 cl 5(3), 6(2)(a), 7(1)(b)(ii), 7(2)–(4), 8(5)(a), 10(b), 20); kept 3 months (cl 12(2)) unless compliance is shown another way (cl 12(3)).
+  - Substantiation (cl 12): records of receipt, storage, display and transport temperatures, cooking, minimising time, cooling, reheating, and cleaning and sanitising; kept 3 months (cl 12(2)) unless compliance is shown another way (cl 12(3)).
 - Std 3.2.3: premises and equipment designed to be easily cleaned, adequate water supply, hand-wash facilities, ventilation, lighting, pest proofing, toilets, storage, waste and sewage disposal.
 
 ## HACCP (Hazard Analysis and Critical Control Points) — 7 principles
