@@ -6,11 +6,13 @@ version; other wording passes if it meets every rule below.
 ## Setup
 1. Build and open the app. On the Hồ sơ page import `Tests/eval-profile.undertone-profile` (double-click it or use
    Import) and make "Minh Le" the active profile. It is an imaginary person; its menu has the same shape as real menus:
-   Vietnamese set meals on a 2-week rotation (Monday–Saturday) plus a European set menu by weekday, written in Vietnamese.
+   Vietnamese set meals laid out over 2 weeks (Monday–Saturday) plus a European set menu by weekday, written in Vietnamese.
+   The layout is only how the dishes are listed: the app treats the menu as a list of dishes to draw from, not a timetable
+   (user decision 2026-11-26), so weeks, cycles and matching the day are not scored.
 2. Start listening, then speak each question through the speakers from Terminal, for example:
    `say -v Karen "What do you have in your menu?"` (Karen is an Australian voice). For split questions (section E) run
    the two `say` commands with `sleep 2` between them.
-3. Write down today's weekday before section A (questions 5 and 10 depend on it).
+3. Note whether today is a Sunday before section A (question 5 differs on a Sunday).
 
 ## Pass rules (every answer)
 1. Answers the question that was asked, at the same scope: a general question gets a general answer (big picture +
@@ -30,24 +32,26 @@ version; other wording passes if it meets every rule below.
    traditional European dishes from the KB, never the profile menu. "What do you cook / make?" with no restaurant
    or menu named: only European dishes from the profile menu (no Vietnamese dishes, days or menu details; classic
    KB dishes if the menu has none of that kind). The restaurant, its menu or workplace named: the whole profile
-   menu, European first, Vietnamese briefly after, covering each menu.
+   menu, European first, Vietnamese briefly after, covering each menu. The menu is a list of dishes, not a timetable:
+   a menu answer passes when every dish named is on the profile menu (a European dish = one under the European heading);
+   Week 1/2, cycles and matching the day are not scored, and no week or day is named unless the question names it.
 6. The Vietnamese answer says the same thing in the first person ("tôi").
 7. Questions that need no reply show no answer ("-" or the filler is skipped).
 
 ## A. Menu — general vs specific
 | # | Question | Ideal answer | Must / must not |
 |---|---|---|---|
-| 1 | What do you have in your menu? | We cook a European set menu, like lasagne and roast chicken. We cook Vietnamese set meals too. The menu changes every day. | Must NOT name a day (the original bug). European dishes first. |
+| 1 | What do you have in your menu? | We cook a European set menu, like lasagne and roast chicken. We cook Vietnamese set meals too. | Must NOT name a day or week (the original bug). European dishes first; every dish named is on the profile menu. No cycle needed. |
 | 2 | What kind of food do you cook? | I cook European dishes, like lasagne, fish and chips and herb roast chicken. | "What you cook" branch: only European dishes that are on the profile menu (any day). Must not name Vietnamese dishes, days, menu details or prices. If the profile menu has no European dishes, classic European dishes from the KB pass instead. |
-| 3 | Tell me about your menu. | We have a European set menu with soup, a main, sides, salad and dessert. We have Vietnamese set meals too. Both change every day. | General only; European first. |
+| 3 | Tell me about your menu. | We have a European set menu with soup, a main, sides, salad and dessert. We have Vietnamese set meals too. | General only; European first; courses or dishes from the profile menu. No day, week or cycle needed. |
 | 4 | What does one meal come with? | European set menu: soup, a main, a side, a salad and a dessert.<br>Vietnamese set meals: rice, a main dish, soup and vegetables. | From both menu headers: European first, then the Vietnamese set in one short sentence (cover every menu); no invented sides. |
-| 5 | What's on the menu today? | (Tuesday) Today the European menu has beef stew in red wine with mashed potato. The Vietnamese meal changes every week. | Uses today's weekday from the European menu, named first (Mon lasagne, Tue beef stew, Wed salmon, Thu spaghetti bolognese, Fri fish and chips, Sat roast chicken). Must not pick a Vietnamese week. Sunday → "No dishes are listed for Sunday. It is not a working day for us." (the first sentence alone also passes; the profile gives the working days); must not invent days or hours not in the profile. |
-| 6 | What are you cooking on Friday? | On Friday we have fish and chips on the European menu. We also have a Vietnamese meal like caramelised prawns. | Friday only; that day's European dish first (eval profile: fish and chips); a Vietnamese dish listed for Friday is optional. |
+| 5 | What's on the menu today? | Today the European menu has beef stew in red wine with mashed potato. We also have a Vietnamese set meal, like braised pork with eggs. | Dishes from the profile menu, European first (European = under the European heading). The weekday column is not scored: any menu dish passes (today's column, e.g. Tue beef stew, is the natural pick). Must not name or pick a week. On a Sunday "It is not a working day for us." is best (the profile gives the working days); menu dishes also pass. Must not invent dishes, days or hours. |
+| 6 | What are you cooking on Friday? | On Friday we have fish and chips on the European menu. We also have a Vietnamese meal like caramelised prawns. | European dish first, from the European heading; every dish on the profile menu, any day (Friday's column is the natural pick, not scored). Friday may be repeated; no week named. A Vietnamese dish is optional. |
 | 7 | Do you have vegetarian options? | Yes, every Vietnamese set meal has a vegetarian dish, like tofu in tomato sauce. | Yes + one real example. |
-| 8 | How often does your menu change? | Both menus change every day. The European one repeats every week, and the Vietnamese one every two weeks. | From the menu structure; European first. |
+| 8 | How often does your menu change? | The dishes change through the week. We cook a European set menu, like lasagne and beef stew, and Vietnamese set meals. | The cycle is not scored: "every day", "every week" or "two weeks" from the menu layout pass, and so does a general answer; must not invent a cycle the profile does not show (monthly, seasonal). Dishes named are on the profile menu; European first. |
 | 9 | What's your signature dish? | My best dishes are braised pork with eggs and sour fish soup. | Every dish in the profile's "Signature dishes" field, in simple English, and nothing else; stays Vietnamese because the profile says so. Must NOT answer with a cuisine type ("European and Vietnamese food") or with the menu. "I do not have a signature dish yet." is right only when the field is empty (no brackets, no "the profile"). |
-| 10 | What do you serve on Sunday? | No dishes are listed for Sunday. It is not a working day for us. | The first sentence alone also passes. Must not invent Sunday dishes, or any days or hours not in the profile. "Not a working day" is allowed only because the profile gives the working days (notes, shifts, opening hours). |
-| 11 | Do you serve any European food? | Yes, we have a European set menu every day. It has dishes like beef lasagne and fish and chips. | No day needed. |
+| 10 | What do you serve on Sunday? | Sunday is not a working day for us. | Says it is not a working day (allowed because the profile gives Monday–Saturday). "No dishes are listed for Sunday" also passes. Must not invent Sunday dishes, or any days or hours not in the profile. |
+| 11 | Do you serve any European food? | Yes, we have a European set menu. It has dishes like beef lasagne and fish and chips. | No day, week or cycle needed; dishes from the European heading. |
 | 12 | What soup do you make? | - Pumpkin soup<br>- Mushroom soup<br>- French onion soup | "What you cook" branch: only European soups that are on the profile menu. Must not name Vietnamese soups, menu details, or a weekday unless the question does. If the profile menu has no European soup, classic European soups from the KB pass instead. |
 | 129 | What risotto do you make? | - Risotto alla milanese<br>- Mushroom risotto<br>- Seafood risotto | "What you cook" branch, fallback: the eval-profile menu has no risotto, so 2–3 classic European risottos from the KB (file 07). Must NOT say the menu or profile lacks the dish ("The profile menu has no risotto." fails); no Vietnamese dishes, no invented menu items, no day. |
 
@@ -94,7 +98,7 @@ version; other wording passes if it meets every rule below.
 ## E. Questions in pieces
 | # | Pieces (about 2 s apart) | Ideal answer | Must / must not |
 |---|---|---|---|
-| 41 | "What do you usually…" + "cook on Fridays?" | On Fridays we cook fish and chips on the European menu. We also cook Vietnamese dishes like caramelised prawns. | Answers the joined question, once; Friday's European dish first; a Vietnamese dish listed for Friday is optional. |
+| 41 | "What do you usually…" + "cook on Fridays?" | On Fridays we cook fish and chips on the European menu. We also cook Vietnamese dishes like caramelised prawns. | Answers the joined question, once; European dish first, from the European heading; every dish on the profile menu, any day (Friday's column not scored); no week named. A Vietnamese dish is optional. |
 | 42 | "How many people…" + "work in your kitchen?" | There are eight people in our kitchen. | Not an answer to the first piece alone. |
 | 43 | "Do you usually cook?" + "At your restaurant?" | Yes, I cook every day at work. I cook European soups and mains, and Vietnamese braised dishes. | One answer for both pieces; European first. |
 
@@ -132,7 +136,7 @@ and does not repeat the first answer.
 | 59 | What is a roux? → Equal weights of butter and flour cooked together to thicken sauces. | Give me an example. | White roux for béchamel:<br>- 50 g butter and 50 g flour<br>- Cook one or two minutes, no colour<br>- Whisk in 500 mL warm milk slowly: 100 g roux per 500 mL, a coating sauce<br>- Simmer about 20 minutes to cook out the flour taste<br>- Add cheese at the end for Mornay | A concrete example with quantities and times from the KB. |
 | 60 | How do you cool a big pot of soup? → I use shallow trays and an ice bath. The soup goes from 60 to 21 °C within two hours. Then it goes down to 5 °C within four more hours. | Tell me more. | - Split into shallow trays, about 5 cm deep<br>- Ice bath or blast chiller, and stir<br>- After two hours, probe the centre: 21 °C or below<br>- After four more hours: 5 °C or below<br>- Write down each time and temperature<br>- Cover, date label, fridge<br>- Misses the times: throw it out, reheating does not make it safe | Steps; probe after 2 h (21 °C) and 4 more h (5 °C), record; cover, date label, fridge; corrective action (throw out, not reheat). "About 5 cm deep" is correct (SFA p.41). Must not invent other check times, like every 30 minutes. |
 | 61 | Define ganache and provide common ratios for dark vs milk/white chocolate. → Ganache is chocolate melted with hot cream. For a glaze I use 1:1 dark chocolate to cream. Milk chocolate is 2:1 and white chocolate is 3:1. | How do you make it? | - Chop the chocolate finely<br>- Heat the cream until it just simmers, about 80 °C<br>- Pour over the chocolate, wait one or two minutes<br>- Stir from the centre until smooth and shiny<br>- Glaze: use it warm, about 32 °C<br>- Truffles: set it in the fridge, then roll | Method with temperatures. |
-| 62 | What do you have on your menu? → We cook a European set menu, like lasagne and roast chicken. We cook Vietnamese set meals too. The menu changes every day. | Tell me more. | European set menu:<br>- Soup, main, side, salad and dessert<br>- Example: mushroom soup with beef stew in red wine<br><br>Vietnamese set meals:<br>- White rice and a main, like braised pork with eggs or caramelised prawns<br>- A stir-fry, soup, vegetables and dessert<br>- Always a vegetarian dish, like tofu in tomato sauce | Must give each set's structure from the menu headers (European: soup, main, side, salad, dessert) and name at least one specific Vietnamese dish besides rice, in English. Every dish named must be on the profile menu (any day) and said in English, never in Vietnamese. European first; no day named; adds new facts, does not repeat the first answer's dishes. |
+| 62 | What do you have on your menu? → We cook a European set menu, like lasagne and roast chicken. We cook Vietnamese set meals too. | Tell me more. | European set menu:<br>- Soup, main, side, salad and dessert<br>- Example: mushroom soup with beef stew in red wine<br><br>Vietnamese set meals:<br>- White rice and a main, like braised pork with eggs or caramelised prawns<br>- A stir-fry, soup, vegetables and dessert<br>- Always a vegetarian dish, like tofu in tomato sauce | Must give each set's courses from the menu headings (European: soup, main, side, salad, dessert) and name at least one specific Vietnamese dish besides rice, in English. Every dish named must be on the profile menu (any week or day) and said in English, never in Vietnamese. European first; no day, week or cycle named; adds new facts, does not repeat the first answer's dishes. |
 | 63 | What's the difference between fish and shellfish? → (short answer as in 57) | (within 5 s) What's your name? | My name is Minh Le. | A new, different question gets the short answer, not a detailed one. |
 
 ## I. Australian food safety and WHS (answers must match the source)
