@@ -297,17 +297,17 @@ enum Prompt {
     Each line is one short idea; a short phrase is fine, not always a full sentence. In a multi-part answer, give \
     each part at most 3 or 4 lines, unless the question asks for more items. Still cover every part asked, with \
     correct facts.
-    - If the question asks for a list of one kind, start with the first item: no label, definition or \
-    introduction. Give each item by name only (e.g. "- Béchamel"), unless the question asks for more about each item.
+    - Never write your checking or reasoning; give only the answer.
+    - If the question asks for a list of one kind, the first line is the first item: no label line, definition \
+    or introduction. Example: "List the five mother sauces." starts with "- Béchamel", never with "The five \
+    mother sauces are:". Give each item by name only, unless the question asks for more about each item.
     - Use only facts from the knowledge base or the user profile.
     - Never invent a number, measurement or size (e.g. "5 cm deep").
-    - Never invent restaurant details: its menu, menu cycle, team or schedule.
+    - Never invent restaurant details: its menu, team or schedule.
     - Never name a weekday or date unless the question names that day, even though <today> gives today's date.
-    - Name a dish for a day only if the profile lists it for that exact day. If that day has several weeks, \
-    name the dish of each week.
-    - Never state working days or hours unless the profile says them. If a day is not in the menu, say only \
-    that no dishes are listed for that day. If the profile gives working days, you may add that it is not a \
-    working day. Example: "No dishes are listed for Sunday."
+    - The profile menu is a list of suggested dishes, not a fixed plan by day. For a question about a day \
+    (e.g. "What do you cook on Friday?"), suggest dishes from the menu; they need not match that day.
+    - Never state working days or hours unless the profile says them.
     - If the profile has nothing for a question about your certificates, qualifications, experience or \
     signature dishes, say in one short first-person sentence that you have none yet. Use [brackets] only for a \
     missing name, age, address or workplace. Never mention "the profile".
@@ -321,8 +321,6 @@ enum Prompt {
     - Use the whole profile menu only when the question names your restaurant, its menu or your workplace \
     (e.g. "What do you serve at your restaurant?"). Then name European dishes first, then Vietnamese ones.
     - When the profile has more than one menu, cover each one.
-    - Say how often a menu changes only from the profile: one list of weekdays repeats every week; \
-    Week 1 and Week 2 repeat every two weeks.
     - Cover every item and every part the question asks for.
     </rules>
     """
@@ -422,16 +420,27 @@ enum Prompt {
         "and", "or", "also", "plus", "then", "including", "especially",
     ]
 
-    /// The user's local date with its weekday in English, e.g. "2026-11-17 (Tuesday)": the model often
-    /// gets the weekday of a bare ISO date wrong. (The ISO format style alone would give the UTC date,
-    /// a day off in Vietnam before 7 am.)
-    static func today(_ now: Date, in timeZone: TimeZone) -> String {
+    /// The user's local date, e.g. "2026-11-17", with its weekday in English ("2026-11-17 (Tuesday)") only
+    /// when `withWeekday`: the model often gets the weekday of a bare ISO date wrong, but names it unasked
+    /// when it is there. (The ISO format style alone would give the UTC date, a day off in Vietnam before 7 am.)
+    static func today(_ now: Date, in timeZone: TimeZone, withWeekday: Bool = true) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.timeZone = timeZone
-        formatter.dateFormat = "yyyy-MM-dd (EEEE)"
+        formatter.dateFormat = withWeekday ? "yyyy-MM-dd (EEEE)" : "yyyy-MM-dd"
         return formatter.string(from: now)
     }
+
+    /// The question names a day relative to today or a weekday ("today", "tomorrow", "tonight", "Friday").
+    static func namesDay(_ question: String) -> Bool {
+        let words = question.lowercased().split { !$0.isLetter }.map(String.init)
+        return words.contains { dayWords.contains($0) }
+    }
+
+    private static let dayWords: Set<String> = [
+        "today", "tomorrow", "tonight", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
+        "mondays", "tuesdays", "wednesdays", "thursdays", "fridays", "saturdays", "sundays",
+    ]
 
     /// `history`: earlier utterances, oldest first; each line says how long ago it ended, so the model
     /// can tell pieces of one question from separate turns.
@@ -484,7 +493,7 @@ enum Prompt {
 
     static func user(history: [Heard], utterance: String, previous: Exchange? = nil,
                      now: Date = Date(), timeZone: TimeZone = .current) -> String {
-        var message = "<today>\(today(now, in: timeZone))</today>\n\n"
+        var message = "<today>\(today(now, in: timeZone, withWeekday: namesDay(utterance)))</today>\n\n"
         if !history.isEmpty {
             let lines = history.map { "[\(max(0, Int(now.timeIntervalSince($0.end).rounded()))) s ago] \($0.text)" }
             message += "<recent_conversation>\n\(lines.joined(separator: "\n"))\n</recent_conversation>\n\n"

@@ -115,15 +115,14 @@ check(Prompt.system.contains("no introduction, no repetition, no closing line, n
 check(Prompt.system.contains("When asked for an example, give one concrete example with its numbers"),
       "an example carries concrete numbers")
 // Hard rules sit right before the newest utterance (TESTER live run on cc1c1fe: Haiku ignored them in the system prompt).
-for rule in ["Use only facts from the knowledge base or the user profile.",
+for rule in ["Never write your checking or reasoning; give only the answer.",
+             "Use only facts from the knowledge base or the user profile.",
              "Never invent a number, measurement or size (e.g. \"5 cm deep\").",
-             "Never invent restaurant details: its menu, menu cycle, team or schedule.",
+             "Never invent restaurant details: its menu, team or schedule.",
              "Never name a weekday or date unless the question names that day, even though <today> gives today's date.",
-             "Name a dish for a day only if the profile lists it for that exact day. If that day has several weeks, "
-                 + "name the dish of each week.",
-             "Never state working days or hours unless the profile says them. If a day is not in the menu, say only "
-                 + "that no dishes are listed for that day. If the profile gives working days, you may add that it is not a "
-                 + "working day. Example: \"No dishes are listed for Sunday.\"",
+             "The profile menu is a list of suggested dishes, not a fixed plan by day. For a question about a day "
+                 + "(e.g. \"What do you cook on Friday?\"), suggest dishes from the menu; they need not match that day.",
+             "Never state working days or hours unless the profile says them.",
              "If the profile has nothing for a question about your certificates, qualifications, experience or "
                  + "signature dishes, say in one short first-person sentence that you have none yet. Use [brackets] only for a "
                  + "missing name, age, address or workplace. Never mention \"the profile\".",
@@ -137,8 +136,6 @@ for rule in ["Use only facts from the knowledge base or the user profile.",
              "Use the whole profile menu only when the question names your restaurant, its menu or your workplace "
                  + "(e.g. \"What do you serve at your restaurant?\"). Then name European dishes first, then Vietnamese ones.",
              "When the profile has more than one menu, cover each one.",
-             "Say how often a menu changes only from the profile: one list of weekdays repeats every week; "
-                 + "Week 1 and Week 2 repeat every two weeks.",
              "Cover every item and every part the question asks for."] {
     check(Prompt.rules.contains("- " + rule), "rule: \(rule)")
 }
@@ -152,16 +149,19 @@ check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, each line un
       "the layout rule comes first")
 check(Prompt.rules.contains("  Two cold sauces:\n  - Mayonnaise\n  - Vinaigrette\n\n  Storage:\n"),
       "the layout example has a label, list lines and a blank line between parts")
-check(Prompt.rules.contains("\n- If the question asks for a list of one kind, start with the first item: no label, "
-                            + "definition or introduction. Give each item by name only (e.g. \"- Béchamel\"), unless the "
-                            + "question asks for more about each item.\n"),
+// #50 (TESTER on Haiku): still opened with "The five mother sauces are:", so the rule shows the wrong first line.
+check(Prompt.rules.contains("\n- If the question asks for a list of one kind, the first line is the first item: no label "
+                            + "line, definition or introduction. Example: \"List the five mother sauces.\" starts with "
+                            + "\"- Béchamel\", never with \"The five mother sauces are:\". Give each item by name only, "
+                            + "unless the question asks for more about each item.\n"),
       "a one-kind list starts with its first item and gives names only")
 check(!Prompt.rules.contains("Keep every sentence under 14 words"), "the 14-word limit is part of the layout rule")
 // User: Sonnet's answers were too long. Minimal answers, short phrase lines, 3–4 lines per part, no word cap.
 check(Prompt.rules.contains("\n- Keep it minimal: no restating the question, no opening or closing line, nothing beyond "
                             + "what was asked. Each line is one short idea; a short phrase is fine, not always a full "
                             + "sentence. In a multi-part answer, give each part at most 3 or 4 lines, unless the question "
-                            + "asks for more items. Still cover every part asked, with correct facts.\n- If the question "
+                            + "asks for more items. Still cover every part asked, with correct facts.\n- Never write your "
+                            + "checking or reasoning; give only the answer.\n- If the question "
                             + "asks for a list of one kind"),
       "the minimal-answer rule follows the layout rule")
 check(!Prompt.system.contains("No bullet points") && Prompt.system.contains("Lay it out as the <rules> block says")
@@ -213,7 +213,17 @@ let tuesdayMorningInHanoi = ISO8601DateFormatter().date(from: "2026-11-16T23:30:
 let hanoi = TimeZone(identifier: "Asia/Ho_Chi_Minh")!
 check(Prompt.today(tuesdayMorningInHanoi, in: hanoi) == "2026-11-17 (Tuesday)", "today is the local date with its weekday")
 check(Prompt.user(history: [], utterance: "Hi.", now: tuesdayMorningInHanoi, timeZone: hanoi)
-      .hasPrefix("<today>2026-11-17 (Tuesday)</today>"), "the user message starts with <today>")
+      .hasPrefix("<today>2026-11-17</today>"), "the user message starts with <today>")
+// The weekday goes in only for a day question (Haiku named it unasked, TESTER #12).
+for text in ["What is on the menu today?", "What do you cook tomorrow?", "Who works tonight?",
+             "What do you serve on Fridays?", "Is Sunday a working day?"] {
+    check(Prompt.user(history: [], utterance: text, now: tuesdayMorningInHanoi, timeZone: hanoi)
+          .hasPrefix("<today>2026-11-17 (Tuesday)</today>"), "weekday sent for: \(text)")
+}
+for text in ["What kind of food do you cook?", "How old are you?", "What do you do every day?"] {
+    check(Prompt.user(history: [], utterance: text, now: tuesdayMorningInHanoi, timeZone: hanoi)
+          .hasPrefix("<today>2026-11-17</today>"), "no weekday for: \(text)")
+}
 
 // Follow-ups that dig into the last answer get it as context and a longer answer; anything else stays short.
 for text in ["Can you explain more?", "Tell me more about the poaching liquid.", "Why?", "Why so?", "How?",
