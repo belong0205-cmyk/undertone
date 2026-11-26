@@ -122,7 +122,9 @@ for (phrase, what) in [
     ("Never invent a number or size, a dish, experience, a qualification, a company or project, "
          + "or restaurant details (menu, team, schedule, "
          + "working days or hours).", "no invented numbers, dishes or restaurant details (#6 \"crispy fish\")"),
-    ("Never mention \"the profile\".", "no 'the profile' (#23)"),
+    ("Never mention \"the profile\" or say that the menu or profile lacks a dish.",
+         "no 'the profile', never 'the menu lacks it' (#23, #129; dropped in 0c4fc0f, 79f5b67 said \"I do not have a "
+             + "risotto on my menu\")"),
     ("Name a weekday or date only if the question names one, even if <today> or the menu shows days.",
          "no unasked weekday (#3, #12)"),
     ("The profile menu is suggested dishes, not a plan by day.", "menu is suggestions (user decision)"),
@@ -130,11 +132,11 @@ for (phrase, what) in [
          + "Vietnamese.", "European by menu heading (#6)"),
     ("In answer_en, give dish names in English (\"Vịt nướng cam\" -> \"Roast duck with orange\", \"món mặn\" -> \"savoury main\"); answer_vi keeps "
          + "the Vietnamese names.", "English dish names (#3)"),
-    ("General food or recipe (\"How do you make a French omelette?\"): classic European dishes from the knowledge "
+    ("General food or recipe (\"How do you make an omelette?\"): classic European dishes from the knowledge "
          + "base, not the profile menu.", "branch 1: general food"),
     ("What you cook or make, no restaurant named (\"What soup do you make?\"): only European dishes from the profile "
          + "menu, no days or menu details. If it has none of that kind, classic European dishes, as your own.", "branch 2: what you cook (#2, #12, #129)"),
-    ("Restaurant, its menu or your workplace named (\"What do you serve at your restaurant?\"): the whole menu.",
+    ("Restaurant, its menu or your workplace named (\"What do you serve?\"): the whole menu.",
          "branch 3: whole menu (European first via the next rule, #4)"),
     ("\n- When the profile has more than one menu, cover each one in full, European first even if listed "
          + "second. Name a vegetarian option only if the profile lists one; never say there is none. Shape for "
@@ -145,8 +147,7 @@ for (phrase, what) in [
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
          "day question gets suggestions"),
     ("When the profile lacks a detail asked (name, date, place, number), put a hinted blank in the spoken sentence "
-         + "(e.g. \"Before my current job, I worked at [restaurant name].\"); never contradict it. Never say you or the "
-         + "menu have none (\"I do not have any ... to tell you about\") unless the profile says so; never explain a "
+         + "(e.g. \"Before my current job, I worked at [restaurant name].\"); never contradict it. Never say you have none (\"I do not have any ... to tell you about\") unless the profile says so; never explain a "
          + "blank. Use [brackets] only for such blanks.",
          "missing detail = hinted blank anchored in the spoken sentence, never contradicted, never 'none' (#135, #129)"),
     ("If the profile has nothing on your certificates, qualifications or signature dishes, say in one short "
@@ -155,7 +156,7 @@ for (phrase, what) in [
     // Any comparison, not only in interviews (#132 on 7fc1602 ignored the interview-only line).
     ("\n- Any comparison (\"difference between\", \"vs\", \"X or Y\", \"which is better\") uses only this shape, "
          + "with facts (\"Braising uses...\"), never \"I ...\" lines:\n  Main difference: one sentence\n"
-         + "  Option A:\n  - Best for: ...\n  - Limit: a real cost (time, texture, risk)\n  Option B: the same two lines\n"
+         + "  Option A:\n  - Best for: ...\n  - Limit: a real cost (time, texture, risk)\n  Option B: the same lines\n"
          + "  Trade-off: one sentence\n",
          "comparison: only this shape, facts not 'I ...', Limit = a real cost (#132; bd441bf added \"Method:\", \"I sear\")"),
     // Interview answers (user request 2026-11-26): sources first, STAR with hinted blanks, vague questions,

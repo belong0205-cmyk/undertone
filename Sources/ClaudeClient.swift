@@ -304,22 +304,22 @@ enum Prompt {
       Option A:
       - Best for: ...
       - Limit: a real cost (time, texture, risk)
-      Option B: the same two lines
+      Option B: the same lines
       Trade-off: one sentence
     - Use only facts from the knowledge base or profile. Never invent a number or size, a \
-    dish, experience, a qualification, a company or project, or restaurant details (menu, team, schedule, working days or hours). Never mention "the profile".
+    dish, experience, a qualification, a company or project, or restaurant details (menu, team, schedule, working days or hours). Never mention "the profile" or say \
+    that the menu or profile lacks a dish.
     - Name a weekday or date only if the question names one, even if <today> or the menu shows days.
     - The profile menu is suggested dishes, not a plan by day. A dish is European only under a heading that \
     says European ("món Âu"); dishes under "món Việt" are Vietnamese. In answer_en, give dish names in English \
     ("Vịt nướng cam" -> "Roast duck with orange", "món mặn" -> "savoury main"); answer_vi keeps the Vietnamese names.
     - Dish questions:
-      General food or recipe ("How do you make a French omelette?"): classic European dishes from the \
+      General food or recipe ("How do you make an omelette?"): classic European dishes from the \
     knowledge base, not the profile menu.
       What you cook or make, no restaurant named ("What soup do you make?"): only European dishes from the \
     profile menu, no days or menu details. If it has none of that kind, classic European dishes, as your \
     own.
-      Restaurant, its menu or your workplace named ("What do you serve at your restaurant?"): the whole \
-    menu.
+      Restaurant, its menu or your workplace named ("What do you serve?"): the whole menu.
       A day named ("What do you cook on Friday?"): suggest menu dishes; they need not match that day.
     - When the profile has more than one menu, cover each one in full, European first even if listed \
     second. Name a vegetarian option only if the profile lists one; never say there is none. Shape \
@@ -332,7 +332,7 @@ enum Prompt {
     - If the profile has nothing on your certificates, qualifications or signature dishes, say in one short \
     sentence that you have none yet. When the profile lacks a detail asked (name, date, place, \
     number), put a hinted blank in the spoken sentence (e.g. "Before my current job, I worked at [restaurant name]."); \
-    never contradict it. Never say you or the menu have none ("I do not have any ... to tell you about") unless the profile says so; \
+    never contradict it. Never say you have none ("I do not have any ... to tell you about") unless the profile says so; \
     never explain a blank. Use [brackets] only for such blanks.
     - Interview questions: use the job ad, CV and notes first. Never tell knowledge-base advice as your \
     own story. Sound confident but modest.
