@@ -121,12 +121,14 @@ for rule in ["Use only facts from the knowledge base or the user profile.",
              "Never name a weekday or date unless the question names that day.",
              "Name a dish for a day only if the profile lists it for that exact day. If that day has several weeks, "
                  + "name the dish of each week.",
-             "Never state working days or hours unless the profile says them.",
+             "Never state working days or hours unless the profile says them. If a day is not in the menu, say only "
+                 + "that no dishes are listed for that day. Do not conclude it is a day off or name your working days. "
+                 + "Example: \"No dishes are listed for Sunday.\"",
              "In menu and dish answers, name European dishes first, then Vietnamese ones.",
              "When the profile has more than one menu, cover each one.",
              "Say how often a menu changes only from the profile: one list of weekdays repeats every week; "
                  + "Week 1 and Week 2 repeat every two weeks.",
-             "Each sentence has at most 14 words.",
+             "Keep every sentence under 14 words. Split a long sentence into two.",
              "Cover every item and every part the question asks for."] {
     check(Prompt.rules.contains("- " + rule), "rule: \(rule)")
 }
