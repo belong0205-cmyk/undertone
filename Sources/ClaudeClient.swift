@@ -25,9 +25,18 @@ enum ClaudeError: LocalizedError {
 
 /// Streaming client for the Claude Messages API over raw HTTP (there is no official Swift SDK).
 struct ClaudeClient {
-    /// The per-utterance answer, and its cache warmer (caches are per model, so both must match):
-    /// many calls, so the fast low-cost Haiku. Haiku 5.5 has no server-side fallback.
-    static let liveModel = "claude-haiku-5-5"
+    /// The per-utterance answer model, in one place (its cache warmer uses it too: caches are per model).
+    /// To go back to Haiku: `LiveModel(id: "claude-haiku-5-5", thinkingOff: "disabled", fallbacks: false)`.
+    struct LiveModel {
+        let id: String
+        /// `thinking.type` that keeps thinking off, so the answer starts at once. Sonnet 5.5 rejects
+        /// `disabled` (400) and takes `between_tools` (effort high or below); Haiku 5.5 takes `disabled`.
+        /// Omitting `thinking` would turn adaptive thinking on.
+        let thinkingOff: String
+        /// Server-side fallback when a safety classifier declines (Sonnet 5.5 has one, Haiku 5.5 none).
+        let fallbacks: Bool
+    }
+    static let live = LiveModel(id: "claude-sonnet-5-5", thinkingOff: "between_tools", fallbacks: true)
     /// Rare one-off jobs such as the Word profile import.
     static let model = "claude-opus-5-5"
     let apiKey: String
@@ -168,17 +177,19 @@ struct ClaudeClient {
     static func requestBody(
         system: String, profile: String?, user: String, maxTokens: Int, stream: Bool
     ) -> [String: Any] {
-        [
-            "model": liveModel,
+        var body: [String: Any] = [
+            "model": live.id,
             "max_tokens": maxTokens,
             "stream": stream,
             "system": systemBlocks(system, profile: profile),
             "messages": [["role": "user", "content": user]],
-            // The answer must start within a second, so no thinking (Haiku 5.5 accepts `disabled`
-            // at effort high or below). No `fallbacks`: Haiku 5.5 has none, refusals surface as `.refusal`.
-            "thinking": ["type": "disabled"],
+            // The answer must start within a second, so no thinking (see `LiveModel.thinkingOff`).
+            "thinking": ["type": live.thinkingOff],
             "output_config": ["effort": "low"],
         ]
+        // Without a fallback, a refusal surfaces as `.refusal`.
+        if live.fallbacks { body["fallbacks"] = "default" }
+        return body
     }
 
     /// Order: the large knowledge base, then the user's profile (each with its own cache

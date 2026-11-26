@@ -266,5 +266,16 @@ for (heard, expected) in [("What is the temperature danger zone?", dangerZone),
 check(FixedAnswers.words("What’s sanitizing vs cleaning?") == ["what", "is", "sanitising", "versus", "cleaning"],
       "words are normalised")
 
+// The answer request (offline: the body and headers are only built, never sent).
+let body = ClaudeClient.requestBody(system: "s", profile: nil, user: "u", maxTokens: 2048, stream: true)
+check(body["model"] as? String == "claude-sonnet-5-5", "answers use Sonnet 5.5")
+check((body["thinking"] as? [String: Any])?["type"] as? String == "between_tools",
+      "thinking stays off with between_tools (Sonnet 5.5 rejects disabled)")
+check((body["output_config"] as? [String: Any])?["effort"] as? String == "low" && body["max_tokens"] as? Int == 2048,
+      "effort low, max_tokens 2048")
+check(body["fallbacks"] as? String == "default"
+      && (try? ClaudeClient(apiKey: "k").makeRequest(body: body))?.value(forHTTPHeaderField: "anthropic-beta")
+         == "server-side-fallback-2026-07-01", "a refusal falls back server-side, with its beta header")
+
 print(failures == 0 ? "ALL PASSED" : "\(failures) FAILED")
 exit(failures == 0 ? 0 : 1)
