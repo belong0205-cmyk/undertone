@@ -125,7 +125,7 @@ for (phrase, what) in [
     ("Never mention \"the profile\" or say that the menu or profile lacks a dish.",
          "no 'the profile', never 'the menu lacks it' (#23, #129; dropped in 0c4fc0f, 79f5b67 said \"I do not have a "
              + "risotto on my menu\")"),
-    ("Name a weekday or date only if the question names one, even if <today> or the menu shows days.",
+    ("Name a weekday or date only if asked, even if <today> or the menu shows days.",
          "no unasked weekday (#3, #12)"),
     ("The profile menu is suggested dishes, not a plan by day.", "menu is suggestions (user decision)"),
     ("A dish is European only under a European heading (\"món Âu\"); dishes under \"món Việt\" are "
@@ -155,7 +155,7 @@ for (phrase, what) in [
          "missing detail = hinted blank anchored in the spoken sentence, never contradicted, never 'none' or 'none to name' (#135, #129; 4dae09c said \"I do not have other workplaces to name here.\")"),
     ("If the profile has nothing on your certificates, qualifications or signature dishes, say in one short "
          + "sentence that you have none yet.", "none yet for certificates, no brackets (#23)"),
-    ("A procedure keeps every step, including checks and records.", "procedures keep the record step (#60)"),
+    ("A procedure keeps every step, with checks and records.", "procedures keep the record step (#60)"),
     // Any comparison, not only in interviews (#132 on 7fc1602 ignored the interview-only line).
     ("\n- Any comparison (\"difference between\", \"vs\", \"X or Y\", \"which is better\") uses only this shape, "
          + "with facts (\"Braising uses...\"), never \"I ...\" lines:\n  Main difference: one sentence, under 14 words\n"
@@ -199,7 +199,7 @@ check(Prompt.rules.count < 4100, "the rules block stays short (\(Prompt.rules.co
 check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, every line under 14 words; break a long line into \"- \" "
                              + "lines. A one-idea "
                              + "answer is one or two lines. A list puts each item on its own \"- \" line. Several parts: "
-                             + "a short label line ending in \":\", its lines, a blank line between parts. No ** or #. "
+                             + "a label line ending in \":\", its lines, a blank line between. No ** or #. "
                              + "answer_vi keeps the same lines.\n- Be minimal:"),
       "the layout rule comes first, with no example of its own")
 // The cold-sauces example was cut for room (leader, 2026-11-26): the comparison and menu shapes show labels,
@@ -207,15 +207,15 @@ check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, every line u
 check(!Prompt.rules.contains("Two cold sauces") && Prompt.rules.contains("European menu:\n  - Its parts")
       && Prompt.rules.contains("\n\n  Vietnamese menu:"), "the menu shape still shows a label, list lines and a blank line")
 // User: Sonnet's answers were too long. Minimal answers, short phrase lines, 3–4 lines per part, no word cap.
-check(Prompt.rules.contains("\n- Be minimal: no restating the question, no opening or closing line, never your "
+check(Prompt.rules.contains("\n- Be minimal: no restating the question, no opener or closer, never your "
                             + "reasoning, nothing not asked. Short phrases are fine. Each part has at most 3 or 4 lines "
-                            + "unless more items are asked, but cover every item and part asked."),
+                            + "unless more are asked, but cover every item and part asked."),
       "the minimal-answer rule")
 // #50: a one-kind list opened with "The five mother sauces are:", so the rule shows the wrong first line.
 check(Prompt.rules.contains("\n- A list of one kind starts with its first item, names only unless more is asked. "
-                            + "Example: \"List the five mother sauces.\" starts with \"- Béchamel\", never with \"The "
-                            + "five mother sauces are:\".\n"),
-      "a one-kind list starts with its first item and gives names only")
+                            + "Asked for N (\"Give 5 examples\"): N+2 lines (5 -> 7), real ones only. "
+                            + "\"List the mother sauces.\" starts with \"- Béchamel\", not \"The five mother sauces are:\".\n"),
+      "a one-kind list starts with its first item and gives names only; N asked gives N+2 real items (user, 0.5.23-D)")
 let layoutAt = Prompt.rules.range(of: "- Layout:")!.lowerBound
 let minimalAt = Prompt.rules.range(of: "- Be minimal:")!.lowerBound
 let listAt = Prompt.rules.range(of: "- A list of one kind")!.lowerBound
