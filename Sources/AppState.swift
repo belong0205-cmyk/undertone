@@ -503,16 +503,21 @@ final class AppState: ObservableObject {
         lastAPIUse = Date()
         rows[index].isProcessing = true
         let tag = DebugLog.tag(id)
-        log("claude #\(tag) start\(previous == nil ? "" : " (follow-up)"), \(tasks.count + 1) in flight")
+        log("claude #\(tag) start\(previous == nil ? "" : " (follow-up)"), \(tasks.count + 1) in flight, "
+            + "\(pieces.count - first) piece(s): \(question)")
 
         tasks[id] = Task { [weak self] in
             let started = Date()
             var output = ""
             var answerLogged = false
+            var answerDone = false
             do {
                 for try await chunk in client.stream(system: Self.systemPrompt, profile: profile, user: message,
                                                      maxTokens: 2048, tag: tag) {
-                    if Task.isCancelled { break } // replaced: a chunk already received must not bring it back
+                    if Task.isCancelled { // replaced: a chunk already received must not bring it back
+                        DebugLog.log(String(format: "claude #%@ cancelled after %.2f s", tag, Date().timeIntervalSince(started)))
+                        break
+                    }
                     if output.isEmpty {
                         DebugLog.log(String(format: "claude #%@ first token %.2f s", tag, Date().timeIntervalSince(started)))
                     }
@@ -520,6 +525,10 @@ final class AppState: ObservableObject {
                     if !answerLogged, !Prompt.section("answer_en", in: output).isEmpty {
                         answerLogged = true
                         DebugLog.log(String(format: "claude #%@ answer on screen %.2f s", tag, Date().timeIntervalSince(started)))
+                    }
+                    if !answerDone, output.contains("</answer_en>") {
+                        answerDone = true
+                        DebugLog.log(String(format: "claude #%@ answer_en complete %.2f s", tag, Date().timeIntervalSince(started)))
                     }
                     self?.apply(output, to: id)
                 }

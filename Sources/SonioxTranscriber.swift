@@ -568,7 +568,7 @@ final class SonioxTranscriber {
         guard running else { // stopped on purpose: keep the words not yet final as heard
             currentFinal += currentPending
             currentPending = ""
-            finishUtterance()
+            finishUtterance("stopped")
             return
         }
         // The next stream gets the audio after the last final word again, so words not final yet
@@ -595,7 +595,7 @@ final class SonioxTranscriber {
             quickFailures = Date().timeIntervalSince(connectedAt) < 5 ? quickFailures + 1 : 0
             if fatal || quickFailures >= 3 {
                 stop()
-                finishUtterance()
+                finishUtterance("stream failed")
                 onFailure?(failure)
                 return
             }
@@ -668,7 +668,7 @@ final class SonioxTranscriber {
                 if discarding {
                     discarding = false
                 } else if token.text == "<fin>" || currentFinal.trimmingCharacters(in: .whitespaces).hasSuffix("?") {
-                    finishUtterance() // our finalize at a long pause, or a finished question
+                    finishUtterance(token.text == "<fin>" ? "finalize at pause" : "endpoint after ?") // our finalize at a long pause, or a finished question
                 } else {
                     awaitingSilence = true
                 }
@@ -714,12 +714,12 @@ final class SonioxTranscriber {
                     releaseHeldWord()
                 }
                 if wordStart, atStatementEnd, !atBoundary, !afterPause { heldWord = [token]; continue }
-                if atBoundary || afterPause, wordStart { finishUtterance() }
+                if atBoundary || afterPause, wordStart { finishUtterance(atBoundary ? "boundary" : "pause before word") }
                 appendFinal(token)
             } else {
                 // The boundary itself is final, so the next word may start the new utterance even
                 // before it is final.
-                if atBoundary || afterPause, pending.isEmpty, token.text.first?.isWhitespace == true { finishUtterance() }
+                if atBoundary || afterPause, pending.isEmpty, token.text.first?.isWhitespace == true { finishUtterance(atBoundary ? "boundary" : "pause before word") }
                 pending += token.text
             }
         }
@@ -783,7 +783,7 @@ final class SonioxTranscriber {
         let wordless = processedMs - lastSpokenEndMs - wordDelayMs - 800
         if quiet >= needed || (noisy && wordless >= needed) {
             DebugLog.log("soniox utterance ends: quiet \(quiet) ms, no words \(processedMs - lastSpokenEndMs) ms, word delay \(wordDelayMs) ms")
-            finishUtterance()
+            finishUtterance("silence")
         }
     }
 
@@ -796,9 +796,12 @@ final class SonioxTranscriber {
         return text.split(whereSeparator: \.isWhitespace).count >= pauseSplitWords
     }
 
-    private func finishUtterance() {
+    private func finishUtterance(_ why: String) {
         let text = currentFinal.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !text.isEmpty { onUtterance?(currentID, text, true) }
+        if !text.isEmpty {
+            DebugLog.log("soniox final #\(DebugLog.tag(currentID)) (\(why))")
+            onUtterance?(currentID, text, true)
+        }
         currentID = UUID()
         currentFinal = ""
         currentPending = ""
@@ -843,7 +846,7 @@ final class SonioxTranscriber {
     private func releaseHeldWord() {
         guard !heldWord.isEmpty else { return }
         let word = heldWord.map(\.text).joined().lowercased().filter(\.isLetter)
-        if !Self.continuations.contains(word) { finishUtterance() }
+        if !Self.continuations.contains(word) { finishUtterance("new statement") }
         let tokens = heldWord
         heldWord = []
         tokens.forEach(appendFinal)
