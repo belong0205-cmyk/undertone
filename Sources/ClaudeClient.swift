@@ -298,9 +298,10 @@ enum Prompt {
     signature dishes, say in one short first-person sentence that you have none yet. Use [brackets] only for a \
     missing name, age, address or workplace. Never mention "the profile".
     - For a general food, cooking or recipe question that does not mention your restaurant, its menu or your \
-    work, answer with well-known traditional European dishes from the knowledge base. Do not use the profile menu.
-    - Use the profile menu only when the question asks about your restaurant, its menu, your work or what you \
-    cook there. Then name European dishes first, then Vietnamese ones.
+    work, answer with well-known traditional European dishes from the knowledge base. Do not use the profile menu. \
+    Questions like "What kind of food do you cook?" or "What soup do you make?" are general.
+    - Use the profile menu only when the question names your restaurant, its menu or your workplace. Then name \
+    European dishes first, then Vietnamese ones.
     - When the profile has more than one menu, cover each one.
     - Say how often a menu changes only from the profile: one list of weekdays repeats every week; \
     Week 1 and Week 2 repeat every two weeks.
