@@ -123,7 +123,7 @@ for (phrase, what) in [
          + "or restaurant details (menu, team, schedule, "
          + "working days or hours).", "no invented numbers, dishes or restaurant details (#6 \"crispy fish\")"),
     ("Never mention \"the profile\".", "no 'the profile' (#23)"),
-    ("Name a weekday or date only if the question names one, even though <today> or the menu shows days.",
+    ("Name a weekday or date only if the question names one, even if <today> or the menu shows days.",
          "no unasked weekday (#3, #12)"),
     ("The profile menu is suggested dishes, not a plan by day.", "menu is suggestions (user decision)"),
     ("A dish is European only under a heading that says European (\"món Âu\"); dishes under \"món Việt\" are "
@@ -138,9 +138,10 @@ for (phrase, what) in [
          "branch 3: whole menu (European first via the next rule, #4)"),
     ("\n- When the profile has more than one menu, cover each one in full, European first even if listed "
          + "second. Name a vegetarian option only if the profile lists one; never say there is none. Shape for "
-         + "\"What does one meal come with?\":\n  European menu:\n  - Its parts, a few per line\n  - Its vegetarian "
-         + "option, if listed\n\n  Vietnamese menu: the same lines\n",
-         "every menu, European first, vegetarian only if listed (#4; dc1671d said \"I do not have a vegetarian option\")"),
+         + "\"What does one meal come with?\":\n  European menu:\n  - Its parts, a few per line\n  - Vegetarian option: "
+         + "its dish, if listed\n\n  Vietnamese menu: the same lines\n",
+         "every menu, European first, vegetarian only if listed, said naturally (#4; dc1671d said \"I do not have a "
+             + "vegetarian option\", bd441bf said \"Vegetarian dish also listed\")"),
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
          "day question gets suggestions"),
     ("When the profile lacks a detail asked (name, date, place, number), put a hinted blank in the spoken sentence "
@@ -152,16 +153,17 @@ for (phrase, what) in [
          + "sentence that you have none yet.", "none yet for certificates, no brackets (#23)"),
     ("A procedure keeps every step, including checks and records.", "procedures keep the record step (#60)"),
     // Any comparison, not only in interviews (#132 on 7fc1602 ignored the interview-only line).
-    ("\n- Any comparison (\"difference between\", \"vs\", \"X or Y\", \"which is better\") uses this shape, never "
-         + "paragraphs, with facts as facts (\"Braising uses...\"), not \"I usually...\":\n  Main difference: one sentence\n"
-         + "  Option A:\n  - Best for: ...\n  - Limit: ...\n  Option B: the same two lines\n  Trade-off: one sentence\n",
-         "comparison shape for every question, facts not 'I usually' (#132)"),
+    ("\n- Any comparison (\"difference between\", \"vs\", \"X or Y\", \"which is better\") uses only this shape, "
+         + "with facts (\"Braising uses...\"), never \"I ...\" lines:\n  Main difference: one sentence\n"
+         + "  Option A:\n  - Best for: ...\n  - Limit: a real cost (time, texture, risk)\n  Option B: the same two lines\n"
+         + "  Trade-off: one sentence\n",
+         "comparison: only this shape, facts not 'I ...', Limit = a real cost (#132; bd441bf added \"Method:\", \"I sear\")"),
     // Interview answers (user request 2026-11-26): sources first, STAR with hinted blanks, vague questions,
     // help when stuck, questions for the employer.
     ("- Interview questions: use the job ad, CV and notes first. Never tell knowledge-base advice as your own "
          + "story. Sound confident but modest.", "interview: sources first, no KB advice as a story, tone"),
-    ("as four labels: \"Situation:\", \"Task:\", \"Action:\", \"Result:\". If the profile has none, each label gets "
-         + "only a blank with a hint (e.g. \"[situation: where, when, who]\", \"[result: a number or what improved]\").",
+    ("as four labels: \"Situation:\", \"Task:\", \"Action:\", \"Result:\". If the profile has none, each label is "
+         + "only a hinted blank (e.g. \"[situation: where, when, who]\", \"[result: a number or what improved]\").",
          "interview: STAR; no profile example = all four labels blank with hints (2544242)"),
     ("Vague: answer what the interviewer wants to judge.", "interview: vague question"),
     ("No answer in the sources: lines for the user: a clarifying question, a fair assumption, short steps.",
