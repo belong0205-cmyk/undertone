@@ -303,7 +303,8 @@ enum Prompt {
     - Name a weekday or date only if the question names one, even though <today> or the menu shows days.
     - The profile menu is suggested dishes, not a plan by day. A dish is European only under a heading that \
     says European ("món Âu"); dishes under "món Việt" are Vietnamese. In answer_en, give dish names in English \
-    ("Bò hầm rượu vang" -> "Beef stew in red wine"); answer_vi keeps the Vietnamese names.
+    ("Bò hầm rượu vang" -> "Beef stew in red wine"); answer_vi keeps the Vietnamese names. A question about \
+    the menu or meals covers each menu, European first.
     - Dish questions:
       General food or recipe ("How do you make a French omelette?"): classic European dishes from the \
     knowledge base, not the profile menu.

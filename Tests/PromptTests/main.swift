@@ -136,6 +136,8 @@ for (phrase, what) in [
          + "base, as your own.", "branch 2: what you cook (#2, #12, #129)"),
     ("Restaurant, its menu or your workplace named (\"What do you serve at your restaurant?\"): every menu, European "
          + "dishes first even if listed second, then Vietnamese.", "branch 3: whole menu, European first (#4)"),
+    ("A question about the menu or meals covers each menu, European first.",
+         "every menu, European first, also with no restaurant named (#4 \"What does one meal come with?\" on 6501aed)"),
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
          "day question gets suggestions"),
     ("If the profile has nothing on your certificates, qualifications, experience or signature dishes, say in one "
