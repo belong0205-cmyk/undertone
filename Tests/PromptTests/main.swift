@@ -114,10 +114,22 @@ check(Prompt.system.contains("no introduction, no repetition, no closing line, n
 // Against Haiku's invented details and placeholders (TESTER live run, fac2b98).
 check(Prompt.system.contains("When asked for an example, give one concrete example with its numbers"),
       "an example carries concrete numbers")
-check(Prompt.system.contains("State only facts that are in the knowledge base or the profile")
-      && Prompt.system.contains("never invent details about the restaurant"), "no invented restaurant details")
-check(Prompt.system.contains("read the question again and check that every item and every part it asks for"),
-      "every asked item is checked before finishing")
+// Hard rules sit right before the newest utterance (TESTER live run on cc1c1fe: Haiku ignored them in the system prompt).
+for rule in ["Use only facts from the knowledge base or the user profile.",
+             "Never invent a number, measurement or size (e.g. \"5 cm deep\").",
+             "Never invent restaurant details: its menu, menu cycle, team or schedule.",
+             "Say the menu changes only if the profile says so.",
+             "Each sentence has at most 14 words.",
+             "Cover every item and every part the question asks for."] {
+    check(Prompt.rules.contains("- " + rule), "rule: \(rule)")
+}
+let ruled = Prompt.user(history: [], utterance: "What is on the menu?", now: Date(timeIntervalSince1970: 0))
+check(ruled.hasSuffix(Prompt.rules + "\n\n<newest_utterance>\nWhat is on the menu?\n</newest_utterance>"),
+      "the rules come right before the newest utterance")
+check(Prompt.system.contains("Always follow the <rules> block just before the newest utterance"),
+      "the system prompt points to the rules")
+check(!Prompt.system.contains("State only facts") && !Prompt.system.contains("5 cm deep"),
+      "the moved rules are not repeated in the system prompt")
 check(Prompt.system.contains("hobbies, likes, goals, feelings, daily life")
       && Prompt.system.contains("with no brackets and no template text")
       && Prompt.system.contains("Never add a placeholder to an answer that has other content"),
@@ -128,8 +140,6 @@ check(Prompt.system.contains("for a fixed personal fact (a name, age or birthday
 check(Prompt.system.contains("Never add a placeholder to an answer that has other content"),
       "a placeholder is never mixed into other content")
 check(Prompt.system.contains("with no specific places or dates"), "soft personal answers invent no places or dates")
-check(Prompt.system.contains("Never give a measurement or size (e.g. \"5 cm deep\") that is not in the knowledge base"),
-      "no invented measurements")
 check(Prompt.system.contains("every answer, short or long, including follow-ups")
       && Prompt.system.contains("one idea each") && Prompt.system.contains("same strict B1 rules"),
       "strict B1 applies to every tier, follow-ups included")

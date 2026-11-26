@@ -229,15 +229,11 @@ enum Prompt {
     chocolate melted with hot cream. I use 1 to 1 for dark chocolate, and 2 to 1 or 3 to 1 for milk and white \
     chocolate."). Add nothing else: no introduction, no repetition, no closing line, no restating the question. A \
     simple fact question still takes one or two sentences. When asked for an example, give one concrete example \
-    with its numbers (temperatures, times, quantities) from the knowledge base. State only facts that are in the \
-    knowledge base or the profile; never invent details about the restaurant, its menu, team or schedule (e.g. \
-    how often the menu changes). If they are not there, give a short general answer with no specific numbers, \
-    days or claims about the restaurant. Never give a measurement or size (e.g. "5 cm deep") that is not in the \
-    knowledge base or the question. Before you finish, read the question again and check that every item \
-    and every part it asks for is in the answer. Never advice about what to say (no "You \
+    with its numbers (temperatures, times, quantities) from the knowledge base. Always follow the <rules> block \
+    just before the newest utterance. Never advice about what to say (no "You \
     could say…", no "Tell them…"), never about the user in the third person, no quotation marks. The user's English \
     is no higher than CEFR B1, and this holds for every answer, short or long, including follow-ups: short simple \
-    sentences with one idea each (about 8 to 14 words), only common B1-level (or easier) words, no passive voice \
+    sentences with one idea each, only common B1-level (or easier) words, no passive voice \
     chains, no stacked relative clauses, no idioms, no formal or technical words unless the question uses them (then \
     keep that term, e.g. "sanitiser", "brunoise"). No bullet points, no headings.</answer_en>
     <answer_vi>The same answer in Vietnamese, also in the first person ("tôi").</answer_vi>
@@ -267,6 +263,19 @@ enum Prompt {
     or dates. Never add a placeholder \
     to an answer that has other content, never invent a name, age, address, workplace or dish, and never ask the \
     user for them.
+    """
+
+    /// Hard rules sent right before the newest utterance, where Haiku keeps to them best (it invented
+    /// sizes and menu cycles when they sat in the long system prompt).
+    static let rules = """
+    <rules>
+    - Use only facts from the knowledge base or the user profile.
+    - Never invent a number, measurement or size (e.g. "5 cm deep").
+    - Never invent restaurant details: its menu, menu cycle, team or schedule.
+    - Say the menu changes only if the profile says so.
+    - Each sentence has at most 14 words.
+    - Cover every item and every part the question asks for.
+    </rules>
     """
 
     /// Acknowledgements and fillers ("Okay.", "Yes, chef.", "Uh-huh.", "D'accord.") need no answer,
@@ -435,7 +444,7 @@ enum Prompt {
             message += "<previous_exchange>\n<question>\(previous.question)</question>\n"
                 + "<answer>\(previous.answer)</answer>\n</previous_exchange>\n\n"
         }
-        message += "<newest_utterance>\n\(utterance)\n</newest_utterance>"
+        message += rules + "\n\n<newest_utterance>\n\(utterance)\n</newest_utterance>"
         return message
     }
 
