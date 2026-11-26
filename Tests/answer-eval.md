@@ -17,8 +17,9 @@ version; other wording passes if it meets every rule below.
    at most 2–3 examples), a specific question gets exactly that detail.
 2. No invented facts: no day, date, week, time, number, price or name that was not asked for or is not in the profile /
    knowledge base. Missing personal facts use a placeholder in square brackets.
-3. At most 25 words in 1–2 sentences; a technical fact question up to 45 words; a procedure, steps or list question
-   up to 5 sentences and 70 words, covering every point asked; a follow-up in section H: 3–6 short sentences, 90 words. Spoken as the user ("I", "my", "we"); never "You could say…".
+3. As short as possible but complete: the direct answer first, then one short B1 sentence per point the question asks
+   for (every item, step or reason; both halves of "what and why"), nothing extra and no repeating. No fixed word or
+   sentence limit. Spoken as the user ("I", "my", "we"); never "You could say…".
 4. Simple B1 English; Vietnamese dishes get simple English names.
 5. Menu and dish answers name European dishes first; Vietnamese dishes come after, or only when asked (user preference).
 6. The Vietnamese answer says the same thing in the first person ("tôi").
@@ -67,7 +68,7 @@ version; other wording passes if it meets every rule below.
 | # | Question | Ideal answer | Must / must not |
 |---|---|---|---|
 | 28 | What temperature should the fridge be? | We keep the fridge at 5 °C or below. | Australian 5 °C, not 40 °F. |
-| 29 | What is the temperature danger zone? | It's between 5 and 60 °C, so I keep cold food below 5 and hot food above 60. | 5–60 °C. |
+| 29 | What is the temperature danger zone? | It's between 5 and 60 °C. Cold food stays at 5 or below, hot food at 60 or above. | 5–60 °C. |
 | 30 | How do you cool down a big pot of soup? | I use shallow trays and an ice bath: 60 to 21 °C within two hours, then down to 5 °C within four more. | 2h/4h rule. |
 | 31 | What core temperature do you cook chicken to? | I cook chicken to at least 75 °C in the thickest part. | 75 °C. |
 | 32 | What's the difference between cleaning and sanitising? | Cleaning removes food, dirt and grease. Sanitising then reduces germs to a safe level with heat or chemicals. I always clean first. | Clean → sanitise; must not say sanitising kills all bacteria (FSANZ 3.2.2 cl 20). |
@@ -95,7 +96,7 @@ version; other wording passes if it meets every rule below.
 | 46 | Let's get started with the interview. | "-" (a statement, no question). |
 
 ## G. Define / Explain / List (assessor style)
-Answers stay within the length limits in rule 3, so they give the definition and the key numbers, not a full lesson.
+Answers give the definition and every item or number asked for, not a full lesson (rule 3).
 | # | Question | Ideal answer | Must / must not |
 |---|---|---|---|
 | 47 | Define ganache and provide common ratios for dark vs milk/white chocolate. | Ganache is chocolate melted with hot cream. For a glaze I use 1:1 dark, 2:1 milk and 3:1 white chocolate to cream. | Definition + ratios for all three; milk and white need more chocolate than dark. Accept truffle ratios (2:1 dark, 2.5–3:1 milk, 3–4:1 white) if the use is named. |
@@ -112,7 +113,7 @@ Answers stay within the length limits in rule 3, so they give the definition and
 ## H. Follow-up — more detail (within about 10 s)
 Ask the first question, wait for its short answer, then ask the follow-up within 10 s, e.g.
 `say -v Karen "What is a roux?"; sleep 6; say -v Karen "Give me an example."`. The first answer stays short. The follow-up
-answer has 3–6 short B1 sentences in the first person, stays on the same topic, adds new facts (numbers, steps, examples)
+answer is a few short B1 sentences in the first person, stays on the same topic, adds new facts (numbers, steps, examples)
 and does not repeat the first answer.
 | # | First question → short answer | Follow-up | Ideal detailed answer | Must / must not |
 |---|---|---|---|---|
@@ -121,11 +122,11 @@ and does not repeat the first answer.
 | 59 | What is a roux? → Equal weights of butter and flour cooked together to thicken sauces. | Give me an example. | For béchamel I melt 50 g butter, add 50 g flour and cook it for one or two minutes without colour. Then I slowly whisk in 500 mL warm milk and simmer it for about 20 minutes. For a Mornay sauce I add cheese at the end. | A concrete example with quantities. |
 | 60 | How do you cool a big pot of soup? → I use shallow trays and an ice bath: 60 to 21 °C within two hours, then down to 5 °C within four more. | Tell me more. | First I split the soup into shallow trays and put them in an ice bath or a blast chiller, and I stir it. I check the temperature with a probe and write down the times. When it is cold, I cover it, label it with the date and put it in the fridge. If it doesn't reach 21 °C in two hours, I reheat it or throw it out. | Steps, recording and the corrective action; not only the 2h/4h numbers again. |
 | 61 | Define ganache and provide common ratios for dark vs milk/white chocolate. → Ganache is chocolate melted with hot cream. For a glaze I use 1:1 dark, 2:1 milk and 3:1 white chocolate to cream. | How do you make it? | I chop the chocolate finely and heat the cream until it just simmers, about 80 °C. I pour the cream over the chocolate, wait one or two minutes, then stir from the centre until it's smooth and shiny. For a glaze I use it warm, about 32 °C. For truffles I let it set in the fridge, then roll it. | Method with temperatures. |
-| 62 | What do you have on your menu? → We cook a European set menu, like lasagne and roast chicken, and Vietnamese set meals too. It changes every day. | Tell me more. | Our European set menu has a soup, a main, a side, a salad and a dessert, for example pumpkin soup with beef lasagne, or fish and chips. Our Vietnamese set meals come with rice, a braised dish, a soup, vegetables and fruit. There is always a vegetarian dish too. Both menus change every day. | European first; facts from the profile only; no day named. |
+| 62 | What do you have on your menu? → We cook a European set menu, like lasagne and roast chicken, and Vietnamese set meals too. It changes every day. | Tell me more. | Our European set menu has a soup, a main, a side, a salad and a dessert, for example pumpkin soup with beef lasagne, or fish and chips. Our Vietnamese set meals come with rice, a braised dish, a soup, vegetables and fruit. There is always a vegetarian dish too. | European first; facts from the profile only; no day named. |
 | 63 | What's the difference between fish and shellfish? → (short answer as in 57) | (within 5 s) What's your name? | My name is Minh Le. | A new, different question gets the short answer, not a detailed one. |
 
 ## I. Australian food safety and WHS (answers must match the source)
-Short answers (1–2 sentences, B1, "I"). A Code requirement must not be swapped for a guidance figure, or the other way round.
+Short B1 answers in the first person ("I"), complete on every point asked. A Code requirement must not be swapped for a guidance figure, or the other way round.
 | # | Question | Ideal answer | Must / must not | Source |
 |---|---|---|---|---|
 | 64 | What temperature must potentially hazardous food be when you receive it? | Cold food must be 5 °C or below and hot food 60 °C or above. Frozen food must arrive frozen. | Both limits + frozen. | FSANZ 3.2.2 cl 5(3)–(4) |
@@ -143,7 +144,7 @@ Short answers (1–2 sentences, B1, "I"). A Code requirement must not be swapped
 | 76 | How do you lift a heavy box of stock safely? | I check the weight, use a trolley or get help if it's heavy, bend my knees and keep the box close to my body. | Assess first, aids or help. | Safe Work Australia Code of Practice: Hazardous manual tasks |
 
 ## J. SA Cook questionnaire topics (answers must match the KB)
-Short answers (1–2 sentences, B1, "I"). The KB fact column names the knowledge file and the note the answer must agree with.
+Short B1 answers in the first person ("I"), complete on every point asked. The KB fact column names the knowledge file and the note the answer must agree with.
 | # | Question | Ideal answer | Must / must not | KB fact |
 |---|---|---|---|---|
 | 77 | I had gastro but I feel better this morning. What do you do? | I phone my supervisor before my shift and stay home. I come back only 48 hours after the symptoms stop. | Phone, not text; 48 h. Must NOT say feeling better is enough. | 01 Sick procedure (SITXFSA005) |
@@ -166,7 +167,7 @@ Short answers (1–2 sentences, B1, "I"). The KB fact column names the knowledge
 | 94 | Give three examples of cross-contamination. | Raw chicken juice drips onto a salad. One board is used for raw meat, then salad. Unwashed hands touch ready-to-eat food. | Three examples; raw → ready-to-eat. | 01 Cross-contamination examples |
 | 95 | How do you clean a deep fryer? | I switch it off and let the oil cool fully. I drain the oil and boil it out with fryer cleaner. I rinse and dry it before refilling. | Cool first; dry before refilling (water + hot oil); PPE acceptable extra. | 15 Deep fryer (SITHKOP009) |
 | 96 | What is gelatinisation? | Starch heated in liquid, at about 60 to 80°C, takes in water and swells. This thickens the liquid. It happens in pasta, rice and roux sauces. | Starch + heat + liquid; swell/thicken; ~60–80 °C; a farinaceous example. | 07 Gelatinisation (SITHCCC030) |
-| 97 | What is mirepoix and what's the ratio? | Mirepoix is rough-cut onion, carrot and celery. The ratio is half onion, a quarter carrot, a quarter celery. It gives stock flavour and colour. | Onion, carrot, celery; 2:1:1 (50/25/25). | 06 Mirepoix (SITHCCC029) |
+| 97 | What is mirepoix and what's the ratio? | Mirepoix is rough-cut onion, carrot and celery for flavouring stock. The ratio is half onion, a quarter carrot, a quarter celery. | Onion, carrot, celery; 2:1:1 (50/25/25). | 06 Mirepoix (SITHCCC029) |
 | 98 | How is demi-glace made? | I mix equal parts espagnole and brown stock, reduce by half, skim and strain. It is glossy, deep brown and coats a spoon. | Espagnole + brown stock, reduced by half; at least 2 quality signs. | 06 Demi-glace |
 | 99 | What's a complete protein? | It has all nine essential amino acids, like soy, quinoa, eggs and dairy. Grains and legumes are incomplete, so I combine them: dhal with rice. | 9 essential amino acids; one complete example; a combination. | 08 Complete vs incomplete proteins (SITHCCC031) |
 | 100 | What can replace gelatine in a vegan dessert? | I use agar-agar. It comes from seaweed, sets firmer and must be boiled. Pectin works for fruit jellies. | Agar-agar named; must NOT suggest gelatine-based or animal products. | 08 Gelatine replacers |
@@ -179,7 +180,7 @@ Short answers (1–2 sentences, B1, "I"). The KB fact column names the knowledge
 | 107 | Define carry-over cooking. | Off the heat, the core keeps rising about 3 to 5 degrees. So I take it off early and rest it. | Core keeps rising; pull early. | 09 Carry-over cooking (SITHCCC036) |
 | 108 | A steak is tough and dry. Give three causes. | It was overcooked. It was not rested, or cut with the grain. Or it was a tough cut cooked too fast. | Three distinct causes. | 09 Tough, dry steak (SITHCCC036) |
 | 109 | What does the Maillard reaction do when you sear meat? | Above about 140°C the dry surface browns. That gives a crust, colour and deep flavour. It does not seal in the juices. | Browning and flavour; must not claim it seals in juices. | 09 Searing and the Maillard reaction (SITHCCC036) |
-| 110 | Give five causes of choux failure and a fix for each. | Collapsed: underbaked, bake until dry. Not hollow: too much egg, add it gradually. Soggy: filled too early, fill near service. Flat: mix too soft, piping consistency. Cracked: piped unevenly. | At least collapsed, not hollow and soggy, each with a fix. | 11 Choux failures and fixes (SITHCCC041) |
+| 110 | Give five causes of choux failure and a fix for each. | Collapsed means underbaked, so I bake it until dry. Heavy and not hollow means too much egg, so I add egg slowly. Soggy means it was filled too early, so I fill it near service. Flat means the mix was too soft, so I keep a piping consistency. Cracked means it was piped unevenly, so I pipe evenly. | Five causes, each with a fix (KB: collapsed, heavy, soggy, flat, cracked). | 11 Choux failures and fixes (SITHCCC041) |
 | 111 | What is yeast fermentation and how does it affect bread? | Yeast feeds on sugars and makes carbon dioxide and alcohol. The gas lifts the dough and opens the crumb. The alcohol adds flavour. | CO₂ lifts dough; flavour. | 11 Fermentation (SITHCCC041) |
 | 112 | What are the quality indicators of a finished dessert? | The texture is true to type and the flavour is balanced. It is served at the right temperature and portion. Plating is neat, with fresh garnish. | Texture, flavour balance, presentation. | 12 Quality indicators (SITHPAT016) |
 | 113 | A customer says "I'm allergic to gluten" but orders soy sauce. What do you do? | I explain that regular soy sauce has wheat. I offer gluten-free tamari or leave it out. Then I mark the docket and tell the chef. | Explain wheat; offer tamari or omit; docket and chef. | 13 Soy sauce scenario (SITHCCC042) |
@@ -195,7 +196,7 @@ Short answers (1–2 sentences, B1, "I"). The KB fact column names the knowledge
 | 123 | During service a staff member stores dirty equipment beside clean dishes. How would you manage it? | I calmly move the dirty items to the dirty side. I re-wash and sanitise any clean items they touched. I remind them of the dirty-to-clean flow and tell the supervisor. | Must include re-sanitising affected clean items and calm communication | 15: dirty equipment beside clean dishes |
 | 124 | What is the difference between an à la carte menu and a buffet menu? | À la carte: each dish is priced alone and cooked to order. Buffet: one fixed price, guests serve themselves, so portion control is lost. | Must give both definitions; must mention cooked to order vs self-service | 16: à la carte vs buffet |
 | 125 | How do seasonal ingredients influence recipe planning and costing? | In-season produce is cheaper and better quality, so I plan menus around the seasons. Out-of-season items are dear, so I use "market price". | Must link season to price and quality | 16: seasonal ingredients |
-| 126 | What is food cost percentage and why is it important? | Portion cost divided by selling price without GST, times 100. It shows how much of each dollar goes on food. So I can set prices and spot waste. Target: 25 to 35%. | Must give the formula and a reason; ex-GST | 16: food cost % line |
+| 126 | What is food cost percentage and why is it important? | Portion cost divided by selling price without GST, times 100. It shows how much of each dollar goes on food. So I can set prices and spot waste. | Must give the formula and a reason; ex-GST | 16: food cost % line |
 | 127 | How do cultural and ethnic influences affect recipe development? | The customers' backgrounds shape ingredients, flavours and methods, like halal or kosher. I use authentic ingredients, respect religious food rules and describe dishes honestly. | Must mention religious/cultural food rules and authenticity | 16: cultural and ethnic influences |
 | 128 | Why is feedback important when planning and improving recipes? | Feedback from customers, floor staff, sales and plate waste shows what to change. I test the change and update the standard recipe. | Must mention a source of feedback and updating the standard recipe | 16: feedback |
 
