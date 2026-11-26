@@ -42,9 +42,13 @@ struct ClaudeClient {
     let apiKey: String
 
     /// Yields answer text as it streams in. `profile` is the active user profile block, if any.
-    func stream(system: String, profile: String?, user: String, maxTokens: Int = 1024) -> AsyncThrowingStream<String, Error> {
+    /// `tag` names the request in the debug log, which gets one usage line per request.
+    func stream(system: String, profile: String?, user: String, maxTokens: Int = 1024,
+                tag: String = "-") -> AsyncThrowingStream<String, Error> {
         AsyncThrowingStream { continuation in
             let task = Task {
+                var usage = StreamUsage(started: Date())
+                defer { DebugLog.log("claude #\(tag) usage: \(usage.summary)") }
                 do {
                     let request = try makeRequest(
                         system: system, profile: profile, user: user, maxTokens: maxTokens, stream: true)
@@ -61,6 +65,7 @@ struct ClaudeClient {
                         let payload = Data(line.dropFirst(5).trimmingCharacters(in: .whitespaces).utf8)
                         guard let event = try? JSONSerialization.jsonObject(with: payload) as? [String: Any] else { continue }
                         let delta = event["delta"] as? [String: Any]
+                        usage.record(event)
                         switch event["type"] as? String {
                         case "content_block_delta":
                             // Only text deltas; thinking and fallback blocks are skipped.
@@ -88,11 +93,18 @@ struct ClaudeClient {
     /// so the next real request skips re-processing it. Model and settings must match `stream`.
     func warmCache(system: String, profile: String?) async throws {
         let request = try makeRequest(system: system, profile: profile, user: "Warm-up.", maxTokens: 0, stream: false)
+        let started = Date()
         let (data, response) = try await URLSession.shared.data(for: request)
         let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+        let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
         guard status == 200 else {
-            let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+            DebugLog.log("claude warm-up: HTTP \(status)")
             throw ClaudeError.http(status: status, message: Self.errorMessage(in: json))
+        }
+        if DebugLog.enabled {
+            var usage = StreamUsage(started: started)
+            usage.recordUsage(json?["usage"] as? [String: Any])
+            DebugLog.log("claude warm-up usage: \(usage.summary)")
         }
     }
 
@@ -213,6 +225,56 @@ struct ClaudeClient {
 
     private static func errorMessage(in json: [String: Any]?) -> String {
         (json?["error"] as? [String: Any])?["message"] as? String ?? "không rõ"
+    }
+}
+
+/// Debug-log figures for one request: time to first text, token usage and any thinking blocks
+/// (counted and measured only; their content and the API key are never logged).
+struct StreamUsage {
+    let started: Date
+    var firstText: TimeInterval?
+    var inputTokens = 0
+    var cacheRead = 0
+    var cacheWrite = 0
+    var outputTokens = 0
+    var thinkingBlocks = 0
+    var thinkingChars = 0
+
+    mutating func record(_ event: [String: Any]) {
+        switch event["type"] as? String {
+        case "message_start":
+            recordUsage((event["message"] as? [String: Any])?["usage"] as? [String: Any])
+        case "content_block_start":
+            let type = (event["content_block"] as? [String: Any])?["type"] as? String
+            if type == "thinking" || type == "redacted_thinking" { thinkingBlocks += 1 }
+        case "content_block_delta":
+            let delta = event["delta"] as? [String: Any]
+            switch delta?["type"] as? String {
+            case "text_delta": if firstText == nil { firstText = Date().timeIntervalSince(started) }
+            case "thinking_delta": thinkingChars += (delta?["thinking"] as? String)?.count ?? 0
+            default: break
+            }
+        case "message_delta":
+            recordUsage(event["usage"] as? [String: Any])
+        default:
+            break
+        }
+    }
+
+    /// Usage objects arrive in message_start and again (cumulative) in message_delta.
+    mutating func recordUsage(_ usage: [String: Any]?) {
+        guard let usage else { return }
+        if let value = usage["input_tokens"] as? Int { inputTokens = value }
+        if let value = usage["cache_read_input_tokens"] as? Int { cacheRead = value }
+        if let value = usage["cache_creation_input_tokens"] as? Int { cacheWrite = value }
+        if let value = usage["output_tokens"] as? Int { outputTokens = value }
+    }
+
+    var summary: String {
+        let ttft = firstText.map { String(format: "%.2f s", $0) } ?? "-"
+        return "ttft \(ttft), total \(String(format: "%.2f s", Date().timeIntervalSince(started))), "
+            + "input \(inputTokens), cache read \(cacheRead), cache write \(cacheWrite), output \(outputTokens), "
+            + "thinking blocks \(thinkingBlocks) (\(thinkingChars) chars)"
     }
 }
 

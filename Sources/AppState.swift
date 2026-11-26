@@ -493,7 +493,7 @@ final class AppState: ObservableObject {
             var answerLogged = false
             do {
                 for try await chunk in client.stream(system: Self.systemPrompt, profile: profile, user: message,
-                                                     maxTokens: 2048) {
+                                                     maxTokens: 2048, tag: tag) {
                     if Task.isCancelled { break } // replaced: a chunk already received must not bring it back
                     if output.isEmpty {
                         DebugLog.log(String(format: "claude #%@ first token %.2f s", tag, Date().timeIntervalSince(started)))
