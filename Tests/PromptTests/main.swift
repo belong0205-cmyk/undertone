@@ -122,7 +122,7 @@ for (phrase, what) in [
     ("Never invent a number or size (e.g. \"5 cm deep\"), a dish, experience, a qualification, a company or project, "
          + "or restaurant details (menu, team, schedule, "
          + "working days or hours).", "no invented numbers, dishes or restaurant details (#6 \"crispy fish\")"),
-    ("Never mention \"the profile\" or say that the menu or profile lacks a dish.", "no 'the profile', no 'menu lacks' (#23, #129)"),
+    ("Never mention \"the profile\".", "no 'the profile' (#23)"),
     ("Name a weekday or date only if the question names one, even though <today> or the menu shows days.",
          "no unasked weekday (#3, #12)"),
     ("The profile menu is suggested dishes, not a plan by day.", "menu is suggestions (user decision)"),
@@ -137,36 +137,36 @@ for (phrase, what) in [
     ("Restaurant, its menu or your workplace named (\"What do you serve at your restaurant?\"): the whole menu.",
          "branch 3: whole menu (European first via the next rule, #4)"),
     ("\n- When the profile has more than one menu, cover each one in full, European first even if listed "
-         + "second. Name a vegetarian option only if the profile lists one; never say there is none. Take the "
-         + "parts from the profile. Shape for \"What does one meal come with?\":\n  European menu:\n  - Its parts, a few "
-         + "per line\n  - Its vegetarian option, if listed\n\n  Vietnamese menu:\n  - Its parts, a few per line\n"
-         + "  - Its vegetarian option, if listed\n",
+         + "second. Name a vegetarian option only if the profile lists one; never say there is none. Shape for "
+         + "\"What does one meal come with?\":\n  European menu:\n  - Its parts, a few per line\n  - Its vegetarian "
+         + "option, if listed\n\n  Vietnamese menu: the same lines\n",
          "every menu, European first, vegetarian only if listed (#4; dc1671d said \"I do not have a vegetarian option\")"),
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
          "day question gets suggestions"),
-    ("When the profile lacks a detail asked (name, date, place, number), give a blank with a hint (e.g. "
-         + "\"[restaurant name]\"); never say you have none or never did unless the profile says so. Use [brackets] "
-         + "only for such blanks.",
-         "missing detail = hinted blank, never 'none' (#135 \"I do not have any restaurant experience before\")"),
+    ("When the profile lacks a detail asked (name, date, place, number), put a hinted blank in the spoken sentence "
+         + "(e.g. \"Before that, I worked at [restaurant name].\"). Never say you or the menu have none (\"I do not have "
+         + "any ... to tell you about\") unless the profile says so, and never talk to the user about a blank. Use "
+         + "[brackets] only for such blanks.",
+         "missing detail = hinted blank inside the spoken sentence, never 'none', never to the user (#135, #129)"),
     ("If the profile has nothing on your certificates, qualifications or signature dishes, say in one short "
          + "sentence that you have none yet.", "none yet for certificates, no brackets (#23)"),
     ("A procedure keeps every step, including checks and records.", "procedures keep the record step (#60)"),
-    // Interview answers (user request 2026-11-26): sources first, KB as facts, STAR with hinted blanks,
-    // comparisons as lists with a trade-off, vague questions, help when stuck, questions for the employer.
-    ("- Interview questions: use the job ad, CV and notes first.", "interview: sources first"),
-    ("Say knowledge-base facts as facts (\"Braising uses...\"), never as your own story (\"I usually...\").",
-         "interview: KB as facts, not a story (#132, conflict question on 2544242)"),
-    ("Sound confident but modest.", "interview: tone"),
+    // Any comparison, not only in interviews (#132 on 7fc1602 ignored the interview-only line).
+    ("\n- Any comparison (\"difference between\", \"vs\", \"X or Y\", \"which is better\") uses this shape, never "
+         + "paragraphs, with facts as facts (\"Braising uses...\"), not \"I usually...\":\n  Main difference: one line\n"
+         + "  Option A:\n  - Best for: ...\n  - Limit: ...\n  Option B: the same two lines\n  Trade-off: one line\n",
+         "comparison shape for every question, facts not 'I usually' (#132)"),
+    // Interview answers (user request 2026-11-26): sources first, STAR with hinted blanks, vague questions,
+    // help when stuck, questions for the employer.
+    ("- Interview questions: use the job ad, CV and notes first. Never tell knowledge-base advice as your own "
+         + "story. Sound confident but modest.", "interview: sources first, no KB advice as a story, tone"),
     ("as four labels: \"Situation:\", \"Task:\", \"Action:\", \"Result:\". If the profile has none, each label gets "
          + "only a blank with a hint (e.g. \"[situation: where, when, who]\", \"[result: a number or what improved]\").",
          "interview: STAR; no profile example = all four labels blank with hints (2544242)"),
-    ("Technical: for a comparison (\"difference between\", \"vs\", \"X or Y\", \"which is better\"): one line on the main "
-         + "difference, then a label line per option with \"- Best for:\" and \"- Limit:\", then a \"Trade-off:\" line. No "
-         + "paragraphs.", "interview: comparison triggers, list layout and trade-off (#132 on 8aeae31)"),
     ("Vague: answer what the interviewer wants to judge.", "interview: vague question"),
-    ("No answer in the sources: lines for the user: a clarifying question, a fair assumption, then short steps to "
-         + "an answer.", "interview: help when stuck, said by the user (model still shows no reasoning)"),
-    ("\"Do you have any questions?\": 2 or 3 about the role, team, how success is measured, or the company.",
+    ("No answer in the sources: lines for the user: a clarifying question, a fair assumption, short steps.",
+         "interview: help when stuck, said by the user (model still shows no reasoning)"),
+    ("\"Do you have any questions?\": 2 or 3 about the role, team, success measures or company.",
          "interview: questions for the employer"),
     ("cover every item and part asked", "every item and part covered"),
 ] {
@@ -207,6 +207,9 @@ let layoutAt = Prompt.rules.range(of: "- Layout:")!.lowerBound
 let minimalAt = Prompt.rules.range(of: "- Be minimal:")!.lowerBound
 let listAt = Prompt.rules.range(of: "- A list of one kind")!.lowerBound
 check(layoutAt < minimalAt && minimalAt < listAt, "layout, then minimal, then the one-kind list rule")
+check(listAt < Prompt.rules.range(of: "- Any comparison")!.lowerBound
+      && Prompt.rules.range(of: "- Any comparison")!.lowerBound < Prompt.rules.range(of: "- Interview questions")!.lowerBound,
+      "the comparison rule is a general rule near the top, not inside the interview rule")
 check(!Prompt.system.contains("No bullet points") && Prompt.system.contains("Lay it out as the <rules> block says")
       && Prompt.system.contains("with the same lines and layout.</answer_vi>"),
       "the system prompt allows list lines and keeps the Vietnamese layout the same")
