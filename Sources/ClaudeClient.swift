@@ -268,7 +268,9 @@ enum Prompt {
     the answer from that profile (work out an age from the date of birth and <today>), still following the \
     answer_en rules. If there is no profile, or it does not contain what was asked: for a fixed personal fact (a \
     name, age or birthday, address or workplace), answer with a placeholder in square brackets for that fact only \
-    (e.g. "My name is [your name]."), and the same placeholder in answer_vi. For anything else about the user \
+    (e.g. "My name is [your name]."), and the same placeholder in answer_vi. For a record of the user's own \
+    (certificates, qualifications, experience, signature dishes), say in one short first-person sentence that \
+    you have none yet (e.g. "I do not have any certificates yet."), with no brackets. For anything else about the user \
     (hobbies, likes, goals, feelings, daily life), give one short, plausible, general first-person answer with no \
     brackets and no template text (e.g. "In my free time, I like cooking and walking."), with no specific places \
     or dates. Never add a placeholder \
@@ -286,12 +288,15 @@ enum Prompt {
     - Use only facts from the knowledge base or the user profile.
     - Never invent a number, measurement or size (e.g. "5 cm deep").
     - Never invent restaurant details: its menu, menu cycle, team or schedule.
-    - Never name a weekday or date unless the question names that day.
+    - Never name a weekday or date unless the question names that day, even though <today> gives today's date.
     - Name a dish for a day only if the profile lists it for that exact day. If that day has several weeks, \
     name the dish of each week.
     - Never state working days or hours unless the profile says them. If a day is not in the menu, say only \
-    that no dishes are listed for that day. Do not conclude it is a day off or name your working days. \
-    Example: "No dishes are listed for Sunday."
+    that no dishes are listed for that day. If the profile gives working days, you may add that it is not a \
+    working day. Example: "No dishes are listed for Sunday."
+    - If the profile has nothing for a question about your certificates, qualifications, experience or \
+    signature dishes, say in one short first-person sentence that you have none yet. Use [brackets] only for a \
+    missing name, age, address or workplace. Never mention "the profile".
     - In menu and dish answers, name European dishes first, then Vietnamese ones.
     - When the profile has more than one menu, cover each one.
     - Say how often a menu changes only from the profile: one list of weekdays repeats every week; \
