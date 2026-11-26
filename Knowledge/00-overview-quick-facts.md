@@ -17,7 +17,6 @@ middle of the range is the safe answer, and "follow workplace procedures / the s
 - 2-hour/4-hour rule for ready-to-eat potentially hazardous food that has been between 5°C and 60°C:
   Under 2 hours in total: I can use it or chill it again. 2 to 4 hours: I must use it now and not chill it again. Over 4 hours: I throw it out (Safe Food Australia, App. 2). Example: sandwiches come out of the fridge at 10:00. I can chill them again until 12:00. I must use them between 12:00 and 14:00. After 14:00 I throw them out. The times add up over the day.
 - Cook poultry, minced meat, sausages and rolled/stuffed meats to 75°C or above in the centre (FSANZ guidance). The Code requires a process step that reduces pathogens to safe levels (3.2.2 cl 7(1)(b)(ii)).
-- To hold cooled PHF hot, I reheat it fast to 60°C or above. FSANZ says within 2 hours (3.2.2 cl 7(4)). I reheat only once, never in a bain-marie.
 - Thermometer: probe accurate to ±1°C (3.2.2 cl 22). Check calibration in ice slurry (0°C) and boiling water (100°C at sea level). Clean and sanitise the probe between foods.
 - Thawing: in the fridge (best), under cold running water in sealed packaging, or in the microwave and cook immediately. Never thaw at room temperature. Do not refreeze thawed raw food unless it is cooked first.
 ### Hygiene
@@ -25,13 +24,10 @@ middle of the range is the safe answer, and "follow workplace procedures / the s
 - Illness, food safety supervisor and records: file 01. Sanitising methods: file 15.
 ### Kitchen numbers
 - Deep-frying oil 160–190°C (most foods 175–180°C). Change oil when dark, foaming, smoking at normal temperature or smelling rancid.
-- Water boils 100°C; simmer ~85–95°C (gentle bubbles); poach ~70–85°C (liquid barely moving).
 - Roux: equal weights of fat and flour. Thin sauce ≈ 50 g roux per 500 mL liquid, coating sauce ≈ 100 g per 500 mL, panada (binding) ≈ 200 g per 500 mL (roux = fat + flour combined).
-- Fresh egg pasta: about 100 g flour ('00') per 1 egg.
 - Sugar stages: thread 106–112°C, soft ball 112–116°C, firm ball 118–120°C, hard ball 121–130°C, soft crack 132–143°C, hard crack 149–154°C, caramel 160–177°C.
 - Chocolate tempering (dark): melt 45–50°C, cool to 27–28°C, rework to 31–32°C. Milk: 40–45 → 26–27 → 29–30°C. White: 40 → 25–26 → 28–29°C.
 - Yeast dough ideal temperature ~26–28°C; yeast dies around 55–60°C.
-- Meat doneness (core, before resting): rare 50–52°C, medium-rare 55–57°C, medium 60–63°C, medium-well 65–68°C, well done 70°C+. Minced meat, sausages and poultry: 75°C.
 - Costing formulas: file 16.
 
 ## Chopping board colour coding (common in Australia; follow workplace system)

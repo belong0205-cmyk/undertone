@@ -1,8 +1,8 @@
 # Clean kitchen premises and equipment — SITHKOP009
 
 ## Definitions
-- Cleaning: removing visible dirt, food residue, grease and debris using detergent and water (and physical action). Clean = clean to touch, no visible matter or bad smell (Std 3.1.1).
-- Sanitising: applying heat, chemicals, or heat and chemicals to a clean surface or utensil so micro-organisms are reduced to a level that does not compromise food safety (3.2.2 cl 20(2)). It reduces germs; it does not sterilise. Clean first — sanitisers don't work on dirty surfaces.
+- Cleaning: removing visible dirt, food residue, grease and debris using detergent and water (and physical action). Clean = clean to touch, free of extraneous visible matter and objectionable odour (Std 3.1.1).
+- Sanitising: applying heat, chemicals, or heat and chemicals to a clean surface or utensil so micro-organisms are reduced to a level that does not compromise food safety or spread infectious disease (3.2.2 cl 20(2)). It reduces germs; it does not sterilise. Clean first — sanitisers don't work on dirty surfaces.
 - Disinfecting kills most micro-organisms on non-food surfaces (toilets, bins, drains) with stronger chemicals. Detergent removes grease and dirt: alkaline for grease, acid descaler for limescale. No abrasives on stainless steel or non-stick. Sanitisers: chlorine (bleach), quats, iodine, 70% alcohol, two-in-one detergent-sanitisers. With bleach I check the concentration; it is corrosive. With two-in-one products I still clean first when heavily soiled.
 - Why cleaning and sanitising matter: they remove food, grease and moisture. Bacteria and pests live on these. They stop cross-contamination and food poisoning. They protect allergy customers. They keep equipment working and safe (WHS). They meet the law (Std 3.2.2 cl 19–20; fines or closure). They give customers confidence in the business.
 

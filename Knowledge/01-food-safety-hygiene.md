@@ -5,7 +5,7 @@
 - Potentially hazardous food (PHF): food that must be kept at ≤5°C or ≥60°C to stop pathogens growing or toxins forming. Examples: raw and cooked meat, poultry, seafood, dairy, eggs and egg products, cooked rice and pasta, cooked vegetables and legumes, prepared salads and cut fruit, sandwiches, soups, sauces, gravies, foods containing these. (3.2.2 cl 1)
 - Ready-to-eat (RTE) food: eaten without further cooking (salads, sliced cold meats, desserts, sushi).
 - Contamination means something harmful or unwanted is in the food. Cross-contamination means a hazard moves from one food, surface or person to another. Examples: raw chicken juice drips onto salad below it. One board or knife is used for raw meat and then for salad. Dirty hands or a dirty cloth touch ready-to-eat food.
-- Clean = clean to touch and free of extraneous visible matter and objectionable odour (Std 3.1.1). Clean and sanitary = clean, then heat, chemicals, or heat and chemicals applied so micro-organisms are reduced to a level that does not compromise food safety or spread infectious disease (3.2.2 cl 20(2)). Sanitising reduces germs to a safe level; it does not sterilise.
+- Clean (Std 3.1.1) and sanitise (3.2.2 cl 20(2)): definitions in file 15.
 - Food handler: anyone who handles food or surfaces that touch food. Food safety supervisor (FSS): certified person who supervises and advises food handlers.
 - Use-by date: food must not be sold or eaten after it (safety). Best-before date: food is still safe after it but quality may drop; it can be sold if not damaged/deteriorated.
 
