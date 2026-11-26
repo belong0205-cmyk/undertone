@@ -188,8 +188,11 @@ for profileText in ["dipping sauce", "iced tea", "stir-fry", "Soup, main", "sala
 check(!Prompt.rules.contains("Before that, I worked at"), "the blank example names what it comes before")
 // #132 on 0c4fc0f joined two sentences on the "Main difference" and "Trade-off" lines.
 check(!Prompt.rules.contains(": one line\n"), "comparison shape asks for one sentence per line")
-// Ceiling: 2,800 after the merge (6501aed); raised for the interview rules (user request); 4,000 = leader max.
-check(Prompt.rules.count < 4000, "the rules block stays short (\(Prompt.rules.count) chars)")
+// DATA (80caeb0): "Best for / Limit" does not fit two definitions (cross-contamination vs cross-contact, fish vs shellfish).
+check(Prompt.rules.contains("  Trade-off: one sentence, under 14 words\n  Two terms, not choices: \"- Means:\" and "
+                            + "\"- Example:\", no Trade-off.\n"), "two terms get Means/Example, not Best for/Limit")
+// Ceiling: 2,800 after the merge (6501aed); raised for the interview rules (user request); 4,100 = leader max (definition pairs).
+check(Prompt.rules.count < 4100, "the rules block stays short (\(Prompt.rules.count) chars)")
 // Answers are laid out to skim (user request): one idea per line, "- " list lines, labelled parts with a blank
 // line between, nothing else; the layout rule comes first, then the minimal rule, then the one-kind list rule.
 check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, every line under 14 words; break a long line into \"- \" "
