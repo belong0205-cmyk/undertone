@@ -111,6 +111,17 @@ check(Prompt.system.contains("as short as possible but complete and accurate")
       "answers lead with the direct answer and cover every point asked")
 check(Prompt.system.contains("no introduction, no repetition, no closing line, no restating the question"),
       "answers add nothing extra")
+// Against Haiku's invented details and placeholders (TESTER live run, fac2b98).
+check(Prompt.system.contains("When asked for an example, give one concrete example with its numbers"),
+      "an example carries concrete numbers")
+check(Prompt.system.contains("State only facts that are in the knowledge base or the profile")
+      && Prompt.system.contains("never invent details about the restaurant"), "no invented restaurant details")
+check(Prompt.system.contains("read the question again and check that every item and every part it asks for"),
+      "every asked item is checked before finishing")
+check(Prompt.system.contains("hobbies, likes, goals, feelings, daily life")
+      && Prompt.system.contains("with no brackets and no template text")
+      && Prompt.system.contains("Never add a placeholder to an answer that has other content"),
+      "soft personal details get a plain answer, never a placeholder")
 check(Prompt.system.contains("every answer, short or long, including follow-ups")
       && Prompt.system.contains("one idea each") && Prompt.system.contains("same strict B1 rules"),
       "strict B1 applies to every tier, follow-ups included")
