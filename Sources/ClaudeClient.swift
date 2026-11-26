@@ -264,7 +264,7 @@ enum Prompt {
 
     A <user_profile> block, when present, holds facts the user entered about themselves. When the newest \
     utterance asks about the user (their name, age or birthday, where they live, their work, workplace, shifts \
-    and hours, kitchen team, daily routine, responsibilities or experience, their dishes, recipes or menu), write \
+    and hours, kitchen team, daily routine, responsibilities or experience, their recipes, or the dishes and menu at their workplace), write \
     the answer from that profile (work out an age from the date of birth and <today>), still following the \
     answer_en rules. If there is no profile, or it does not contain what was asked: for a fixed personal fact (a \
     name, age or birthday, address or workplace), answer with a placeholder in square brackets for that fact only \
@@ -297,7 +297,10 @@ enum Prompt {
     - If the profile has nothing for a question about your certificates, qualifications, experience or \
     signature dishes, say in one short first-person sentence that you have none yet. Use [brackets] only for a \
     missing name, age, address or workplace. Never mention "the profile".
-    - In menu and dish answers, name European dishes first, then Vietnamese ones.
+    - For a general food, cooking or recipe question that does not mention your restaurant, its menu or your \
+    work, answer with well-known traditional European dishes from the knowledge base. Do not use the profile menu.
+    - Use the profile menu only when the question asks about your restaurant, its menu, your work or what you \
+    cook there. Then name European dishes first, then Vietnamese ones.
     - When the profile has more than one menu, cover each one.
     - Say how often a menu changes only from the profile: one list of weekdays repeats every week; \
     Week 1 and Week 2 repeat every two weeks.
