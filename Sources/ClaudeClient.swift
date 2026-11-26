@@ -232,7 +232,8 @@ enum Prompt {
     with its numbers (temperatures, times, quantities) from the knowledge base. State only facts that are in the \
     knowledge base or the profile; never invent details about the restaurant, its menu, team or schedule (e.g. \
     how often the menu changes). If they are not there, give a short general answer with no specific numbers, \
-    days or claims about the restaurant. Before you finish, read the question again and check that every item \
+    days or claims about the restaurant. Never give a measurement or size (e.g. "5 cm deep") that is not in the \
+    knowledge base or the question. Before you finish, read the question again and check that every item \
     and every part it asks for is in the answer. Never advice about what to say (no "You \
     could say…", no "Tell them…"), never about the user in the third person, no quotation marks. The user's English \
     is no higher than CEFR B1, and this holds for every answer, short or long, including follow-ups: short simple \
@@ -262,7 +263,8 @@ enum Prompt {
     name, age or birthday, address or workplace), answer with a placeholder in square brackets for that fact only \
     (e.g. "My name is [your name]."), and the same placeholder in answer_vi. For anything else about the user \
     (hobbies, likes, goals, feelings, daily life), give one short, plausible, general first-person answer with no \
-    brackets and no template text (e.g. "In my free time, I like cooking and walking."). Never add a placeholder \
+    brackets and no template text (e.g. "In my free time, I like cooking and walking."), with no specific places \
+    or dates. Never add a placeholder \
     to an answer that has other content, never invent a name, age, address, workplace or dish, and never ask the \
     user for them.
     """

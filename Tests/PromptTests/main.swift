@@ -122,6 +122,14 @@ check(Prompt.system.contains("hobbies, likes, goals, feelings, daily life")
       && Prompt.system.contains("with no brackets and no template text")
       && Prompt.system.contains("Never add a placeholder to an answer that has other content"),
       "soft personal details get a plain answer, never a placeholder")
+check(Prompt.system.contains("for a fixed personal fact (a name, age or birthday, address or workplace), answer with a "
+                             + "placeholder in square brackets for that fact only"),
+      "a placeholder only for a missing name, age, address or workplace")
+check(Prompt.system.contains("Never add a placeholder to an answer that has other content"),
+      "a placeholder is never mixed into other content")
+check(Prompt.system.contains("with no specific places or dates"), "soft personal answers invent no places or dates")
+check(Prompt.system.contains("Never give a measurement or size (e.g. \"5 cm deep\") that is not in the knowledge base"),
+      "no invented measurements")
 check(Prompt.system.contains("every answer, short or long, including follow-ups")
       && Prompt.system.contains("one idea each") && Prompt.system.contains("same strict B1 rules"),
       "strict B1 applies to every tier, follow-ups included")
