@@ -119,7 +119,8 @@ check(Prompt.system.contains("When asked for an example, give one concrete examp
 for (phrase, what) in [
     ("never your reasoning", "no thinking aloud (#6 on Haiku)"),
     ("Use only facts from the knowledge base or profile.", "facts only from KB or profile"),
-    ("Never invent a number or size (e.g. \"5 cm deep\"), a dish, or restaurant details (menu, team, schedule, "
+    ("Never invent a number or size (e.g. \"5 cm deep\"), a dish, experience, a qualification, a company or project, "
+         + "or restaurant details (menu, team, schedule, "
          + "working days or hours).", "no invented numbers, dishes or restaurant details (#6 \"crispy fish\")"),
     ("Never mention \"the profile\" or say that the menu or profile lacks a dish.", "no 'the profile', no 'menu lacks' (#23, #129)"),
     ("Name a weekday or date only if the question names one, even though <today> or the menu shows days.",
@@ -127,7 +128,7 @@ for (phrase, what) in [
     ("The profile menu is suggested dishes, not a plan by day.", "menu is suggestions (user decision)"),
     ("A dish is European only under a heading that says European (\"món Âu\"); dishes under \"món Việt\" are "
          + "Vietnamese.", "European by menu heading (#6)"),
-    ("In answer_en, give dish names in English (\"Bò hầm rượu vang\" -> \"Beef stew in red wine\"); answer_vi keeps "
+    ("In answer_en, give dish names in English (\"Vịt nướng cam\" -> \"Roast duck with orange\"); answer_vi keeps "
          + "the Vietnamese names.", "English dish names (#3)"),
     ("General food or recipe (\"How do you make a French omelette?\"): classic European dishes from the knowledge "
          + "base, not the profile menu.", "branch 1: general food"),
@@ -143,9 +144,22 @@ for (phrase, what) in [
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
          "day question gets suggestions"),
     ("If the profile has nothing on your certificates, qualifications, experience or signature dishes, say in one "
-         + "short sentence that you have none yet. Use [brackets] only for a missing name, age, address or workplace.",
+         + "short sentence that you have none yet. Use [brackets] only for a missing name, age, address or workplace, "
+         + "or the blanks of a STAR answer.",
          "none yet, no brackets (#23)"),
     ("A procedure keeps every step, including checks and records.", "procedures keep the record step (#60)"),
+    // Interview answers (user request 2026-11-26): sources first, STAR with blanks, technical trade-offs,
+    // vague questions, help when stuck, questions for the employer.
+    ("- Interview questions: use the job ad, CV and notes in the profile or knowledge base first.", "interview: sources first"),
+    ("confident but modest, professional but natural", "interview: tone"),
+    ("as four labels: \"Situation:\", \"Task:\", \"Action:\", \"Result:\". If the profile has none, keep them with "
+         + "blanks (e.g. \"[project]\", \"[number]\").", "interview: STAR, blanks when the profile has no example"),
+    ("Technical: explain the idea clearly; with options, give pros, limits and the trade-off.", "interview: technical"),
+    ("Vague: answer what the interviewer wants to judge.", "interview: vague question"),
+    ("lines for the user to say: one clarifying question, one fair assumption, then short steps to a useful answer.",
+         "interview: help when stuck, said by the user (model still shows no reasoning)"),
+    ("\"Do you have any questions?\": 2 or 3 questions about the role, team, how success is measured, or the company.",
+         "interview: questions for the employer"),
     ("cover every item and part asked", "every item and part covered"),
 ] {
     check(Prompt.rules.contains(phrase), "rule: \(what)")
@@ -156,11 +170,11 @@ for line in Prompt.rules.split(separator: "\n") where line.hasPrefix("  - ") {
 }
 // The rules go to GitHub and the profile does not: the menu example is a shape, not this profile's menu
 // (tech debt from 51ec26f; a copied menu would also be repeated when the real menu changes).
-for profileText in ["dipping sauce", "iced tea", "stir-fry", "Soup, main", "salad, bread"] {
+for profileText in ["dipping sauce", "iced tea", "stir-fry", "Soup, main", "salad, bread", "Bò hầm rượu vang"] {
     check(!Prompt.rules.contains(profileText), "the rules hold no profile menu text: \(profileText)")
 }
-// Ceiling = the 25% cut target from 3,741 chars before the merge (6501aed).
-check(Prompt.rules.count < 2800, "the rules block stays short (\(Prompt.rules.count) chars)")
+// Ceiling: 2,800 after the merge (6501aed); raised for the interview rules (user request), with ~60 chars spare.
+check(Prompt.rules.count < 3650, "the rules block stays short (\(Prompt.rules.count) chars)")
 // Answers are laid out to skim (user request): one idea per line, "- " list lines, labelled parts with a blank
 // line between, nothing else; the layout rule comes first, then the minimal rule, then the one-kind list rule.
 check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, every line under 14 words; break a long line into \"- \" "
