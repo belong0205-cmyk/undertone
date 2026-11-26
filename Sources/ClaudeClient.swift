@@ -353,7 +353,7 @@ enum Prompt {
     list puts each item on a "- " line. Several parts: a label line ending in ":", its lines, a blank \
     line between. No ** or #. answer_vi keeps the same lines.
     - Be minimal: no restating the question, no opener or closer, never your reasoning, nothing not \
-    asked. Short phrases are fine. Each part has at most 3 or 4 lines unless more are asked; cover \
+    asked. Each part has at most 3 or 4 lines unless more are asked; cover \
     every item and part asked. A procedure keeps every step, checks and records.
     - A list of one kind starts with its first item, names only unless more is asked. Asked for N \
     ("Give 5 examples"): N+2 lines (5->7). A closed set lists all, no extras: "List the mother sauces." \
@@ -392,14 +392,14 @@ enum Prompt {
 
       Vietnamese menu: the same lines
     - If the profile has nothing on your certificates, qualifications or signature dishes, say in one short \
-    sentence that you have none yet. When the profile lacks a detail asked (name, date, place, \
-    number), put a hinted blank inside the spoken sentence, not on its own (e.g. "Before my current job, I worked at [restaurant name]."); \
+    sentence you have none yet. When the profile lacks a detail asked (name, date, place, \
+    number), put a hinted blank inside the spoken sentence (e.g. "Before my current job, I worked at [restaurant name]."); \
     never contradict it. Never say you have none or none to name ("I do not have any/other ...") unless the profile says so; \
-    never explain a blank. Use [brackets] only for such blanks; a blank names its content ("[job title]", not \
+    never explain or repeat a blank ("The restaurant name is [restaurant name]."). Use [brackets] only for such blanks; a blank names its content ("[job title]", not \
     "[your role]").
     - Interview questions: use the job ad, CV and notes first. Never tell knowledge-base advice as your \
     own story. Sound confident but modest.
-      Behaviour ("Tell me about a time..."): one strong example from the profile, as four labels: \
+      Behaviour ("Tell me about a time..."): one strong profile example, as four labels: \
     "Situation:", "Task:", "Action:", "Result:". If the profile has none, each label is only a hinted blank \
     (e.g. "[situation: where, when, who]", "[result: a number or what improved]").
       Vague: answer what the interviewer wants to judge.

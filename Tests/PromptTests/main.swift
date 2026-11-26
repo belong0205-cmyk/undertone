@@ -149,12 +149,12 @@ for (phrase, what) in [
     ("\n- Menu or dishes asked (\"What is on your menu?\"): at least 6 dishes in total, all if fewer, not 3 or 4; "
          + "each a \"- \" line: name, then 3-6 words.\n- When the profile has more than one menu",
          "menu question lists at least 6 dishes in total, not 3 (user request, 0.5.22-A/B); its own rule before the menu shape"),
-    ("When the profile lacks a detail asked (name, date, place, number), put a hinted blank inside the spoken sentence, not on its own "
-         + "(e.g. \"Before my current job, I worked at [restaurant name].\"); never contradict it. Never say you have none or none to name (\"I do not have any/other ...\") unless the profile says so; never explain a "
-         + "blank. Use [brackets] only for such blanks; a blank names its content (\"[job title]\", not \"[your role]\").",
-         "missing detail = hinted blank anchored in the spoken sentence, never contradicted, never on its own (#135 on 914b2d6: \"The restaurant name was [restaurant name].\"), never 'none' or 'none to name' (#135, #129; 4dae09c said \"I do not have other workplaces to name here.\")"),
+    ("When the profile lacks a detail asked (name, date, place, number), put a hinted blank inside the spoken sentence "
+         + "(e.g. \"Before my current job, I worked at [restaurant name].\"); never contradict it. Never say you have none or none to name (\"I do not have any/other ...\") unless the profile says so; never explain or repeat a "
+         + "blank (\"The restaurant name is [restaurant name].\"). Use [brackets] only for such blanks; a blank names its content (\"[job title]\", not \"[your role]\").",
+         "missing detail = hinted blank anchored in the spoken sentence, never contradicted, never repeated alone (#135 on 914b2d6/041ed8e: \"The restaurant name is [restaurant name].\"), never 'none' or 'none to name' (#135, #129; 4dae09c said \"I do not have other workplaces to name here.\")"),
     ("If the profile has nothing on your certificates, qualifications or signature dishes, say in one short "
-         + "sentence that you have none yet.", "none yet for certificates, no brackets (#23)"),
+         + "sentence you have none yet.", "none yet for certificates, no brackets (#23)"),
     ("A procedure keeps every step, checks and records.", "procedures keep the record step (#60)"),
     // Any comparison, not only in interviews (#132 on 7fc1602 ignored the interview-only line).
     ("\n- Any comparison (\"difference between\", \"vs\", \"X or Y\", \"which is better\") uses only this shape, "
@@ -208,7 +208,7 @@ check(!Prompt.rules.contains("Two cold sauces") && Prompt.rules.contains("Europe
       && Prompt.rules.contains("\n\n  Vietnamese menu:"), "the menu shape still shows a label, list lines and a blank line")
 // User: Sonnet's answers were too long. Minimal answers, short phrase lines, 3–4 lines per part, no word cap.
 check(Prompt.rules.contains("\n- Be minimal: no restating the question, no opener or closer, never your "
-                            + "reasoning, nothing not asked. Short phrases are fine. Each part has at most 3 or 4 lines "
+                            + "reasoning, nothing not asked. Each part has at most 3 or 4 lines "
                             + "unless more are asked; cover every item and part asked."),
       "the minimal-answer rule")
 // #50: a one-kind list opened with "The five mother sauces are:", so the rule shows the wrong first line.
