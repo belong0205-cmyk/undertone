@@ -76,8 +76,11 @@ final class AppState: ObservableObject {
     private var tasks: [UUID: Task<Void, Never>] = [:]
     /// Last request to the Claude API, to know whether its connection may have gone idle.
     private var lastAPIUse = Date.distantPast
-    /// Keeps the knowledge base and the active profile in Claude's prompt cache while listening.
+    /// Keeps the knowledge base and the active profile in Claude's prompt cache: from app launch and
+    /// after each wake in the real app, and from the start of listening anywhere.
     private var cacheWarmer: Task<Void, Never>?
+    /// Only the real app warms the cache on its own; harnesses and tests are not bundles.
+    private static let isApp = Bundle.main.bundleURL.pathExtension == "app"
     private var rewarmTask: Task<Void, Never>?
     /// Debug only: reports when the main thread falls behind (it also runs the transcriber).
     private var stallProbe: Task<Void, Never>?
@@ -118,8 +121,21 @@ final class AppState: ObservableObject {
             self?.errorMessage = message
         }
 
+        if Self.isApp {
+            if hasAPIKey { startCacheWarmer() }
+            NSWorkspace.shared.notificationCenter.addObserver(
+                forName: NSWorkspace.didWakeNotification, object: nil, queue: .main
+            ) { [weak self] _ in
+                Task { @MainActor in
+                    guard let self, self.hasAPIKey else { return }
+                    self.log("wake: re-warming the prompt cache")
+                    self.startCacheWarmer()
+                }
+            }
+        }
+
         // Only the real app checks; harnesses and design snapshots are not bundles.
-        if Bundle.main.bundleURL.pathExtension == "app" {
+        if Self.isApp {
             updateChecker = Task { [weak self] in
                 while !Task.isCancelled {
                     await self?.checkForUpdates(silent: true)
@@ -362,10 +378,12 @@ final class AppState: ObservableObject {
     func stopListening() {
         capture.stop()
         transcriber.stop()
-        cacheWarmer?.cancel()
-        cacheWarmer = nil
-        rewarmTask?.cancel()
-        rewarmTask = nil
+        if !Self.isApp { // the real app keeps its cache warm while open
+            cacheWarmer?.cancel()
+            cacheWarmer = nil
+            rewarmTask?.cancel()
+            rewarmTask = nil
+        }
         stallProbe?.cancel()
         stallProbe = nil
         listenState = .idle
@@ -380,11 +398,11 @@ final class AppState: ObservableObject {
 
     /// The prompt changed (profile edited or switched): re-warm once typing has paused.
     private func scheduleCacheRewarm() {
-        guard listenState == .listening, hasAPIKey else { return }
+        guard Self.isApp || listenState == .listening, hasAPIKey else { return }
         rewarmTask?.cancel()
         rewarmTask = Task { [weak self] in
             try? await Task.sleep(for: .seconds(3))
-            guard !Task.isCancelled, let self, self.listenState == .listening else { return }
+            guard !Task.isCancelled, let self, Self.isApp || self.listenState == .listening else { return }
             self.startCacheWarmer()
         }
     }

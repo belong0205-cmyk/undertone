@@ -416,6 +416,12 @@ check((body["output_config"] as? [String: Any])?["effort"] as? String == "low" &
 check(body["fallbacks"] as? String == "default"
       && (try? ClaudeClient(apiKey: "k").makeRequest(body: body))?.value(forHTTPHeaderField: "anthropic-beta")
          == "server-side-fallback-2026-07-01", "a refusal falls back server-side, with its beta header")
+// 0.5.23-B: cached blocks live 1 hour, so a question after a quiet spell still reads the cache.
+let withProfile = ClaudeClient.requestBody(system: "s", profile: "p", user: "u", maxTokens: 2048, stream: true)
+let profileBlock = (withProfile["system"] as? [[String: Any]])?.first { $0["text"] as? String == "p" }
+check((profileBlock?["cache_control"] as? [String: Any])?["ttl"] as? String == "1h"
+      && ((withProfile["system"] as? [[String: Any]])?.last?["cache_control"] == nil),
+      "profile (and knowledge base) cache blocks use ttl 1h; the instructions block is not cached")
 
 print(failures == 0 ? "ALL PASSED" : "\(failures) FAILED")
 exit(failures == 0 ? 0 : 1)

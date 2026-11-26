@@ -117,7 +117,7 @@ struct ClaudeClient {
         URLSession.shared.dataTask(with: request).resume()
     }
 
-    /// Keeps the knowledge base and profile in the prompt cache (entries expire after 5 idle minutes)
+    /// Keeps the knowledge base and profile in the prompt cache (1-hour entries, see `cacheControl`)
     /// until cancelled. Best effort: if a warm-up fails, the next real request simply writes the cache.
     func keepCacheWarm(system: String, profile: String?) -> Task<Void, Never> {
         Task {
@@ -207,17 +207,21 @@ struct ClaudeClient {
     /// Order: the large knowledge base, then the user's profile (each with its own cache
     /// breakpoint, so long menus and recipes are read from the cache), then the instructions.
     /// No profile means no profile block.
+    /// 1-hour entries (the default is 5 minutes): a question after a quiet spell still reads the cached
+    /// knowledge base and profile instead of re-processing ~46k tokens before its first word.
+    static let cacheControl: [String: Any] = ["type": "ephemeral", "ttl": "1h"]
+
     private static func systemBlocks(_ system: String, profile: String?) -> [[String: Any]] {
         var blocks: [[String: Any]] = []
         if !KnowledgeBase.promptBlock.isEmpty {
             blocks.append([
                 "type": "text",
                 "text": KnowledgeBase.promptBlock,
-                "cache_control": ["type": "ephemeral"],
+                "cache_control": cacheControl,
             ])
         }
         if let profile, !profile.isEmpty {
-            blocks.append(["type": "text", "text": profile, "cache_control": ["type": "ephemeral"]])
+            blocks.append(["type": "text", "text": profile, "cache_control": cacheControl])
         }
         blocks.append(["type": "text", "text": system])
         return blocks
