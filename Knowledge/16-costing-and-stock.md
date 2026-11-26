@@ -36,7 +36,7 @@ Typical food cost targets 25–35% (fine dining may be lower; cafés/pubs vary).
 
 ## Menu planning principles
 Balance of colour, texture, flavour, cooking methods and ingredients across the menu (avoid repetition — e.g. not two cream sauces or two pastry dishes); seasonality and local produce; nutritional balance and dietary options (V, VG, GF); target market and price point; kitchen equipment and staff skill; storage capacity; cost and profitability; menu descriptions must be accurate (Australian Consumer Law — no misleading claims e.g. "fresh" or "local").
-- À la carte: dishes are listed and priced one by one and cooked to order. There is more choice and exact portion costing, but more labour and waste risk. Buffet: one fixed price, and guests serve themselves from a display. Bulk production means less labour per cover, but portion control is lost. So I cost from the average eaten per head. I watch hot-holding ≥60°C, cold ≤5°C and the 2-hour/4-hour rule. Also sneeze guards and a utensil per dish.
+- À la carte: dishes are listed and priced one by one. They are cooked to order. There is more choice and exact portion costing, but more labour and waste risk. Buffet: one fixed price, and guests serve themselves from a display. Bulk production means less labour per cover, but portion control is lost. So I cost from the average eaten per head. I watch hot-holding ≥60°C, cold ≤5°C and the 2-hour/4-hour rule. Also sneeze guards and a utensil per dish.
 
 ## Receiving stock (SITXINV006)
 1. I check the delivery against the purchase order and invoice. Product, quantity, weight, brand, price. I check quality. Probe temperature between packs: PHF ≤5°C or ≥60°C, frozen food frozen (3.2.2 cl 5). Packaging intact: no dents, swelling, leaks or broken vacuum seals. Use-by dates, no pests, fresh smell and colour, a clean refrigerated vehicle.
@@ -48,7 +48,7 @@ Balance of colour, texture, flavour, cooking methods and ingredients across the 
 - Labels: product, date received/prepared, use-by, batch, initials, allergens. Rotation: FIFO (new stock behind old) or FEFO (first expired, first out). Record fridge/freezer temperatures at least daily; report faults.
 
 ## Maintaining stock
-- Par level: the minimum stock I need between deliveries. Order quantity = par level − stock on hand, plus expected usage before the delivery.
+- Par level: the minimum stock I need between deliveries. Order quantity: par level minus stock on hand, plus expected usage before delivery.
 - Stocktake: I count the stock at regular intervals (weekly or monthly). It shows usage, cost of goods sold, losses, waste, theft and slow movers. Cost of goods sold = opening stock + purchases − closing stock.
 - Documents: purchase orders, delivery dockets, invoices, credit notes, bin cards, inventory software, wastage sheets. Record and dispose of spoiled or expired stock; investigate causes; lock stores.
 - Overstocking: spoilage, cash and space tied up, theft. Understocking: 86'd items, unhappy customers, costly emergency buys.
