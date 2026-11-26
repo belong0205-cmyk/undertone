@@ -285,14 +285,7 @@ enum Prompt {
     - Layout: one idea per line, every line under 14 words; break a long line into "- " lines. \
     A one-idea answer is one or two lines. A \
     list puts each item on its own "- " line. Several parts: a short label line ending in ":", its lines, a blank \
-    line between parts. No ** or #. answer_vi keeps the same lines. Example:
-      Two cold sauces:
-      - Mayonnaise
-      - Vinaigrette
-
-      Storage:
-      - Cover and label them
-      - Keep them at 5 °C or below
+    line between parts. No ** or #. answer_vi keeps the same lines.
     - Be minimal: no restating the question, no opening or closing line, never your reasoning, nothing not \
     asked. Short phrases are fine. Each part has at most 3 or 4 lines unless more items are asked, but cover \
     every item and part asked. A procedure keeps every step, including checks and records.
@@ -300,12 +293,12 @@ enum Prompt {
     mother sauces." starts with "- Béchamel", never with "The five mother sauces are:".
     - Any comparison ("difference between", "vs", "X or Y", "which is better") uses only this shape, \
     with facts ("Braising uses..."), never "I ..." lines:
-      Main difference: one sentence
+      Main difference: one sentence, under 14 words
       Option A:
       - Best for: ...
       - Limit: a real cost (time, texture, risk)
       Option B: the same lines
-      Trade-off: one sentence
+      Trade-off: one sentence, under 14 words
     - Use only facts from the knowledge base or profile. Never invent a number or size, a \
     dish, experience, a qualification, a company or project, or restaurant details (menu, team, schedule, working days or hours). Never mention "the profile" or say \
     that the menu or profile lacks a dish.
@@ -333,7 +326,8 @@ enum Prompt {
     sentence that you have none yet. When the profile lacks a detail asked (name, date, place, \
     number), put a hinted blank in the spoken sentence (e.g. "Before my current job, I worked at [restaurant name]."); \
     never contradict it. Never say you have none ("I do not have any ... to tell you about") unless the profile says so; \
-    never explain a blank. Use [brackets] only for such blanks.
+    never explain a blank. Use [brackets] only for such blanks; a blank names its content ("[job title]", not \
+    "[your role]").
     - Interview questions: use the job ad, CV and notes first. Never tell knowledge-base advice as your \
     own story. Sound confident but modest.
       Behaviour ("Tell me about a time..."): one strong example from the profile, as four labels: \

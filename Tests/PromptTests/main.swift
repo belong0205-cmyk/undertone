@@ -148,16 +148,16 @@ for (phrase, what) in [
          "day question gets suggestions"),
     ("When the profile lacks a detail asked (name, date, place, number), put a hinted blank in the spoken sentence "
          + "(e.g. \"Before my current job, I worked at [restaurant name].\"); never contradict it. Never say you have none (\"I do not have any ... to tell you about\") unless the profile says so; never explain a "
-         + "blank. Use [brackets] only for such blanks.",
+         + "blank. Use [brackets] only for such blanks; a blank names its content (\"[job title]\", not \"[your role]\").",
          "missing detail = hinted blank anchored in the spoken sentence, never contradicted, never 'none' (#135, #129)"),
     ("If the profile has nothing on your certificates, qualifications or signature dishes, say in one short "
          + "sentence that you have none yet.", "none yet for certificates, no brackets (#23)"),
     ("A procedure keeps every step, including checks and records.", "procedures keep the record step (#60)"),
     // Any comparison, not only in interviews (#132 on 7fc1602 ignored the interview-only line).
     ("\n- Any comparison (\"difference between\", \"vs\", \"X or Y\", \"which is better\") uses only this shape, "
-         + "with facts (\"Braising uses...\"), never \"I ...\" lines:\n  Main difference: one sentence\n"
+         + "with facts (\"Braising uses...\"), never \"I ...\" lines:\n  Main difference: one sentence, under 14 words\n"
          + "  Option A:\n  - Best for: ...\n  - Limit: a real cost (time, texture, risk)\n  Option B: the same lines\n"
-         + "  Trade-off: one sentence\n",
+         + "  Trade-off: one sentence, under 14 words\n",
          "comparison: only this shape, facts not 'I ...', Limit = a real cost (#132; bd441bf added \"Method:\", \"I sear\")"),
     // Interview answers (user request 2026-11-26): sources first, STAR with hinted blanks, vague questions,
     // help when stuck, questions for the employer.
@@ -196,10 +196,12 @@ check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, every line u
                              + "lines. A one-idea "
                              + "answer is one or two lines. A list puts each item on its own \"- \" line. Several parts: "
                              + "a short label line ending in \":\", its lines, a blank line between parts. No ** or #. "
-                             + "answer_vi keeps the same lines. Example:\n"),
-      "the layout rule comes first")
-check(Prompt.rules.contains("  Two cold sauces:\n  - Mayonnaise\n  - Vinaigrette\n\n  Storage:\n"),
-      "the layout example has a label, list lines and a blank line between parts")
+                             + "answer_vi keeps the same lines.\n- Be minimal:"),
+      "the layout rule comes first, with no example of its own")
+// The cold-sauces example was cut for room (leader, 2026-11-26): the comparison and menu shapes show labels,
+// "- " lines and a blank line between parts.
+check(!Prompt.rules.contains("Two cold sauces") && Prompt.rules.contains("European menu:\n  - Its parts")
+      && Prompt.rules.contains("\n\n  Vietnamese menu:"), "the menu shape still shows a label, list lines and a blank line")
 // User: Sonnet's answers were too long. Minimal answers, short phrase lines, 3–4 lines per part, no word cap.
 check(Prompt.rules.contains("\n- Be minimal: no restating the question, no opening or closing line, never your "
                             + "reasoning, nothing not asked. Short phrases are fine. Each part has at most 3 or 4 lines "
