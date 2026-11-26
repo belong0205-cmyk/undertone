@@ -146,13 +146,13 @@ for (phrase, what) in [
              + "vegetarian option\", bd441bf said \"Vegetarian dish also listed\")"),
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
          "day question gets suggestions"),
-    ("\n- Menu or dishes asked (\"What is on your menu?\"): at least 6 dishes per menu, all if fewer, not 3 or 4; "
-         + "each a \"- \" line: name, then 3 to 6 words.\n- When the profile has more than one menu",
-         "menu question lists at least 6 dishes, not 3 (user request, 0.5.22-A); its own rule before the menu shape"),
+    ("\n- Menu or dishes asked (\"What is on your menu?\"): at least 6 dishes in total, all if fewer, not 3 or 4; "
+         + "each a \"- \" line: name, then 3-6 words.\n- When the profile has more than one menu",
+         "menu question lists at least 6 dishes in total, not 3 (user request, 0.5.22-A/B); its own rule before the menu shape"),
     ("When the profile lacks a detail asked (name, date, place, number), put a hinted blank in the spoken sentence "
-         + "(e.g. \"Before my current job, I worked at [restaurant name].\"); never contradict it. Never say you have none (\"I do not have any ... to tell you about\") unless the profile says so; never explain a "
+         + "(e.g. \"Before my current job, I worked at [restaurant name].\"); never contradict it. Never say you have none or none to name (\"I do not have any/other ...\") unless the profile says so; never explain a "
          + "blank. Use [brackets] only for such blanks; a blank names its content (\"[job title]\", not \"[your role]\").",
-         "missing detail = hinted blank anchored in the spoken sentence, never contradicted, never 'none' (#135, #129)"),
+         "missing detail = hinted blank anchored in the spoken sentence, never contradicted, never 'none' or 'none to name' (#135, #129; 4dae09c said \"I do not have other workplaces to name here.\")"),
     ("If the profile has nothing on your certificates, qualifications or signature dishes, say in one short "
          + "sentence that you have none yet.", "none yet for certificates, no brackets (#23)"),
     ("A procedure keeps every step, including checks and records.", "procedures keep the record step (#60)"),
