@@ -299,8 +299,6 @@ enum Prompt {
       - Limit: a real cost (time, texture, risk)
       Option B: the same lines
       Trade-off: one sentence, under 14 words
-      Two kinds or terms, not choices (fish vs shellfish): "- Means:" and "- Example:" (a wrong action \
-    without "I"), no Trade-off.
     - Use only facts from the knowledge base or profile. Never invent a number or size, a \
     dish, experience, a qualification, a company or project, or restaurant details (menu, team, schedule, working days or hours). Never mention "the profile" or say \
     that the menu or profile lacks a dish.
