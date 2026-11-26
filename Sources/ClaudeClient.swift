@@ -409,6 +409,14 @@ enum Prompt {
 
     /// Acknowledgements and fillers ("Okay.", "Yes, chef.", "Uh-huh.", "D'accord.") need no answer,
     /// so they are shown without calling Claude.
+    /// Text heard at an endpoint is worth answering before the silence wait ends: at least 3 words
+    /// and a sentence end, so a fragment ("And.", "Of fish.") never goes out on its own.
+    static func isEarlySendable(_ text: String) -> Bool {
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let last = trimmed.last, ".!?".contains(last) else { return false }
+        return trimmed.split(whereSeparator: \.isWhitespace).count >= 3
+    }
+
     static func isFiller(_ utterance: String) -> Bool {
         // A question ("You?", "Right?", "Chef?") expects an answer, so it is never a filler.
         if utterance.trimmingCharacters(in: .whitespacesAndNewlines).hasSuffix("?") { return false }

@@ -19,6 +19,9 @@ final class SonioxTranscriber {
     /// (utterance id, Vietnamese translation so far). Soniox translates each finalized stretch of
     /// speech right after it, so this can arrive after the utterance's final text.
     var onTranslation: ((UUID, String) -> Void)?
+    /// (utterance id, final text so far): an endpoint came, and the utterance now waits for silence
+    /// to end; unless more words come, its final text will be this.
+    var onEndpoint: ((UUID, String) -> Void)?
     var onFailure: ((String) -> Void)?
     #if DEBUG
     /// Test only: a spoken token became final (latency harness).
@@ -671,6 +674,7 @@ final class SonioxTranscriber {
                     finishUtterance(token.text == "<fin>" ? "finalize at pause" : "endpoint after ?") // our finalize at a long pause, or a finished question
                 } else {
                     awaitingSilence = true
+                    onEndpoint?(currentID, currentFinal.trimmingCharacters(in: .whitespacesAndNewlines))
                 }
                 pending = ""
                 stretchEnded = true

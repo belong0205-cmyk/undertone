@@ -422,6 +422,15 @@ let profileBlock = (withProfile["system"] as? [[String: Any]])?.first { $0["text
 check((profileBlock?["cache_control"] as? [String: Any])?["ttl"] as? String == "1h"
       && ((withProfile["system"] as? [[String: Any]])?.last?["cache_control"] == nil),
       "profile (and knowledge base) cache blocks use ttl 1h; the instructions block is not cached")
+// 0.5.23-C: at an endpoint, only a full sentence of 3+ words is sent before the silence wait ends.
+for (heard, early) in [("Explain salad dressing emulsification.", true),
+                       ("Explained salad dressing emulsification. And. Common method.", true),
+                       ("Describe how to keep salads crisp.", true),
+                       ("And.", false), ("Of fish.", false), ("Okay, yes.", false),
+                       ("Explain salad dressing emulsification and", false),
+                       ("List 3 types of fish,", false)] {
+    check(Prompt.isEarlySendable(heard) == early, (early ? "early send: " : "no early send: ") + heard)
+}
 
 print(failures == 0 ? "ALL PASSED" : "\(failures) FAILED")
 exit(failures == 0 ? 0 : 1)

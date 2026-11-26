@@ -74,6 +74,8 @@ final class AppState: ObservableObject {
     let capture = SystemAudioCapture()
     let transcriber = SonioxTranscriber()
     private var tasks: [UUID: Task<Void, Never>] = [:]
+    /// Text sent to Claude at an endpoint, before the utterance was final (see `endpoint`).
+    private var earlySent: [UUID: String] = [:]
     /// Last request to the Claude API, to know whether its connection may have gone idle.
     private var lastAPIUse = Date.distantPast
     /// Keeps the knowledge base and the active profile in Claude's prompt cache: from app launch and
@@ -115,6 +117,9 @@ final class AppState: ObservableObject {
         transcriber.onTranslation = { [weak self] id, vietnamese in
             guard let self, let index = rows.firstIndex(where: { $0.id == id }) else { return }
             rows[index].vietnamese = vietnamese
+        }
+        transcriber.onEndpoint = { [weak self] id, text in
+            self?.endpoint(id, text: text)
         }
         transcriber.onFailure = { [weak self] message in
             self?.stopListening()
@@ -417,6 +422,7 @@ final class AppState: ObservableObject {
         transcriber.discardCurrent()
         tasks.values.forEach { $0.cancel() }
         tasks.removeAll()
+        earlySent.removeAll()
         rows.removeAll()
     }
 
@@ -438,11 +444,41 @@ final class AppState: ObservableObject {
         }
         // No early answer from partials: Soniox updates partials in bursts more than 300 ms apart while
         // the speaker is still talking, so every early request measured hit half a sentence and had to be
-        // redone, while the final itself arrives 0.2-0.8 s after speech ends.
+        // redone. An endpoint is different: its words are final (see `endpoint`).
+        if let sent = earlySent[id], text != sent {
+            earlySent[id] = nil
+            log("early-send replaced #\(DebugLog.tag(id)): more words")
+            dropAnswer(id)
+        }
         if isFinal {
             log("heard #\(DebugLog.tag(id)): \(text)")
+            if earlySent.removeValue(forKey: id) != nil { // same text: its answer is already on the way
+                log("early-send kept #\(DebugLog.tag(id))")
+                return
+            }
             process(id)
         }
+    }
+
+    /// Soniox's endpoint comes 1-2 s before the silence wait ends the utterance. A full sentence is sent
+    /// to Claude now; if the final text is the same, that answer is kept, else it is redone (`receive`).
+    private func endpoint(_ id: UUID, text: String) {
+        guard Prompt.isEarlySendable(text), earlySent[id] != text,
+              let index = rows.firstIndex(where: { $0.id == id }), !rows[index].isFinal else { return }
+        rows[index].english = text
+        log("early-send #\(DebugLog.tag(id)): \(text)")
+        earlySent[id] = text
+        process(id)
+    }
+
+    /// Cancels a row's answer request and clears what it showed.
+    private func dropAnswer(_ id: UUID) {
+        tasks[id]?.cancel()
+        tasks[id] = nil
+        guard let i = rows.firstIndex(where: { $0.id == id }) else { return }
+        rows[i].answerEnglish = ""
+        rows[i].answerVietnamese = ""
+        rows[i].isProcessing = false
     }
 
     private func log(_ message: @autoclosure () -> String) {
@@ -468,16 +504,12 @@ final class AppState: ObservableObject {
         }
         // A question cut by pauses arrives as several rows: answer them together on the newest row, and
         // drop the answers given to the earlier pieces (a complete question never waits for more).
-        let heard = rows[...index].filter(\.isFinal).suffix(40) // a long question can come in many pieces
+        // The row itself may not be final yet (sent early at an endpoint).
+        let heard = rows[...index].filter { $0.isFinal || $0.id == id }.suffix(40) // a long question can come in many pieces
         let pieces = Array(heard).map { Prompt.Heard(text: $0.english, start: $0.startedAt, end: $0.finishedAt ?? $0.startedAt) }
         let first = Prompt.questionStart(pieces)
         for row in heard.dropFirst(first).dropLast() {
-            tasks[row.id]?.cancel()
-            tasks[row.id] = nil
-            guard let i = rows.firstIndex(where: { $0.id == row.id }) else { continue }
-            rows[i].answerEnglish = ""
-            rows[i].answerVietnamese = ""
-            rows[i].isProcessing = false
+            dropAnswer(row.id)
             log("claude #\(DebugLog.tag(row.id)) replaced: joins #\(DebugLog.tag(id))")
         }
         let question = pieces[first...].map(\.text).joined(separator: " ")
