@@ -128,7 +128,7 @@ for (phrase, what) in [
     ("The profile menu is suggested dishes, not a plan by day.", "menu is suggestions (user decision)"),
     ("A dish is European only under a heading that says European (\"món Âu\"); dishes under \"món Việt\" are "
          + "Vietnamese.", "European by menu heading (#6)"),
-    ("In answer_en, give dish names in English (\"Vịt nướng cam\" -> \"Roast duck with orange\"); answer_vi keeps "
+    ("In answer_en, give dish names in English (\"Vịt nướng cam\" -> \"Roast duck with orange\", \"món mặn\" -> \"savoury main\"); answer_vi keeps "
          + "the Vietnamese names.", "English dish names (#3)"),
     ("General food or recipe (\"How do you make a French omelette?\"): classic European dishes from the knowledge "
          + "base, not the profile menu.", "branch 1: general food"),
@@ -153,9 +153,12 @@ for (phrase, what) in [
     // vague questions, help when stuck, questions for the employer.
     ("- Interview questions: use the job ad, CV and notes in the profile or knowledge base first.", "interview: sources first"),
     ("confident but modest, professional but natural", "interview: tone"),
-    ("as four labels: \"Situation:\", \"Task:\", \"Action:\", \"Result:\". If the profile has none, keep them with "
-         + "blanks (e.g. \"[project]\", \"[number]\").", "interview: STAR, blanks when the profile has no example"),
-    ("Technical: explain the idea clearly; with options, give pros, limits and the trade-off.", "interview: technical"),
+    ("as four labels: \"Situation:\", \"Task:\", \"Action:\", \"Result:\". If the profile has none, each label gets "
+         + "only a blank with a hint (e.g. \"[situation: where, when, who]\", \"[result: a number or what improved]\"). "
+         + "Never tell knowledge-base advice as your own story.",
+         "interview: STAR; no profile example = all four labels blank with hints, no KB advice told as a story (2544242)"),
+    ("Technical: explain the idea clearly. When it compares options, give each one's strength and limit, then a "
+         + "\"Trade-off:\" line.", "interview: technical comparison ends with a trade-off (braising vs stewing)"),
     ("Vague: answer what the interviewer wants to judge.", "interview: vague question"),
     ("lines for the user to say: one clarifying question, one fair assumption, then short steps to a useful answer.",
          "interview: help when stuck, said by the user (model still shows no reasoning)"),
@@ -175,7 +178,7 @@ for profileText in ["dipping sauce", "iced tea", "stir-fry", "Soup, main", "sala
     check(!Prompt.rules.contains(profileText), "the rules hold no profile menu text: \(profileText)")
 }
 // Ceiling: 2,800 after the merge (6501aed); raised for the interview rules (user request), with ~60 chars spare.
-check(Prompt.rules.count < 3650, "the rules block stays short (\(Prompt.rules.count) chars)")
+check(Prompt.rules.count < 3900, "the rules block stays short (\(Prompt.rules.count) chars)")
 // Answers are laid out to skim (user request): one idea per line, "- " list lines, labelled parts with a blank
 // line between, nothing else; the layout rule comes first, then the minimal rule, then the one-kind list rule.
 check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, every line under 14 words; break a long line into \"- \" "
