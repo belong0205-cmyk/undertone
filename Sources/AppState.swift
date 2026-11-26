@@ -76,6 +76,10 @@ final class AppState: ObservableObject {
     private var tasks: [UUID: Task<Void, Never>] = [:]
     /// Text sent to Claude at an endpoint, before the utterance was final (see `endpoint`).
     private var earlySent: [UUID: String] = [:]
+    /// A re-asked question keeps the old answer on screen until the new one's first words arrive:
+    /// rows showing an answer from an older request, and the rows each new answer replaces.
+    private var staleAnswer: Set<UUID> = []
+    private var replaces: [UUID: [UUID]] = [:]
     /// Last request to the Claude API, to know whether its connection may have gone idle.
     private var lastAPIUse = Date.distantPast
     /// Keeps the knowledge base and the active profile in Claude's prompt cache: from app launch and
@@ -423,6 +427,8 @@ final class AppState: ObservableObject {
         tasks.values.forEach { $0.cancel() }
         tasks.removeAll()
         earlySent.removeAll()
+        staleAnswer.removeAll()
+        replaces.removeAll()
         rows.removeAll()
     }
 
@@ -448,7 +454,7 @@ final class AppState: ObservableObject {
         if let sent = earlySent[id], text != sent {
             earlySent[id] = nil
             log("early-send replaced #\(DebugLog.tag(id)): more words")
-            dropAnswer(id)
+            stopAnswer(id)
         }
         if isFinal {
             log("heard #\(DebugLog.tag(id)): \(text)")
@@ -471,14 +477,23 @@ final class AppState: ObservableObject {
         process(id)
     }
 
-    /// Cancels a row's answer request and clears what it showed.
-    private func dropAnswer(_ id: UUID) {
+    /// Cancels a row's answer request; what it showed stays until a new answer replaces it.
+    private func stopAnswer(_ id: UUID) {
         tasks[id]?.cancel()
         tasks[id] = nil
         guard let i = rows.firstIndex(where: { $0.id == id }) else { return }
-        rows[i].answerEnglish = ""
-        rows[i].answerVietnamese = ""
         rows[i].isProcessing = false
+    }
+
+    /// The new answer on `id` has words on screen: clear the answers it replaces.
+    private func clearReplaced(by id: UUID) {
+        if staleAnswer.remove(id) != nil { log("old answer #\(DebugLog.tag(id)) replaced on screen") }
+        for old in replaces.removeValue(forKey: id) ?? [] {
+            log("old answer #\(DebugLog.tag(old)) cleared: #\(DebugLog.tag(id)) has words")
+            guard let i = rows.firstIndex(where: { $0.id == old }) else { continue }
+            rows[i].answerEnglish = ""
+            rows[i].answerVietnamese = ""
+        }
     }
 
     private func log(_ message: @autoclosure () -> String) {
@@ -509,7 +524,8 @@ final class AppState: ObservableObject {
         let pieces = Array(heard).map { Prompt.Heard(text: $0.english, start: $0.startedAt, end: $0.finishedAt ?? $0.startedAt) }
         let first = Prompt.questionStart(pieces)
         for row in heard.dropFirst(first).dropLast() {
-            dropAnswer(row.id)
+            stopAnswer(row.id)
+            if !row.answerEnglish.isEmpty { replaces[id, default: []].append(row.id) }
             log("claude #\(DebugLog.tag(row.id)) replaced: joins #\(DebugLog.tag(id))")
         }
         let question = pieces[first...].map(\.text).joined(separator: " ")
@@ -520,11 +536,13 @@ final class AppState: ObservableObject {
             .map { (exchange: Prompt.Exchange(question: $0.question, answer: $0.answerEnglish), end: $0.finishedAt ?? $0.startedAt) }
         let previous = Prompt.previousExchange(for: question, startedAt: pieces[first].start, answered: Array(answered))
         rows[index].question = question
+        if !rows[index].answerEnglish.isEmpty { staleAnswer.insert(id) } // re-asked: old answer stays for now
         // A question the user settled an answer for: that answer, word for word, at once and without Claude.
         // (A follow-up to it still goes to Claude, with it as the previous exchange.)
         if previous == nil, let fixed = FixedAnswers.match(question) {
             rows[index].answerEnglish = fixed.answer
             rows[index].answerVietnamese = fixed.vietnamese
+            clearReplaced(by: id)
             log("fixed answer #\(DebugLog.tag(id)), no Claude call")
             return
         }
@@ -569,18 +587,24 @@ final class AppState: ObservableObject {
                 if !Task.isCancelled { self?.errorMessage = error.localizedDescription }
             }
             DebugLog.log(String(format: "claude #%@ done %.2f s", tag, Date().timeIntervalSince(started)))
-            self?.finish(id)
+            // A cancelled request was replaced: its row may already have a new request, so leave it be.
+            if !Task.isCancelled { self?.finish(id) }
         }
     }
 
     private func apply(_ output: String, to id: UUID) {
         guard let index = rows.firstIndex(where: { $0.id == id }) else { return }
-        rows[index].answerEnglish = Prompt.section("answer_en", in: output)
+        let english = Prompt.section("answer_en", in: output)
+        if english.isEmpty, staleAnswer.contains(id) { return } // the old answer stays until new words come
+        if !english.isEmpty, staleAnswer.contains(id) || replaces[id] != nil { clearReplaced(by: id) }
+        rows[index].answerEnglish = english
         rows[index].answerVietnamese = Prompt.section("answer_vi", in: output)
     }
 
     private func finish(_ id: UUID) {
         tasks[id] = nil
+        staleAnswer.remove(id) // a failed re-ask leaves the old answers in place
+        replaces[id] = nil
         if let index = rows.firstIndex(where: { $0.id == id }) {
             rows[index].isProcessing = false
             log("vi #\(DebugLog.tag(id)): \(rows[index].vietnamese) | answer: \(rows[index].answerEnglish.isEmpty ? "-" : rows[index].answerEnglish)")
