@@ -282,7 +282,7 @@ enum Prompt {
     /// sizes and menu cycles when they sat in the long system prompt).
     static let rules = """
     <rules>
-    - Layout: one idea per line, each line under 14 words. A one-idea answer is one or two plain lines. A list \
+    - Layout: one idea per line, each line under 14 words; split a longer line into two. A one-idea answer is one or two plain lines. A list \
     puts each item on its own line starting with "- ". If the question has several parts (e.g. options and key \
     considerations), give each part a short label line ending with ":", then its lines, with one blank line \
     between parts. No other formatting: no ** and no #. answer_vi keeps the same lines. Example:
@@ -326,7 +326,8 @@ enum Prompt {
     classic European dishes from the knowledge base instead, as if they were your own. Never say that the menu \
     or profile lacks a dish.
     - Use the whole profile menu only when the question names your restaurant, its menu or your workplace \
-    (e.g. "What do you serve at your restaurant?"). Then name European dishes first, then Vietnamese ones.
+    (e.g. "What do you serve at your restaurant?"). Then name European dishes first, then Vietnamese ones, \
+    even when the profile lists the Vietnamese menu first.
     - When the profile has more than one menu, cover each one.
     - Cover every item and every part the question asks for.
     </rules>
