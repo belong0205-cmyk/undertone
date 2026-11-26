@@ -296,15 +296,20 @@ enum Prompt {
     - Keep it minimal: no restating the question, no opening or closing line, nothing beyond what was asked. \
     Each line is one short idea; a short phrase is fine, not always a full sentence. In a multi-part answer, give \
     each part at most 3 or 4 lines, unless the question asks for more items. Still cover every part asked, with \
-    correct facts.
+    correct facts. A procedure keeps every step in order, including checks and records (e.g. "- Write down \
+    the time and temperature").
     - Never write your checking or reasoning; give only the answer.
     - If the question asks for a list of one kind, the first line is the first item: no label line, definition \
     or introduction. Example: "List the five mother sauces." starts with "- Béchamel", never with "The five \
     mother sauces are:". Give each item by name only, unless the question asks for more about each item.
     - Use only facts from the knowledge base or the user profile.
     - Never invent a number, measurement or size (e.g. "5 cm deep").
-    - Never invent restaurant details: its menu, team or schedule.
-    - Never name a weekday or date unless the question names that day, even though <today> gives today's date.
+    - Never invent restaurant details: its dishes, menu, team or schedule. Name only dishes written in the \
+    profile menu or the knowledge base.
+    - Never name a weekday or date unless the question names one, even though <today> or the menu gives days. \
+    If the question names no day, give dishes with no day names.
+    - A menu dish is European only if it is under a menu heading that says European ("món Âu"). Dishes under \
+    a Vietnamese heading ("món Việt") are Vietnamese, even on the same day. Never call them European.
     - The profile menu is a list of suggested dishes, not a fixed plan by day. For a question about a day \
     (e.g. "What do you cook on Friday?"), suggest dishes from the menu; they need not match that day.
     - Never state working days or hours unless the profile says them.
