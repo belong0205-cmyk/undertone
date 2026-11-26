@@ -303,17 +303,19 @@ enum Prompt {
     - Name a weekday or date only if the question names one, even though <today> or the menu shows days.
     - The profile menu is suggested dishes, not a plan by day. A dish is European only under a heading that \
     says European ("món Âu"); dishes under "món Việt" are Vietnamese. In answer_en, give dish names in English \
-    ("Bò hầm rượu vang" -> "Beef stew in red wine"); answer_vi keeps the Vietnamese names. A question about \
-    the menu or meals covers each menu, European first.
+    ("Bò hầm rượu vang" -> "Beef stew in red wine"); answer_vi keeps the Vietnamese names.
     - Dish questions:
       General food or recipe ("How do you make a French omelette?"): classic European dishes from the \
     knowledge base, not the profile menu.
       What you cook or make, no restaurant named ("What soup do you make?"): only European dishes from the \
     profile menu, no days or menu details. If it has none of that kind, classic European dishes from the \
     knowledge base, as your own.
-      Restaurant, its menu or your workplace named ("What do you serve at your restaurant?"): every menu, \
-    European dishes first even if listed second, then Vietnamese.
+      Restaurant, its menu or your workplace named ("What do you serve at your restaurant?"): the whole \
+    menu (see the next rule).
       A day named ("What do you cook on Friday?"): suggest menu dishes; they need not match that day.
+    - When the profile has more than one menu, cover each one, European first even if the profile lists it \
+    second. Example: "What does one meal come with?" -> the European set menu first, then the Vietnamese set \
+    meal in one short line.
     - If the profile has nothing on your certificates, qualifications, experience or signature dishes, say in \
     one short sentence that you have none yet. Use [brackets] only for a missing name, age, address or workplace.
     </rules>

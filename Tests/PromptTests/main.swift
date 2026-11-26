@@ -134,10 +134,12 @@ for (phrase, what) in [
     ("What you cook or make, no restaurant named (\"What soup do you make?\"): only European dishes from the profile "
          + "menu, no days or menu details. If it has none of that kind, classic European dishes from the knowledge "
          + "base, as your own.", "branch 2: what you cook (#2, #12, #129)"),
-    ("Restaurant, its menu or your workplace named (\"What do you serve at your restaurant?\"): every menu, European "
-         + "dishes first even if listed second, then Vietnamese.", "branch 3: whole menu, European first (#4)"),
-    ("A question about the menu or meals covers each menu, European first.",
-         "every menu, European first, also with no restaurant named (#4 \"What does one meal come with?\" on 6501aed)"),
+    ("Restaurant, its menu or your workplace named (\"What do you serve at your restaurant?\"): the whole menu (see "
+         + "the next rule).", "branch 3: whole menu (European first via the next rule, #4)"),
+    ("\n- When the profile has more than one menu, cover each one, European first even if the profile lists it "
+         + "second. Example: \"What does one meal come with?\" -> the European set menu first, then the Vietnamese set "
+         + "meal in one short line.\n",
+         "every menu, European first, as its own rule (#4 on 6501aed and 4189eda; passed on 9f85d9a as its own rule)"),
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
          "day question gets suggestions"),
     ("If the profile has nothing on your certificates, qualifications, experience or signature dishes, say in one "
@@ -148,7 +150,8 @@ for (phrase, what) in [
 ] {
     check(Prompt.rules.contains(phrase), "rule: \(what)")
 }
-check(Prompt.rules.count < 2600, "the rules block stays short (\(Prompt.rules.count) chars)")
+// Ceiling = the 25% cut target from 3,741 chars before the merge (6501aed).
+check(Prompt.rules.count < 2800, "the rules block stays short (\(Prompt.rules.count) chars)")
 // Answers are laid out to skim (user request): one idea per line, "- " list lines, labelled parts with a blank
 // line between, nothing else; the layout rule comes first, then the minimal rule, then the one-kind list rule.
 check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, under 14 words; split a longer line. A one-idea "
