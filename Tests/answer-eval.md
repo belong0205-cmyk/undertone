@@ -33,14 +33,14 @@ version; other wording passes if it meets every rule below.
 | 2 | What kind of food do you cook? | I cook European dishes like lasagne and fish and chips. I also cook Vietnamese home-style meals. | European first; no day, no prices. |
 | 3 | Tell me about your menu. | We have a European set menu with soup, a main, sides, salad and dessert. We have Vietnamese set meals too. Both change every day. | General only; European first. |
 | 4 | What does one meal come with? | Our European set menu comes with soup and a main course. It also has a side, a salad and a dessert. | From the European menu header first; no invented sides. Vietnamese details only if asked. |
-| 5 | What's on the menu today? | (Tuesday) Today the European menu has beef stew in red wine with mashed potato. The Vietnamese meal changes every week. | Uses today's weekday from the European menu, named first (Mon lasagne, Tue beef stew, Wed salmon, Thu spaghetti bolognese, Fri fish and chips, Sat roast chicken). Must not pick a Vietnamese week. Sunday → "No dishes are listed for Sunday." (not closed / day off). |
+| 5 | What's on the menu today? | (Tuesday) Today the European menu has beef stew in red wine with mashed potato. The Vietnamese meal changes every week. | Uses today's weekday from the European menu, named first (Mon lasagne, Tue beef stew, Wed salmon, Thu spaghetti bolognese, Fri fish and chips, Sat roast chicken). Must not pick a Vietnamese week. Sunday → "No dishes are listed for Sunday." or "Sunday is not a working day." (the profile gives shifts Monday to Saturday); must not invent days or hours not in the profile. |
 | 6 | What are you cooking on Friday? | On Friday we have fish and chips on the European menu. We also have a Vietnamese meal like caramelised prawns. | Friday only; European Friday = fish and chips, named first. |
 | 7 | Do you have vegetarian options? | Yes, every Vietnamese set meal has a vegetarian dish, like tofu in tomato sauce. | Yes + one real example. |
 | 8 | How often does your menu change? | Both menus change every day. The European one repeats every week, and the Vietnamese one every two weeks. | From the menu structure; European first. |
 | 9 | What's your signature dish? | My best dishes are braised pork with eggs and sour fish soup. | From the profile's "Signature dishes" field only (Thịt kho trứng; Canh chua cá → braised pork with eggs, sour fish soup, in English); stays Vietnamese because the profile says so. Must NOT answer with a cuisine type ("European and Vietnamese food") or with the European menu, and must not say I have none yet: that sentence is right only when the field is empty. |
-| 10 | What do you serve on Sunday? | No dishes are listed for Sunday. | Must not invent Sunday dishes. Must not say closed or day off, and must not name working days (rule 2cd315a: unlisted day → only "no dishes are listed"). |
+| 10 | What do you serve on Sunday? | No dishes are listed for Sunday. — or — Sunday is not a working day. (either one, or both) | Must not invent Sunday dishes, or any days or hours not in the profile. Working days may be stated because the profile gives them (shifts "Day shift, Monday to Saturday"; opening hours "closed on Sunday"). |
 | 11 | Do you serve any European food? | Yes, we have a European set menu every day. It has dishes like beef lasagne and fish and chips. | No day needed. |
-| 12 | What soup do you make? | We make a different soup every day, like pumpkin soup or mushroom soup. We also make Vietnamese sour fish soup. | General, no day; European soups first. |
+| 12 | What soup do you make? | We make a different soup every day, like pumpkin soup or mushroom soup. We also make Vietnamese sour fish soup. | General; European soups first. Must not name a weekday unless the question does. |
 
 ## B. Questions about the user — exact scope
 | # | Question | Ideal answer | Must / must not |
@@ -55,7 +55,7 @@ version; other wording passes if it meets every rule below.
 | 20 | Tell me about your day. | I check deliveries and fridge temperatures and prep meat and vegetables. Then I cook the braised dishes and soups for lunch. | 2–3 steps, no clock times needed. |
 | 21 | What are your main responsibilities? | I cook the European soups and mains and the Vietnamese braised dishes. I also check fridge temperatures. | From the profile; European first. |
 | 22 | How long have you been working as a cook? | I have about three years of kitchen experience. | 3 years. |
-| 23 | Do you have any certificates? | Yes, I have a Food Safety Supervisor certificate and a First Aid certificate. | Both, no invented ones. |
+| 23 | Do you have any certificates? | Yes, I have a Food Safety Supervisor certificate and a First Aid certificate. | Both, no invented ones. With an empty Certificates field: one short first-person sentence saying none yet ("I do not have any certificates yet."), no brackets, never mention "the profile". |
 | 24 | What languages do you speak? | I speak Vietnamese and some English. | — |
 
 ## C. Missing personal facts → placeholder or short general answer
