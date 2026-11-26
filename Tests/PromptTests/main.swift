@@ -118,12 +118,19 @@ check(Prompt.system.contains("When asked for an example, give one concrete examp
 for rule in ["Use only facts from the knowledge base or the user profile.",
              "Never invent a number, measurement or size (e.g. \"5 cm deep\").",
              "Never invent restaurant details: its menu, menu cycle, team or schedule.",
-             "Say the menu changes only if the profile says so.",
+             "Never name a weekday or date unless the question names that day.",
+             "In menu and dish answers, name European dishes first, then Vietnamese ones.",
+             "When the profile has more than one menu, cover each one.",
+             "Say how often a menu changes only from the profile: one list of weekdays repeats every week; "
+                 + "Week 1 and Week 2 repeat every two weeks.",
              "Each sentence has at most 14 words.",
-             "Cover every item and every part the question asks for.",
-             "If the question asks for a list, give only the items, one short sentence each, with no definition first."] {
+             "Cover every item and every part the question asks for."] {
     check(Prompt.rules.contains("- " + rule), "rule: \(rule)")
 }
+// A list answer starts with its first item (#50, live: it opened with a definition), so the list rule comes first.
+check(Prompt.rules.hasPrefix("<rules>\n- If the question asks for a list, start the first sentence with the first item. "
+                             + "No definition, no introduction. Give only the items, one short sentence each.\n"),
+      "the list rule is first and starts the answer with the first item")
 let ruled = Prompt.user(history: [], utterance: "What is on the menu?", now: Date(timeIntervalSince1970: 0))
 check(ruled.hasSuffix(Prompt.rules + "\n\n<newest_utterance>\nWhat is on the menu?\n</newest_utterance>"),
       "the rules come right before the newest utterance")
@@ -269,8 +276,10 @@ check(FixedAnswers.words("What’s sanitizing vs cleaning?") == ["what", "is", "
 // The answer request (offline: the body and headers are only built, never sent).
 let body = ClaudeClient.requestBody(system: "s", profile: nil, user: "u", maxTokens: 2048, stream: true)
 check(body["model"] as? String == "claude-sonnet-5-5", "answers use Sonnet 5.5")
-check((body["thinking"] as? [String: Any])?["type"] as? String == "between_tools",
-      "thinking stays off with between_tools (Sonnet 5.5 rejects disabled)")
+check(body["thinking"] == nil, "no thinking field (TESTER: faster than between_tools, no thinking blocks)")
+let warmUp = ClaudeClient.requestBody(system: "s", profile: nil, user: "Warm-up.", maxTokens: 0, stream: false)
+check(warmUp["thinking"] == nil && warmUp["model"] as? String == "claude-sonnet-5-5",
+      "the cache warm-up sends no thinking field either, with the same model")
 check((body["output_config"] as? [String: Any])?["effort"] as? String == "low" && body["max_tokens"] as? Int == 2048,
       "effort low, max_tokens 2048")
 check(body["fallbacks"] as? String == "default"

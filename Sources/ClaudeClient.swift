@@ -29,14 +29,14 @@ struct ClaudeClient {
     /// To go back to Haiku: `LiveModel(id: "claude-haiku-5-5", thinkingOff: "disabled", fallbacks: false)`.
     struct LiveModel {
         let id: String
-        /// `thinking.type` that keeps thinking off, so the answer starts at once. Sonnet 5.5 rejects
-        /// `disabled` (400) and takes `between_tools` (effort high or below); Haiku 5.5 takes `disabled`.
-        /// Omitting `thinking` would turn adaptive thinking on.
-        let thinkingOff: String
+        /// `thinking.type` that keeps thinking off, or nil to send no `thinking` field. Sonnet 5.5 rejects
+        /// `disabled` (400); with no field at effort low it wrote no thinking block and started sooner than
+        /// with `between_tools` (TESTER on d9c33c1, with warm-up). Haiku 5.5 takes `disabled`.
+        let thinkingOff: String?
         /// Server-side fallback when a safety classifier declines (Sonnet 5.5 has one, Haiku 5.5 none).
         let fallbacks: Bool
     }
-    static let live = LiveModel(id: "claude-sonnet-5-5", thinkingOff: "between_tools", fallbacks: true)
+    static let live = LiveModel(id: "claude-sonnet-5-5", thinkingOff: nil, fallbacks: true)
     /// Rare one-off jobs such as the Word profile import.
     static let model = "claude-opus-5-5"
     let apiKey: String
@@ -183,10 +183,10 @@ struct ClaudeClient {
             "stream": stream,
             "system": systemBlocks(system, profile: profile),
             "messages": [["role": "user", "content": user]],
-            // The answer must start within a second, so no thinking (see `LiveModel.thinkingOff`).
-            "thinking": ["type": live.thinkingOff],
             "output_config": ["effort": "low"],
         ]
+        // The answer must start within a second, so no thinking (see `LiveModel.thinkingOff`).
+        if let thinkingOff = live.thinkingOff { body["thinking"] = ["type": thinkingOff] }
         // Without a fallback, a refusal surfaces as `.refusal`.
         if live.fallbacks { body["fallbacks"] = "default" }
         return body
@@ -280,13 +280,18 @@ enum Prompt {
     /// sizes and menu cycles when they sat in the long system prompt).
     static let rules = """
     <rules>
+    - If the question asks for a list, start the first sentence with the first item. No definition, no \
+    introduction. Give only the items, one short sentence each.
     - Use only facts from the knowledge base or the user profile.
     - Never invent a number, measurement or size (e.g. "5 cm deep").
     - Never invent restaurant details: its menu, menu cycle, team or schedule.
-    - Say the menu changes only if the profile says so.
+    - Never name a weekday or date unless the question names that day.
+    - In menu and dish answers, name European dishes first, then Vietnamese ones.
+    - When the profile has more than one menu, cover each one.
+    - Say how often a menu changes only from the profile: one list of weekdays repeats every week; \
+    Week 1 and Week 2 repeat every two weeks.
     - Each sentence has at most 14 words.
     - Cover every item and every part the question asks for.
-    - If the question asks for a list, give only the items, one short sentence each, with no definition first.
     </rules>
     """
 
