@@ -281,11 +281,15 @@ enum Prompt {
     static let rules = """
     <rules>
     - If the question asks for a list, start the first sentence with the first item. No definition, no \
-    introduction. Give only the items, one short sentence each.
+    introduction. Give each item by name only, with no description, unless the question asks for more about \
+    each item. Example: "Béchamel, velouté, espagnole, tomato and hollandaise."
     - Use only facts from the knowledge base or the user profile.
     - Never invent a number, measurement or size (e.g. "5 cm deep").
     - Never invent restaurant details: its menu, menu cycle, team or schedule.
     - Never name a weekday or date unless the question names that day.
+    - Name a dish for a day only if the profile lists it for that exact day. If that day has several weeks, \
+    name the dish of each week.
+    - Never state working days or hours unless the profile says them.
     - In menu and dish answers, name European dishes first, then Vietnamese ones.
     - When the profile has more than one menu, cover each one.
     - Say how often a menu changes only from the profile: one list of weekdays repeats every week; \

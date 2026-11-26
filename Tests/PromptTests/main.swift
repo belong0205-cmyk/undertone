@@ -119,6 +119,9 @@ for rule in ["Use only facts from the knowledge base or the user profile.",
              "Never invent a number, measurement or size (e.g. \"5 cm deep\").",
              "Never invent restaurant details: its menu, menu cycle, team or schedule.",
              "Never name a weekday or date unless the question names that day.",
+             "Name a dish for a day only if the profile lists it for that exact day. If that day has several weeks, "
+                 + "name the dish of each week.",
+             "Never state working days or hours unless the profile says them.",
              "In menu and dish answers, name European dishes first, then Vietnamese ones.",
              "When the profile has more than one menu, cover each one.",
              "Say how often a menu changes only from the profile: one list of weekdays repeats every week; "
@@ -127,9 +130,11 @@ for rule in ["Use only facts from the knowledge base or the user profile.",
              "Cover every item and every part the question asks for."] {
     check(Prompt.rules.contains("- " + rule), "rule: \(rule)")
 }
-// A list answer starts with its first item (#50, live: it opened with a definition), so the list rule comes first.
+// A list answer starts with its first item and gives names only (#50, live: it opened with a definition, then
+// described each sauce), so the list rule comes first.
 check(Prompt.rules.hasPrefix("<rules>\n- If the question asks for a list, start the first sentence with the first item. "
-                             + "No definition, no introduction. Give only the items, one short sentence each.\n"),
+                             + "No definition, no introduction. Give each item by name only, with no description, unless the question "
+                             + "asks for more about each item. Example: \"Béchamel, velouté, espagnole, tomato and hollandaise.\"\n"),
       "the list rule is first and starts the answer with the first item")
 let ruled = Prompt.user(history: [], utterance: "What is on the menu?", now: Date(timeIntervalSince1970: 0))
 check(ruled.hasSuffix(Prompt.rules + "\n\n<newest_utterance>\nWhat is on the menu?\n</newest_utterance>"),
