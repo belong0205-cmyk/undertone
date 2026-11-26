@@ -120,7 +120,8 @@ for rule in ["Use only facts from the knowledge base or the user profile.",
              "Never invent restaurant details: its menu, menu cycle, team or schedule.",
              "Say the menu changes only if the profile says so.",
              "Each sentence has at most 14 words.",
-             "Cover every item and every part the question asks for."] {
+             "Cover every item and every part the question asks for.",
+             "If the question asks for a list, give only the items, one short sentence each, with no definition first."] {
     check(Prompt.rules.contains("- " + rule), "rule: \(rule)")
 }
 let ruled = Prompt.user(history: [], utterance: "What is on the menu?", now: Date(timeIntervalSince1970: 0))

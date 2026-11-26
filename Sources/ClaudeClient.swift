@@ -275,6 +275,7 @@ enum Prompt {
     - Say the menu changes only if the profile says so.
     - Each sentence has at most 14 words.
     - Cover every item and every part the question asks for.
+    - If the question asks for a list, give only the items, one short sentence each, with no definition first.
     </rules>
     """
 
