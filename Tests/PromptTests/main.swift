@@ -121,7 +121,7 @@ for (phrase, what) in [
     ("Use only facts from the knowledge base or profile.", "facts only from KB or profile"),
     ("Never invent a number or size, a dish, experience, a qualification, a company or project, "
          + "or restaurant details (menu, team, schedule, "
-         + "days or hours).", "no invented numbers, dishes or restaurant details (#6 \"crispy fish\")"),
+         + "days, hours).", "no invented numbers, dishes or restaurant details (#6 \"crispy fish\")"),
     ("Never mention \"the profile\" or say that the menu or profile lacks a dish.",
          "no 'the profile', never 'the menu lacks it' (#23, #129; dropped in 0c4fc0f, 79f5b67 said \"I do not have a "
              + "risotto on my menu\")"),
@@ -155,7 +155,7 @@ for (phrase, what) in [
          "missing detail = hinted blank anchored in the spoken sentence, never contradicted, never 'none' or 'none to name' (#135, #129; 4dae09c said \"I do not have other workplaces to name here.\")"),
     ("If the profile has nothing on your certificates, qualifications or signature dishes, say in one short "
          + "sentence that you have none yet.", "none yet for certificates, no brackets (#23)"),
-    ("A procedure keeps every step, with checks and records.", "procedures keep the record step (#60)"),
+    ("A procedure keeps every step, checks and records.", "procedures keep the record step (#60)"),
     // Any comparison, not only in interviews (#132 on 7fc1602 ignored the interview-only line).
     ("\n- Any comparison (\"difference between\", \"vs\", \"X or Y\", \"which is better\") uses only this shape, "
          + "with facts (\"Braising uses...\"), never \"I ...\" lines:\n  Main difference: one sentence, under 14 words\n"
@@ -198,7 +198,7 @@ check(Prompt.rules.count < 4100, "the rules block stays short (\(Prompt.rules.co
 // line between, nothing else; the layout rule comes first, then the minimal rule, then the one-kind list rule.
 check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, every line under 14 words; break a long line into \"- \" "
                              + "lines. A one-idea "
-                             + "answer is one or two lines. A list puts each item on its own \"- \" line. Several parts: "
+                             + "answer: one or two lines. A list puts each item on a \"- \" line. Several parts: "
                              + "a label line ending in \":\", its lines, a blank line between. No ** or #. "
                              + "answer_vi keeps the same lines.\n- Be minimal:"),
       "the layout rule comes first, with no example of its own")
@@ -209,13 +209,13 @@ check(!Prompt.rules.contains("Two cold sauces") && Prompt.rules.contains("Europe
 // User: Sonnet's answers were too long. Minimal answers, short phrase lines, 3–4 lines per part, no word cap.
 check(Prompt.rules.contains("\n- Be minimal: no restating the question, no opener or closer, never your "
                             + "reasoning, nothing not asked. Short phrases are fine. Each part has at most 3 or 4 lines "
-                            + "unless more are asked, but cover every item and part asked."),
+                            + "unless more are asked; cover every item and part asked."),
       "the minimal-answer rule")
 // #50: a one-kind list opened with "The five mother sauces are:", so the rule shows the wrong first line.
 check(Prompt.rules.contains("\n- A list of one kind starts with its first item, names only unless more is asked. "
-                            + "Asked for N (\"Give 5 examples\"): N+2 lines (5 -> 7), real ones only. "
+                            + "Asked for N (\"Give 5 examples\"): N+2 lines (5->7). A closed set lists all, no extras: "
                             + "\"List the mother sauces.\" starts with \"- Béchamel\", not \"The five mother sauces are:\".\n"),
-      "a one-kind list starts with its first item and gives names only; N asked gives N+2 real items (user, 0.5.23-D)")
+      "a one-kind list starts with its first item and gives names only; N asked gives N+2, a closed set all members, no extras (user, 0.5.23-D)")
 let layoutAt = Prompt.rules.range(of: "- Layout:")!.lowerBound
 let minimalAt = Prompt.rules.range(of: "- Be minimal:")!.lowerBound
 let listAt = Prompt.rules.range(of: "- A list of one kind")!.lowerBound

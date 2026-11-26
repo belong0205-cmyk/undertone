@@ -349,14 +349,14 @@ enum Prompt {
     static let rules = """
     <rules>
     - Layout: one idea per line, every line under 14 words; break a long line into "- " lines. \
-    A one-idea answer is one or two lines. A \
-    list puts each item on its own "- " line. Several parts: a label line ending in ":", its lines, a blank \
+    A one-idea answer: one or two lines. A \
+    list puts each item on a "- " line. Several parts: a label line ending in ":", its lines, a blank \
     line between. No ** or #. answer_vi keeps the same lines.
     - Be minimal: no restating the question, no opener or closer, never your reasoning, nothing not \
-    asked. Short phrases are fine. Each part has at most 3 or 4 lines unless more are asked, but cover \
-    every item and part asked. A procedure keeps every step, with checks and records.
+    asked. Short phrases are fine. Each part has at most 3 or 4 lines unless more are asked; cover \
+    every item and part asked. A procedure keeps every step, checks and records.
     - A list of one kind starts with its first item, names only unless more is asked. Asked for N \
-    ("Give 5 examples"): N+2 lines (5 -> 7), real ones only. "List the mother sauces." \
+    ("Give 5 examples"): N+2 lines (5->7). A closed set lists all, no extras: "List the mother sauces." \
     starts with "- Béchamel", not "The five mother sauces are:".
     - Any comparison ("difference between", "vs", "X or Y", "which is better") uses only this shape, \
     with facts ("Braising uses..."), never "I ..." lines:
@@ -367,7 +367,7 @@ enum Prompt {
       Option B: the same lines
       Trade-off: one sentence, under 14 words
     - Use only facts from the knowledge base or profile. Never invent a number or size, a \
-    dish, experience, a qualification, a company or project, or restaurant details (menu, team, schedule, days or hours). Never mention "the profile" or say \
+    dish, experience, a qualification, a company or project, or restaurant details (menu, team, schedule, days, hours). Never mention "the profile" or say \
     that the menu or profile lacks a dish.
     - Name a weekday or date only if asked, even if <today> or the menu shows days.
     - The profile menu is suggested dishes, not a plan by day. A dish is European only under a European \
