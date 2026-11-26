@@ -312,16 +312,16 @@ check(FixedAnswers.words("What’s sanitizing vs cleaning?") == ["what", "is", "
 
 // The answer request (offline: the body and headers are only built, never sent).
 let body = ClaudeClient.requestBody(system: "s", profile: nil, user: "u", maxTokens: 2048, stream: true)
-check(body["model"] as? String == "claude-sonnet-5-5", "answers use Sonnet 5.5")
-check(body["thinking"] == nil, "no thinking field (TESTER: faster than between_tools, no thinking blocks)")
+check(body["model"] as? String == "claude-haiku-5-5", "answers use Haiku 5.5")
+check((body["thinking"] as? [String: Any])?["type"] as? String == "disabled", "thinking is disabled (Haiku 5.5)")
 let warmUp = ClaudeClient.requestBody(system: "s", profile: nil, user: "Warm-up.", maxTokens: 0, stream: false)
-check(warmUp["thinking"] == nil && warmUp["model"] as? String == "claude-sonnet-5-5",
-      "the cache warm-up sends no thinking field either, with the same model")
+check((warmUp["thinking"] as? [String: Any])?["type"] as? String == "disabled" && warmUp["model"] as? String == "claude-haiku-5-5",
+      "the cache warm-up uses the same model and thinking setting")
 check((body["output_config"] as? [String: Any])?["effort"] as? String == "low" && body["max_tokens"] as? Int == 2048,
       "effort low, max_tokens 2048")
-check(body["fallbacks"] as? String == "default"
-      && (try? ClaudeClient(apiKey: "k").makeRequest(body: body))?.value(forHTTPHeaderField: "anthropic-beta")
-         == "server-side-fallback-2026-07-01", "a refusal falls back server-side, with its beta header")
+check(body["fallbacks"] == nil
+      && (try? ClaudeClient(apiKey: "k").makeRequest(body: body))?.value(forHTTPHeaderField: "anthropic-beta") == nil,
+      "no server-side fallback or beta header (Haiku 5.5 has none)")
 
 print(failures == 0 ? "ALL PASSED" : "\(failures) FAILED")
 exit(failures == 0 ? 0 : 1)
