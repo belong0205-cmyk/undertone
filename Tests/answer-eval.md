@@ -33,12 +33,12 @@ version; other wording passes if it meets every rule below.
 | 2 | What kind of food do you cook? | I cook European dishes like lasagne and fish and chips. I also cook Vietnamese home-style meals. | European first; no day, no prices. |
 | 3 | Tell me about your menu. | We have a European set menu with soup, a main, sides, salad and dessert. We have Vietnamese set meals too. Both change every day. | General only; European first. |
 | 4 | What does one meal come with? | Our European set menu comes with soup and a main course. It also has a side, a salad and a dessert. | From the European menu header first; no invented sides. Vietnamese details only if asked. |
-| 5 | What's on the menu today? | (Tuesday) Today the European menu has beef stew in red wine with mashed potato. The Vietnamese meal changes every week. | Uses today's weekday from the European menu, named first (Mon lasagne, Tue beef stew, Wed salmon, Thu spaghetti bolognese, Fri fish and chips, Sat roast chicken). Must not pick a Vietnamese week. Sunday → "We are closed on Sunday." |
+| 5 | What's on the menu today? | (Tuesday) Today the European menu has beef stew in red wine with mashed potato. The Vietnamese meal changes every week. | Uses today's weekday from the European menu, named first (Mon lasagne, Tue beef stew, Wed salmon, Thu spaghetti bolognese, Fri fish and chips, Sat roast chicken). Must not pick a Vietnamese week. Sunday → "No dishes are listed for Sunday." (not closed / day off). |
 | 6 | What are you cooking on Friday? | On Friday we have fish and chips on the European menu. We also have a Vietnamese meal like caramelised prawns. | Friday only; European Friday = fish and chips, named first. |
 | 7 | Do you have vegetarian options? | Yes, every Vietnamese set meal has a vegetarian dish, like tofu in tomato sauce. | Yes + one real example. |
 | 8 | How often does your menu change? | Both menus change every day. The European one repeats every week, and the Vietnamese one every two weeks. | From the menu structure; European first. |
 | 9 | What's your signature dish? | My best dishes are braised pork with eggs and sour fish soup. | From "Signature dishes" only — stays Vietnamese because the profile says so. |
-| 10 | What do you serve on Sunday? | We are closed on Sunday. | Must not invent Sunday dishes. |
+| 10 | What do you serve on Sunday? | No dishes are listed for Sunday. | Must not invent Sunday dishes. Must not say closed or day off, and must not name working days (rule 2cd315a: unlisted day → only "no dishes are listed"). |
 | 11 | Do you serve any European food? | Yes, we have a European set menu every day. It has dishes like beef lasagne and fish and chips. | No day needed. |
 | 12 | What soup do you make? | We make a different soup every day, like pumpkin soup or mushroom soup. We also make Vietnamese sour fish soup. | General, no day; European soups first. |
 
