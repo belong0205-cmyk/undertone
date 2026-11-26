@@ -36,7 +36,7 @@ struct ClaudeClient {
         /// Server-side fallback when a safety classifier declines (Sonnet 5.5 has one, Haiku 5.5 none).
         let fallbacks: Bool
     }
-    static let live = LiveModel(id: "claude-haiku-5-5", thinkingOff: "disabled", fallbacks: false)
+    static let live = LiveModel(id: "claude-sonnet-5-5", thinkingOff: nil, fallbacks: true)
     /// Rare one-off jobs such as the Word profile import.
     static let model = "claude-opus-5-5"
     let apiKey: String
