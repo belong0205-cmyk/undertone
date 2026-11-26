@@ -1,6 +1,6 @@
 # Answer evaluation — manual check for TESTER
 
-129 common kitchen-interview and assessment questions (including follow-ups, Australian food safety and WHS, and SA Cook questionnaire topics) with an ideal answer and what must (not) happen. The ideal answer is one good
+137 common kitchen-interview and assessment questions (including follow-ups, Australian food safety and WHS, and SA Cook questionnaire topics) with an ideal answer and what must (not) happen. The ideal answer is one good
 version; other wording passes if it meets every rule below.
 
 ## Setup
@@ -213,6 +213,22 @@ Short B1 answers in the first person ("I"), complete on every point asked. The K
 | 126 | What is food cost percentage and why is it important? | Food cost %: portion cost divided by selling price without GST, times 100.<br><br>Why it matters:<br>- Shows how much of each dollar goes on food<br>- Helps me set prices and spot waste | Must give the formula and a reason; ex-GST | 16: food cost % line |
 | 127 | How do cultural and ethnic influences affect recipe development? | The customers' backgrounds shape ingredients, flavours and methods, like halal or kosher. I use authentic ingredients, respect religious food rules and describe dishes honestly. | Must mention religious/cultural food rules and authenticity | 16: cultural and ethnic influences |
 | 128 | Why is feedback important when planning and improving recipes? | Feedback from customers, floor staff, sales and plate waste shows what to change. I test the change and update the standard recipe. | Must mention a source of feedback and updating the standard recipe | 16: feedback |
+
+## K. Interview questions (facts from the eval profile only; blanks for what it lacks)
+Minh Le's profile gives: commis chef at Green Bowl Catering (set lunches for offices), 3 years, kitchen hand at an unnamed
+Vietnamese restaurant in 2023–2024, Certificate III in Commercial Cookery, Food Safety Supervisor and First Aid certificates,
+goal chef de partie in two years, no notes about the job applied for. Anything else (employer names, numbers, stories) must be
+a blank in square brackets. When the question is unclear, one thinking-aloud opening line is allowed (exception to rule 3).
+| # | Question | Ideal answer | Must / must not |
+|---|---|---|---|
+| 130 | Tell me about yourself. | I am a commis chef at Green Bowl Catering. We cook set lunches for offices.<br>I have three years in kitchens and a Certificate III in Commercial Cookery.<br>I am good at braising, stir-frying and working fast in lunch service.<br>My goal is to be a chef de partie in two years. | 3–4 lines; role, workplace, years, qualification and goal from the eval profile only. Must not invent other employers, awards, numbers or a city; no life story. |
+| 131 | Tell me about a time you handled a conflict in the kitchen. | Situation: [when], at [where], a disagreement with [who] about [what]<br>Task: I had to keep service running and sort it out calmly<br>Action: I listened first, stayed calm, agreed a plan and told the chef<br>Result: [what happened]; we finished service and agreed how to work next time | Four lines labelled Situation, Task, Action, Result in that order. The eval profile has no such story, so who, where, when and the outcome are blanks in square brackets; must not invent a colleague, venue, date or number. B1. |
+| 132 | What is the difference between braising and stewing? | Braising: large pieces, seared, then cooked slowly with liquid part-way up, usually in the oven<br>Stewing: small even pieces fully covered in liquid, on the stove or in the oven<br>- Both make tough cuts tender<br>- Braising keeps the piece whole and reduces the liquid into the sauce<br>- Stewing is already in portions and the liquid is served with the dish | One line per method (size of pieces, amount of liquid) plus at least one trade-off or use. Must match KB 04 (Stewing, Braising); no invented times or temperatures. |
+| 133 | Why should we hire you? | - Three years in kitchens, cooking both a European set menu and Vietnamese dishes<br>- Certificate III and a Food Safety Supervisor certificate<br>- Fast and clean in lunch service<br>- I want to grow into a chef de partie with you | 3–4 lines, each a fact or skill from the eval profile (years, menus, certificates, speed, goal). Must not invent awards, former employer names, covers per day or percentages; no "I am the best". |
+| 134 | How do you work? | - I set up my section first: prep list, mise en place, fridge checks<br>- I keep it clean as I go and label everything<br>- I talk to the chef and call out when I need help<br>- In lunch service I stay calm and work fast | Vague question: answers directly about method, hygiene, teamwork and pressure; must not ask "What do you mean?". 3–4 lines; routine details only from the eval profile. |
+| 135 | Which restaurants did you work at before Green Bowl? | Before Green Bowl I was a kitchen hand at a Vietnamese restaurant, [restaurant name], in 2023–2024. | The eval profile gives the role and years but no name: the name is a blank in square brackets. Must not invent a restaurant name, suburb or extra jobs. |
+| 136 | What would you do if it goes wrong? | Let me think for a second.<br>Do you mean a dish or the whole service?<br>If a dish: I tell the chef at once and remake it.<br>If the service: I call for help, keep my section calm and keep food safe. | Unclear question: one clarifying question, then an assumption with a short answer under it. The thinking-aloud first line is optional (rule 3 exception). Must not answer one guessed meaning without saying so; no invented facts. |
+| 137 | Do you have any questions for us? | - How big is the kitchen team on a normal shift?<br>- What does a typical week of shifts look like?<br>- How do you train new cooks on your menu? | 2–3 short questions about the role, team or shifts. Must not answer "No"; must not state facts about the employer that the eval profile lacks (venues, awards). |
 
 ## Recording results
 For each failed item note: question #, the app's answer, which pass rule failed. Send failures about scope or invented
