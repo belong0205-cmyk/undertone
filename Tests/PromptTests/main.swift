@@ -121,14 +121,14 @@ for (phrase, what) in [
     ("Use only facts from the knowledge base or profile.", "facts only from KB or profile"),
     ("Never invent a number or size, a dish, experience, a qualification, a company or project, "
          + "or restaurant details (menu, team, schedule, "
-         + "working days or hours).", "no invented numbers, dishes or restaurant details (#6 \"crispy fish\")"),
+         + "days or hours).", "no invented numbers, dishes or restaurant details (#6 \"crispy fish\")"),
     ("Never mention \"the profile\" or say that the menu or profile lacks a dish.",
          "no 'the profile', never 'the menu lacks it' (#23, #129; dropped in 0c4fc0f, 79f5b67 said \"I do not have a "
              + "risotto on my menu\")"),
     ("Name a weekday or date only if the question names one, even if <today> or the menu shows days.",
          "no unasked weekday (#3, #12)"),
     ("The profile menu is suggested dishes, not a plan by day.", "menu is suggestions (user decision)"),
-    ("A dish is European only under a heading that says European (\"món Âu\"); dishes under \"món Việt\" are "
+    ("A dish is European only under a European heading (\"món Âu\"); dishes under \"món Việt\" are "
          + "Vietnamese.", "European by menu heading (#6)"),
     ("In answer_en, give dish names in English (\"Vịt nướng cam\" -> \"Roast duck with orange\", \"món mặn\" -> \"savoury main\"); answer_vi keeps "
          + "the Vietnamese names.", "English dish names (#3)"),
@@ -146,6 +146,9 @@ for (phrase, what) in [
              + "vegetarian option\", bd441bf said \"Vegetarian dish also listed\")"),
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
          "day question gets suggestions"),
+    ("\n- Menu or dishes asked (\"What is on your menu?\"): at least 6 dishes per menu, all if fewer, not 3 or 4; "
+         + "each a \"- \" line: name, then 3 to 6 words.\n- When the profile has more than one menu",
+         "menu question lists at least 6 dishes, not 3 (user request, 0.5.22-A); its own rule before the menu shape"),
     ("When the profile lacks a detail asked (name, date, place, number), put a hinted blank in the spoken sentence "
          + "(e.g. \"Before my current job, I worked at [restaurant name].\"); never contradict it. Never say you have none (\"I do not have any ... to tell you about\") unless the profile says so; never explain a "
          + "blank. Use [brackets] only for such blanks; a blank names its content (\"[job title]\", not \"[your role]\").",
