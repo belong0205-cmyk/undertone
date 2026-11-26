@@ -157,6 +157,13 @@ check(Prompt.rules.contains("\n- If the question asks for a list of one kind, st
                             + "question asks for more about each item.\n"),
       "a one-kind list starts with its first item and gives names only")
 check(!Prompt.rules.contains("Keep every sentence under 14 words"), "the 14-word limit is part of the layout rule")
+// User: Sonnet's answers were too long. Minimal answers, short phrase lines, 3–4 lines per part, no word cap.
+check(Prompt.rules.contains("\n- Keep it minimal: no restating the question, no opening or closing line, nothing beyond "
+                            + "what was asked. Each line is one short idea; a short phrase is fine, not always a full "
+                            + "sentence. In a multi-part answer, give each part at most 3 or 4 lines, unless the question "
+                            + "asks for more items. Still cover every part asked, with correct facts.\n- If the question "
+                            + "asks for a list of one kind"),
+      "the minimal-answer rule follows the layout rule")
 check(!Prompt.system.contains("No bullet points") && Prompt.system.contains("Lay it out as the <rules> block says")
       && Prompt.system.contains("with the same lines and layout.</answer_vi>"),
       "the system prompt allows list lines and keeps the Vietnamese layout the same")

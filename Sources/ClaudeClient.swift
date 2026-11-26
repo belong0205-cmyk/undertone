@@ -293,6 +293,10 @@ enum Prompt {
       Storage:
       - Cover and label them
       - Keep them at 5 °C or below
+    - Keep it minimal: no restating the question, no opening or closing line, nothing beyond what was asked. \
+    Each line is one short idea; a short phrase is fine, not always a full sentence. In a multi-part answer, give \
+    each part at most 3 or 4 lines, unless the question asks for more items. Still cover every part asked, with \
+    correct facts.
     - If the question asks for a list of one kind, start with the first item: no label, definition or \
     introduction. Give each item by name only (e.g. "- Béchamel"), unless the question asks for more about each item.
     - Use only facts from the knowledge base or the user profile.
