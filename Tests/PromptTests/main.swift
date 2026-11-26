@@ -115,64 +115,61 @@ check(Prompt.system.contains("no introduction, no repetition, no closing line, n
 check(Prompt.system.contains("When asked for an example, give one concrete example with its numbers"),
       "an example carries concrete numbers")
 // Hard rules sit right before the newest utterance (TESTER live run on cc1c1fe: Haiku ignored them in the system prompt).
-for rule in ["Never write your checking or reasoning; give only the answer.",
-             "Use only facts from the knowledge base or the user profile.",
-             "Never invent a number, measurement or size (e.g. \"5 cm deep\").",
-             "Never invent restaurant details: its dishes, menu, team or schedule. Name only dishes written in the "
-                 + "profile menu or the knowledge base.",
-             "Never name a weekday or date unless the question names one, even though <today> or the menu gives days. "
-                 + "If the question names no day, give dishes with no day names.",
-             "A menu dish is European only if it is under a menu heading that says European (\"món Âu\"). Dishes under "
-                 + "a Vietnamese heading (\"món Việt\") are Vietnamese, even on the same day. Never call them European.",
-             "In answer_en, write menu dish names in English (e.g. \"Bò hầm rượu vang\" -> \"Beef stew in red wine\"); "
-                 + "answer_vi keeps the Vietnamese names.",
-             "The profile menu is a list of suggested dishes, not a fixed plan by day. For a question about a day "
-                 + "(e.g. \"What do you cook on Friday?\"), suggest dishes from the menu; they need not match that day.",
-             "Never state working days or hours unless the profile says them.",
-             "If the profile has nothing for a question about your certificates, qualifications, experience or "
-                 + "signature dishes, say in one short first-person sentence that you have none yet. Use [brackets] only for a "
-                 + "missing name, age, address or workplace. Never mention \"the profile\".",
-             "For a general food, cooking or recipe question (e.g. \"How do you make a French omelette?\"), answer with "
-                 + "well-known traditional European dishes from the knowledge base. Do not use the profile menu.",
-             "For a question about which food you cook or make, with no restaurant or menu named (e.g. \"What kind of "
-                 + "food do you cook?\", \"What soup do you make?\"), name only European dishes from the profile menu. No "
-                 + "Vietnamese dishes, no days, no menu details. If the profile menu has no European dish of that kind, name "
-                 + "classic European dishes from the knowledge base instead, as if they were your own. Never say that the menu "
-                 + "or profile lacks a dish.",
-             "Use the whole profile menu only when the question names your restaurant, its menu or your workplace "
-                 + "(e.g. \"What do you serve at your restaurant?\"). Then name European dishes first, then Vietnamese ones, "
-                 + "even when the profile lists the Vietnamese menu first.",
-             "When the profile has more than one menu, cover each one.",
-             "Cover every item and every part the question asks for."] {
-    check(Prompt.rules.contains("- " + rule), "rule: \(rule)")
+// Merged on e8d012f to cut ~35% of the rules tokens with the same behaviour; each check names the case it guards.
+for (phrase, what) in [
+    ("never your reasoning", "no thinking aloud (#6 on Haiku)"),
+    ("Use only facts from the knowledge base or profile.", "facts only from KB or profile"),
+    ("Never invent a number or size (e.g. \"5 cm deep\"), a dish, or restaurant details (menu, team, schedule, "
+         + "working days or hours).", "no invented numbers, dishes or restaurant details (#6 \"crispy fish\")"),
+    ("Never mention \"the profile\" or say that the menu or profile lacks a dish.", "no 'the profile', no 'menu lacks' (#23, #129)"),
+    ("Name a weekday or date only if the question names one, even though <today> or the menu shows days.",
+         "no unasked weekday (#3, #12)"),
+    ("The profile menu is suggested dishes, not a plan by day.", "menu is suggestions (user decision)"),
+    ("A dish is European only under a heading that says European (\"món Âu\"); dishes under \"món Việt\" are "
+         + "Vietnamese.", "European by menu heading (#6)"),
+    ("In answer_en, give dish names in English (\"Bò hầm rượu vang\" -> \"Beef stew in red wine\"); answer_vi keeps "
+         + "the Vietnamese names.", "English dish names (#3)"),
+    ("General food or recipe (\"How do you make a French omelette?\"): classic European dishes from the knowledge "
+         + "base, not the profile menu.", "branch 1: general food"),
+    ("What you cook or make, no restaurant named (\"What soup do you make?\"): only European dishes from the profile "
+         + "menu, no days or menu details. If it has none of that kind, classic European dishes from the knowledge "
+         + "base, as your own.", "branch 2: what you cook (#2, #12, #129)"),
+    ("Restaurant, its menu or your workplace named (\"What do you serve at your restaurant?\"): every menu, European "
+         + "dishes first even if listed second, then Vietnamese.", "branch 3: whole menu, European first (#4)"),
+    ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
+         "day question gets suggestions"),
+    ("If the profile has nothing on your certificates, qualifications, experience or signature dishes, say in one "
+         + "short sentence that you have none yet. Use [brackets] only for a missing name, age, address or workplace.",
+         "none yet, no brackets (#23)"),
+    ("A procedure keeps every step, including checks and records.", "procedures keep the record step (#60)"),
+    ("cover every item and part asked", "every item and part covered"),
+] {
+    check(Prompt.rules.contains(phrase), "rule: \(what)")
 }
+check(Prompt.rules.count < 2600, "the rules block stays short (\(Prompt.rules.count) chars)")
 // Answers are laid out to skim (user request): one idea per line, "- " list lines, labelled parts with a blank
-// line between, nothing else; the layout rule comes first, then the one-kind list rule (#50: names only).
-check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, each line under 14 words; split a longer line into two. A one-idea answer is one or "
-                             + "two plain lines. A list puts each item on its own line starting with \"- \". If the question "
-                             + "has several parts (e.g. options and key considerations), give each part a short label line "
-                             + "ending with \":\", then its lines, with one blank line between parts. No other formatting: "
-                             + "no ** and no #. answer_vi keeps the same lines. Example:\n"),
+// line between, nothing else; the layout rule comes first, then the minimal rule, then the one-kind list rule.
+check(Prompt.rules.hasPrefix("<rules>\n- Layout: one idea per line, under 14 words; split a longer line. A one-idea "
+                             + "answer is one or two lines. A list puts each item on its own \"- \" line. Several parts: "
+                             + "a short label line ending in \":\", its lines, a blank line between parts. No ** or #. "
+                             + "answer_vi keeps the same lines. Example:\n"),
       "the layout rule comes first")
 check(Prompt.rules.contains("  Two cold sauces:\n  - Mayonnaise\n  - Vinaigrette\n\n  Storage:\n"),
       "the layout example has a label, list lines and a blank line between parts")
-// #50 (TESTER on Haiku): still opened with "The five mother sauces are:", so the rule shows the wrong first line.
-check(Prompt.rules.contains("\n- If the question asks for a list of one kind, the first line is the first item: no label "
-                            + "line, definition or introduction. Example: \"List the five mother sauces.\" starts with "
-                            + "\"- Béchamel\", never with \"The five mother sauces are:\". Give each item by name only, "
-                            + "unless the question asks for more about each item.\n"),
-      "a one-kind list starts with its first item and gives names only")
-check(!Prompt.rules.contains("Keep every sentence under 14 words"), "the 14-word limit is part of the layout rule")
 // User: Sonnet's answers were too long. Minimal answers, short phrase lines, 3–4 lines per part, no word cap.
-check(Prompt.rules.contains("\n- Keep it minimal: no restating the question, no opening or closing line, nothing beyond "
-                            + "what was asked. Each line is one short idea; a short phrase is fine, not always a full "
-                            + "sentence. In a multi-part answer, give each part at most 3 or 4 lines, unless the question "
-                            + "asks for more items. Still cover every part asked, with correct facts. A procedure keeps "
-                            + "every step in order, including checks and records (e.g. \"- Write down the time and "
-                            + "temperature\").\n- Never write your "
-                            + "checking or reasoning; give only the answer.\n- If the question "
-                            + "asks for a list of one kind"),
-      "the minimal-answer rule follows the layout rule")
+check(Prompt.rules.contains("\n- Be minimal: no restating the question, no opening or closing line, never your "
+                            + "reasoning, nothing not asked. Short phrases are fine. Each part has at most 3 or 4 lines "
+                            + "unless more items are asked, but cover every item and part asked."),
+      "the minimal-answer rule")
+// #50: a one-kind list opened with "The five mother sauces are:", so the rule shows the wrong first line.
+check(Prompt.rules.contains("\n- A list of one kind starts with its first item, names only unless more is asked. "
+                            + "Example: \"List the five mother sauces.\" starts with \"- Béchamel\", never with \"The "
+                            + "five mother sauces are:\".\n"),
+      "a one-kind list starts with its first item and gives names only")
+let layoutAt = Prompt.rules.range(of: "- Layout:")!.lowerBound
+let minimalAt = Prompt.rules.range(of: "- Be minimal:")!.lowerBound
+let listAt = Prompt.rules.range(of: "- A list of one kind")!.lowerBound
+check(layoutAt < minimalAt && minimalAt < listAt, "layout, then minimal, then the one-kind list rule")
 check(!Prompt.system.contains("No bullet points") && Prompt.system.contains("Lay it out as the <rules> block says")
       && Prompt.system.contains("with the same lines and layout.</answer_vi>"),
       "the system prompt allows list lines and keeps the Vietnamese layout the same")
