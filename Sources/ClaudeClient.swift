@@ -315,14 +315,14 @@ enum Prompt {
     menu.
       A day named ("What do you cook on Friday?"): suggest menu dishes; they need not match that day.
     - When the profile has more than one menu, cover each one in full, with its vegetarian option, \
-    European first even if the profile lists it second. Example for "What does one meal come with?":
-      European set menu:
-      - Soup, main, side, salad, bread, dessert
+    European first even if the profile lists it second. Take the parts from the profile. Shape \
+    for "What does one meal come with?":
+      European menu:
+      - Its parts, a few per line
       - Vegetarian option
 
-      Vietnamese set meal:
-      - Rice, dipping sauce, iced tea
-      - Main, side, stir-fry, soup, vegetables, dessert
+      Vietnamese menu:
+      - Its parts, a few per line
       - Vegetarian option
     - If the profile has nothing on your certificates, qualifications, experience or signature dishes, say in \
     one short sentence that you have none yet. Use [brackets] only for a missing name, age, address or workplace.

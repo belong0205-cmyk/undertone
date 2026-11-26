@@ -136,10 +136,9 @@ for (phrase, what) in [
     ("Restaurant, its menu or your workplace named (\"What do you serve at your restaurant?\"): the whole menu.",
          "branch 3: whole menu (European first via the next rule, #4)"),
     ("\n- When the profile has more than one menu, cover each one in full, with its vegetarian option, "
-         + "European first even if the profile lists it second. Example for \"What does one meal come with?\":\n"
-         + "  European set menu:\n  - Soup, main, side, salad, bread, dessert\n  - Vegetarian option\n\n"
-         + "  Vietnamese set meal:\n  - Rice, dipping sauce, iced tea\n  - Main, side, stir-fry, soup, vegetables, "
-         + "dessert\n  - Vegetarian option\n",
+         + "European first even if the profile lists it second. Take the parts from the profile. Shape for "
+         + "\"What does one meal come with?\":\n  European menu:\n  - Its parts, a few per line\n  - Vegetarian option\n\n"
+         + "  Vietnamese menu:\n  - Its parts, a few per line\n  - Vegetarian option\n",
          "every menu, European first, as its own rule (#4 on 6501aed and 4189eda; passed on 9f85d9a as its own rule)"),
     ("A day named (\"What do you cook on Friday?\"): suggest menu dishes; they need not match that day.",
          "day question gets suggestions"),
@@ -154,6 +153,11 @@ for (phrase, what) in [
 // The rules' own example lines stay under 14 words (#2/#4: an example "in one short line" gave 18-word lines).
 for line in Prompt.rules.split(separator: "\n") where line.hasPrefix("  - ") {
     check(line.split(separator: " ").count < 14, "example line under 14 words: \(line)")
+}
+// The rules go to GitHub and the profile does not: the menu example is a shape, not this profile's menu
+// (tech debt from 51ec26f; a copied menu would also be repeated when the real menu changes).
+for profileText in ["dipping sauce", "iced tea", "stir-fry", "Soup, main", "salad, bread"] {
+    check(!Prompt.rules.contains(profileText), "the rules hold no profile menu text: \(profileText)")
 }
 // Ceiling = the 25% cut target from 3,741 chars before the merge (6501aed).
 check(Prompt.rules.count < 2800, "the rules block stays short (\(Prompt.rules.count) chars)")
