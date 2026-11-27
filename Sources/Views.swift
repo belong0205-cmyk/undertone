@@ -213,10 +213,15 @@ private struct TimelineRow: View {
                     Text(row.english).utterance(color: row.isFinal ? Theme.textSecondary : Theme.textTertiary)
                 }
                 if !row.answerEnglish.isEmpty {
-                    Columns(leading: Theme.afterGutter) {
-                        AnswerCard(text: row.answerVietnamese, highlighted: isNewest)
-                    } right: {
-                        AnswerCard(text: row.answerEnglish, highlighted: isNewest)
+                    if let pairs = PairedAnswer.pairs(vietnamese: row.answerVietnamese, english: row.answerEnglish,
+                                                      streaming: row.isProcessing) {
+                        PairedAnswer(pairs: pairs, highlighted: isNewest)
+                    } else {
+                        Columns(leading: Theme.afterGutter) {
+                            AnswerCard(text: row.answerVietnamese, highlighted: isNewest)
+                        } right: {
+                            AnswerCard(text: row.answerEnglish, highlighted: isNewest)
+                        }
                     }
                 }
             }
@@ -248,6 +253,49 @@ private struct TimelineGutter: View {
 }
 
 /// The suggested answer, short by design: a quiet card; the newest one gets a green border.
+/// A bullet answer as one row per line, Vietnamese beside its English line: a wrapped line makes its row
+/// taller instead of shifting every line below it out of step with the other language.
+private struct PairedAnswer: View {
+    let pairs: [(vi: String, en: String)]
+    let highlighted: Bool
+
+    /// One pair per English line, the Vietnamese cell empty until its translation streams in. Nil keeps the
+    /// two cards: an answer with no "- " line, or line counts that differ (once both are complete).
+    static func pairs(vietnamese: String, english: String, streaming: Bool) -> [(vi: String, en: String)]? {
+        func lines(_ text: String) -> [String] {
+            text.components(separatedBy: "\n").map { $0.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty }
+        }
+        let en = lines(english), vi = lines(vietnamese)
+        guard en.contains(where: { $0.hasPrefix("- ") }), vi.count <= en.count, streaming || vi.count == en.count
+        else { return nil }
+        return en.indices.map { (vi: $0 < vi.count ? vi[$0] : "", en: en[$0]) }
+    }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            ForEach(pairs.indices, id: \.self) { i in
+                if i > 0 { Rectangle().fill(Theme.hairline).frame(height: 1) }
+                Columns(leading: 10) {
+                    AnswerText(text: pairs[i].vi)
+                } right: {
+                    AnswerText(text: pairs[i].en)
+                }
+                .padding(.vertical, 6)
+                .background(i % 2 == 1 ? Theme.answerRowAlt : Color.clear)
+            }
+        }
+        .padding(.vertical, 2)
+        .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Theme.answerFill))
+        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .strokeBorder(highlighted ? Theme.accent.opacity(0.45) : Theme.answerStroke)
+        )
+        .padding(.leading, Theme.afterGutter)
+        .padding(.trailing, Theme.pad)
+    }
+}
+
 private struct AnswerCard: View {
     let text: String
     let highlighted: Bool

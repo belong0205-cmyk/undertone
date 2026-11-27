@@ -19,6 +19,7 @@ enum Theme {
     static let dot = Color.white.opacity(0.30)
     static let answerFill = Color.black.opacity(0.22)
     static let answerStroke = Color.white.opacity(0.08)
+    static let answerRowAlt = Color.white.opacity(0.03) // every other row of a paired answer
 
     static let radius: CGFloat = 16      // matches the system window corner radius
     static let pad: CGFloat = 14
