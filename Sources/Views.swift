@@ -1,7 +1,7 @@
 import AppKit
 import SwiftUI
 
-/// The whole UI: one bar, then a newest-first timeline of utterances in two columns
+/// The whole UI: one bar, then a newest-first list of utterances in two columns
 /// (Vietnamese | English); settings hidden behind one icon.
 struct OverlayView: View {
     @EnvironmentObject private var state: AppState
@@ -67,14 +67,11 @@ private struct TopBar: View {
     @EnvironmentObject private var state: AppState
 
     var body: some View {
-        // Same geometry as the timeline rows, so each caption sits right above its column.
-        HStack(spacing: 0) {
-            Color.clear.frame(width: Theme.gutter)
-            Columns(inset: Theme.inset) {
-                Caption(text: "Tiếng Việt")
-            } right: {
-                Caption(text: "English")
-            }
+        // Same geometry as the conversation rows, so each caption sits right above its column.
+        Columns(inset: Theme.inset) {
+            Caption(text: "Tiếng Việt")
+        } right: {
+            Caption(text: "English")
         }
         .frame(height: 36)
         .overlay(alignment: .trailing) {
@@ -173,7 +170,6 @@ private struct Conversation: View {
                             TimelineRow(
                                 row: row,
                                 isNewest: index == 0,
-                                isOldest: index == newestFirst.count - 1,
                                 translating: state.hasAPIKey
                             )
                         }
@@ -192,63 +188,38 @@ private struct Conversation: View {
     private static let top = "timeline-top"
 }
 
-/// One utterance: a dot on the timeline, then Vietnamese | English, then the suggested answer.
+/// One utterance: Vietnamese | English, then the suggested answer.
 private struct TimelineRow: View {
     let row: AppState.Row
     let isNewest: Bool
-    let isOldest: Bool
     let translating: Bool
 
     var body: some View {
-        HStack(alignment: .top, spacing: 0) {
-            TimelineGutter(isNewest: isNewest, isOldest: isOldest)
-            VStack(alignment: .leading, spacing: 6) {
-                Columns(inset: Theme.inset) {
-                    if !row.vietnamese.isEmpty {
-                        Text(row.vietnamese).utterance(color: Theme.textPrimary)
-                    } else if translating && (row.isProcessing || !row.isFinal) {
-                        PendingDots()
-                    }
-                } right: {
-                    Text(row.english).utterance(color: row.isFinal ? Theme.textSecondary : Theme.textTertiary)
+        VStack(alignment: .leading, spacing: 6) {
+            Columns(inset: Theme.inset) {
+                if !row.vietnamese.isEmpty {
+                    Text(row.vietnamese).utterance(color: Theme.textPrimary)
+                } else if translating && (row.isProcessing || !row.isFinal) {
+                    PendingDots()
                 }
-                if !row.answerEnglish.isEmpty {
-                    if let pairs = PairedAnswer.pairs(vietnamese: row.answerVietnamese, english: row.answerEnglish,
-                                                      streaming: row.isProcessing) {
-                        PairedAnswer(pairs: pairs, highlighted: isNewest)
-                    } else {
-                        Columns {
-                            AnswerCard(text: row.answerVietnamese, highlighted: isNewest)
-                        } right: {
-                            AnswerCard(text: row.answerEnglish, highlighted: isNewest)
-                        }
+            } right: {
+                Text(row.english).utterance(color: row.isFinal ? Theme.textSecondary : Theme.textTertiary)
+            }
+            if !row.answerEnglish.isEmpty {
+                if let pairs = PairedAnswer.pairs(vietnamese: row.answerVietnamese, english: row.answerEnglish,
+                                                  streaming: row.isProcessing) {
+                    PairedAnswer(pairs: pairs, highlighted: isNewest)
+                } else {
+                    Columns {
+                        AnswerCard(text: row.answerVietnamese, highlighted: isNewest)
+                    } right: {
+                        AnswerCard(text: row.answerEnglish, highlighted: isNewest)
                     }
                 }
             }
-            .padding(.bottom, 14)
         }
+        .padding(.bottom, 14)
         .fixedSize(horizontal: false, vertical: true)
-    }
-}
-
-/// Thin vertical line with a dot level with the row's first line of text; the newest dot is green.
-private struct TimelineGutter: View {
-    let isNewest: Bool
-    let isOldest: Bool
-
-    var body: some View {
-        VStack(spacing: 0) {
-            line.opacity(isNewest ? 0 : 1).frame(height: 5)
-            Circle()
-                .fill(isNewest ? Theme.accent : Theme.dot)
-                .frame(width: 7, height: 7)
-            line.opacity(isOldest ? 0 : 1).frame(maxHeight: .infinity)
-        }
-        .frame(width: Theme.gutter)
-    }
-
-    private var line: some View {
-        Rectangle().fill(Theme.timeline).frame(width: 1)
     }
 }
 
@@ -285,8 +256,8 @@ private struct PairedAnswer: View {
         let card = RoundedRectangle(cornerRadius: 8, style: .continuous)
         VStack(spacing: 0) {
             ForEach(pairs.indices, id: \.self) { i in
-                if pairs[i].startsPart { Color.clear.frame(height: 8) }
                 if i > 0 { Rectangle().fill(Theme.hairline).frame(height: 1) }
+                if pairs[i].startsPart { Color.clear.frame(height: 8) }
                 Columns(inset: Theme.inset) {
                     AnswerText(text: pairs[i].vi)
                 } right: {
@@ -298,10 +269,10 @@ private struct PairedAnswer: View {
         }
         .padding(.vertical, 2)
         .background(Theme.answerFill)
-        .mask { card.padding(.leading, Theme.afterGutter).padding(.trailing, Theme.edge) }
+        .mask { card.padding(.horizontal, Theme.edge) }
         .overlay {
             card.strokeBorder(highlighted ? Theme.accent.opacity(0.45) : Theme.answerStroke)
-                .padding(.leading, Theme.afterGutter).padding(.trailing, Theme.edge)
+                .padding(.horizontal, Theme.edge)
         }
     }
 }
@@ -358,13 +329,10 @@ private struct EmptyColumns: View {
     @EnvironmentObject private var state: AppState
 
     var body: some View {
-        HStack(alignment: .top, spacing: 0) {
-            Color.clear.frame(width: Theme.gutter, height: 1)
-            Columns(inset: Theme.inset) {
-                EmptyNote(title: vietnamese.title, detail: vietnamese.detail)
-            } right: {
-                EmptyNote(title: english, detail: nil)
-            }
+        Columns(inset: Theme.inset) {
+            EmptyNote(title: vietnamese.title, detail: vietnamese.detail)
+        } right: {
+            EmptyNote(title: english, detail: nil)
         }
         .padding(.top, 10)
         .frame(maxHeight: .infinity, alignment: .top)

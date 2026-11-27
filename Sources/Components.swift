@@ -14,8 +14,7 @@ enum Theme {
     static let danger = Color(red: 1.00, green: 0.42, blue: 0.40)
     static let warning = Color(red: 1.00, green: 0.72, blue: 0.35)
 
-    // Timeline and answer cards
-    static let timeline = Color.white.opacity(0.12)
+    // Answer cards
     static let dot = Color.white.opacity(0.30)
     static let answerFill = Color.black.opacity(0.22)
     static let answerStroke = Color.white.opacity(0.08)
@@ -23,13 +22,11 @@ enum Theme {
 
     static let radius: CGFloat = 16      // matches the system window corner radius
     static let pad: CGFloat = 14
-    static let gutter: CGFloat = 16      // timeline column at the left edge
-    static let afterGutter: CGFloat = 2  // gap between the timeline and the Vietnamese column
+    static let edge: CGFloat = 8         // conversation content to the window edge, left and right
     static let colGap: CGFloat = 4       // each side of the split between the two columns
-    static let edge: CGFloat = 8         // right edge of the English column
     /// Text inset from its column edge. Answer cards pad by it and plain lines are indented by it,
     /// so transcript text, cards and grid rows all start on one left edge.
-    static let inset: CGFloat = 8
+    static let inset: CGFloat = 6
 
     static let bodySize: CGFloat = 13
     static let answerSize: CGFloat = 13.5
@@ -99,7 +96,7 @@ struct Columns<Left: View, Right: View>: View {
         HStack(alignment: .top, spacing: 0) {
             left
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .padding(.leading, Theme.afterGutter + inset)
+                .padding(.leading, Theme.edge + inset)
                 .padding(.trailing, Theme.colGap + inset)
             right
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -161,13 +158,12 @@ extension View {
     }
 }
 
-/// Renders an answer: inline markdown (bold, italic, code) and "- " bullets with a hanging indent.
+/// Renders an answer: inline markdown (bold, italic, code); "- " bullet markers are dropped, one line per item.
 struct AnswerText: View {
     let text: String
     @Environment(\.textScale) private var textScale
 
     private struct Line {
-        let isBullet: Bool
         let content: AttributedString
         /// A blank line came before it: it starts a new part of the answer.
         let startsPart: Bool
@@ -186,7 +182,7 @@ struct AnswerText: View {
             let marker = line.range(of: #"^[-*•]\s+"#, options: .regularExpression)
             if let marker { line.removeSubrange(marker) }
             let content = (try? AttributedString(markdown: line, options: options)) ?? AttributedString(line)
-            lines.append(Line(isBullet: marker != nil, content: content, startsPart: blankBefore))
+            lines.append(Line(content: content, startsPart: blankBefore))
             blankBefore = false
         }
         return lines
@@ -195,17 +191,8 @@ struct AnswerText: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             ForEach(Array(lines.enumerated()), id: \.offset) { _, line in
-                Group {
-                    if line.isBullet {
-                        HStack(alignment: .firstTextBaseline, spacing: 5) {
-                            Text("•").font(.system(size: Theme.answerSize * textScale * 0.85)).foregroundStyle(Theme.accent)
-                            Text(line.content)
-                        }
-                    } else {
-                        Text(line.content)
-                    }
-                }
-                .padding(.top, line.startsPart ? 7 : 0)
+                Text(line.content)
+                    .padding(.top, line.startsPart ? 7 : 0)
             }
         }
         .font(.system(size: Theme.answerSize * textScale))
