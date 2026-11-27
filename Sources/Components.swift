@@ -23,8 +23,13 @@ enum Theme {
 
     static let radius: CGFloat = 16      // matches the system window corner radius
     static let pad: CGFloat = 14
-    static let gutter: CGFloat = 28      // timeline column at the left edge
-    static let afterGutter: CGFloat = 6  // gap between the timeline and the Vietnamese column
+    static let gutter: CGFloat = 16      // timeline column at the left edge
+    static let afterGutter: CGFloat = 2  // gap between the timeline and the Vietnamese column
+    static let colGap: CGFloat = 4       // each side of the split between the two columns
+    static let edge: CGFloat = 8         // right edge of the English column
+    /// Text inset from its column edge. Answer cards pad by it and plain lines are indented by it,
+    /// so transcript text, cards and grid rows all start on one left edge.
+    static let inset: CGFloat = 8
 
     static let bodySize: CGFloat = 13
     static let answerSize: CGFloat = 13.5
@@ -78,13 +83,14 @@ struct Caption: View {
 }
 
 /// Two equal columns whose cells stretch to the taller one, so rows line up across languages.
+/// `inset` pads each cell's content on both sides (Theme.inset for text that is not inside a card).
 struct Columns<Left: View, Right: View>: View {
-    private let leading: CGFloat
+    private let inset: CGFloat
     private let left: Left
     private let right: Right
 
-    init(leading: CGFloat = Theme.pad, @ViewBuilder left: () -> Left, @ViewBuilder right: () -> Right) {
-        self.leading = leading
+    init(inset: CGFloat = 0, @ViewBuilder left: () -> Left, @ViewBuilder right: () -> Right) {
+        self.inset = inset
         self.left = left()
         self.right = right()
     }
@@ -93,11 +99,12 @@ struct Columns<Left: View, Right: View>: View {
         HStack(alignment: .top, spacing: 0) {
             left
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .padding(.leading, leading)
-                .padding(.trailing, Theme.pad)
+                .padding(.leading, Theme.afterGutter + inset)
+                .padding(.trailing, Theme.colGap + inset)
             right
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .padding(.horizontal, Theme.pad)
+                .padding(.leading, Theme.colGap + inset)
+                .padding(.trailing, Theme.edge + inset)
         }
         .fixedSize(horizontal: false, vertical: true)
     }
@@ -190,8 +197,8 @@ struct AnswerText: View {
             ForEach(Array(lines.enumerated()), id: \.offset) { _, line in
                 Group {
                     if line.isBullet {
-                        HStack(alignment: .firstTextBaseline, spacing: 7) {
-                            Text("•").foregroundStyle(Theme.accent)
+                        HStack(alignment: .firstTextBaseline, spacing: 5) {
+                            Text("•").font(.system(size: Theme.answerSize * textScale * 0.85)).foregroundStyle(Theme.accent)
                             Text(line.content)
                         }
                     } else {

@@ -70,7 +70,7 @@ private struct TopBar: View {
         // Same geometry as the timeline rows, so each caption sits right above its column.
         HStack(spacing: 0) {
             Color.clear.frame(width: Theme.gutter)
-            Columns(leading: Theme.afterGutter) {
+            Columns(inset: Theme.inset) {
                 Caption(text: "Tiếng Việt")
             } right: {
                 Caption(text: "English")
@@ -178,7 +178,7 @@ private struct Conversation: View {
                             )
                         }
                     }
-                    .padding(.top, 14)
+                    .padding(.top, 10)
                     .padding(.bottom, 6)
                 }
                 .onChange(of: state.rows.count) { _, _ in
@@ -202,8 +202,8 @@ private struct TimelineRow: View {
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             TimelineGutter(isNewest: isNewest, isOldest: isOldest)
-            VStack(alignment: .leading, spacing: 8) {
-                Columns(leading: Theme.afterGutter) {
+            VStack(alignment: .leading, spacing: 6) {
+                Columns(inset: Theme.inset) {
                     if !row.vietnamese.isEmpty {
                         Text(row.vietnamese).utterance(color: Theme.textPrimary)
                     } else if translating && (row.isProcessing || !row.isFinal) {
@@ -217,7 +217,7 @@ private struct TimelineRow: View {
                                                       streaming: row.isProcessing) {
                         PairedAnswer(pairs: pairs, highlighted: isNewest)
                     } else {
-                        Columns(leading: Theme.afterGutter) {
+                        Columns {
                             AnswerCard(text: row.answerVietnamese, highlighted: isNewest)
                         } right: {
                             AnswerCard(text: row.answerEnglish, highlighted: isNewest)
@@ -225,7 +225,7 @@ private struct TimelineRow: View {
                     }
                 }
             }
-            .padding(.bottom, 20)
+            .padding(.bottom, 14)
         }
         .fixedSize(horizontal: false, vertical: true)
     }
@@ -256,43 +256,53 @@ private struct TimelineGutter: View {
 /// A bullet answer as one row per line, Vietnamese beside its English line: a wrapped line makes its row
 /// taller instead of shifting every line below it out of step with the other language.
 private struct PairedAnswer: View {
-    let pairs: [(vi: String, en: String)]
+    typealias Pair = (vi: String, en: String, startsPart: Bool)
+    let pairs: [Pair]
     let highlighted: Bool
 
     /// One pair per English line, the Vietnamese cell empty until its translation streams in. Nil keeps the
     /// two cards: an answer with no "- " line, or line counts that differ (once both are complete).
-    static func pairs(vietnamese: String, english: String, streaming: Bool) -> [(vi: String, en: String)]? {
-        func lines(_ text: String) -> [String] {
-            text.components(separatedBy: "\n").map { $0.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty }
+    /// `startsPart`: a blank line came before the English line, so a new section of the answer starts there.
+    static func pairs(vietnamese: String, english: String, streaming: Bool) -> [Pair]? {
+        func lines(_ text: String) -> [(text: String, startsPart: Bool)] {
+            var out: [(text: String, startsPart: Bool)] = [], blank = false
+            for raw in text.components(separatedBy: "\n") {
+                let line = raw.trimmingCharacters(in: .whitespaces)
+                if line.isEmpty { blank = !out.isEmpty; continue }
+                out.append((line, blank))
+                blank = false
+            }
+            return out
         }
         let en = lines(english), vi = lines(vietnamese)
-        guard en.contains(where: { $0.hasPrefix("- ") }), vi.count <= en.count, streaming || vi.count == en.count
+        guard en.contains(where: { $0.text.hasPrefix("- ") }), vi.count <= en.count, streaming || vi.count == en.count
         else { return nil }
-        return en.indices.map { (vi: $0 < vi.count ? vi[$0] : "", en: en[$0]) }
+        return en.indices.map { (vi: $0 < vi.count ? vi[$0].text : "", en: en[$0].text, startsPart: en[$0].startsPart) }
     }
 
     var body: some View {
+        // Rows span the same columns as the transcript lines above; the card is drawn inside the column edges.
+        let card = RoundedRectangle(cornerRadius: 8, style: .continuous)
         VStack(spacing: 0) {
             ForEach(pairs.indices, id: \.self) { i in
+                if pairs[i].startsPart { Color.clear.frame(height: 8) }
                 if i > 0 { Rectangle().fill(Theme.hairline).frame(height: 1) }
-                Columns(leading: 10) {
+                Columns(inset: Theme.inset) {
                     AnswerText(text: pairs[i].vi)
                 } right: {
                     AnswerText(text: pairs[i].en)
                 }
-                .padding(.vertical, 6)
+                .padding(.vertical, 4)
                 .background(i % 2 == 1 ? Theme.answerRowAlt : Color.clear)
             }
         }
         .padding(.vertical, 2)
-        .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Theme.answerFill))
-        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .strokeBorder(highlighted ? Theme.accent.opacity(0.45) : Theme.answerStroke)
-        )
-        .padding(.leading, Theme.afterGutter)
-        .padding(.trailing, Theme.pad)
+        .background(Theme.answerFill)
+        .mask { card.padding(.leading, Theme.afterGutter).padding(.trailing, Theme.edge) }
+        .overlay {
+            card.strokeBorder(highlighted ? Theme.accent.opacity(0.45) : Theme.answerStroke)
+                .padding(.leading, Theme.afterGutter).padding(.trailing, Theme.edge)
+        }
     }
 }
 
@@ -313,8 +323,8 @@ private struct AnswerCard: View {
                 AnswerText(text: text)
             }
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 8)
+        .padding(.horizontal, Theme.inset)
+        .padding(.vertical, 6)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(Theme.answerFill))
         .overlay(
@@ -350,13 +360,13 @@ private struct EmptyColumns: View {
     var body: some View {
         HStack(alignment: .top, spacing: 0) {
             Color.clear.frame(width: Theme.gutter, height: 1)
-            Columns(leading: Theme.afterGutter) {
+            Columns(inset: Theme.inset) {
                 EmptyNote(title: vietnamese.title, detail: vietnamese.detail)
             } right: {
                 EmptyNote(title: english, detail: nil)
             }
         }
-        .padding(.top, 14)
+        .padding(.top, 10)
         .frame(maxHeight: .infinity, alignment: .top)
     }
 
